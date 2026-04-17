@@ -3,7 +3,7 @@ export default function About({ onNavigate }) {
     {
       label: 'What This Is',
       headline: 'Civic Congruence builds infrastructure, not content.',
-      body: 'Most civic data efforts produce reports. This project creates feedback loops. It connects community networks with institutions so information about what people are actually experiencing flows both ways, not just top-down. The goal is simple: better signal for media, policy, and civic organizations trying to understand what\u2019s happening on the ground.',
+      body: 'Most civic data efforts produce reports. This project creates feedback loops. It connects community networks with institutions so information about what people are actually experiencing flows both ways, not just top-down. The result is better signal for media, policy, and civic organizations trying to understand what\u2019s happening on the ground.',
     },
     {
       label: 'How It Works',
@@ -13,7 +13,7 @@ export default function About({ onNavigate }) {
         'The Political Alignment diagnostic maps how people think about tradeoffs',
         'The Network Pulse connects vetted community organizations who submit weekly signal briefs',
       ],
-      body: 'Together, these layers surface where agreement is stronger than expected, where real divides exist, and what institutions may be missing.',
+      body: 'Together, these layers reveal where agreement is stronger than expected, where real divides exist, and what institutions may be missing.',
     },
     {
       label: 'Data and Trust',
@@ -99,7 +99,7 @@ export default function About({ onNavigate }) {
               <p>
                 Civic Congruence was created by a civic media and community engagement
                 leader with experience inside public media, local government, and
-                community-based infrastructure. The project exists because the gap between
+                community-based infrastructure. This project exists because the gap between
                 what institutions think communities need and what communities are actually
                 experiencing has become too wide to ignore.
               </p>
