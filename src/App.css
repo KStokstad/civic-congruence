@@ -1120,26 +1120,29 @@
 
 /* Opening instruction */
 .diagnostic-instruction {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
   background: #FFFBEB;
   border: 1.5px solid #F59E0B;
   border-radius: var(--radius);
-  padding: 20px 24px;
+  padding: 24px 28px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .instruction-icon {
-  font-size: 20px;
-  flex-shrink: 0;
-  margin-top: 1px;
+  display: none;
 }
 
 .diagnostic-instruction p {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   color: #78350F;
-  line-height: 1.6;
+  line-height: 1.65;
+  text-align: left;
+  margin: 0 0 12px 0;
+}
+
+.diagnostic-instruction p:last-child {
+  margin-bottom: 0;
 }
 
 /* Analysis sections */
