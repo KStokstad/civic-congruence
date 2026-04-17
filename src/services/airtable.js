@@ -8,7 +8,7 @@ const headers = () => ({
 })
 
 export async function submitSurvey(fields) {
-  const res = await fetch(`${API}/Survey%20Responses`, {
+  const res = await fetch(`${API}/Survey%20Response`, {
     method: 'POST',
     headers: headers(),
     body: JSON.stringify({ fields }),
@@ -34,8 +34,9 @@ export async function submitPulse(fields) {
 }
 
 export async function validateAccessCode(code) {
+  const safeCode = code.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
   const params = new URLSearchParams({
-    filterByFormula: `{Access Code}="${code}"`,
+    filterByFormula: `{Access Code}="${safeCode}"`,
     maxRecords: 1,
   })
   const res = await fetch(`${API}/Network%20Participants?${params}`, {
@@ -50,13 +51,13 @@ export async function validateAccessCode(code) {
   const fields = data.records[0].fields
   return {
     status: fields['Status'] || '',
-    networkName: fields['Network Name'] || '',
+    networkName: fields['Name'] || '',
   }
 }
 
 export async function fetchVerifiedSurveys() {
   const params = new URLSearchParams({ filterByFormula: '{Verified}=TRUE()' })
-  const res = await fetch(`${API}/Survey%20Responses?${params}`, {
+  const res = await fetch(`${API}/Survey%20Response?${params}`, {
     headers: { Authorization: `Bearer ${TOKEN}` },
   })
   if (!res.ok) {

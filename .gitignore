@@ -17,6 +17,9 @@ dist-ssr
 .env.*
 !.env.example
 
+# Local test scripts
+test-airtable.mjs
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

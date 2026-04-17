@@ -13,7 +13,7 @@ const TOPICS = [
         type: 'scale',
         lowLabel: 'Focus on growth',
         highLabel: 'Reduce inequality',
-        fieldName: 'Economy - Inequality vs Growth',
+        fieldName: 'Economy Q1',
       },
       {
         id: 'q2',
@@ -25,7 +25,7 @@ const TOPICS = [
           'It should not be set by the government',
           'It should vary by region, not be national',
         ],
-        fieldName: 'Economy - Minimum Wage View',
+        fieldName: 'Economy Q2',
       },
     ],
   },
@@ -40,7 +40,7 @@ const TOPICS = [
         type: 'scale',
         lowLabel: 'Enforcement and deterrence',
         highLabel: 'Prevention and root causes',
-        fieldName: 'Safety - Emphasis',
+        fieldName: 'Safety Q1',
       },
       {
         id: 'q2',
@@ -53,7 +53,7 @@ const TOPICS = [
           'Youth programs',
           'Neighborhood watch',
         ],
-        fieldName: 'Safety - Top Improvement',
+        fieldName: 'Safety Q2',
       },
     ],
   },
@@ -68,7 +68,7 @@ const TOPICS = [
         type: 'scale',
         lowLabel: 'Very poor',
         highLabel: 'Excellent',
-        fieldName: 'Health - Access Rating',
+        fieldName: 'Health Q1',
       },
       {
         id: 'q2',
@@ -81,7 +81,7 @@ const TOPICS = [
           'Environmental health',
           'Preventive care',
         ],
-        fieldName: 'Health - Top Challenge',
+        fieldName: 'Health Q2',
       },
     ],
   },
@@ -96,7 +96,7 @@ const TOPICS = [
         type: 'scale',
         lowLabel: 'Very dissatisfied',
         highLabel: 'Very satisfied',
-        fieldName: 'Education - Satisfaction',
+        fieldName: 'Education Q1',
       },
       {
         id: 'q2',
@@ -109,7 +109,7 @@ const TOPICS = [
           'Vocational & trade training',
           'Technology access',
         ],
-        fieldName: 'Education - Top Priority',
+        fieldName: 'Education Q2',
       },
     ],
   },
@@ -124,7 +124,7 @@ const TOPICS = [
         type: 'scale',
         lowLabel: 'Very little',
         highLabel: 'A great deal',
-        fieldName: 'Governance - Election Trust',
+        fieldName: 'Governance Q1',
       },
       {
         id: 'q2',
@@ -137,7 +137,7 @@ const TOPICS = [
           'Independent oversight',
           'Better communication',
         ],
-        fieldName: 'Governance - Top Improvement',
+        fieldName: 'Governance Q2',
       },
     ],
   },
@@ -492,9 +492,9 @@ function PulseForm() {
     setError(null)
     try {
       await submitPulse({
-        'Issue': form.issue.trim(),
-        'Who is Affected': form.affected.trim(),
-        'What is Missing': form.missing.trim(),
+        'Issue This Week': form.issue.trim(),
+        'Who Is Affected': form.affected.trim(),
+        'What Is Missing': form.missing.trim(),
         'Network Name': networkName || '',
         'Submitted At': new Date().toISOString(),
       })
