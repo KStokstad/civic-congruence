@@ -1,4 +1,4 @@
-const Stripe = require('stripe')
+import Stripe from 'stripe'
 
 const AIRTABLE_API = 'https://api.airtable.com/v0/appyEX5eCOCKMruL7'
 
@@ -34,7 +34,7 @@ async function saveSessionToAirtable(recordId, sessionId) {
   return JSON.parse(responseText)
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   try {
     if (req.method !== 'POST') {
       return res.status(405).json({ error: 'Method not allowed' })

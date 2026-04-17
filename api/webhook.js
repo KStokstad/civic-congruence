@@ -1,6 +1,6 @@
-const Stripe = require('stripe')
-const Anthropic = require('@anthropic-ai/sdk')
-const { Resend } = require('resend')
+import Stripe from 'stripe'
+import Anthropic from '@anthropic-ai/sdk'
+import { Resend } from 'resend'
 
 const AIRTABLE_API = 'https://api.airtable.com/v0/appyEX5eCOCKMruL7'
 
@@ -154,7 +154,7 @@ function buildEmailHtml(reportText) {
   </body></html>`
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
@@ -248,4 +248,4 @@ module.exports = async function handler(req, res) {
   return res.status(200).json({ received: true })
 }
 
-module.exports.config = { api: { bodyParser: false } }
+export const config = { api: { bodyParser: false } }
