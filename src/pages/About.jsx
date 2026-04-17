@@ -99,9 +99,16 @@ export default function About({ onNavigate }) {
               <p>
                 Civic Congruence was created by a civic media and community engagement
                 leader with experience inside public media, local government, and
-                community-based infrastructure. This project exists because the gap between
-                what institutions think communities need and what communities are actually
-                experiencing has become too wide to ignore.
+                community-based infrastructure.
+              </p>
+              <p>
+                The project is based on a consistent gap observed across those systems:
+                decisions are often made without clear, continuous feedback about what
+                people are actually experiencing. Existing inputs are fragmented, delayed,
+                or filtered.
+              </p>
+              <p>
+                Civic Congruence is designed to address that gap directly.
               </p>
             </div>
           </div>
