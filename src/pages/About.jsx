@@ -15,12 +15,12 @@ export default function About({ onNavigate }) {
       headline: 'No editorial layer. No hidden weighting.',
       body: 'Survey responses are reviewed before publication. Network pulse data is synthesized without attribution. The dashboard shows only what has been verified. We don\u2019t decide what matters \u2014 we surface what consistently shows up. If institutions ignore clear signals, that\u2019s visible. Transparency is the accountability mechanism.',
     },
-    {
-      label: 'Who Is Behind This',
-      headline: 'Built by someone who has worked inside the system.',
-      body: 'Civic Congruence was created by Keri Stokstad, based in Des Moines, Iowa. The project draws on years of experience in public media, civic engagement, and community-based work. It exists because the gap between what institutions think communities need and what communities are actually experiencing has become too wide to ignore.',
-    },
   ]
+
+  function goToNetworkPulse() {
+    window.scrollTo(0, 0)
+    onNavigate('network-pulse')
+  }
 
   return (
     <div className="about-page">
@@ -47,7 +47,7 @@ export default function About({ onNavigate }) {
             </div>
           ))}
 
-          {/* Contact section */}
+          {/* Get involved — appears before Who Is Behind This */}
           <div className="about-section about-section-contact">
             <div className="about-section-label">Get Involved</div>
             <div className="about-section-body">
@@ -65,13 +65,25 @@ export default function About({ onNavigate }) {
                 >
                   contact@civiccongruence.org
                 </a>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => onNavigate('network-pulse')}
-                >
+                <button className="btn btn-primary" onClick={goToNetworkPulse}>
                   Join the network
                 </button>
               </div>
+            </div>
+          </div>
+
+          {/* Who Is Behind This — last */}
+          <div className="about-section">
+            <div className="about-section-label">Who Is Behind This</div>
+            <div className="about-section-body">
+              <h2>Built by someone who has worked inside the system.</h2>
+              <p>
+                Civic Congruence was created by community supporters. The project draws
+                on years of experience in public media, civic engagement, and
+                community-based work. It exists because the gap between what institutions
+                think communities need and what communities are actually experiencing has
+                become too wide to ignore.
+              </p>
             </div>
           </div>
         </div>

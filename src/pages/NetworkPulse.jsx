@@ -64,8 +64,7 @@ function ApplicationForm({ onBack }) {
         <div className="section-label">Network Application</div>
         <h3>Apply to join the pilot network</h3>
         <p>
-          Tell us about your organization and why you want to participate. We\u2019ll
-          follow up by email within a few days.
+          Tell us about your organization and why you want to participate. We'll follow up by email within a few days.
         </p>
       </div>
 
