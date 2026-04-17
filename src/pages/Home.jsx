@@ -32,7 +32,7 @@ export default function Home({ onNavigate }) {
             share information, and make decisions.
           </p>
           <div className="hero-actions">
-            <button className="btn btn-primary btn-lg" onClick={() => onNavigate('survey')}>
+            <button className="btn btn-primary btn-lg" onClick={() => onNavigate('civic-survey')}>
               Take the Survey
             </button>
             <button className="btn btn-ghost btn-lg" onClick={() => onNavigate('dashboard')}>
@@ -82,7 +82,7 @@ export default function Home({ onNavigate }) {
             <div className="pilot-actions">
               <button
                 className="btn btn-pilot-primary btn-lg"
-                onClick={() => onNavigate('survey')}
+                onClick={() => onNavigate('civic-survey')}
               >
                 Join the Network
               </button>
