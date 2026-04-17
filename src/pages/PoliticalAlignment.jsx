@@ -135,15 +135,24 @@ async function callAnthropic(answers) {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-5',
       max_tokens: 1000,
       messages: [{ role: 'user', content: prompt }],
     }),
   })
 
   if (!res.ok) {
-    const err = await res.json().catch(() => ({}))
-    throw new Error(err?.error?.message || 'Failed to generate analysis')
+    let err = {}
+    const rawText = await res.text().catch(() => '')
+    try { err = JSON.parse(rawText) } catch (_) {}
+    console.error('Anthropic API error', {
+      status: res.status,
+      statusText: res.statusText,
+      body: err,
+      raw: rawText,
+    })
+    const msg = err?.error?.message || `HTTP ${res.status} ${res.statusText}`
+    throw new Error(`Anthropic API: ${msg}`)
   }
 
   const data = await res.json()
