@@ -84,7 +84,7 @@ export default function Home({ onNavigate }) {
                 className="btn btn-pilot-primary btn-lg"
                 onClick={() => onNavigate('network-pulse')}
               >
-                Join the Network
+                Apply to join
               </button>
               <button
                 className="btn btn-pilot-secondary btn-lg"
