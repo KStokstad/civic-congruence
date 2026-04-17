@@ -82,7 +82,7 @@ export default function Home({ onNavigate }) {
             <div className="pilot-actions">
               <button
                 className="btn btn-pilot-primary btn-lg"
-                onClick={() => onNavigate('civic-survey')}
+                onClick={() => onNavigate('network-pulse')}
               >
                 Join the Network
               </button>
