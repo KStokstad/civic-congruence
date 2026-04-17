@@ -19,14 +19,21 @@ module.exports = async function handler(req, res) {
   params.append('fields[]', 'Report')
   params.append('fields[]', 'Report Generated')
 
+  console.log('get-report: session_id =', session_id)
+  console.log('get-report: token present =', !!process.env.VITE_AIRTABLE_TOKEN)
+
   try {
     const airtableRes = await fetch(`${AIRTABLE_API}/Alignment%20Response?${params}`, {
       headers: { Authorization: `Bearer ${process.env.VITE_AIRTABLE_TOKEN}` },
     })
 
     if (!airtableRes.ok) {
-      const err = await airtableRes.json().catch(() => ({}))
-      return res.status(502).json({ error: err?.error?.message || 'Airtable error' })
+      const rawError = await airtableRes.text()
+      console.error('get-report Airtable error status:', airtableRes.status)
+      console.error('get-report Airtable error body:', rawError)
+      let errMsg
+      try { errMsg = JSON.parse(rawError)?.error?.message } catch {}
+      return res.status(502).json({ error: errMsg || rawError || 'Airtable error' })
     }
 
     const data = await airtableRes.json()
