@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { submitAlignment, updateAlignment } from '../services/airtable'
+import { renderMarkdown } from '../utils/renderMarkdown'
 
 const OPENING_INSTRUCTION = `This is not a personality quiz. It is designed to understand how you make tradeoffs.
 
@@ -329,8 +330,6 @@ export default function PoliticalAlignment({ onNavigate }) {
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
     const { label, patterns } = parseAnalysis(analysis)
-    const labelParas  = label.split(/\n\n+/).filter(Boolean)
-    const patternLines = patterns ? patterns.split(/\n+/).filter((l) => l.trim()) : []
 
     return (
       <div className="survey-page">
@@ -349,22 +348,20 @@ export default function PoliticalAlignment({ onNavigate }) {
                 Ideological Label
               </div>
               <div className="analysis-paragraphs">
-                {labelParas.map((p, i) => <p key={i}>{p}</p>)}
+                {renderMarkdown(label)}
               </div>
             </div>
 
             {/* Output 2 — Behavioral Patterns */}
-            {patternLines.length > 0 && (
+            {patterns && (
               <div className="analysis-section">
                 <div className="analysis-section-header">
                   <span className="analysis-section-num">2</span>
                   Behavioral Patterns
                 </div>
-                <ul className="pattern-list">
-                  {patternLines.map((line, i) => (
-                    <li key={i} className="pattern-item">{line}</li>
-                  ))}
-                </ul>
+                <div className="analysis-paragraphs">
+                  {renderMarkdown(patterns)}
+                </div>
               </div>
             )}
 

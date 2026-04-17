@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { renderMarkdown } from '../utils/renderMarkdown'
 
 const POLL_INTERVAL = 3000
 const MAX_POLLS = 100 // 5 minutes
@@ -50,27 +51,6 @@ export default function Report({ onNavigate }) {
     return () => clearTimeout(timer.current)
   }, [sessionId])
 
-  function renderReport(text) {
-    const sectionPattern = /^([A-Z][A-Z &]+)$/m
-    const parts = text.split(/\n(?=[A-Z][A-Z &]+\n)/)
-    return parts.map((part, i) => {
-      const lines = part.trim().split('\n')
-      const heading = lines[0]
-      const body = lines.slice(1).join('\n').trim()
-      const isHeading = sectionPattern.test(heading)
-      return (
-        <div key={i} className="report-section">
-          {isHeading
-            ? <h2 className="report-section-heading">{heading}</h2>
-            : <p className="report-body">{heading}</p>
-          }
-          {body && <div className="report-body">{body.split('\n').map((line, j) => (
-            <p key={j}>{line}</p>
-          ))}</div>}
-        </div>
-      )
-    })
-  }
 
   if (status === 'error') {
     return (
@@ -112,7 +92,7 @@ export default function Report({ onNavigate }) {
             A copy has been sent to your email.
           </p>
           <div className="report-content">
-            {renderReport(report)}
+            {renderMarkdown(report)}
           </div>
           <div style={{ marginTop: 40 }}>
             <button className="btn btn-ghost" onClick={() => onNavigate('home')}>
