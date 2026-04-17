@@ -1,8 +1,13 @@
 import { useState } from 'react'
 import { submitAlignment } from '../services/airtable'
 
-const OPENING_INSTRUCTION =
-  'Several of these questions involve real tradeoffs \u2014 there\u2019s no cost-free answer. Choose the option you would accept even knowing its downside.'
+const OPENING_INSTRUCTION = `This is not a personality quiz. It is designed to understand how you make tradeoffs.
+
+Many of these questions involve competing values. Choose the answer you would accept even if it creates a downside.
+
+Avoid choosing the most balanced or agreeable option by default. The goal is to capture your instinct when a real decision has to be made.
+
+If none of the options fit perfectly, select the one you lean toward most.`
 
 const QUESTIONS = [
   {
@@ -18,6 +23,7 @@ const QUESTIONS = [
   },
   {
     id: 'q2', fieldName: 'Q2',
+    hint: 'You may find yourself agreeing with more than one option. Choose the one you would prioritize in practice.',
     topic: 'Economic Fairness',
     stem: 'When the gap between wealthy and lower-income Americans widens, your deeper concern is:',
     options: [
@@ -30,6 +36,7 @@ const QUESTIONS = [
   },
   {
     id: 'q3', fieldName: 'Q3',
+    hint: 'You may find yourself agreeing with more than one option. Choose the one you would prioritize in practice.',
     topic: 'Social Policy',
     stem: 'When it comes to social issues, the principle you\u2019d defend even under pressure is:',
     options: [
@@ -97,6 +104,7 @@ const QUESTIONS = [
   },
   {
     id: 'q9', fieldName: 'Q9',
+    hint: 'You may find yourself agreeing with more than one option. Choose the one you would prioritize in practice.',
     topic: 'Compromise',
     stem: 'In a divided system, the position you\u2019d actually hold under pressure:',
     options: [
@@ -124,7 +132,32 @@ async function callAnthropic(answers) {
     return `${q.topic}: ${selected ? `${selected.id}) ${selected.text}` : 'No answer'}`
   }).join('\n')
 
-  const prompt = `You are analyzing the political values of a survey respondent. They were told upfront: "Several of these questions involve real tradeoffs — there's no cost-free answer. Choose the option you would accept even knowing its downside." Here are their 10 responses:\n\n${answersText}\n\nProvide your analysis in exactly this format — two sections, no deviation:\n\nOUTPUT 1 — IDEOLOGICAL LABEL\nA specific 2-3 sentence label for this person's political orientation. Avoid generic terms like "moderate" or "centrist." Be specific and honest about what their answers actually reveal. Follow with 2-3 sentences of plain language explanation of what drives this orientation.\n\nOUTPUT 2 — BEHAVIORAL PATTERNS\nDo NOT label them politically here. Identify 3 specific behavioral tendencies revealed by their answers. Frame each as a separate line starting with "You consistently..." describing behavior and the condition that triggers it. If their answers show internal tension or contradiction, name it directly — that's useful data. Be analytical, not flattering.`
+  const prompt = `You are analyzing a political values diagnostic for Civic Congruence. The respondent was told: 'Several of these questions involve real tradeoffs — there's no cost-free answer. Choose the option you would accept even knowing its downside.'
+
+Here are their 10 answers:
+${answersText}
+
+Your job is NOT to summarize what they chose. They already know what they chose.
+
+Your job is to find what their answers reveal that they may not have noticed themselves — tensions, contradictions, patterns, and what their choices suggest about how they actually process political decisions under pressure.
+
+Produce exactly two sections:
+
+OUTPUT 1 — IDEOLOGICAL LABEL
+One specific label (4-6 words maximum) followed by 2-3 sentences. The label should name something precise and non-obvious — not 'moderate' or 'progressive' or 'conservative.' Find the specific orientation their combination of answers reveals. Then explain what that orientation means in practice — what tradeoffs they habitually accept, what they habitually resist.
+
+OUTPUT 2 — BEHAVIORAL PATTERNS
+Three insights, each starting with 'You consistently...' These should reveal something the person might find surprising or clarifying — not obvious restatements of their choices. Look for:
+- Where their answers create internal tension (e.g. they want reform but distrust the reformers)
+- What they prioritize when forced to choose between two things they value
+- What their answer to Question 10 (the discomfort test) reveals about their deeper political instinct
+- Any pattern across multiple questions that points to an underlying value not explicitly named
+
+Be direct. Be specific. If their answers show a genuine contradiction, name it. That is more useful than flattery.
+
+Do not use the phrase 'This person.' Address them directly as 'You.'
+Do not repeat their answer choices back to them.
+Do not use hedging language like 'suggests' or 'may indicate' — state what you see.`
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -222,7 +255,9 @@ export default function PoliticalAlignment({ onNavigate }) {
           </div>
           <div className="diagnostic-instruction">
             <div className="instruction-icon">&#9888;</div>
-            <p>{OPENING_INSTRUCTION}</p>
+            {OPENING_INSTRUCTION.split('\n\n').map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: 32 }}>
             <button className="btn btn-primary btn-lg" onClick={() => setPhase('questions')}>
@@ -343,6 +378,10 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="alignment-topic-label">{question.topic}</div>
             <div className="question-text" style={{ fontSize: 18 }}>{question.stem}</div>
           </div>
+
+          {question.hint && (
+            <p className="question-hint">{question.hint}</p>
+          )}
 
           <div className="alignment-options">
             {question.options.map((opt) => (
