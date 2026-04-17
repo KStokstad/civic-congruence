@@ -1,7 +1,166 @@
 import { useState } from 'react'
-import { submitPulse, validateAccessCode } from '../services/airtable'
+import { submitPulse, validateAccessCode, submitApplication } from '../services/airtable'
 
-function AccessGate({ onUnlock }) {
+function ApplicationForm({ onBack }) {
+  const [form, setForm] = useState({
+    org: '', name: '', email: '', location: '', description: '', why: '',
+  })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(null)
+
+  function update(key, val) {
+    setForm((prev) => ({ ...prev, [key]: val }))
+  }
+
+  function isComplete() {
+    return form.org.trim() && form.name.trim() && form.email.trim() &&
+      form.location.trim() && form.description.trim() && form.why.trim()
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    setSubmitting(true)
+    setError(null)
+    try {
+      await submitApplication({
+        'Name': form.name.trim(),
+        'Organization Name': form.org.trim(),
+        'Email': form.email.trim(),
+        'Location': form.location.trim(),
+        'Organization Description': form.description.trim(),
+        'Why Participate': form.why.trim(),
+        'Status': 'Applied',
+        'Application Date': new Date().toISOString().slice(0, 10),
+      })
+      setSubmitted(true)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  if (submitted) {
+    return (
+      <div className="submit-success">
+        <div className="success-icon">✓</div>
+        <h3>Application received</h3>
+        <p>
+          Thank you for applying. We review applications within a few days and will
+          follow up by email.
+        </p>
+        <button className="btn btn-ghost" onClick={onBack}>← Back</button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="application-form-wrap">
+      <div className="application-form-header">
+        <button className="btn btn-ghost" style={{ marginBottom: 20 }} onClick={onBack}>
+          ← Back
+        </button>
+        <div className="section-label">Network Application</div>
+        <h3>Apply to join the pilot network</h3>
+        <p>
+          Tell us about your organization and why you want to participate. We\u2019ll
+          follow up by email within a few days.
+        </p>
+      </div>
+
+      <form className="pulse-form" onSubmit={handleSubmit}>
+        <div className="field-group">
+          <label className="field-label" htmlFor="app-org">Organization name</label>
+          <input
+            id="app-org"
+            className="field-input"
+            type="text"
+            value={form.org}
+            onChange={(e) => update('org', e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="field-group">
+          <label className="field-label" htmlFor="app-name">Your name</label>
+          <input
+            id="app-name"
+            className="field-input"
+            type="text"
+            value={form.name}
+            onChange={(e) => update('name', e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="field-group">
+          <label className="field-label" htmlFor="app-email">Email</label>
+          <input
+            id="app-email"
+            className="field-input"
+            type="email"
+            value={form.email}
+            onChange={(e) => update('email', e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="field-group">
+          <label className="field-label" htmlFor="app-location">Location</label>
+          <div className="field-sublabel">City and state</div>
+          <input
+            id="app-location"
+            className="field-input"
+            type="text"
+            placeholder="e.g. Des Moines, Iowa"
+            value={form.location}
+            onChange={(e) => update('location', e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="field-group">
+          <label className="field-label" htmlFor="app-description">About your organization</label>
+          <div className="field-sublabel">Brief description of your organization and the community you serve.</div>
+          <textarea
+            id="app-description"
+            className="field-textarea"
+            value={form.description}
+            onChange={(e) => update('description', e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="field-group">
+          <label className="field-label" htmlFor="app-why">Why you want to participate</label>
+          <div className="field-sublabel">Why do you want to join the Civic Congruence pilot?</div>
+          <textarea
+            id="app-why"
+            className="field-textarea"
+            value={form.why}
+            onChange={(e) => update('why', e.target.value)}
+            required
+          />
+        </div>
+
+        {error && <div className="error-banner">{error}</div>}
+
+        <div className="pulse-submit">
+          <button
+            type="submit"
+            className="btn btn-primary btn-lg"
+            disabled={submitting || !isComplete()}
+          >
+            {submitting ? 'Submitting\u2026' : 'Submit application'}
+          </button>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+function AccessGate({ onUnlock, onApply }) {
   const [code, setCode] = useState('')
   const [checking, setChecking] = useState(false)
   const [error, setError] = useState(null)
@@ -77,7 +236,13 @@ function AccessGate({ onUnlock }) {
       </form>
       <p className="gate-footnote">
         Not a network member yet?{' '}
-        <span style={{ color: 'var(--accent)', cursor: 'pointer' }}>Apply to join</span>
+        <button
+          className="gate-apply-link"
+          type="button"
+          onClick={onApply}
+        >
+          Apply to join
+        </button>
       </p>
     </div>
   )
@@ -194,7 +359,13 @@ function PulseForm({ networkName, onReset }) {
 }
 
 export default function NetworkPulse() {
+  const [view, setView] = useState('gate') // 'gate' | 'apply' | 'pulse'
   const [networkName, setNetworkName] = useState(null)
+
+  function handleUnlock(name) {
+    setNetworkName(name)
+    setView('pulse')
+  }
 
   return (
     <div className="survey-page">
@@ -205,10 +376,15 @@ export default function NetworkPulse() {
           <p>Weekly check-in for Civic Congruence network participants.</p>
         </div>
 
-        {networkName === null
-          ? <AccessGate onUnlock={setNetworkName} />
-          : <PulseForm networkName={networkName} onReset={() => setNetworkName(null)} />
-        }
+        {view === 'gate' && (
+          <AccessGate onUnlock={handleUnlock} onApply={() => setView('apply')} />
+        )}
+        {view === 'apply' && (
+          <ApplicationForm onBack={() => setView('gate')} />
+        )}
+        {view === 'pulse' && (
+          <PulseForm networkName={networkName} onReset={() => setView('gate')} />
+        )}
       </div>
     </div>
   )

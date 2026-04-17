@@ -68,6 +68,19 @@ export async function submitAlignment(fields) {
   return res.json()
 }
 
+export async function submitApplication(fields) {
+  const res = await fetch(`${API}/Network%20Participants`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({ fields }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err?.error?.message || 'Failed to submit application')
+  }
+  return res.json()
+}
+
 export async function fetchVerifiedSurveys() {
   const params = new URLSearchParams({ filterByFormula: '{Verified}=TRUE()' })
   const res = await fetch(`${API}/Survey%20Response?${params}`, {
