@@ -68,6 +68,7 @@ async function findAirtableRecord(sessionId, token) {
     filterByFormula: `{Session ID}="${sessionId}"`,
     maxRecords: 1,
   })
+  params.append('fields[]', 'Report Generated')
   const res = await fetch(`${AIRTABLE_API}/Alignment%20Response?${params}`, {
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
   })
@@ -132,6 +133,13 @@ module.exports = async function handler(req, res) {
 
   if (!sessionId) {
     console.error('No sessionId in metadata')
+    return res.status(200).json({ received: true })
+  }
+
+  // Idempotency check — skip if report was already generated
+  const existingRecord = await findAirtableRecord(sessionId, airtableToken)
+  if (existingRecord?.fields?.['Report Generated'] === true) {
+    console.log('Report already generated for sessionId:', sessionId, '— skipping duplicate webhook')
     return res.status(200).json({ received: true })
   }
 

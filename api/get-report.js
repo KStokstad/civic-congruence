@@ -15,8 +15,9 @@ module.exports = async function handler(req, res) {
   const params = new URLSearchParams({
     filterByFormula: `{Stripe Session}="${safeId}"`,
     maxRecords: 1,
-    fields: ['Report', 'Report Generated'],
   })
+  params.append('fields[]', 'Report')
+  params.append('fields[]', 'Report Generated')
 
   try {
     const airtableRes = await fetch(`${AIRTABLE_API}/Alignment%20Response?${params}`, {
