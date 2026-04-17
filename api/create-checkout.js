@@ -24,28 +24,38 @@ async function saveSessionToAirtable(recordId, sessionId, email) {
 }
 
 module.exports = async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' })
-  }
-
-  const { email, alignmentData, sessionId, airtableRecordId } = req.body
-
-  if (!email || !sessionId) {
-    return res.status(400).json({ error: 'email and sessionId are required' })
-  }
-
-  // Save Session ID to Airtable — non-blocking, errors logged but don't fail checkout
-  if (airtableRecordId) {
-    try {
-      await saveSessionToAirtable(airtableRecordId, sessionId, email)
-    } catch (err) {
-      console.error('Airtable session save failed (non-fatal):', err.message)
-    }
-  }
-
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-
   try {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method not allowed' })
+    }
+
+    const { email, alignmentData, sessionId, airtableRecordId } = req.body
+
+    console.log('create-checkout invoked', {
+      email,
+      sessionId,
+      airtableRecordId,
+      hasStripeKey: !!process.env.STRIPE_SECRET_KEY,
+      hasPriceId: !!process.env.STRIPE_PRICE_ID,
+      hasSiteUrl: !!process.env.VITE_SITE_URL,
+    })
+
+    if (!email || !sessionId) {
+      return res.status(400).json({ error: 'email and sessionId are required' })
+    }
+
+    // Save Session ID to Airtable — non-blocking
+    if (airtableRecordId) {
+      try {
+        await saveSessionToAirtable(airtableRecordId, sessionId, email)
+        console.log('Airtable session save succeeded')
+      } catch (err) {
+        console.error('Airtable session save failed (non-fatal):', err.message)
+      }
+    }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
@@ -60,9 +70,17 @@ module.exports = async function handler(req, res) {
       },
     })
 
+    console.log('Stripe session created:', session.id)
     return res.status(200).json({ url: session.url })
+
   } catch (err) {
-    console.error('Stripe checkout error:', err)
-    return res.status(500).json({ error: err.message })
+    console.error('create-checkout unhandled error:', err.message)
+    console.error('Stack:', err.stack)
+    return res.status(500).json({
+      error: err.message,
+      type: err.constructor?.name ?? 'Error',
+      ...(err.type && { stripeType: err.type }),
+      ...(err.code && { stripeCode: err.code }),
+    })
   }
 }
