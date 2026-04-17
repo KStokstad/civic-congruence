@@ -53,10 +53,12 @@ export default function App() {
 
       <footer className="footer">
         <div className="footer-inner">
-          <span className="footer-logo">Civic Congruence</span>
-          <span className="footer-copy">
-            © {new Date().getFullYear()} · Civic Infrastructure Project
-          </span>
+          <div className="footer-left">
+            <span className="footer-logo">Civic Congruence</span>
+            <span className="footer-copy">
+              © {new Date().getFullYear()} · Civic Infrastructure Project
+            </span>
+          </div>
           <button className="footer-link" onClick={() => setPage('contact')}>
             Contact
           </button>

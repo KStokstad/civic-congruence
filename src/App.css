@@ -161,8 +161,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
   gap: 16px;
-  flex-wrap: wrap;
 }
 
 .footer-logo {
