@@ -221,6 +221,28 @@ export default function PoliticalAlignment({ onNavigate }) {
     setAnswers((prev) => ({ ...prev, [fieldName]: optionId }))
   }
 
+  function buildAirtableFields(text) {
+    const fields = { 'Submitted At': new Date().toISOString(), 'Result': text }
+    QUESTIONS.forEach((q) => {
+      const selected = q.options.find((o) => o.id === answers[q.fieldName])
+      fields[q.airtableField] = selected ? `${selected.id}: ${selected.text}` : ''
+    })
+    return fields
+  }
+
+  async function saveAlignmentRecord(text) {
+    try {
+      const record = await submitAlignment(buildAirtableFields(text))
+      const id = record?.id ?? null
+      console.log('Alignment record saved, id:', id)
+      setAirtableRecordId(id)
+      return id
+    } catch (err) {
+      console.error('Alignment Airtable save failed:', err.message)
+      return null
+    }
+  }
+
   async function handleFinish() {
     setPhase('generating')
     setError(null)
@@ -228,14 +250,7 @@ export default function PoliticalAlignment({ onNavigate }) {
       const text = await callAnthropic(answers)
       setAnalysis(text)
       setPhase('results')
-      const airtableFields = { 'Submitted At': new Date().toISOString(), 'Result': text }
-      QUESTIONS.forEach((q) => {
-        const selected = q.options.find((o) => o.id === answers[q.fieldName])
-        airtableFields[q.airtableField] = selected ? `${selected.id}: ${selected.text}` : ''
-      })
-      submitAlignment(airtableFields)
-        .then((record) => setAirtableRecordId(record?.id ?? null))
-        .catch(() => {})
+      saveAlignmentRecord(text) // fire and log — don't block showing results
     } catch (e) {
       setError(e.message)
       setPhase('questions')
@@ -248,6 +263,13 @@ export default function PoliticalAlignment({ onNavigate }) {
     try {
       const sessionId = crypto.randomUUID()
 
+      // Ensure the Airtable record exists before proceeding
+      let recordId = airtableRecordId
+      if (!recordId) {
+        console.log('No record ID yet — saving alignment record now')
+        recordId = await saveAlignmentRecord(analysis)
+      }
+
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -255,7 +277,7 @@ export default function PoliticalAlignment({ onNavigate }) {
           email: reportEmail,
           sessionId,
           alignmentData: answers,
-          airtableRecordId: airtableRecordId ?? null,
+          airtableRecordId: recordId,
         }),
       })
 
