@@ -78,11 +78,20 @@ async function findAirtableRecord(sessionId, token) {
 }
 
 async function updateAirtableRecord(recordId, fields, token) {
-  await fetch(`${AIRTABLE_API}/Alignment%20Response/${recordId}`, {
+  console.log('updateAirtableRecord fields:', JSON.stringify(fields))
+  const res = await fetch(`${AIRTABLE_API}/Alignment%20Response/${recordId}`, {
     method: 'PATCH',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ fields }),
   })
+  const body = await res.text()
+  console.log('updateAirtableRecord status:', res.status)
+  if (!res.ok) {
+    console.error('updateAirtableRecord error body:', body)
+    const err = new Error(`Airtable PATCH ${res.status}`)
+    err.status = res.status
+    throw err
+  }
 }
 
 function markdownToHtml(text) {
@@ -210,12 +219,19 @@ module.exports = async function handler(req, res) {
 
   const record = await findAirtableRecord(sessionId, airtableToken)
   if (record) {
-    await updateAirtableRecord(record.id, {
-      'Report': reportText,
-      'Stripe Session': session.id,
-      'Email': email ?? '',
-      'Report Generated': true,
-    }, airtableToken).catch((err) => console.error('Airtable update error:', err))
+    try {
+      await updateAirtableRecord(record.id, {
+        'Report': reportText,
+        'Stripe Session': session.id,
+        'Report Email': email ?? '',
+        'Report Generated': true,
+        'Session ID': sessionId,
+      }, airtableToken)
+      console.log('Airtable record updated successfully:', record.id)
+    } catch (err) {
+      console.error('Airtable update error status:', err.status ?? 'unknown')
+      console.error('Airtable update error message:', err.message)
+    }
   } else {
     console.warn('No Airtable record found for sessionId:', sessionId)
   }
