@@ -1620,3 +1620,48 @@
   .nav-links  { gap: 2px; flex-wrap: wrap; }
   .nav-link   { font-size: 13px; padding: 5px 10px; }
 }
+
+/* ═══════════════════════════════════════════════════
+   REPORT PAGE
+═══════════════════════════════════════════════════ */
+
+.report-page {
+  padding: 48px 0;
+}
+
+.report-email-note {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+.report-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.report-section {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+}
+
+.report-section-heading {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 12px 0;
+}
+
+.report-body p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text);
+  margin: 0 0 12px 0;
+}
+
+.report-body p:last-child {
+  margin-bottom: 0;
+}

@@ -6,6 +6,7 @@ import CivicSurvey from './pages/CivicSurvey'
 import PoliticalAlignment from './pages/PoliticalAlignment'
 import NetworkPulse from './pages/NetworkPulse'
 import Dashboard from './pages/Dashboard'
+import Report from './pages/Report'
 import './App.css'
 
 const NAV = [
@@ -17,8 +18,14 @@ const NAV = [
   { id: 'dashboard',           label: 'Dashboard' },
 ]
 
+function getInitialPage() {
+  const path = window.location.pathname
+  if (path === '/report' || path.startsWith('/report/')) return 'report'
+  return 'home'
+}
+
 export default function App() {
-  const [page, setPage] = useState('home')
+  const [page, setPage] = useState(getInitialPage)
 
   return (
     <div className="app">
@@ -49,6 +56,7 @@ export default function App() {
         {page === 'political-alignment' && <PoliticalAlignment onNavigate={setPage} />}
         {page === 'network-pulse'       && <NetworkPulse />}
         {page === 'dashboard'           && <Dashboard />}
+        {page === 'report'              && <Report onNavigate={setPage} />}
       </main>
 
       <footer className="footer">
