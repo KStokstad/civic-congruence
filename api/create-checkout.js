@@ -1,17 +1,49 @@
 const Stripe = require('stripe')
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+const AIRTABLE_API = 'https://api.airtable.com/v0/appyEX5eCOCKMruL7'
+
+async function saveSessionToAirtable(recordId, sessionId, email) {
+  const res = await fetch(`${AIRTABLE_API}/Alignment%20Response/${recordId}`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${process.env.VITE_AIRTABLE_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      fields: {
+        'Session ID': sessionId,
+        'Email': email,
+      },
+    }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(`Airtable ${res.status}: ${err?.error?.message || JSON.stringify(err)}`)
+  }
+  return res.json()
+}
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { email, alignmentData, sessionId } = req.body
+  const { email, alignmentData, sessionId, airtableRecordId } = req.body
 
   if (!email || !sessionId) {
     return res.status(400).json({ error: 'email and sessionId are required' })
   }
+
+  // Save Session ID to Airtable — non-blocking, errors logged but don't fail checkout
+  if (airtableRecordId) {
+    try {
+      await saveSessionToAirtable(airtableRecordId, sessionId, email)
+    } catch (err) {
+      console.error('Airtable session save failed (non-fatal):', err.message)
+    }
+  }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
   try {
     const session = await stripe.checkout.sessions.create({

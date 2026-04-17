@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { submitAlignment, updateAlignment } from '../services/airtable'
+import { submitAlignment } from '../services/airtable'
 import { renderMarkdown } from '../utils/renderMarkdown'
 
 const OPENING_INSTRUCTION = `This is not a personality quiz. It is designed to understand how you make tradeoffs.
@@ -248,27 +248,35 @@ export default function PoliticalAlignment({ onNavigate }) {
     try {
       const sessionId = crypto.randomUUID()
 
-      if (airtableRecordId) {
-        await updateAlignment(airtableRecordId, {
-          'Session ID': sessionId,
-          'Email': reportEmail,
-        }).catch(() => {})
-      }
-
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: reportEmail, sessionId, alignmentData: answers }),
+        body: JSON.stringify({
+          email: reportEmail,
+          sessionId,
+          alignmentData: answers,
+          airtableRecordId: airtableRecordId ?? null,
+        }),
       })
 
+      const rawText = await res.text()
+      console.log('create-checkout response', res.status, rawText)
+
       if (!res.ok) {
-        const err = await res.json().catch(() => ({}))
-        throw new Error(err.error || 'Checkout failed')
+        let message = `HTTP ${res.status}`
+        try {
+          const err = JSON.parse(rawText)
+          message = err.error || err.message || JSON.stringify(err)
+        } catch {
+          message = rawText || message
+        }
+        throw new Error(message)
       }
 
-      const { url } = await res.json()
+      const { url } = JSON.parse(rawText)
       window.location.href = url
     } catch (err) {
+      console.error('Checkout error:', err)
       setCheckoutError(err.message)
       setCheckoutLoading(false)
     }
