@@ -2,7 +2,7 @@ const Stripe = require('stripe')
 
 const AIRTABLE_API = 'https://api.airtable.com/v0/appyEX5eCOCKMruL7'
 
-async function saveSessionToAirtable(recordId, sessionId, email) {
+async function saveSessionToAirtable(recordId, sessionId) {
   const res = await fetch(`${AIRTABLE_API}/Alignment%20Response/${recordId}`, {
     method: 'PATCH',
     headers: {
@@ -12,7 +12,6 @@ async function saveSessionToAirtable(recordId, sessionId, email) {
     body: JSON.stringify({
       fields: {
         'Session ID': sessionId,
-        'Email': email,
       },
     }),
   })
@@ -47,7 +46,7 @@ module.exports = async function handler(req, res) {
     // Save Session ID to Airtable — non-blocking
     if (airtableRecordId) {
       try {
-        await saveSessionToAirtable(airtableRecordId, sessionId, email)
+        await saveSessionToAirtable(airtableRecordId, sessionId)
         console.log('Airtable session save succeeded')
       } catch (err) {
         console.error('Airtable session save failed (non-fatal):', err.message)
