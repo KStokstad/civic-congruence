@@ -1,147 +1,103 @@
 import { useState } from 'react'
 import { submitSurvey } from '../services/airtable'
 
+const EXPERIENCE_OPTIONS = [
+  'Yes, it affected me directly',
+  'Yes, someone in my household or immediate family',
+  'No direct impact',
+  'Prefer not to say',
+]
+
 const TOPICS = [
   {
     id: 'economy',
     label: 'Economy',
     icon: '📊',
-    questions: [
-      {
-        id: 'q1',
-        text: 'How much should government prioritize reducing economic inequality vs. growing the overall economy?',
-        type: 'scale',
-        lowLabel: 'Focus on growth',
-        highLabel: 'Reduce inequality',
-        fieldName: 'Economy Q1',
-      },
-      {
-        id: 'q2',
-        text: 'What best describes your view on the minimum wage?',
-        type: 'choice',
-        options: [
-          'It should be higher than it is now',
-          'It is roughly appropriate',
-          'It should not be set by the government',
-          'It should vary by region, not be national',
-        ],
-        fieldName: 'Economy Q2',
-      },
-    ],
+    scale: {
+      text: 'When tradeoffs are required, what should be prioritized in your community right now?',
+      lowLabel: 'Economic growth and business activity',
+      highLabel: 'Reducing cost pressures on households',
+      fieldName: 'Economy Scale',
+    },
+    followUp: {
+      text: 'In the past year, has an economic issue — job loss, wage pressure, housing cost, debt — directly affected you or someone in your household or immediate family?',
+      options: EXPERIENCE_OPTIONS,
+      fieldName: 'Economy Experience',
+    },
   },
   {
     id: 'safety',
     label: 'Safety',
     icon: '🛡️',
-    questions: [
-      {
-        id: 'q1',
-        text: 'When it comes to public safety, where do you put more emphasis?',
-        type: 'scale',
-        lowLabel: 'Enforcement and deterrence',
-        highLabel: 'Prevention and root causes',
-        fieldName: 'Safety Q1',
-      },
-      {
-        id: 'q2',
-        text: 'What would most improve public safety where you live?',
-        type: 'choice',
-        options: [
-          'More community policing',
-          'Mental health resources',
-          'Better lighting & infrastructure',
-          'Youth programs',
-          'Neighborhood watch',
-        ],
-        fieldName: 'Safety Q2',
-      },
-    ],
+    scale: {
+      text: 'When resources are limited, where should your community focus?',
+      lowLabel: 'Enforcement and immediate response',
+      highLabel: 'Prevention and long-term root causes',
+      fieldName: 'Safety Scale',
+    },
+    followUp: {
+      text: 'In the past year, has a safety issue — crime, violence, unsafe conditions, lack of emergency response — directly affected you or someone in your household or immediate family?',
+      options: EXPERIENCE_OPTIONS,
+      fieldName: 'Safety Experience',
+    },
   },
   {
     id: 'health',
     label: 'Health',
     icon: '🏥',
-    questions: [
-      {
-        id: 'q1',
-        text: 'How would you rate access to quality healthcare in your area?',
-        type: 'scale',
-        lowLabel: 'Very poor',
-        highLabel: 'Excellent',
-        fieldName: 'Health Q1',
-      },
-      {
-        id: 'q2',
-        text: 'What is the biggest health challenge facing your community?',
-        type: 'choice',
-        options: [
-          'Cost of care',
-          'Access to specialists',
-          'Mental health services',
-          'Environmental health',
-          'Preventive care',
-        ],
-        fieldName: 'Health Q2',
-      },
-    ],
+    scale: {
+      text: 'When making healthcare decisions for your community, what should take priority?',
+      lowLabel: 'Expanding access to basic care for everyone',
+      highLabel: 'Improving quality and specialization of existing care',
+      fieldName: 'Health Scale',
+    },
+    followUp: {
+      text: 'In the past year, has a health issue — cost of care, access to providers, mental health, chronic illness — directly affected you or someone in your household or immediate family?',
+      options: EXPERIENCE_OPTIONS,
+      fieldName: 'Health Experience',
+    },
   },
   {
     id: 'education',
     label: 'Education',
     icon: '🎓',
-    questions: [
-      {
-        id: 'q1',
-        text: 'How satisfied are you with the quality of public education in your area?',
-        type: 'scale',
-        lowLabel: 'Very dissatisfied',
-        highLabel: 'Very satisfied',
-        fieldName: 'Education Q1',
-      },
-      {
-        id: 'q2',
-        text: 'What should be the top priority for local schools?',
-        type: 'choice',
-        options: [
-          'Teacher pay & retention',
-          'School facilities',
-          'Early childhood programs',
-          'Vocational & trade training',
-          'Technology access',
-        ],
-        fieldName: 'Education Q2',
-      },
-    ],
+    scale: {
+      text: 'Where should local education investment be focused?',
+      lowLabel: 'Foundational skills and early childhood',
+      highLabel: 'Career readiness and advanced learning',
+      fieldName: 'Education Scale',
+    },
+    followUp: {
+      text: 'In the past year, has an education issue — school quality, access, cost, or outcomes — directly affected you or someone in your household or immediate family?',
+      options: EXPERIENCE_OPTIONS,
+      fieldName: 'Education Experience',
+    },
   },
   {
     id: 'governance',
     label: 'Governance',
     icon: '🏛️',
-    questions: [
-      {
-        id: 'q1',
-        text: 'How much do you trust that elections in your community accurately reflect the will of voters?',
-        type: 'scale',
-        lowLabel: 'Very little',
-        highLabel: 'A great deal',
-        fieldName: 'Governance Q1',
-      },
-      {
-        id: 'q2',
-        text: 'What would most improve civic trust in your community?',
-        type: 'choice',
-        options: [
-          'Greater transparency',
-          'More public input on decisions',
-          'Faster response to issues',
-          'Independent oversight',
-          'Better communication',
-        ],
-        fieldName: 'Governance Q2',
-      },
-    ],
+    scale: {
+      text: 'What matters more to you in how government operates?',
+      lowLabel: 'Efficiency and decisive action',
+      highLabel: 'Transparency and community input',
+      fieldName: 'Governance Scale',
+    },
+    followUp: {
+      text: 'In the past year, have you participated in a local civic process — attending a meeting, contacting a representative, voting in a local election, or signing a petition?',
+      options: [
+        'Yes, I participated',
+        'No, I did not',
+        'I wanted to but didn\u2019t know how',
+        'I didn\u2019t think it would make a difference',
+      ],
+      fieldName: 'Governance Action',
+    },
   },
 ]
+
+const CLOSING_FIELD = 'Biggest Impact'
+const CLOSING_OPTIONS = ['Economy', 'Safety', 'Health', 'Education', 'Governance']
 
 function getScoreColor(score) {
   if (score <= 2) return 'score-low'
@@ -152,7 +108,7 @@ function getScoreColor(score) {
 function buildSummary(answers) {
   const scored = TOPICS.map((t) => ({
     label: t.label,
-    score: answers[t.questions[0].fieldName] || 0,
+    score: answers[t.scale.fieldName] || 0,
   })).sort((a, b) => a.score - b.score)
 
   const topConcerns = scored.filter((t) => t.score <= 2).map((t) => t.label)
@@ -164,7 +120,7 @@ function buildSummary(answers) {
   if (strengths.length > 0) {
     return `You feel positive about ${strengths.join(' and ')}. Areas with moderate scores represent room for local improvement.`
   }
-  return 'Your responses reflect mixed satisfaction across civic areas — a common pattern in communities navigating complex, interconnected challenges.'
+  return 'Your responses reflect mixed satisfaction across civic areas \u2014 a common pattern in communities navigating complex, interconnected challenges.'
 }
 
 export default function CivicSurvey({ onNavigate }) {
@@ -175,14 +131,24 @@ export default function CivicSurvey({ onNavigate }) {
   const [error, setError] = useState(null)
 
   const total = TOPICS.length
-  const topic = TOPICS[step]
+  const isClosingStep = step === total
+  const isResultsStep = step > total
+
+  const topic = step < total ? TOPICS[step] : null
 
   function answer(fieldName, value) {
     setAnswers((prev) => ({ ...prev, [fieldName]: value }))
   }
 
   function topicComplete() {
-    return topic.questions.every((q) => answers[q.fieldName] !== undefined)
+    if (!topic) return false
+    const scaleAnswered = answers[topic.scale.fieldName] !== undefined
+    const followUpAnswered = answers[topic.followUp.fieldName] !== undefined
+    return scaleAnswered && followUpAnswered
+  }
+
+  function closingComplete() {
+    return answers[CLOSING_FIELD] !== undefined
   }
 
   async function handleSubmit() {
@@ -230,7 +196,7 @@ export default function CivicSurvey({ onNavigate }) {
   }
 
   // ── Results screen ──────────────────────────────
-  if (step === total) {
+  if (isResultsStep) {
     return (
       <div className="survey-page">
         <div className="container-sm">
@@ -241,8 +207,8 @@ export default function CivicSurvey({ onNavigate }) {
 
             <div className="results-grid">
               {TOPICS.map((t) => {
-                const score = answers[t.questions[0].fieldName]
-                const choice = answers[t.questions[1].fieldName]
+                const score = answers[t.scale.fieldName]
+                const experience = answers[t.followUp.fieldName]
                 const pct = score ? (score / 5) * 100 : 0
                 return (
                   <div className="result-row" key={t.id}>
@@ -255,11 +221,18 @@ export default function CivicSurvey({ onNavigate }) {
                     <div className="result-bar-track">
                       <div className={`result-bar-fill ${getScoreColor(score)}`} style={{ width: `${pct}%` }} />
                     </div>
-                    {choice && <div className="result-choice-text">Top concern: {choice}</div>}
+                    {experience && <div className="result-choice-text">{experience}</div>}
                   </div>
                 )
               })}
             </div>
+
+            {answers[CLOSING_FIELD] && (
+              <div className="results-summary" style={{ marginTop: 16 }}>
+                <h4>Biggest impact this year</h4>
+                <p>{answers[CLOSING_FIELD]}</p>
+              </div>
+            )}
 
             <div className="results-summary">
               <h4>Your alignment snapshot</h4>
@@ -270,7 +243,7 @@ export default function CivicSurvey({ onNavigate }) {
 
             <div className="results-actions">
               <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
-                {submitting ? 'Submitting…' : 'Submit my responses'}
+                {submitting ? 'Submitting\u2026' : 'Submit my responses'}
               </button>
               <button className="btn btn-ghost" onClick={reset}>Start over</button>
             </div>
@@ -287,14 +260,81 @@ export default function CivicSurvey({ onNavigate }) {
     )
   }
 
-  // ── Question step ───────────────────────────────
+  // ── Closing question ────────────────────────────
+  if (isClosingStep) {
+    return (
+      <div className="survey-page">
+        <div className="container-sm">
+          <div className="topic-step">
+            <div className="survey-progress">
+              <div className="progress-dots">
+                {TOPICS.map((t, i) => (
+                  <div key={t.id} className="progress-dot done" />
+                ))}
+              </div>
+              <div className="progress-track">
+                <div className="progress-fill" style={{ width: '100%' }} />
+              </div>
+            </div>
+
+            <div className="topic-heading">
+              <span style={{ fontSize: 28 }}>🗳️</span>
+              <div>
+                <div className="topic-num">Final Question</div>
+                <h3>Biggest Impact</h3>
+              </div>
+            </div>
+
+            <div className="question-block">
+              <div className="question-text">
+                Which of these issues has had the biggest impact on your daily life in the past year?
+              </div>
+              <div className="choice-options">
+                {CLOSING_OPTIONS.map((opt) => (
+                  <button
+                    key={opt}
+                    className={`choice-btn ${answers[CLOSING_FIELD] === opt ? 'selected' : ''}`}
+                    onClick={() => answer(CLOSING_FIELD, opt)}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="survey-nav">
+              <div>
+                <button className="btn btn-ghost" onClick={() => setStep((s) => s - 1)}>← Back</button>
+              </div>
+              <div className="survey-nav-right">
+                <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>Final</span>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => setStep((s) => s + 1)}
+                  disabled={!closingComplete()}
+                >
+                  See my results →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Topic step ──────────────────────────────────
+  const scaleAnswered = answers[topic.scale.fieldName] !== undefined
+
   return (
     <div className="survey-page">
       <div className="container-sm">
         <div className="survey-header">
           <div className="section-label">Civic Survey</div>
           <h2>Community Alignment Survey</h2>
-          <p>Share how you experience five key areas of civic life. Takes about 3 minutes.</p>
+          <p className="diagnostic-instruction" style={{ marginTop: 12 }}>
+            This survey focuses on your experiences and priorities in your community, not your political beliefs.
+          </p>
         </div>
 
         <div className="topic-step" key={topic.id}>
@@ -317,45 +357,45 @@ export default function CivicSurvey({ onNavigate }) {
             </div>
           </div>
 
-          {topic.questions.map((q) => (
-            <div className="question-block" key={q.id}>
-              <div className="question-text">{q.text}</div>
-
-              {q.type === 'scale' && (
-                <div className="scale-wrapper">
-                  <div className="scale-options">
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <button
-                        key={n}
-                        className={`scale-btn ${answers[q.fieldName] === n ? 'selected' : ''}`}
-                        onClick={() => answer(q.fieldName, n)}
-                      >
-                        {n}
-                      </button>
-                    ))}
-                  </div>
-                  <div className="scale-labels">
-                    <span className="scale-label-text">{q.lowLabel}</span>
-                    <span className="scale-label-text">{q.highLabel}</span>
-                  </div>
-                </div>
-              )}
-
-              {q.type === 'choice' && (
-                <div className="choice-options">
-                  {q.options.map((opt) => (
-                    <button
-                      key={opt}
-                      className={`choice-btn ${answers[q.fieldName] === opt ? 'selected' : ''}`}
-                      onClick={() => answer(q.fieldName, opt)}
-                    >
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-              )}
+          {/* Scale question */}
+          <div className="question-block">
+            <div className="question-text">{topic.scale.text}</div>
+            <div className="scale-wrapper">
+              <div className="scale-options">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <button
+                    key={n}
+                    className={`scale-btn ${answers[topic.scale.fieldName] === n ? 'selected' : ''}`}
+                    onClick={() => answer(topic.scale.fieldName, n)}
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
+              <div className="scale-labels">
+                <span className="scale-label-text">{topic.scale.lowLabel}</span>
+                <span className="scale-label-text">{topic.scale.highLabel}</span>
+              </div>
             </div>
-          ))}
+          </div>
+
+          {/* Follow-up — revealed after scale selection */}
+          {scaleAnswered && (
+            <div className="question-block">
+              <div className="question-text">{topic.followUp.text}</div>
+              <div className="choice-options">
+                {topic.followUp.options.map((opt) => (
+                  <button
+                    key={opt}
+                    className={`choice-btn ${answers[topic.followUp.fieldName] === opt ? 'selected' : ''}`}
+                    onClick={() => answer(topic.followUp.fieldName, opt)}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="survey-nav">
             <div>
@@ -370,7 +410,7 @@ export default function CivicSurvey({ onNavigate }) {
                 onClick={() => setStep((s) => s + 1)}
                 disabled={!topicComplete()}
               >
-                {step === total - 1 ? 'See my results →' : 'Next →'}
+                {step === total - 1 ? 'Final question →' : 'Next →'}
               </button>
             </div>
           </div>

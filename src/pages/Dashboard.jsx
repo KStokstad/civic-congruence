@@ -176,11 +176,11 @@ function LiveDashboard({ records, onReset }) {
     'Governance',
   ].map((label) => {
     const fieldMap = {
-      Economy:    'Economy Q1',
-      Safety:     'Safety Q1',
-      Health:     'Health Q1',
-      Education:  'Education Q1',
-      Governance: 'Governance Q1',
+      Economy:    'Economy Scale',
+      Safety:     'Safety Scale',
+      Health:     'Health Scale',
+      Education:  'Education Scale',
+      Governance: 'Governance Scale',
     }
     const vals = records
       .map((r) => r.fields[fieldMap[label]])
