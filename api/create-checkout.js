@@ -3,23 +3,35 @@ const Stripe = require('stripe')
 const AIRTABLE_API = 'https://api.airtable.com/v0/appyEX5eCOCKMruL7'
 
 async function saveSessionToAirtable(recordId, sessionId) {
-  const res = await fetch(`${AIRTABLE_API}/Alignment%20Response/${recordId}`, {
+  const url = `${AIRTABLE_API}/Alignment%20Response/${recordId}`
+  const fields = { 'Session ID': sessionId }
+  const body = JSON.stringify({ fields })
+
+  console.log('Airtable PATCH url:', url)
+  console.log('Airtable PATCH recordId:', recordId)
+  console.log('Airtable PATCH fields:', JSON.stringify(fields))
+  console.log('Airtable PATCH body:', body)
+  console.log('Airtable token present:', !!process.env.VITE_AIRTABLE_TOKEN)
+
+  const res = await fetch(url, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${process.env.VITE_AIRTABLE_TOKEN}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      fields: {
-        'Session ID': sessionId,
-      },
-    }),
+    body,
   })
+
+  const responseText = await res.text()
+  console.log('Airtable PATCH status:', res.status)
+  console.log('Airtable PATCH response:', responseText)
+
   if (!res.ok) {
-    const err = await res.json().catch(() => ({}))
-    throw new Error(`Airtable ${res.status}: ${err?.error?.message || JSON.stringify(err)}`)
+    let errMsg
+    try { errMsg = JSON.parse(responseText)?.error?.message } catch {}
+    throw new Error(`Airtable ${res.status}: ${errMsg || responseText}`)
   }
-  return res.json()
+  return JSON.parse(responseText)
 }
 
 module.exports = async function handler(req, res) {
