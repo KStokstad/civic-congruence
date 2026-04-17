@@ -1,8 +1,18 @@
 import { useState } from 'react'
 import Home from './pages/Home'
-import Survey from './pages/Survey'
+import CivicSurvey from './pages/CivicSurvey'
+import PoliticalAlignment from './pages/PoliticalAlignment'
+import NetworkPulse from './pages/NetworkPulse'
 import Dashboard from './pages/Dashboard'
 import './App.css'
+
+const NAV = [
+  { id: 'home',                label: 'Home' },
+  { id: 'civic-survey',        label: 'Civic Survey' },
+  { id: 'political-alignment', label: 'Political Alignment' },
+  { id: 'network-pulse',       label: 'Network Pulse' },
+  { id: 'dashboard',           label: 'Dashboard' },
+]
 
 export default function App() {
   const [page, setPage] = useState('home')
@@ -15,32 +25,25 @@ export default function App() {
             Civic Congruence
           </button>
           <div className="nav-links">
-            <button
-              className={`nav-link ${page === 'home' ? 'active' : ''}`}
-              onClick={() => setPage('home')}
-            >
-              Home
-            </button>
-            <button
-              className={`nav-link ${page === 'survey' ? 'active' : ''}`}
-              onClick={() => setPage('survey')}
-            >
-              Survey
-            </button>
-            <button
-              className={`nav-link ${page === 'dashboard' ? 'active' : ''}`}
-              onClick={() => setPage('dashboard')}
-            >
-              Dashboard
-            </button>
+            {NAV.map(({ id, label }) => (
+              <button
+                key={id}
+                className={`nav-link ${page === id ? 'active' : ''}`}
+                onClick={() => setPage(id)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
         </div>
       </nav>
 
       <main className="main-content">
-        {page === 'home' && <Home onNavigate={setPage} />}
-        {page === 'survey' && <Survey />}
-        {page === 'dashboard' && <Dashboard />}
+        {page === 'home'                && <Home onNavigate={setPage} />}
+        {page === 'civic-survey'        && <CivicSurvey onNavigate={setPage} />}
+        {page === 'political-alignment' && <PoliticalAlignment onNavigate={setPage} />}
+        {page === 'network-pulse'       && <NetworkPulse />}
+        {page === 'dashboard'           && <Dashboard />}
       </main>
 
       <footer className="footer">

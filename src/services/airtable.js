@@ -55,6 +55,19 @@ export async function validateAccessCode(code) {
   }
 }
 
+export async function submitAlignment(fields) {
+  const res = await fetch(`${API}/Alignment%20Response`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({ fields }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err?.error?.message || 'Failed to save alignment response')
+  }
+  return res.json()
+}
+
 export async function fetchVerifiedSurveys() {
   const params = new URLSearchParams({ filterByFormula: '{Verified}=TRUE()' })
   const res = await fetch(`${API}/Survey%20Response?${params}`, {
