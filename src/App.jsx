@@ -11,7 +11,6 @@ import './App.css'
 const NAV = [
   { id: 'home',                label: 'Home' },
   { id: 'about',               label: 'About' },
-  { id: 'contact',             label: 'Contact' },
   { id: 'civic-survey',        label: 'Civic Survey' },
   { id: 'political-alignment', label: 'Political Alignment' },
   { id: 'network-pulse',       label: 'Network Pulse' },
@@ -58,6 +57,9 @@ export default function App() {
           <span className="footer-copy">
             © {new Date().getFullYear()} · Civic Infrastructure Project
           </span>
+          <button className="footer-link" onClick={() => setPage('contact')}>
+            Contact
+          </button>
         </div>
       </footer>
     </div>

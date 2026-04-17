@@ -177,6 +177,21 @@
   color: var(--text-muted);
 }
 
+.footer-link {
+  font-size: 14px;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-link:hover {
+  color: var(--text-h);
+}
+
 /* ═══════════════════════════════════════════════════
    HOME PAGE
 ═══════════════════════════════════════════════════ */
