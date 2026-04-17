@@ -22,9 +22,9 @@ export default function About({ onNavigate }) {
     },
   ]
 
-  function goToNetworkPulse() {
+  function goToContact() {
     window.scrollTo(0, 0)
-    onNavigate('network-pulse')
+    onNavigate('contact')
   }
 
   return (
@@ -78,14 +78,8 @@ export default function About({ onNavigate }) {
                 directly.
               </p>
               <div className="about-contact-actions">
-                <a
-                  className="btn btn-ghost"
-                  href="mailto:contact@civiccongruence.org"
-                >
-                  contact@civiccongruence.org
-                </a>
-                <button className="btn btn-primary" onClick={goToNetworkPulse}>
-                  Join the network
+                <button className="btn btn-primary" onClick={goToContact}>
+                  Contact us
                 </button>
               </div>
             </div>

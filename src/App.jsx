@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Home from './pages/Home'
 import About from './pages/About'
+import Contact from './pages/Contact'
 import CivicSurvey from './pages/CivicSurvey'
 import PoliticalAlignment from './pages/PoliticalAlignment'
 import NetworkPulse from './pages/NetworkPulse'
@@ -10,6 +11,7 @@ import './App.css'
 const NAV = [
   { id: 'home',                label: 'Home' },
   { id: 'about',               label: 'About' },
+  { id: 'contact',             label: 'Contact' },
   { id: 'civic-survey',        label: 'Civic Survey' },
   { id: 'political-alignment', label: 'Political Alignment' },
   { id: 'network-pulse',       label: 'Network Pulse' },
@@ -43,6 +45,7 @@ export default function App() {
       <main className="main-content">
         {page === 'home'                && <Home onNavigate={setPage} />}
         {page === 'about'               && <About onNavigate={setPage} />}
+        {page === 'contact'             && <Contact onNavigate={setPage} />}
         {page === 'civic-survey'        && <CivicSurvey onNavigate={setPage} />}
         {page === 'political-alignment' && <PoliticalAlignment onNavigate={setPage} />}
         {page === 'network-pulse'       && <NetworkPulse />}
