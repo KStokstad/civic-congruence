@@ -8,6 +8,8 @@ const REASONS = [
   'Other',
 ]
 
+const IS_APPLICATION = 'Apply to join the pilot network'
+
 export default function Contact({ onNavigate }) {
   const [fields, setFields] = useState({
     name: '',
@@ -15,13 +17,24 @@ export default function Contact({ onNavigate }) {
     email: '',
     reason: '',
     message: '',
+    orgDescription: '',
+    whyParticipate: '',
   })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(null)
 
+  const isApplication = fields.reason === IS_APPLICATION
+
   function update(key, value) {
     setFields((prev) => ({ ...prev, [key]: value }))
+  }
+
+  function isSubmitDisabled() {
+    if (submitting) return true
+    if (!fields.name || !fields.email || !fields.reason || !fields.message) return true
+    if (isApplication && (!fields.orgDescription || !fields.whyParticipate)) return true
+    return false
   }
 
   async function handleSubmit(e) {
@@ -36,15 +49,20 @@ export default function Contact({ onNavigate }) {
         'Email': fields.email,
         'Reason': fields.reason,
         'Message': fields.message,
+        ...(isApplication && {
+          'Org Description': fields.orgDescription,
+          'Why Participate': fields.whyParticipate,
+        }),
         'Submitted At': now,
       })
 
-      if (fields.reason === 'Apply to join the pilot network') {
+      if (isApplication) {
         await submitApplication({
           'Contact Name': fields.name,
           'Email': fields.email,
           'Organization Name': fields.organization,
-          'Notes': fields.message,
+          'Notes': [fields.message, fields.orgDescription, fields.whyParticipate]
+            .filter(Boolean).join('\n\n'),
           'Status': 'Applied',
           'Application Date': now.slice(0, 10),
         }).catch(() => {})
@@ -142,6 +160,36 @@ export default function Contact({ onNavigate }) {
             </select>
           </div>
 
+          {isApplication && (
+            <>
+              <div className="field-group">
+                <label className="field-label" htmlFor="contact-org-desc">
+                  Brief description of your organization and the community you serve.
+                </label>
+                <textarea
+                  id="contact-org-desc"
+                  className="field-textarea"
+                  value={fields.orgDescription}
+                  onChange={(e) => update('orgDescription', e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="field-group">
+                <label className="field-label" htmlFor="contact-why">
+                  Why do you want to join the Civic Congruence pilot?
+                </label>
+                <textarea
+                  id="contact-why"
+                  className="field-textarea"
+                  value={fields.whyParticipate}
+                  onChange={(e) => update('whyParticipate', e.target.value)}
+                  required
+                />
+              </div>
+            </>
+          )}
+
           <div className="field-group">
             <label className="field-label" htmlFor="contact-message">Message</label>
             <textarea
@@ -160,7 +208,7 @@ export default function Contact({ onNavigate }) {
             <button
               className="btn btn-primary btn-lg"
               type="submit"
-              disabled={submitting || !fields.name || !fields.email || !fields.reason || !fields.message}
+              disabled={isSubmitDisabled()}
             >
               {submitting ? 'Sending…' : 'Send message'}
             </button>
