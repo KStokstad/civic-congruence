@@ -1,6 +1,6 @@
-const AIRTABLE_API = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}`
+const AIRTABLE_API = 'https://api.airtable.com/v0/appyEX5eCOCKMruL7'
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
@@ -19,16 +19,16 @@ export default async function handler(req, res) {
   })
 
   try {
-    const res2 = await fetch(`${AIRTABLE_API}/Alignment%20Response?${params}`, {
-      headers: { Authorization: `Bearer ${process.env.AIRTABLE_TOKEN}` },
+    const airtableRes = await fetch(`${AIRTABLE_API}/Alignment%20Response?${params}`, {
+      headers: { Authorization: `Bearer ${process.env.VITE_AIRTABLE_TOKEN}` },
     })
 
-    if (!res2.ok) {
-      const err = await res2.json().catch(() => ({}))
+    if (!airtableRes.ok) {
+      const err = await airtableRes.json().catch(() => ({}))
       return res.status(502).json({ error: err?.error?.message || 'Airtable error' })
     }
 
-    const data = await res2.json()
+    const data = await airtableRes.json()
     const record = data.records?.[0]
 
     if (!record) {

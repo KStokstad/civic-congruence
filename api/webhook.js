@@ -1,30 +1,20 @@
-import Stripe from 'stripe'
-import Anthropic from '@anthropic-ai/sdk'
-import { Resend } from 'resend'
+const Stripe = require('stripe')
+const Anthropic = require('@anthropic-ai/sdk')
+const { Resend } = require('resend')
 
-export const config = { api: { bodyParser: false } }
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_KEY })
-const resend = new Resend(process.env.RESEND_API_KEY)
-
-const AIRTABLE_API = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}`
-const AT_HEADERS = {
-  Authorization: `Bearer ${process.env.AIRTABLE_TOKEN}`,
-  'Content-Type': 'application/json',
-}
+const AIRTABLE_API = 'https://api.airtable.com/v0/appyEX5eCOCKMruL7'
 
 const QUESTIONS = [
-  { fieldName: 'Q1',  topic: 'Role of Government',      options: { A: 'Government stays limited — some needs go unmet, but autonomy and efficiency are preserved.', B: 'Government actively intervenes — some overreach is inevitable, but vulnerable people get protection.', C: 'Government is strong on core functions, restrained elsewhere — the hard part is deciding which is which.', D: 'I reject fixed frameworks — good governance is situational, not ideological.' } },
-  { fieldName: 'Q2',  topic: 'Economic Fairness',        options: { A: "We're discouraging the risk-taking and innovation that drives shared prosperity.", B: 'Concentrated wealth quietly erodes democratic participation and social trust.', C: 'Both are real — but trying to solve both simultaneously usually produces ineffective policy.', D1: 'Absolute quality of life matters more than how wealth is distributed across groups.', D2: 'This framing assumes a fixed pie — I reject the premise of the question.' } },
-  { fieldName: 'Q3',  topic: 'Social Policy',            options: { A: 'Traditions and shared values that have held communities together over time deserve protection.', B: 'Individual autonomy — people should live as they choose without interference from the state or majority opinion.', C: "Maintaining social cohesion sometimes requires limiting individual expression — that's an acceptable tradeoff.", D: 'Most social conflict is downstream of economic insecurity — fix that first.' } },
-  { fieldName: 'Q4',  topic: 'Institutions',             options: { A: 'Our institutions have become self-serving and unaccountable — meaningful disruption is overdue.', B: 'Imperfect institutions are still what stands between order and chaos — defend them.', C: 'Serious reform is necessary, but tearing down institutions creates more problems than it solves.', D: 'What matters is outcomes — institutional form is secondary to whether things actually work.' } },
-  { fieldName: 'Q5',  topic: 'Change and Stability',     options: { A: 'Push harder — crises create openings for change that stability never allows.', B: 'Hold the line — preserving stability matters more than advancing any agenda right now.', C: 'Work incrementally — change that lasts has to be built carefully, even when it\'s frustrating.', D: 'Step back — overcorrecting in turbulent times usually makes things worse.' } },
-  { fieldName: 'Q6',  topic: 'Leadership',               options: { A: 'The decisive disruptor — breaks with convention, forces issues others avoid.', B: 'The empathetic consensus builder — listens, brings people along, builds coalitions.', C: 'The technocratic problem-solver — evidence-based, expert, less concerned with politics.', D: 'The principled outsider — limited power, independent, accountable to no establishment.' } },
-  { fieldName: 'Q7',  topic: 'Media and Information',    options: { A: "I've stopped trusting mainstream outlets — the bias is too consistent and too consequential.", B: 'Independent and alternative sources have proven more honest to me than legacy media.', C: "I triangulate across sources — I've accepted I'll never have a complete picture and act accordingly.", D1: "I've built my own filtering system over time and mostly trust my own judgment.", D2: "I've largely disengaged from political news — the signal-to-noise ratio isn't worth it." } },
-  { fieldName: 'Q8',  topic: 'Identity and Politics',    options: { A: 'Lived experience is political knowledge — identity should substantially shape policy and representation.', B: "Identity matters, but it shouldn't override other considerations — it's one input among many.", C: 'Policy should be designed around needs and outcomes, not group membership.', D: 'Identity-based politics has become counterproductive — it creates more division than insight.' } },
-  { fieldName: 'Q9',  topic: 'Compromise',               options: { A: 'Compromise signals weak conviction — real leadership means holding the line.', B: 'Compromise on tactics is necessary — compromise on core values is capitulation. The difference matters.', C: 'Compromise is the basic requirement of democratic governance — without it, nothing functions.', D1: "Whether to compromise depends entirely on what's being traded — values versus tactics are different things.", D2: 'The system is too broken for compromise to matter — the premise no longer applies.' } },
-  { fieldName: 'Q10', topic: 'Political Discomfort',     options: { A: 'A government that moves aggressively, breaks with established norms, and causes lasting institutional damage.', B: 'A government so committed to procedure and stability that it fails to act when action is desperately needed.' } },
+  { fieldName: 'Q1',  topic: 'Role of Government',   options: { A: 'Government stays limited — some needs go unmet, but autonomy and efficiency are preserved.', B: 'Government actively intervenes — some overreach is inevitable, but vulnerable people get protection.', C: 'Government is strong on core functions, restrained elsewhere — the hard part is deciding which is which.', D: 'I reject fixed frameworks — good governance is situational, not ideological.' } },
+  { fieldName: 'Q2',  topic: 'Economic Fairness',     options: { A: "We're discouraging the risk-taking and innovation that drives shared prosperity.", B: 'Concentrated wealth quietly erodes democratic participation and social trust.', C: 'Both are real — but trying to solve both simultaneously usually produces ineffective policy.', D1: 'Absolute quality of life matters more than how wealth is distributed across groups.', D2: 'This framing assumes a fixed pie — I reject the premise of the question.' } },
+  { fieldName: 'Q3',  topic: 'Social Policy',         options: { A: 'Traditions and shared values that have held communities together over time deserve protection.', B: 'Individual autonomy — people should live as they choose without interference from the state or majority opinion.', C: "Maintaining social cohesion sometimes requires limiting individual expression — that's an acceptable tradeoff.", D: 'Most social conflict is downstream of economic insecurity — fix that first.' } },
+  { fieldName: 'Q4',  topic: 'Institutions',          options: { A: 'Our institutions have become self-serving and unaccountable — meaningful disruption is overdue.', B: 'Imperfect institutions are still what stands between order and chaos — defend them.', C: 'Serious reform is necessary, but tearing down institutions creates more problems than it solves.', D: 'What matters is outcomes — institutional form is secondary to whether things actually work.' } },
+  { fieldName: 'Q5',  topic: 'Change and Stability',  options: { A: 'Push harder — crises create openings for change that stability never allows.', B: 'Hold the line — preserving stability matters more than advancing any agenda right now.', C: "Work incrementally — change that lasts has to be built carefully, even when it's frustrating.", D: 'Step back — overcorrecting in turbulent times usually makes things worse.' } },
+  { fieldName: 'Q6',  topic: 'Leadership',             options: { A: 'The decisive disruptor — breaks with convention, forces issues others avoid.', B: 'The empathetic consensus builder — listens, brings people along, builds coalitions.', C: 'The technocratic problem-solver — evidence-based, expert, less concerned with politics.', D: 'The principled outsider — limited power, independent, accountable to no establishment.' } },
+  { fieldName: 'Q7',  topic: 'Media and Information', options: { A: "I've stopped trusting mainstream outlets — the bias is too consistent and too consequential.", B: 'Independent and alternative sources have proven more honest to me than legacy media.', C: "I triangulate across sources — I've accepted I'll never have a complete picture and act accordingly.", D1: "I've built my own filtering system over time and mostly trust my own judgment.", D2: "I've largely disengaged from political news — the signal-to-noise ratio isn't worth it." } },
+  { fieldName: 'Q8',  topic: 'Identity and Politics', options: { A: 'Lived experience is political knowledge — identity should substantially shape policy and representation.', B: "Identity matters, but it shouldn't override other considerations — it's one input among many.", C: 'Policy should be designed around needs and outcomes, not group membership.', D: 'Identity-based politics has become counterproductive — it creates more division than insight.' } },
+  { fieldName: 'Q9',  topic: 'Compromise',             options: { A: 'Compromise signals weak conviction — real leadership means holding the line.', B: 'Compromise on tactics is necessary — compromise on core values is capitulation. The difference matters.', C: 'Compromise is the basic requirement of democratic governance — without it, nothing functions.', D1: "Whether to compromise depends entirely on what's being traded — values versus tactics are different things.", D2: 'The system is too broken for compromise to matter — the premise no longer applies.' } },
+  { fieldName: 'Q10', topic: 'Political Discomfort',  options: { A: 'A government that moves aggressively, breaks with established norms, and causes lasting institutional damage.', B: 'A government so committed to procedure and stability that it fails to act when action is desperately needed.' } },
 ]
 
 function formatAnswers(alignmentData) {
@@ -73,23 +63,23 @@ async function getRawBody(req) {
   })
 }
 
-async function findAirtableRecord(sessionId) {
+async function findAirtableRecord(sessionId, token) {
   const params = new URLSearchParams({
     filterByFormula: `{Session ID}="${sessionId}"`,
     maxRecords: 1,
   })
   const res = await fetch(`${AIRTABLE_API}/Alignment%20Response?${params}`, {
-    headers: AT_HEADERS,
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
   })
   if (!res.ok) return null
   const data = await res.json()
   return data.records?.[0] ?? null
 }
 
-async function updateAirtableRecord(recordId, fields) {
+async function updateAirtableRecord(recordId, fields, token) {
   await fetch(`${AIRTABLE_API}/Alignment%20Response/${recordId}`, {
     method: 'PATCH',
-    headers: AT_HEADERS,
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ fields }),
   })
 }
@@ -112,10 +102,15 @@ function buildEmailHtml(reportText) {
   </body></html>`
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_KEY })
+  const resend = new Resend(process.env.RESEND_API_KEY)
+  const airtableToken = process.env.VITE_AIRTABLE_TOKEN
 
   const rawBody = await getRawBody(req)
   const sig = req.headers['stripe-signature']
@@ -163,14 +158,14 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Report generation failed' })
   }
 
-  const record = await findAirtableRecord(sessionId)
+  const record = await findAirtableRecord(sessionId, airtableToken)
   if (record) {
     await updateAirtableRecord(record.id, {
       'Report': reportText,
       'Stripe Session': session.id,
       'Email': email ?? '',
       'Report Generated': true,
-    }).catch((err) => console.error('Airtable update error:', err))
+    }, airtableToken).catch((err) => console.error('Airtable update error:', err))
   } else {
     console.warn('No Airtable record found for sessionId:', sessionId)
   }
@@ -186,3 +181,5 @@ export default async function handler(req, res) {
 
   return res.status(200).json({ received: true })
 }
+
+module.exports.config = { api: { bodyParser: false } }
