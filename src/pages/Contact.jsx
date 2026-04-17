@@ -17,6 +17,7 @@ export default function Contact({ onNavigate }) {
     email: '',
     reason: '',
     message: '',
+    location: '',
     orgDescription: '',
     whyParticipate: '',
   })
@@ -33,7 +34,7 @@ export default function Contact({ onNavigate }) {
   function isSubmitDisabled() {
     if (submitting) return true
     if (!fields.name || !fields.email || !fields.reason || !fields.message) return true
-    if (isApplication && (!fields.orgDescription || !fields.whyParticipate)) return true
+    if (isApplication && (!fields.location || !fields.orgDescription || !fields.whyParticipate)) return true
     return false
   }
 
@@ -50,7 +51,8 @@ export default function Contact({ onNavigate }) {
         'Reason': fields.reason,
         'Message': fields.message,
         ...(isApplication && {
-          'Org Description': fields.orgDescription,
+          'Location': fields.location,
+          'Organization Description': fields.orgDescription,
           'Why Participate': fields.whyParticipate,
         }),
         'Submitted At': now,
@@ -61,8 +63,9 @@ export default function Contact({ onNavigate }) {
           'Contact Name': fields.name,
           'Email': fields.email,
           'Organization Name': fields.organization,
-          'Notes': [fields.message, fields.orgDescription, fields.whyParticipate]
-            .filter(Boolean).join('\n\n'),
+          'Location': fields.location,
+          'Description': fields.orgDescription,
+          'Notes': fields.whyParticipate,
           'Status': 'Applied',
           'Application Date': now.slice(0, 10),
         }).catch(() => {})
@@ -163,9 +166,25 @@ export default function Contact({ onNavigate }) {
           {isApplication && (
             <>
               <div className="field-group">
+                <label className="field-label" htmlFor="contact-location">Location</label>
+                <input
+                  id="contact-location"
+                  className="field-input"
+                  type="text"
+                  placeholder="e.g. Chicago, IL"
+                  value={fields.location}
+                  onChange={(e) => update('location', e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="field-group">
                 <label className="field-label" htmlFor="contact-org-desc">
-                  Brief description of your organization and the community you serve.
+                  About your organization
                 </label>
+                <div className="field-sublabel">
+                  Brief description of your organization and the community you serve.
+                </div>
                 <textarea
                   id="contact-org-desc"
                   className="field-textarea"
@@ -177,8 +196,11 @@ export default function Contact({ onNavigate }) {
 
               <div className="field-group">
                 <label className="field-label" htmlFor="contact-why">
-                  Why do you want to join the Civic Congruence pilot?
+                  Why you want to participate
                 </label>
+                <div className="field-sublabel">
+                  Why do you want to join the Civic Congruence pilot?
+                </div>
                 <textarea
                   id="contact-why"
                   className="field-textarea"

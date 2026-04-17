@@ -11,7 +11,7 @@ If none of the options fit perfectly, select the one you lean toward most.`
 
 const QUESTIONS = [
   {
-    id: 'q1', fieldName: 'Q1',
+    id: 'q1', fieldName: 'Q1', airtableField: 'Role of Government',
     topic: 'Role of Government',
     stem: 'When you think about the proper scope of government, which would you accept even knowing its downside?',
     options: [
@@ -22,7 +22,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'q2', fieldName: 'Q2',
+    id: 'q2', fieldName: 'Q2', airtableField: 'Economic Fairness',
     hint: 'You may find yourself agreeing with more than one option. Choose the one you would prioritize in practice.',
     topic: 'Economic Fairness',
     stem: 'When the gap between wealthy and lower-income Americans widens, your deeper concern is:',
@@ -35,7 +35,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'q3', fieldName: 'Q3',
+    id: 'q3', fieldName: 'Q3', airtableField: 'Social Policy',
     hint: 'You may find yourself agreeing with more than one option. Choose the one you would prioritize in practice.',
     topic: 'Social Policy',
     stem: 'When it comes to social issues, the principle you\u2019d defend even under pressure is:',
@@ -47,7 +47,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'q4', fieldName: 'Q4',
+    id: 'q4', fieldName: 'Q4', airtableField: 'Institutions',
     topic: 'Institutions and Democracy',
     stem: 'Which position would you hold even if it made you unpopular?',
     options: [
@@ -58,7 +58,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'q5', fieldName: 'Q5',
+    id: 'q5', fieldName: 'Q5', airtableField: 'Change and Stability',
     topic: 'Change and Stability',
     stem: 'When the political environment feels volatile, the position you\u2019d stand behind is:',
     options: [
@@ -69,7 +69,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'q6', fieldName: 'Q6',
+    id: 'q6', fieldName: 'Q6', airtableField: 'Leadership',
     topic: 'Leadership',
     stem: 'The leader you\u2019d trust with real power, knowing the risks:',
     options: [
@@ -80,7 +80,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'q7', fieldName: 'Q7',
+    id: 'q7', fieldName: 'Q7', airtableField: 'Media and Information',
     topic: 'Media and Information',
     stem: 'How you actually navigate political information, honestly:',
     options: [
@@ -92,7 +92,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'q8', fieldName: 'Q8',
+    id: 'q8', fieldName: 'Q8', airtableField: 'Identity and Politics',
     topic: 'Identity and Politics',
     stem: 'Which position would you defend in a room that disagreed with you?',
     options: [
@@ -103,7 +103,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'q9', fieldName: 'Q9',
+    id: 'q9', fieldName: 'Q9', airtableField: 'Compromise',
     hint: 'You may find yourself agreeing with more than one option. Choose the one you would prioritize in practice.',
     topic: 'Compromise',
     stem: 'In a divided system, the position you\u2019d actually hold under pressure:',
@@ -116,7 +116,7 @@ const QUESTIONS = [
     ],
   },
   {
-    id: 'q10', fieldName: 'Q10',
+    id: 'q10', fieldName: 'Q10', airtableField: 'Political Discomfort',
     topic: 'Political Discomfort',
     stem: 'Which scenario genuinely worries you more?',
     options: [
@@ -226,7 +226,7 @@ export default function PoliticalAlignment({ onNavigate }) {
       const airtableFields = { 'Submitted At': new Date().toISOString(), 'Result': text }
       QUESTIONS.forEach((q) => {
         const selected = q.options.find((o) => o.id === answers[q.fieldName])
-        airtableFields[q.fieldName] = selected ? `${selected.id}: ${selected.text}` : ''
+        airtableFields[q.airtableField] = selected ? `${selected.id}: ${selected.text}` : ''
       })
       submitAlignment(airtableFields).catch(() => {})
     } catch (e) {
