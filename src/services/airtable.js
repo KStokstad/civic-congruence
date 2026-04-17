@@ -68,6 +68,19 @@ export async function submitAlignment(fields) {
   return res.json()
 }
 
+export async function updateAlignment(recordId, fields) {
+  const res = await fetch(`${API}/Alignment%20Response/${recordId}`, {
+    method: 'PATCH',
+    headers: headers(),
+    body: JSON.stringify({ fields }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err?.error?.message || 'Failed to update alignment record')
+  }
+  return res.json()
+}
+
 export async function submitContact(fields) {
   const res = await fetch(`${API}/Contact`, {
     method: 'POST',

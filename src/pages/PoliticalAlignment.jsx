@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { submitAlignment } from '../services/airtable'
+import { submitAlignment, updateAlignment } from '../services/airtable'
 
 const OPENING_INSTRUCTION = `This is not a personality quiz. It is designed to understand how you make tradeoffs.
 
@@ -207,6 +207,10 @@ export default function PoliticalAlignment({ onNavigate }) {
   const [answers, setAnswers] = useState({})
   const [analysis, setAnalysis] = useState('')
   const [error, setError] = useState(null)
+  const [airtableRecordId, setAirtableRecordId] = useState(null)
+  const [reportEmail, setReportEmail] = useState('')
+  const [checkoutLoading, setCheckoutLoading] = useState(false)
+  const [checkoutError, setCheckoutError] = useState(null)
 
   const total = QUESTIONS.length
   const question = QUESTIONS[step]
@@ -228,10 +232,44 @@ export default function PoliticalAlignment({ onNavigate }) {
         const selected = q.options.find((o) => o.id === answers[q.fieldName])
         airtableFields[q.airtableField] = selected ? `${selected.id}: ${selected.text}` : ''
       })
-      submitAlignment(airtableFields).catch(() => {})
+      submitAlignment(airtableFields)
+        .then((record) => setAirtableRecordId(record?.id ?? null))
+        .catch(() => {})
     } catch (e) {
       setError(e.message)
       setPhase('questions')
+    }
+  }
+
+  async function handleCheckout() {
+    setCheckoutLoading(true)
+    setCheckoutError(null)
+    try {
+      const sessionId = crypto.randomUUID()
+
+      if (airtableRecordId) {
+        await updateAlignment(airtableRecordId, {
+          'Session ID': sessionId,
+          'Email': reportEmail,
+        }).catch(() => {})
+      }
+
+      const res = await fetch('/api/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: reportEmail, sessionId, alignmentData: answers }),
+      })
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}))
+        throw new Error(err.error || 'Checkout failed')
+      }
+
+      const { url } = await res.json()
+      window.location.href = url
+    } catch (err) {
+      setCheckoutError(err.message)
+      setCheckoutLoading(false)
     }
   }
 
@@ -241,6 +279,10 @@ export default function PoliticalAlignment({ onNavigate }) {
     setPhase('intro')
     setAnalysis('')
     setError(null)
+    setAirtableRecordId(null)
+    setReportEmail('')
+    setCheckoutLoading(false)
+    setCheckoutError(null)
   }
 
   // ── Intro ───────────────────────────────────────
@@ -326,25 +368,38 @@ export default function PoliticalAlignment({ onNavigate }) {
               </div>
             )}
 
-            {/* Teaser */}
-            <div className="analysis-teaser">
-              <div className="coming-soon-badge">Coming Soon</div>
-              <h3>Want to go deeper?</h3>
+            {/* Full Report Checkout */}
+            <div className="report-checkout">
+              <h3>Get your full report</h3>
               <p>
-                Your full report includes historical context for your profile, which policy
-                areas show unexpected cross-partisan alignment, and what your pattern suggests
-                about how you&#8217;d respond to the major challenges facing local governance.
+                Your deep dive includes a 900–1200 word analysis: historical analogues,
+                party faction mapping, a political homelessness score, civic leverage
+                points, and psychological tendencies to watch. Sent to your email.
               </p>
-              <div className="teaser-form">
-                <input
-                  className="field-input"
-                  type="email"
-                  placeholder="your@email.com"
-                  disabled
-                  style={{ opacity: 0.5, cursor: 'not-allowed' }}
-                />
-                <button className="btn btn-primary" disabled style={{ opacity: 0.5, cursor: 'not-allowed' }}>
-                  Notify me
+              <div className="report-checkout-form">
+                <div className="field-group">
+                  <label className="field-label" htmlFor="report-email">
+                    Where should we send your report?
+                  </label>
+                  <input
+                    id="report-email"
+                    className="field-input"
+                    type="email"
+                    placeholder="your@email.com"
+                    value={reportEmail}
+                    onChange={(e) => setReportEmail(e.target.value)}
+                  />
+                </div>
+                {checkoutError && (
+                  <div className="error-banner" style={{ marginTop: 8 }}>{checkoutError}</div>
+                )}
+                <button
+                  className="btn btn-primary btn-lg"
+                  onClick={handleCheckout}
+                  disabled={checkoutLoading || !reportEmail}
+                  style={{ marginTop: 12 }}
+                >
+                  {checkoutLoading ? 'Redirecting…' : 'Get Full Report — $7'}
                 </button>
               </div>
             </div>
