@@ -2,7 +2,7 @@ import Stripe from 'stripe'
 import Anthropic from '@anthropic-ai/sdk'
 import { Resend } from 'resend'
 
-const AIRTABLE_API = 'https://api.airtable.com/v0/appyEX5eCOCKMruL7'
+const airtableBase = () => `https://api.airtable.com/v0/${process.env.VITE_AIRTABLE_BASE_ID}`
 
 const QUESTIONS = [
   { fieldName: 'Q1',  topic: 'Role of Government',   options: { A: 'Government stays limited — some needs go unmet, but autonomy and efficiency are preserved.', B: 'Government actively intervenes — some overreach is inevitable, but vulnerable people get protection.', C: 'Government is strong on core functions, restrained elsewhere — the hard part is deciding which is which.', D: 'I reject fixed frameworks — good governance is situational, not ideological.' } },
@@ -63,23 +63,26 @@ async function getRawBody(req) {
   })
 }
 
-async function findAirtableRecord(sessionId, token) {
+async function findRecordBySessionId(sessionId, token) {
   const params = new URLSearchParams({
     filterByFormula: `{Session ID}="${sessionId}"`,
     maxRecords: 1,
   })
   params.append('fields[]', 'Report Generated')
-  const res = await fetch(`${AIRTABLE_API}/Alignment%20Response?${params}`, {
+  const res = await fetch(`${airtableBase()}/Alignment%20Response?${params}`, {
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
   })
-  if (!res.ok) return null
+  if (!res.ok) {
+    console.error('findRecordBySessionId error:', res.status, await res.text())
+    return null
+  }
   const data = await res.json()
   return data.records?.[0] ?? null
 }
 
 async function updateAirtableRecord(recordId, fields, token) {
   console.log('updateAirtableRecord fields:', JSON.stringify(fields))
-  const res = await fetch(`${AIRTABLE_API}/Alignment%20Response/${recordId}`, {
+  const res = await fetch(`${airtableBase()}/Alignment%20Response/${recordId}`, {
     method: 'PATCH',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ fields }),
@@ -187,12 +190,17 @@ export default async function handler(req, res) {
     return res.status(200).json({ received: true })
   }
 
-  // Idempotency check — skip if report was already generated
-  const existingRecord = await findAirtableRecord(sessionId, airtableToken)
-  if (existingRecord?.fields?.['Report Generated'] === true) {
+  // Idempotency check — look up by internal Session ID (written before checkout, always present)
+  const existingRecord = await findRecordBySessionId(sessionId, airtableToken)
+  if (!existingRecord) {
+    console.warn('No Airtable record found for sessionId:', sessionId)
+    return res.status(200).json({ received: true })
+  }
+  if (existingRecord.fields['Report Generated'] === true) {
     console.log('Report already generated for sessionId:', sessionId, '— skipping duplicate webhook')
     return res.status(200).json({ received: true })
   }
+  const recordId = existingRecord.id
 
   let alignmentData = {}
   try {
@@ -208,7 +216,7 @@ export default async function handler(req, res) {
   try {
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-5',
-      max_tokens: 1800,
+      max_tokens: 2500,
       messages: [{ role: 'user', content: prompt }],
     })
     reportText = message.content[0].text
@@ -217,23 +225,18 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Report generation failed' })
   }
 
-  const record = await findAirtableRecord(sessionId, airtableToken)
-  if (record) {
-    try {
-      await updateAirtableRecord(record.id, {
-        'Report': reportText,
-        'Stripe Session': session.id,
-        'Report Email': email ?? '',
-        'Report Generated': true,
-        'Session ID': sessionId,
-      }, airtableToken)
-      console.log('Airtable record updated successfully:', record.id)
-    } catch (err) {
-      console.error('Airtable update error status:', err.status ?? 'unknown')
-      console.error('Airtable update error message:', err.message)
-    }
-  } else {
-    console.warn('No Airtable record found for sessionId:', sessionId)
+  try {
+    await updateAirtableRecord(recordId, {
+      'Report': reportText,
+      'Stripe Session': session.id,
+      'Report Email': email ?? '',
+      'Report Generated': true,
+      'Session ID': sessionId,
+    }, airtableToken)
+    console.log('Airtable record updated successfully:', recordId)
+  } catch (err) {
+    console.error('Airtable update error status:', err.status ?? 'unknown')
+    console.error('Airtable update error message:', err.message)
   }
 
   if (email) {
