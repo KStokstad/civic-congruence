@@ -3,7 +3,7 @@ export default function About({ onNavigate }) {
     {
       label: 'What This Is',
       headline: 'Civic Congruence builds infrastructure, not content.',
-      body: 'Most civic data efforts produce reports. This project creates feedback loops. It connects community networks with institutions so information about what people are actually experiencing flows both ways, not just top-down. The result is better signal for media, policy, and civic organizations trying to understand what\u2019s happening on the ground.',
+      body: 'Most civic data efforts produce reports. This project creates feedback loops. It connects community networks with institutions so information about what people are actually experiencing flows both ways, not just top-down. The result is better signal for media, policy, and civic organizations trying to understand what\u2019s happening on the ground. This allows institutions to adjust decisions based on real-time community signal rather than delayed or partial inputs.',
     },
     {
       label: 'How It Works',
@@ -38,7 +38,7 @@ export default function About({ onNavigate }) {
             Not a think tank. A feedback system.
           </p>
           <p className="about-hero-sub">
-            Designed to be tested in real communities, not theorized.
+            Currently being piloted with early community inputs and network partners. Designed to be deployed across communities.
           </p>
         </div>
       </div>
