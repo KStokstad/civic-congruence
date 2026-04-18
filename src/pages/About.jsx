@@ -9,9 +9,9 @@ export default function About({ onNavigate }) {
       label: 'How It Works',
       headline: 'Three layers, one system.',
       bullets: [
-        'Civic Survey \u2014 what people are experiencing in their communities',
-        'Political Alignment diagnostic \u2014 how people think about tradeoffs',
-        'Network Pulse \u2014 vetted organizations submit weekly signal briefs',
+        'Civic Survey: what people are experiencing in their communities',
+        'Political Alignment diagnostic: how people think about tradeoffs',
+        'Network Pulse: vetted organizations submit weekly signal briefs',
       ],
       example: 'A local housing issue might show up in survey responses, flagged by community partners, and surface as a clear signal institutions can act on.',
       body: 'Together, these layers reveal where agreement is stronger than expected, where real divides exist, and what institutions may be missing.',
