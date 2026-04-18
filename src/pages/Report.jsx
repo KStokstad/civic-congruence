@@ -54,6 +54,19 @@ function parseAtAGlance(text) {
   }
 }
 
+const SECTION_SUB_LINES = {
+  'Core Orientation':        'How your answers fit together',
+  'How You Evaluate Systems':'What your responses reveal about how you make decisions',
+  'Where Tension Shows Up':  'Where your thinking gets complicated',
+  'Historical Context':      'Profiles that share your pattern',
+  'System Context':          'Where this orientation sits in today\u2019s landscape',
+  'System Alignment':        'How well current categories reflect your position',
+  'Where This Works':        'Situations where this approach is effective',
+  'Where It Breaks Down':    'Where this approach runs into limits',
+  'What to Watch':           'Patterns worth being aware of',
+  'Final Orientation':       'How to hold all of this',
+}
+
 const POLL_INTERVAL = 3000
 const MAX_POLLS = 100 // 5 minutes
 
@@ -174,7 +187,7 @@ export default function Report({ onNavigate }) {
           })()}
 
           <div className="report-content">
-            {renderMarkdown(report)}
+            {renderMarkdown(report, SECTION_SUB_LINES)}
           </div>
 
           <div className="report-print-footer">

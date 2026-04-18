@@ -195,6 +195,8 @@ Each output must contain exactly one central idea per section. If two ideas appe
 
 Include one sharp, surprising observation per output — something the reader wouldn't have said about themselves but will recognize as true when they read it. This should emerge from an unexpected combination of answers, not from generic pattern description.
 
+REPETITION RULE: Before finalizing any section, check whether the core idea has already appeared in a previous section. If yes, either cut it or advance it — show a new implication, not the same point restated. Every paragraph must add information that was not present in any prior paragraph. If a paragraph could be removed without losing meaning, remove it.
+
 OUTPUT 2 — How You Evaluate Systems
 Follow this exact sequence:
 First paragraph: Mirror — describe what this person values or how they approach political decisions in a way that feels accurate and affirming. Use language like "your responses point to" or "across your answers a pattern emerges." Make them feel understood before anything else.

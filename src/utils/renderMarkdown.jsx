@@ -5,7 +5,7 @@ function renderInline(text, keyPrefix) {
   )
 }
 
-export function renderMarkdown(text) {
+export function renderMarkdown(text, subLines = {}) {
   const lines = text.split('\n')
   const elements = []
   let listItems = []
@@ -41,6 +41,13 @@ export function renderMarkdown(text) {
     } else if (h2) {
       flushList(); flushPara()
       elements.push(<h2 key={key++}>{renderInline(h2[1], key)}</h2>)
+      if (subLines[h2[1]]) {
+        elements.push(
+          <p key={key++} style={{ fontSize: 13, color: 'var(--text-muted)', fontWeight: 'normal', marginTop: 2, marginBottom: 12 }}>
+            {subLines[h2[1]]}
+          </p>
+        )
+      }
     } else if (h1) {
       flushList(); flushPara()
       elements.push(<h1 key={key++}>{renderInline(h1[1], key)}</h1>)
