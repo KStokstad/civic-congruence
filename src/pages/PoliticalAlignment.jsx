@@ -192,12 +192,17 @@ function parseAnalysis(text) {
   }
 }
 
-function extractOrientationLabel(labelText) {
-  const match = labelText.match(/One way to describe this orientation is ([^.]+)/i)
+const CURIOSITY_LINES = [
+  "Most people with your pattern miss one key contradiction.",
+  "There\u2019s a tension in your responses that only shows up when analyzed together.",
+  "Your answers point to something deeper than a typical political profile.",
+]
+
+function extractTopDomain(labelText, patternsText) {
+  const combined = labelText + ' ' + (patternsText || '')
+  const match = combined.match(/One way to describe this orientation is ([^.]+)/i)
   if (match) return match[1].trim()
-  // Fallback: first 4 words of the label text
-  const words = labelText.replace(/\n/g, ' ').trim().split(/\s+/)
-  return words.slice(0, 4).join(' ') + (words.length > 4 ? '\u2026' : '')
+  return null
 }
 
 export default function PoliticalAlignment({ onNavigate }) {
@@ -210,6 +215,7 @@ export default function PoliticalAlignment({ onNavigate }) {
   const [reportEmail, setReportEmail] = useState('')
   const [checkoutLoading, setCheckoutLoading] = useState(false)
   const [checkoutError, setCheckoutError] = useState(null)
+  const [curiosityIdx] = useState(() => Math.floor(Math.random() * CURIOSITY_LINES.length))
 
   const total = QUESTIONS.length
   const question = QUESTIONS[step]
@@ -358,7 +364,10 @@ export default function PoliticalAlignment({ onNavigate }) {
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
     const { label, patterns } = parseAnalysis(analysis)
-    const orientationLabel = extractOrientationLabel(label)
+    const topDomain = extractTopDomain(label, patterns)
+    const bridgeLine = topDomain
+      ? `${topDomain} stands out. But that\u2019s not the full story.`
+      : "Your responses stand out. But that\u2019s not the full story."
 
     return (
       <div className="survey-page">
@@ -397,24 +406,20 @@ export default function PoliticalAlignment({ onNavigate }) {
             {/* Full Report Checkout */}
             <div className="report-checkout">
               <h3>Get your full report</h3>
-              <p className="report-checkout-hook">
-                {orientationLabel} stands out in your responses. But that's not the full story.
-              </p>
+              <p className="report-checkout-hook">{bridgeLine}</p>
               <p className="report-checkout-body">
-                Your responses reveal a deeper pattern in how you evaluate systems \u2014 where your views hold together and where they break under pressure.
+                Your responses reveal a deeper pattern in how you evaluate civic systems \u2014 where your views hold together, and where they come under tension.
               </p>
               <div className="report-checkout-deeper">
                 <p className="report-checkout-deeper-label">Inside, you'll see:</p>
                 <ul>
                   <li>Why this pattern shows up in your responses</li>
-                  <li>Where your thinking is consistent vs under tension</li>
-                  <li>What kinds of systems align with how you make decisions</li>
-                  <li>Where your approach may create blind spots</li>
+                  <li>Where your thinking is consistent vs under pressure</li>
+                  <li>What kinds of systems align with your approach</li>
+                  <li>Where blind spots may emerge</li>
                 </ul>
               </div>
-              <p className="report-checkout-curiosity">
-                Your responses reveal a pattern that's harder to see from the inside than it looks from the outside.
-              </p>
+              <p className="report-checkout-curiosity">{CURIOSITY_LINES[curiosityIdx]}</p>
               <div className="report-checkout-form">
                 <div className="field-group">
                   <label className="field-label" htmlFor="report-email">
@@ -440,7 +445,7 @@ export default function PoliticalAlignment({ onNavigate }) {
                 >
                   {checkoutLoading ? 'Redirecting\u2026' : 'See your full report \u2014 $7'}
                 </button>
-                <p className="report-checkout-sent">Sent to your email.</p>
+                <p className="report-checkout-sent">2\u20133 minute read. Delivered instantly.</p>
               </div>
             </div>
 
