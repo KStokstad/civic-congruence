@@ -86,6 +86,7 @@ export default function About({ onNavigate }) {
 
           {/* Why — last */}
           <div className="about-section">
+            <div className="about-section-label">Origin</div>
             <div className="about-section-body">
               <h2>Why.</h2>
               <p>
