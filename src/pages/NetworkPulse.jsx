@@ -248,7 +248,7 @@ function AccessGate({ onUnlock, onApply }) {
 }
 
 function PulseForm({ networkName, onReset }) {
-  const [form, setForm] = useState({ issue: '', affected: '', missing: '' })
+  const [form, setForm] = useState({ issue: '', affected: '', missing: '', highlight: '' })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(null)
@@ -266,13 +266,15 @@ function PulseForm({ networkName, onReset }) {
     setSubmitting(true)
     setError(null)
     try {
-      await submitPulse({
+      const fields = {
         'Issue This Week': form.issue.trim(),
         'Who Is Affected': form.affected.trim(),
         'What Is Missing': form.missing.trim(),
         'Network Name': networkName || '',
         'Submitted At': new Date().toISOString(),
-      })
+      }
+      if (form.highlight.trim()) fields['Community Highlight'] = form.highlight.trim()
+      await submitPulse(fields)
       setSubmitted(true)
     } catch (err) {
       setError(err.message)
@@ -292,7 +294,7 @@ function PulseForm({ networkName, onReset }) {
         </p>
         <button
           className="btn btn-ghost"
-          onClick={() => { setSubmitted(false); setForm({ issue: '', affected: '', missing: '' }) }}
+          onClick={() => { setSubmitted(false); setForm({ issue: '', affected: '', missing: '', highlight: '' }) }}
         >
           Submit another pulse
         </button>
@@ -343,6 +345,20 @@ function PulseForm({ networkName, onReset }) {
           value={form.missing}
           onChange={(e) => update('missing', e.target.value)}
           required
+        />
+      </div>
+
+      <div className="field-group">
+        <label className="field-label" htmlFor="pulse-highlight">
+          Community highlight <span className="field-optional">(optional)</span>
+        </label>
+        <div className="field-sublabel">Is there something from your organization this week you'd like shared in the signal brief? A program, event, outcome, or moment worth noting.</div>
+        <textarea
+          id="pulse-highlight"
+          className="field-textarea"
+          style={{ minHeight: 80 }}
+          value={form.highlight}
+          onChange={(e) => update('highlight', e.target.value)}
         />
       </div>
 
