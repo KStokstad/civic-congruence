@@ -86,9 +86,8 @@ export default function About({ onNavigate }) {
 
           {/* Why — last */}
           <div className="about-section">
-            <div className="about-section-label">Origin</div>
+            <div className="about-section-label">Why</div>
             <div className="about-section-body">
-              <h2>Why.</h2>
               <p>
                 Civic Congruence was created by a civic media and community engagement leader with experience across local government, public media, and community networks. This project exists because the gap between what institutions think communities need and what communities are actually experiencing has become too wide to ignore.
               </p>
