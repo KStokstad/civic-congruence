@@ -211,8 +211,8 @@ function AccessGate({ onUnlock, onApply }) {
       <div className="gate-icon">🔑</div>
       <h3>Network participants only</h3>
       <p>
-        The weekly pulse is for Civic Congruence network members. Enter your
-        network access code to continue.
+        Weekly signal from organizations working directly with communities. This
+        is where early patterns show up before they become visible publicly.
       </p>
       <form onSubmit={handleSubmit} className="gate-form">
         <div className="field-group">

@@ -2,13 +2,9 @@ import { useState } from 'react'
 import { submitAlignment } from '../services/airtable'
 import { renderMarkdown } from '../utils/renderMarkdown'
 
-const OPENING_INSTRUCTION = `This is not a personality quiz. It is designed to understand how you make tradeoffs.
+const OPENING_INSTRUCTION = `This is not a personality quiz. It measures how you make tradeoffs under pressure.
 
-Many of these questions involve competing values. Choose the answer you would accept even if it creates a downside.
-
-Avoid choosing the most balanced or agreeable option by default. The goal is to capture your instinct when a real decision has to be made.
-
-If none of the options fit perfectly, select the one you lean toward most.`
+Choose the answer you would accept in reality, not the one that sounds best.`
 
 const QUESTIONS = [
   {
@@ -153,22 +149,22 @@ Example tone: "Your responses point to a strong preference for clarity and outco
 Total length for this section: 150-200 words. No bullet points. No bold headers within the section.
 
 ALIGNMENT PROFILE
-2-3 paragraphs. Describe what this combination of answers reveals about how this person approaches political life. Use language like "your responses suggest," "this profile tends to," "there may be a pattern where." Do not use accusatory framing. Do not say "you are doing X" — say "your responses suggest X may be happening." Acknowledge complexity and internal tension as features, not flaws.
+2-3 paragraphs. Start with an affirming observation — something that mirrors back what the respondent values or how they approach political life. Make them feel accurately seen before introducing any tension or complexity. Do not open with critique or challenge. The first paragraph should make the reader think "yes, that's accurate" before they encounter anything that challenges them. Follow the sequence: mirror first, insight second, tension or challenge third. Use language like "your responses suggest," "this profile tends to," "there may be a pattern where." Do not say "you are doing X" — say "your responses suggest X may be happening." Acknowledge complexity and internal tension as features, not flaws. End with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
 
 HISTORICAL ANALOGUES
-3 specific historical figures or movements. For each: name, era, the specific parallel, and what they achieved or struggled with. Keep it concrete and interesting.
+3 specific historical figures or movements. For each: name, era, the specific parallel, and what they achieved or struggled with. Keep it concrete and interesting. End with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
 
 WHERE YOU HAVE LEVERAGE
-3-5 specific, actionable civic leverage points for someone with this profile. Label each clearly. Be concrete, not generic. This should feel like the most useful section.
+3-5 specific, actionable civic leverage points for someone with this profile. Label each clearly. Be concrete, not generic. This should feel like the most useful section. End with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
 
 WHERE YOU MAY BE STUCK
-2-3 patterns or tendencies that could limit effectiveness. Frame each as a tension or tradeoff, not a criticism. Use language like "there may be a tension between X and Y" or "a pattern worth watching is." End each with a constructive reframe or question to hold.
+2-3 patterns or tendencies that could limit effectiveness. Frame each as a tension or tradeoff, not a criticism. Use language like "there may be a tension between X and Y" or "a pattern worth watching is." End each with a constructive reframe or question to hold. End the section with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
 
 FACTION MAPPING
-Where does this profile fit within today's political landscape? Which factions would welcome, tolerate, or reject this profile? Be honest and specific. Avoid false balance.
+Where does this profile fit within today's political landscape? Which factions would welcome, tolerate, or reject this profile? Be honest and specific. Avoid false balance. End with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
 
 POLITICAL HOMELESSNESS SCORE
-Rate 1-10 with a brief explanation. Be direct about what would need to change for this person to feel more represented.
+Rate 1-10 with a brief explanation. Be direct about what would need to change for this person to feel more represented. End with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
 
 IMPORTANT TONE AND FORMAT RULES:
 - Never say 'you are doing X' — say 'your responses suggest X'
@@ -418,11 +414,19 @@ export default function PoliticalAlignment({ onNavigate }) {
             {/* Full Report Checkout */}
             <div className="report-checkout">
               <h3>Get your full report</h3>
-              <p>
-                Your deep dive includes a 900–1200 word analysis: historical analogues,
-                party faction mapping, a political homelessness score, civic leverage
-                points, and psychological tendencies to watch. Sent to your email.
+              <p className="report-checkout-hook">
+                You're not hard to place politically. You're just not well served by what's available.
               </p>
+              <div className="report-checkout-deeper">
+                <p className="report-checkout-deeper-label">The full report goes deeper into:</p>
+                <ul>
+                  <li>Why you feel politically out of place and where that comes from</li>
+                  <li>The environments where your thinking actually works</li>
+                  <li>Where your approach creates blind spots under pressure</li>
+                  <li>What kinds of systems would need to exist for your preferences to scale</li>
+                </ul>
+              </div>
+              <p className="report-checkout-meta">900–1200 word analysis. Sent to your email.</p>
               <div className="report-checkout-form">
                 <div className="field-group">
                   <label className="field-label" htmlFor="report-email">

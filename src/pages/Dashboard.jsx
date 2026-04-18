@@ -270,8 +270,7 @@ export default function Dashboard() {
             <div className="section-label">Public Data</div>
             <h2>Civic Alignment Dashboard</h2>
             <p>
-              Aggregated survey responses from verified community members.
-              Data is reviewed before publication.
+              What people in your community are actually experiencing — not what's being debated.
             </p>
           </div>
           {mode === 'empty' && (
@@ -289,11 +288,10 @@ export default function Dashboard() {
         {mode === 'empty' && (
           <div className="empty-state">
             <div className="empty-icon">📊</div>
-            <h3>No verified data yet</h3>
+            <h3>No verified data yet.</h3>
             <p>
-              This dashboard will display aggregated civic alignment data once
-              verified survey responses are available. Until then, you can preview
-              what the dashboard will look like with sample data.
+              This is what the system looks like when communities aren't feeding
+              signal into it. Be one of the first to contribute.
             </p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               <button className="btn btn-primary" onClick={() => setMode('sample')}>
