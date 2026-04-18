@@ -31,7 +31,7 @@ export default function Home({ onNavigate }) {
           <h1 className="hero-headline">Better signal. Not more noise.</h1>
           <p className="hero-subtitle">Turn real community experience into usable policy signal.</p>
           <p className="hero-sub">
-            We capture what people are actually experiencing: what's working and what isn't, and make it visible to the people making decisions.
+            We capture what people are actually experiencing: what's working and what isn't. We make it visible to the people making decisions.
           </p>
           <p className="hero-signal-line">
             Right now, institutions react to noise. This system captures signal.
