@@ -84,9 +84,8 @@ export default function About({ onNavigate }) {
             </div>
           </div>
 
-          {/* Who Is Behind This — last */}
+          {/* Why — last */}
           <div className="about-section">
-            <div className="about-section-label">Who Is Behind This</div>
             <div className="about-section-body">
               <h2>Why.</h2>
               <p>
