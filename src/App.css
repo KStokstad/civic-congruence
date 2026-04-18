@@ -1403,6 +1403,8 @@ h1, h2, h3, h4 {
   padding: 14px 18px;
   width: 100%;
   box-sizing: border-box;
+  text-align: center;
+  margin-top: 12px;
 }
 
 @media (max-width: 600px) {
@@ -1427,7 +1429,7 @@ h1, h2, h3, h4 {
   color: #78350F;
   line-height: 1.6;
   text-align: center;
-  margin: 0 0 12px 0;
+  margin: 0 auto 12px auto;
 }
 
 .diagnostic-instruction p:last-child {
