@@ -1403,9 +1403,9 @@
 
 .diagnostic-instruction p {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   color: #78350F;
-  line-height: 1.65;
+  line-height: 1.6;
   text-align: left;
   margin: 0 0 12px 0;
 }

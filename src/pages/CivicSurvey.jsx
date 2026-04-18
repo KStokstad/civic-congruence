@@ -395,9 +395,9 @@ export default function CivicSurvey({ onNavigate }) {
         <div className="survey-header">
           <div className="section-label">Civic Survey</div>
           <h2>Community Alignment Survey</h2>
-          <p className="diagnostic-instruction" style={{ marginTop: 12 }}>
-            This survey captures what you&rsquo;re actually experiencing in your community — not your political beliefs.
-          </p>
+          <div className="diagnostic-instruction" style={{ marginTop: 12 }}>
+            <p>This survey captures what you&rsquo;re actually experiencing in your community, not your political beliefs.</p>
+          </div>
         </div>
 
         {step === 0 && (
