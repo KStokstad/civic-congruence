@@ -37,10 +37,17 @@ const TOPICS = [
     label: 'Safety',
     icon: '🛡️',
     scale: {
-      text: 'When resources are limited, where should your community focus?',
+      text: 'When real tradeoffs have to be made in your community right now, where do you lean?',
       lowLabel: 'Enforcement',
       highLabel: 'Prevention',
       fieldName: 'Safety Scale',
+      labels: [
+        'Strongly favor enforcement',
+        'Slightly favor enforcement',
+        'Balance both',
+        'Slightly favor prevention',
+        'Strongly favor prevention',
+      ],
     },
     followUp: {
       text: 'In the past year, has a safety issue — crime, violence, unsafe conditions, lack of emergency response — directly affected you or someone in your household or immediate family?',
@@ -53,10 +60,17 @@ const TOPICS = [
     label: 'Health',
     icon: '🏥',
     scale: {
-      text: 'When making healthcare decisions for your community, what should take priority?',
+      text: 'When real tradeoffs have to be made in your community right now, where do you lean?',
       lowLabel: 'Expand access',
       highLabel: 'Maintain quality',
       fieldName: 'Health Scale',
+      labels: [
+        'Strongly favor expanding access',
+        'Slightly favor expanding access',
+        'Balance both',
+        'Slightly favor maintaining quality',
+        'Strongly favor maintaining quality',
+      ],
     },
     followUp: {
       text: 'In the past year, has a health issue — cost of care, access to providers, mental health, chronic illness — directly affected you or someone in your household or immediate family?',
@@ -69,10 +83,17 @@ const TOPICS = [
     label: 'Education',
     icon: '🎓',
     scale: {
-      text: 'Where should local education investment be focused?',
-      lowLabel: 'Standards',
+      text: 'When real tradeoffs have to be made in your community right now, where do you lean?',
+      lowLabel: 'Common standards',
       highLabel: 'Local flexibility',
       fieldName: 'Education Scale',
+      labels: [
+        'Strongly favor standards',
+        'Slightly favor standards',
+        'Balance both',
+        'Slightly favor local flexibility',
+        'Strongly favor local flexibility',
+      ],
     },
     followUp: {
       text: 'In the past year, has an education issue — school quality, access, cost, or outcomes — directly affected you or someone in your household or immediate family?',
@@ -85,10 +106,17 @@ const TOPICS = [
     label: 'Governance',
     icon: '🏛️',
     scale: {
-      text: 'How confident are you that your local government is responsive to people like you?',
+      text: 'How confident are you that local decisions reflect the needs of people in your community?',
       lowLabel: 'Not confident',
       highLabel: 'Very confident',
       fieldName: 'Governance Scale',
+      labels: [
+        'Not at all confident',
+        'Slightly confident',
+        'Somewhat confident',
+        'Mostly confident',
+        'Very confident',
+      ],
     },
     followUp: {
       text: 'In the past year, have you participated in a local civic process — attending a meeting, contacting a representative, voting in a local election, or signing a petition?',
