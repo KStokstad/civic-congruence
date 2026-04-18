@@ -47,13 +47,14 @@ function SampleDashboard({ onReset }) {
   return (
     <div className="dashboard-data">
       <div className="data-notice">
-        ⚠ This is sample data for preview purposes. Live data appears once verified responses are available.
+        <span>⚠ This is sample data. Live data appears once verified responses are available.</span>
+        <span style={{ fontSize: 13, color: 'var(--text-muted)', marginLeft: 12 }}>Preview how the system works</span>
         <button
           className="btn btn-ghost"
           style={{ marginLeft: 'auto', padding: '4px 12px', fontSize: 13 }}
           onClick={onReset}
         >
-          Back to empty state
+          Reset view
         </button>
       </div>
 
@@ -83,10 +84,7 @@ function SampleDashboard({ onReset }) {
       <div className="dashboard-grid">
         {/* Avg scores by topic */}
         <div className="chart-card">
-          <h4>
-            Avg. Satisfaction by Topic
-            <span className="verified-badge">✓ Verified</span>
-          </h4>
+          <h4>Avg. Satisfaction by Topic</h4>
           <div className="chart-subtitle">Scale 1–5 · {SAMPLE.verifiedResponses} verified responses</div>
           <div className="bar-chart">
             {SAMPLE.topicsAvg.map(({ label, score }) => (
@@ -189,10 +187,16 @@ function LiveDashboard({ records, onReset }) {
     return { label, score: parseFloat(avg) || 0 }
   })
 
+  const sortedByScore = [...topicsAvg].sort((a, b) => a.score - b.score)
+  const lowestTopic = sortedByScore[0]
+
   return (
     <div className="dashboard-data">
       <div className="data-notice" style={{ background: '#f0fdf4', borderColor: '#86efac', color: '#166534' }}>
-        ✓ Showing live verified data from Airtable.
+        <div>
+          <div>✓ Showing live verified data</div>
+          <div style={{ fontSize: 12, opacity: 0.75, marginTop: 2 }}>Updated in real time</div>
+        </div>
         <button
           className="btn btn-ghost"
           style={{ marginLeft: 'auto', padding: '4px 12px', fontSize: 13 }}
@@ -214,10 +218,14 @@ function LiveDashboard({ records, onReset }) {
             {topicsAvg.length ? Math.min(...topicsAvg.map((t) => t.score)).toFixed(1) : '—'}
           </div>
           <div className="stat-sub">
-            {topicsAvg.sort((a, b) => a.score - b.score)[0]?.label || '—'}
+            {lowestTopic?.label || '—'}
           </div>
         </div>
       </div>
+
+      <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: '-8px 0 20px' }}>
+        Early data — patterns will strengthen as more responses come in.
+      </p>
 
       <div className="chart-card" style={{ marginBottom: 24 }}>
         <h4>
@@ -239,12 +247,17 @@ function LiveDashboard({ records, onReset }) {
             </div>
           ))}
         </div>
+        {lowestTopic && lowestTopic.score > 0 && (
+          <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 16, marginBottom: 0 }}>
+            Currently, {lowestTopic.label} is the lowest-rated area among verified responses.
+          </p>
+        )}
       </div>
     </div>
   )
 }
 
-export default function Dashboard() {
+export default function Dashboard({ onNavigate }) {
   const [mode, setMode] = useState('empty') // 'empty' | 'sample' | 'loading' | 'live' | 'error'
   const [records, setRecords] = useState([])
   const [error, setError] = useState(null)
@@ -276,7 +289,7 @@ export default function Dashboard() {
           {mode === 'empty' && (
             <div className="dashboard-actions">
               <button className="btn btn-ghost" onClick={() => setMode('sample')}>
-                Preview sample data
+                See example output
               </button>
               <button className="btn btn-primary" onClick={loadLiveData}>
                 Load live data
@@ -290,15 +303,25 @@ export default function Dashboard() {
             <div className="empty-icon">📊</div>
             <h3>No verified data yet.</h3>
             <p>
-              This is what the system looks like before communities begin contributing signal.
-              Be one of the first.
+              This is what the system looks like before verified signal is coming in.
             </p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               <button className="btn btn-primary" onClick={() => setMode('sample')}>
-                Preview sample data
+                See example output
               </button>
               <button className="btn btn-ghost" onClick={loadLiveData}>
-                Check for live data
+                Load live data
+              </button>
+            </div>
+            <div style={{ marginTop: 28, paddingTop: 20, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
+              <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 12 }}>
+                Be one of the first to contribute signal.
+              </p>
+              <button
+                className="btn btn-secondary"
+                onClick={() => onNavigate?.('civic-survey')}
+              >
+                Take the Civic Survey
               </button>
             </div>
           </div>

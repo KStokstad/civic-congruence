@@ -55,7 +55,7 @@ export default function App() {
         {page === 'civic-survey'        && <CivicSurvey onNavigate={setPage} />}
         {page === 'political-alignment' && <PoliticalAlignment onNavigate={setPage} />}
         {page === 'network-pulse'       && <NetworkPulse />}
-        {page === 'dashboard'           && <Dashboard />}
+        {page === 'dashboard'           && <Dashboard onNavigate={setPage} />}
         {page === 'report'              && <Report onNavigate={setPage} />}
       </main>
 
