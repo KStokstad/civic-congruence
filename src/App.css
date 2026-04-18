@@ -1347,17 +1347,20 @@
   background: #FFFBEB;
   border: 1.5px solid #F59E0B;
   border-radius: var(--radius);
-  padding: 18px 22px;
+  padding: 14px 18px;
   width: 100%;
   box-sizing: border-box;
 }
 
 @media (max-width: 600px) {
   .diagnostic-instruction {
-    padding: 14px 16px;
+    padding: 12px 14px;
   }
   .diagnostic-instruction p {
     font-size: 14px;
+  }
+  .btn-lg {
+    width: 100%;
   }
 }
 
