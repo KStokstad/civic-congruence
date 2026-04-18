@@ -1,6 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
 import { renderMarkdown } from '../utils/renderMarkdown'
 
+function parseTensionPoles(text) {
+  const coreSection = text.match(/##\s+Core Orientation[^\n]*\n([\s\S]*?)(?=##|$)/i)
+  if (!coreSection) return null
+  const core = coreSection[1]
+  const m = core.match(/tension between ([^.]+?) and ([^.!?]+)[.!?]/i)
+  if (!m) return null
+  const left = m[1].trim().replace(/^(the\s+|a\s+)/i, '')
+  const right = m[2].trim().replace(/^(the\s+|a\s+)/i, '')
+  return { left, right }
+}
+
 function parseAtAGlance(text) {
   function extractSection(name) {
     const re = new RegExp(`##\\s+${name}[^\\n]*\\n([\\s\\S]*?)(?=##|$)`, 'i')
