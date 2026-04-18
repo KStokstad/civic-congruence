@@ -464,7 +464,7 @@ function AccessGate({ onUnlock }) {
       </form>
       <p className="gate-footnote">
         Not a network member yet?{' '}
-        <span style={{ color: 'var(--accent)', cursor: 'pointer' }}>Apply to join</span>
+        <span style={{ color: 'var(--accent)', cursor: 'pointer' }}>Join the network</span>
       </p>
     </div>
   )

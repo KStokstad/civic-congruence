@@ -64,7 +64,7 @@ function ApplicationForm({ onBack }) {
           ← Back
         </button>
         <div className="section-label">Network Application</div>
-        <h3>Apply to join the pilot network</h3>
+        <h3>Join the network</h3>
         <p>
           Tell us about your organization and why you want to participate. We'll follow up by email within a few days.
         </p>
@@ -252,7 +252,7 @@ function AccessGate({ onUnlock, onApply }) {
           type="button"
           onClick={onApply}
         >
-          Apply to join
+          Join the network
         </button>
       </p>
     </div>

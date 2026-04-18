@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { submitContact, submitApplication } from '../services/airtable'
 
 const REASONS = [
-  'Apply to join the pilot network',
+  'Join the network',
   'Media or research inquiry',
   'General question',
   'Other',
 ]
 
-const IS_APPLICATION = 'Apply to join the pilot network'
+const IS_APPLICATION = 'Join the network'
 
 export default function Contact({ onNavigate }) {
   const [fields, setFields] = useState({
@@ -104,7 +104,7 @@ export default function Contact({ onNavigate }) {
           <div className="section-label">Contact</div>
           <h2>Contact.</h2>
           <p>
-            Whether you want to join the pilot network, ask a question, or learn
+            Whether you want to join the network, ask a question, or learn
             more about Civic Congruence.
           </p>
         </div>
