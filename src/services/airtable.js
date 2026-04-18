@@ -68,6 +68,21 @@ export async function submitAlignment(fields) {
   return res.json()
 }
 
+export async function checkRepeatEmail(email) {
+  const safeEmail = email.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+  const params = new URLSearchParams({
+    filterByFormula: `AND({Report Email}="${safeEmail}",{Report Generated}=TRUE())`,
+    maxRecords: 1,
+  })
+  params.append('fields[]', 'Report Email')
+  const res = await fetch(`${API}/Alignment%20Response?${params}`, {
+    headers: { Authorization: `Bearer ${TOKEN}` },
+  })
+  if (!res.ok) return false
+  const data = await res.json()
+  return (data.records?.length ?? 0) > 0
+}
+
 export async function updateAlignment(recordId, fields) {
   const res = await fetch(`${API}/Alignment%20Response/${recordId}`, {
     method: 'PATCH',

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { submitAlignment } from '../services/airtable'
+import { submitAlignment, updateAlignment, checkRepeatEmail } from '../services/airtable'
 import { renderMarkdown } from '../utils/renderMarkdown'
 
 const OPENING_INSTRUCTION = `This is not a personality quiz. It measures how you make tradeoffs under pressure.
@@ -226,7 +226,7 @@ export default function PoliticalAlignment({ onNavigate }) {
   }
 
   function buildAirtableFields(text) {
-    const fields = { 'Submitted At': new Date().toISOString(), 'Result': text }
+    const fields = { 'Submitted At': new Date().toISOString(), 'Result': text, 'Repeat Submission': false }
     QUESTIONS.forEach((q) => {
       const selected = q.options.find((o) => o.id === answers[q.fieldName])
       fields[q.airtableField] = selected ? `${selected.id}: ${selected.text}` : ''
@@ -272,6 +272,17 @@ export default function PoliticalAlignment({ onNavigate }) {
       if (!recordId) {
         console.log('No record ID yet — saving alignment record now')
         recordId = await saveAlignmentRecord(analysis)
+      }
+
+      // Duplicate email check — flag repeat submissions without blocking purchase
+      const isRepeat = await checkRepeatEmail(reportEmail).catch(() => false)
+      if (isRepeat) {
+        console.warn('Repeat submission detected for:', reportEmail)
+        if (recordId) {
+          updateAlignment(recordId, { 'Repeat Submission': true }).catch((e) =>
+            console.error('Failed to flag repeat submission:', e.message)
+          )
+        }
       }
 
       const res = await fetch('/api/create-checkout', {
