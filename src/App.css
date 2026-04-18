@@ -266,11 +266,12 @@ h1, h2, h3, h4 {
 }
 
 .hero-signal-line {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 400;
-  color: var(--text-muted);
+  color: var(--text);
+  opacity: 0.65;
   max-width: 480px;
-  margin: -24px auto 28px;
+  margin: -32px auto 28px;
   line-height: 1.5;
   font-style: italic;
 }
