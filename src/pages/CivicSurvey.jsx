@@ -314,7 +314,7 @@ export default function CivicSurvey({ onNavigate }) {
 
             <div className="results-actions">
               <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 12px' }}>
-                This is a preview. Submit to save your responses to the community dataset.
+                Your responses will be added to the community dataset after review.
               </p>
               <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
                 {submitting ? 'Saving\u2026' : 'Save my responses \u2192'}
