@@ -3,16 +3,19 @@ export default function Home({ onNavigate }) {
     {
       icon: '📡',
       title: 'Signal',
+      anchor: 'What people are actually experiencing',
       body: 'We collect structured civic signal — what people are experiencing, where gaps exist, and what communities are asking for. Not noise, but pattern.',
     },
     {
       icon: '🔗',
       title: 'Infrastructure',
+      anchor: 'How that information connects to decisions',
       body: 'We build the connective tissue between lived experience and institutional decision-making, bridging the gap between residents and policy.',
     },
     {
       icon: '🔎',
       title: 'Transparency',
+      anchor: 'How it becomes visible and usable',
       body: 'We surface verified data to policymakers, advocates, and the public in ways that are accessible, interpretable, and actionable.',
     },
   ]
@@ -26,10 +29,12 @@ export default function Home({ onNavigate }) {
             Civic Infrastructure Project
           </div>
           <h1 className="hero-headline">Better signal. Not more noise.</h1>
-          <p className="hero-subtitle">Where civic signal becomes policy clarity.</p>
+          <p className="hero-subtitle">Turn real community experience into usable policy signal.</p>
           <p className="hero-sub">
-            Civic Congruence connects institutions with how communities actually build trust,
-            share information, and make decisions.
+            We capture what people are actually experiencing — and make it visible to the people making decisions.
+          </p>
+          <p className="hero-signal-line">
+            Right now, institutions react to noise. This system captures signal.
           </p>
           <div className="hero-actions">
             <button className="btn btn-primary btn-lg" onClick={() => onNavigate('civic-survey')}>
@@ -47,7 +52,7 @@ export default function Home({ onNavigate }) {
         <div className="container">
           <div className="features-header">
             <div className="section-label">What We Do</div>
-            <h2>Three pillars of civic alignment</h2>
+            <h2>How the system works</h2>
             <p>
               Congruence happens when what communities need matches what institutions
               provide. We make that gap visible.
@@ -58,6 +63,7 @@ export default function Home({ onNavigate }) {
               <div className="feature-card" key={f.title}>
                 <div className="feature-icon">{f.icon}</div>
                 <h3>{f.title}</h3>
+                <p className="feature-anchor">{f.anchor}</p>
                 <p>{f.body}</p>
               </div>
             ))}
@@ -73,10 +79,7 @@ export default function Home({ onNavigate }) {
               <div className="pilot-label">Pilot Network</div>
               <h2>Join the Civic Congruence Network</h2>
               <p>
-                We're recruiting civic leaders, community organizers, and engaged residents to
-                participate in our pilot network. Weekly pulse check-ins help us build a
-                real-time picture of community needs — and get that signal to the people who
-                can act on it.
+                Join the network and contribute real-time community signal — getting it in front of decision-makers.
               </p>
             </div>
             <div className="pilot-actions">
