@@ -137,7 +137,24 @@ ${answersText}
 Produce exactly two outputs:
 
 OUTPUT 1 — IDEOLOGICAL LABEL
-Start with one sentence that mirrors something accurate and specific about how this person approaches political life — something that makes them feel seen before anything else. When naming the orientation, introduce it with interpretive space rather than assertion. Instead of stating the label as fact, frame it as one way to describe the pattern: "One way to describe this orientation is [label]" — this gives the reader room to agree rather than react. Follow with 2-3 sentences that explain what this label means in practice. Do not open with critique. Do not use generic terms like moderate or centrist. The first thing the reader experiences should feel accurate and affirming, not challenging.
+
+Open with exactly three sentences following this structure:
+
+Line 1 — Recognition: Describe what the respondent is doing or how they think, using "Your responses suggest" not "You are" or "You reject". Name the pattern without labeling it yet.
+
+Line 2 — Pattern: Describe how their answers fit together — what the combination reveals about their underlying orientation. Use "Across your responses" or "A consistent pattern emerges."
+
+Line 3 — Tension: Name where it gets complicated. Where do their values or instincts pull in different directions? This should feel like something they hadn't fully articulated. Use "This creates a tension between" or "This raises a question about."
+
+After those three sentences, develop the full profile. You may now introduce specific patterns, institutional skepticism, identity framing, etc. — but earn that specificity rather than leading with it.
+
+Replace all instances of "You reject," "You don't trust," "You see through" with "Your responses suggest," "You tend to," "A pattern emerges of."
+
+Apply the 30% rule: before finalizing any section, ask if it can be said in fewer words without losing meaning. If yes, cut it.
+
+When naming the orientation, introduce it with interpretive space rather than assertion: "One way to describe this orientation is [label]."
+
+The standard: the first 3-5 lines should make the reader think "that's exactly it" — not "that's interesting" and not "that's a lot."
 
 OUTPUT 2 — BEHAVIORAL PATTERNS
 Follow this exact sequence:
