@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { submitAlignment } from '../services/airtable'
+import { submitAlignment, submitSubscriber } from '../services/airtable'
 import { renderMarkdown } from '../utils/renderMarkdown'
 
 const OPENING_INSTRUCTION = `This is not a personality quiz. It measures how you make tradeoffs under pressure.
@@ -202,6 +202,8 @@ export default function PoliticalAlignment({ onNavigate }) {
   const [reportEmail, setReportEmail] = useState('')
   const [checkoutLoading, setCheckoutLoading] = useState(false)
   const [checkoutError, setCheckoutError] = useState(null)
+  const [subEmail, setSubEmail] = useState('')
+  const [subStatus, setSubStatus] = useState('idle')
 
   const total = QUESTIONS.length
   const question = QUESTIONS[step]
@@ -294,6 +296,18 @@ export default function PoliticalAlignment({ onNavigate }) {
     }
   }
 
+  async function handleSubscribe(e) {
+    e.preventDefault()
+    if (!subEmail) return
+    setSubStatus('submitting')
+    try {
+      await submitSubscriber({ 'Email': subEmail, 'Subscribed At': new Date().toISOString() })
+      setSubStatus('done')
+    } catch {
+      setSubStatus('idle')
+    }
+  }
+
   function reset() {
     setStep(0)
     setAnswers({})
@@ -304,6 +318,8 @@ export default function PoliticalAlignment({ onNavigate }) {
     setReportEmail('')
     setCheckoutLoading(false)
     setCheckoutError(null)
+    setSubEmail('')
+    setSubStatus('idle')
   }
 
   // ── Intro ───────────────────────────────────────
@@ -384,6 +400,29 @@ export default function PoliticalAlignment({ onNavigate }) {
                 </div>
               </div>
             )}
+
+            {/* Inline Subscribe */}
+            <div className="inline-subscribe">
+              <h4 className="inline-subscribe-heading">Stay in the loop</h4>
+              <p className="inline-subscribe-sub">Weekly summary of civic signals across the network. No opinion. Just pattern.</p>
+              {subStatus === 'done' ? (
+                <p className="inline-subscribe-confirm">You're on the list.</p>
+              ) : (
+                <form className="inline-subscribe-form" onSubmit={handleSubscribe}>
+                  <input
+                    type="email"
+                    className="field-input"
+                    placeholder="you@email.com"
+                    value={subEmail}
+                    onChange={(e) => setSubEmail(e.target.value)}
+                    required
+                  />
+                  <button type="submit" className="btn btn-secondary" disabled={subStatus === 'submitting'}>
+                    {subStatus === 'submitting' ? 'Subscribing\u2026' : 'Subscribe'}
+                  </button>
+                </form>
+              )}
+            </div>
 
             {/* Full Report Checkout */}
             <div className="report-checkout">

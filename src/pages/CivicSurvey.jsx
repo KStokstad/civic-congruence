@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { submitSurvey } from '../services/airtable'
+import { submitSurvey, submitSubscriber } from '../services/airtable'
 
 const EXPERIENCE_OPTIONS = [
   'Yes, it affected me directly',
@@ -213,6 +213,8 @@ export default function CivicSurvey({ onNavigate }) {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(null)
+  const [subEmail, setSubEmail] = useState('')
+  const [subStatus, setSubStatus] = useState('idle')
 
   const total = TOPICS.length
   const isClosingStep = step === total
@@ -245,6 +247,18 @@ export default function CivicSurvey({ onNavigate }) {
       setError(e.message)
     } finally {
       setSubmitting(false)
+    }
+  }
+
+  async function handleSubscribe(e) {
+    e.preventDefault()
+    if (!subEmail) return
+    setSubStatus('submitting')
+    try {
+      await submitSubscriber({ 'Email': subEmail, 'Subscribed At': new Date().toISOString() })
+      setSubStatus('done')
+    } catch {
+      setSubStatus('idle')
     }
   }
 
@@ -347,6 +361,28 @@ export default function CivicSurvey({ onNavigate }) {
               <button className="btn btn-secondary" onClick={() => onNavigate('political-alignment')}>
                 Understand your political values →
               </button>
+            </div>
+
+            <div className="inline-subscribe">
+              <h4 className="inline-subscribe-heading">Stay in the loop</h4>
+              <p className="inline-subscribe-sub">Weekly summary of civic signals across the network. No opinion. Just pattern.</p>
+              {subStatus === 'done' ? (
+                <p className="inline-subscribe-confirm">You're on the list.</p>
+              ) : (
+                <form className="inline-subscribe-form" onSubmit={handleSubscribe}>
+                  <input
+                    type="email"
+                    className="field-input"
+                    placeholder="you@email.com"
+                    value={subEmail}
+                    onChange={(e) => setSubEmail(e.target.value)}
+                    required
+                  />
+                  <button type="submit" className="btn btn-secondary" disabled={subStatus === 'submitting'}>
+                    {subStatus === 'submitting' ? 'Subscribing\u2026' : 'Subscribe'}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
