@@ -155,12 +155,24 @@ const TOPIC_IMPLICATIONS = {
   Governance: 'Trust in governance here may be more fractured than other areas in your responses indicate.',
 }
 
-function buildStatement1(answers) {
+function buildSnapshot(answers) {
   const scores = getScores(answers)
   const sorted = [...scores].sort((a, b) => a.score - b.score)
   const highest = sorted[sorted.length - 1]
   const lowest = sorted[0]
-  return `${highest.label} stands out as your highest-impact area (${highest.score}/5 vs ${lowest.label} at ${lowest.score}/5). This suggests concern is more concentrated than evenly distributed.`
+  const spread = highest.score - lowest.score
+
+  const label = spread > 1.5
+    ? 'CONCENTRATED CONCERN'
+    : spread >= 0.5
+    ? 'MIXED EXPERIENCE'
+    : 'CONSISTENT ACROSS AREAS'
+
+  return {
+    label,
+    headline: `${highest.label} is your strongest signal`,
+    detail: `Highest: ${highest.label} (${highest.score}/5) \u00b7 Lowest: ${lowest.label} (${lowest.score}/5)`,
+  }
 }
 
 function buildStatement2(answers) {
@@ -282,22 +294,37 @@ export default function CivicSurvey({ onNavigate }) {
             </div>
 
             <h4 className="results-group-header">Your alignment snapshot</h4>
-            <div className="results-insight-group">
-              <div className="results-summary results-summary--primary">
-                <p>{buildStatement1(answers)}</p>
-              </div>
-              <div className="results-summary results-summary--secondary">
-                <p>{buildStatement2(answers)}</p>
-              </div>
-            </div>
+            {(() => {
+              const snap = buildSnapshot(answers)
+              return (
+                <div className="results-insight-group">
+                  <div className="results-summary results-summary--primary">
+                    <p style={{ fontSize: 11, letterSpacing: '0.08em', color: 'var(--text-muted)', marginBottom: 6, textTransform: 'uppercase' }}>{snap.label}</p>
+                    <p style={{ fontSize: 17, fontWeight: 600, color: 'var(--text-h)', margin: '0 0 4px' }}>{snap.headline}</p>
+                    <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0 }}>{snap.detail}</p>
+                  </div>
+                  <div className="results-summary results-summary--secondary">
+                    <p>{buildStatement2(answers)}</p>
+                  </div>
+                </div>
+              )
+            })()}
 
             {error && <div className="error-banner">{error}</div>}
 
             <div className="results-actions">
+              <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 12px' }}>
+                This is a preview. Submit to save your responses to the community dataset.
+              </p>
               <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
-                {submitting ? 'Submitting\u2026' : 'Submit my responses'}
+                {submitting ? 'Saving\u2026' : 'Save my responses \u2192'}
               </button>
-              <button className="btn btn-ghost" onClick={reset}>Start over</button>
+              <button
+                style={{ background: 'none', border: 'none', fontSize: 13, color: 'var(--text-muted)', opacity: 0.6, cursor: 'pointer', padding: '4px 0' }}
+                onClick={reset}
+              >
+                Start over
+              </button>
             </div>
 
           </div>
