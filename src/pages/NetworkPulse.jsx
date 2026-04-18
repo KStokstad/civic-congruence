@@ -112,7 +112,7 @@ function ApplicationForm({ onBack }) {
             id="app-location"
             className="field-input"
             type="text"
-            placeholder="e.g. Des Moines, Iowa"
+            placeholder="e.g. Chicago, IL"
             value={form.location}
             onChange={(e) => update('location', e.target.value)}
             required
