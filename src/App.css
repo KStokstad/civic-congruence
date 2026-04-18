@@ -1648,10 +1648,24 @@
   margin-bottom: 4px;
 }
 
-.report-checkout-meta {
-  font-size: 13px !important;
-  color: var(--text-muted) !important;
-  margin-bottom: 20px !important;
+.report-checkout-body {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.report-checkout-curiosity {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.report-checkout-sent {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 10px 0 0;
 }
 
 .report-checkout-form {

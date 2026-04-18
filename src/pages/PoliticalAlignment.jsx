@@ -192,6 +192,14 @@ function parseAnalysis(text) {
   }
 }
 
+function extractOrientationLabel(labelText) {
+  const match = labelText.match(/One way to describe this orientation is ([^.]+)/i)
+  if (match) return match[1].trim()
+  // Fallback: first 4 words of the label text
+  const words = labelText.replace(/\n/g, ' ').trim().split(/\s+/)
+  return words.slice(0, 4).join(' ') + (words.length > 4 ? '\u2026' : '')
+}
+
 export default function PoliticalAlignment({ onNavigate }) {
   const [phase, setPhase] = useState('intro') // 'intro' | 'questions' | 'generating' | 'results'
   const [step, setStep] = useState(0)
@@ -350,6 +358,7 @@ export default function PoliticalAlignment({ onNavigate }) {
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
     const { label, patterns } = parseAnalysis(analysis)
+    const orientationLabel = extractOrientationLabel(label)
 
     return (
       <div className="survey-page">
@@ -389,18 +398,23 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="report-checkout">
               <h3>Get your full report</h3>
               <p className="report-checkout-hook">
-                You're not hard to place politically. The available categories don't fully capture how you think.
+                {orientationLabel} stands out in your responses. But that's not the full story.
+              </p>
+              <p className="report-checkout-body">
+                Your responses reveal a deeper pattern in how you evaluate systems \u2014 where your views hold together and where they break under pressure.
               </p>
               <div className="report-checkout-deeper">
                 <p className="report-checkout-deeper-label">Inside, you'll see:</p>
                 <ul>
-                  <li>Why you feel politically out of place and where that comes from</li>
-                  <li>The environments where your thinking actually works</li>
-                  <li>Where your approach creates blind spots under pressure</li>
-                  <li>What kinds of systems would need to exist for your preferences to scale</li>
+                  <li>Why this pattern shows up in your responses</li>
+                  <li>Where your thinking is consistent vs under tension</li>
+                  <li>What kinds of systems align with how you make decisions</li>
+                  <li>Where your approach may create blind spots</li>
                 </ul>
               </div>
-              <p className="report-checkout-meta">900–1200 word analysis. Sent to your email.</p>
+              <p className="report-checkout-curiosity">
+                Your responses reveal a pattern that's harder to see from the inside than it looks from the outside.
+              </p>
               <div className="report-checkout-form">
                 <div className="field-group">
                   <label className="field-label" htmlFor="report-email">
@@ -424,8 +438,9 @@ export default function PoliticalAlignment({ onNavigate }) {
                   disabled={checkoutLoading || !reportEmail}
                   style={{ marginTop: 12 }}
                 >
-                  {checkoutLoading ? 'Redirecting…' : 'Get Full Report — $7'}
+                  {checkoutLoading ? 'Redirecting\u2026' : 'See your full report \u2014 $7'}
                 </button>
+                <p className="report-checkout-sent">Sent to your email.</p>
               </div>
             </div>
 
