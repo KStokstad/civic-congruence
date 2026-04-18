@@ -14,10 +14,17 @@ const TOPICS = [
     label: 'Economy',
     icon: '📊',
     scale: {
-      text: 'When tradeoffs are required, what should be prioritized in your community right now?',
-      lowLabel: 'Growth',
-      highLabel: 'Household costs',
+      text: 'When real tradeoffs have to be made in your community right now, where do you lean?',
+      lowLabel: 'Economic growth',
+      highLabel: 'Lower household costs',
       fieldName: 'Economy Scale',
+      labels: [
+        'Strongly favor growth',
+        'Slightly favor growth',
+        'Balance both',
+        'Slightly favor reducing costs',
+        'Strongly favor reducing costs',
+      ],
     },
     followUp: {
       text: 'In the past year, has an economic issue — job loss, wage pressure, housing cost, debt — directly affected you or someone in your household or immediate family?',
@@ -361,17 +368,22 @@ export default function CivicSurvey({ onNavigate }) {
           <div className="question-block">
             <div className="question-text">{topic.scale.text}</div>
             <div className="scale-wrapper">
-              <div className="scale-context">
-                1 = {topic.scale.lowLabel} &middot; 5 = {topic.scale.highLabel}
-              </div>
-              <div className="scale-options">
+              {!topic.scale.labels && (
+                <div className="scale-context">
+                  1 = {topic.scale.lowLabel} &middot; 5 = {topic.scale.highLabel}
+                </div>
+              )}
+              <div className={topic.scale.labels ? 'scale-options scale-options-labeled' : 'scale-options'}>
                 {[1, 2, 3, 4, 5].map((n) => (
                   <button
                     key={n}
-                    className={`scale-btn ${answers[topic.scale.fieldName] === n ? 'selected' : ''}`}
+                    className={`${topic.scale.labels ? 'scale-btn-labeled' : 'scale-btn'} ${answers[topic.scale.fieldName] === n ? 'selected' : ''}`}
                     onClick={() => answer(topic.scale.fieldName, n)}
                   >
-                    {n}
+                    <span className="scale-btn-number">{n}</span>
+                    {topic.scale.labels && (
+                      <span className="scale-btn-label">{topic.scale.labels[n - 1]}</span>
+                    )}
                   </button>
                 ))}
               </div>
