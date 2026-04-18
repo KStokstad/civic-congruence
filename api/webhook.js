@@ -36,6 +36,8 @@ Generate a report with exactly these six sections. Use the headers exactly as wr
 ALIGNMENT PROFILE
 A narrative portrait of this person's political orientation. Not a list — prose. Name the specific ideological home, explain what drives it, and describe how it sits in the current political landscape.
 
+Regardless of what profile emerges from the answers, always open this section with an observation the respondent would recognize as accurate and non-threatening before introducing any complexity or tension. Even profiles that lean toward disruption or anti-institutionalism should feel seen and understood in the first paragraph before the analysis deepens.
+
 HISTORICAL ANALOGUES
 Three figures from history whose political orientation resembles this person's pattern. For each: name, era, one sentence on the resemblance, one sentence on where they diverged or were tested.
 
