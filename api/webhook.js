@@ -31,7 +31,7 @@ function buildPrompt(answersText) {
 Their answers:
 ${answersText}
 
-Generate a report with exactly these six sections. Use the headers exactly as written.
+Generate a report with these sections. Use the headers exactly as written.
 
 ALIGNMENT PROFILE
 A narrative portrait of this person's political orientation. Not a list — prose. Name the specific ideological home, explain what drives it, and describe how it sits in the current political landscape.
@@ -52,6 +52,26 @@ Three specific areas where this person's orientation gives them unusual effectiv
 
 PSYCHOLOGICAL TENDENCIES TO WATCH
 Two or three patterns in how this person processes political information or makes decisions that could work against them — not character flaws, but cognitive or emotional tendencies revealed by their answers. Frame these as useful self-knowledge, not criticism.
+
+CLOSING (final section, no header label needed)
+
+End the report with exactly 3-4 sentences following this structure:
+
+Line 1 — Pattern: "You approach civic and political questions by [what they do / how they think]." Use their actual answer patterns, not generic language.
+
+Line 2 — Tradeoff: "That gives you [what it provides], but it also [what it costs or limits]." Name the real tradeoff honestly without judgment.
+
+Line 3 — Tension: "The tension isn't about being right or wrong — it's about [where this creates friction or complexity]."
+
+Line 4 — Forward lens: "The key question going forward is [what to watch for or notice] — and where [this approach] may need to adapt."
+
+Rules for this section:
+- No advice, no instructions, no "you should"
+- No judgment, no "this limits your effectiveness"
+- No summary conclusion, no "in conclusion you are"
+- Do not add a header — let it close naturally after the last section
+- The reader should finish feeling: "that showed me how I think" not "that told me what to think"
+- Maximum 4 sentences. Do not exceed this.
 
 Write in second person ("You..."). Be direct. Do not hedge. This is what they paid for.`
 }
