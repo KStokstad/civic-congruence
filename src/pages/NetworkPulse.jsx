@@ -226,9 +226,12 @@ function AccessGate({ onUnlock, onApply }) {
         Weekly signal from organizations working directly with communities. This
         is where early patterns show up before they become visible publicly.
       </p>
+      <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: -8, marginBottom: 20 }}>
+        Access is limited to preserve signal quality.
+      </p>
       <form onSubmit={handleSubmit} className="gate-form">
         <div className="field-group">
-          <label className="field-label" htmlFor="access-code">Access code</label>
+          <label className="field-label" htmlFor="access-code">Enter your network access code</label>
           <input
             id="access-code"
             className="field-input gate-input"
@@ -241,11 +244,11 @@ function AccessGate({ onUnlock, onApply }) {
           />
           {error && <div className="error-msg">{error}</div>}
         </div>
-        <button type="submit" className="btn btn-primary btn-lg" disabled={checking || !code.trim()}>
+        <button type="submit" className="btn btn-primary btn-lg" disabled={checking}>
           {checking ? 'Checking\u2026' : 'Continue \u2192'}
         </button>
       </form>
-      <p className="gate-footnote">
+      <p className="gate-footnote" style={{ marginTop: 24 }}>
         Not a network member yet?{' '}
         <button
           className="gate-apply-link"
@@ -429,6 +432,9 @@ export default function NetworkPulse() {
 
         {view === 'gate' && (
           <div className="inline-subscribe">
+            <div style={{ borderTop: '1px solid var(--border)', margin: '32px 0 20px', paddingTop: 20 }}>
+              <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', margin: '0 0 12px' }}>Public updates</p>
+            </div>
             <h4 className="inline-subscribe-heading">Weekly Signal Brief</h4>
             <p className="inline-subscribe-sub">Weekly summary of civic signals across the network. No opinion. Just pattern.</p>
             {subStatus === 'done' ? (
