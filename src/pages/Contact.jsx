@@ -21,6 +21,7 @@ export default function Contact({ onNavigate }) {
     orgDescription: '',
     whyParticipate: '',
   })
+  const [honeypot, setHoneypot] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(null)
@@ -40,6 +41,7 @@ export default function Contact({ onNavigate }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    if (honeypot) return
     setSubmitting(true)
     setError(null)
     try {
@@ -108,6 +110,16 @@ export default function Contact({ onNavigate }) {
         </div>
 
         <form className="contact-form pulse-form" onSubmit={handleSubmit} noValidate>
+          <input
+            name="website"
+            type="text"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            tabIndex="-1"
+            autoComplete="off"
+            aria-hidden="true"
+            style={{ display: 'none', position: 'absolute', left: '-9999px' }}
+          />
           <div className="field-group">
             <label className="field-label" htmlFor="contact-name">Name</label>
             <input

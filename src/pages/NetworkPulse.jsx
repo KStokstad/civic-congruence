@@ -5,6 +5,7 @@ function ApplicationForm({ onBack }) {
   const [form, setForm] = useState({
     org: '', name: '', email: '', location: '', description: '', why: '',
   })
+  const [honeypot, setHoneypot] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(null)
@@ -20,6 +21,7 @@ function ApplicationForm({ onBack }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    if (honeypot) return
     setSubmitting(true)
     setError(null)
     try {
@@ -69,6 +71,16 @@ function ApplicationForm({ onBack }) {
       </div>
 
       <form className="pulse-form" onSubmit={handleSubmit}>
+        <input
+          name="website"
+          type="text"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          tabIndex="-1"
+          autoComplete="off"
+          aria-hidden="true"
+          style={{ display: 'none', position: 'absolute', left: '-9999px' }}
+        />
         <div className="field-group">
           <label className="field-label" htmlFor="app-org">Organization name</label>
           <input
