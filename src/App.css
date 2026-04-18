@@ -1,3 +1,23 @@
+/* ── Typography balance ──────────────────────────── */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+.hero-subtitle,
+.hero-sub,
+.hero-signal-line,
+.features-header p,
+.pilot-card p,
+.survey-header p,
+.dashboard-header p,
+.about-hero-sub,
+.about-transition-line,
+.diagnostic-instruction p,
+.empty-state p,
+.results-intro {
+  text-wrap: balance;
+}
+
 /* ── Layout ─────────────────────────────────────── */
 .app {
   display: flex;
