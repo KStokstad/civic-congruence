@@ -300,6 +300,46 @@ export default function CivicSurvey({ onNavigate }) {
               )
             })()}
 
+            {(() => {
+              const scores = getScores(answers)
+              const highest = [...scores].sort((a, b) => b.score - a.score)[0]
+              const lowest = [...scores].sort((a, b) => a.score - b.score)[0]
+              const allAbove3 = scores.every((s) => s.score > 3)
+              const allBelow3 = scores.every((s) => s.score < 3)
+
+              let reflection
+              if (highest.score > 3.5 && lowest.score < 2.5) {
+                reflection = `You're experiencing stronger performance in ${highest.label}, while ${lowest.label} feels less consistent.`
+              } else if (allAbove3) {
+                reflection = 'Several areas of your community appear to be functioning reasonably well based on your responses.'
+              } else if (allBelow3) {
+                reflection = 'Your responses suggest most civic systems feel like they\'re falling short right now.'
+              } else {
+                reflection = 'Your responses suggest uneven day-to-day experiences depending on the system.'
+              }
+
+              const firstNote = TOPICS.map((t) => answers[`${t.label} Notes`]).find((n) => n && n.trim())
+              const noteExcerpt = firstNote ? firstNote.trim().slice(0, 120) : null
+
+              return (
+                <>
+                  <p style={{ fontSize: 15, color: 'var(--text)', lineHeight: 1.65, margin: '16px 0 0' }}>
+                    {reflection}
+                  </p>
+                  {noteExcerpt && (
+                    <div style={{ marginTop: 14, padding: '12px 16px', background: 'var(--surface-2)', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)' }}>
+                      <p style={{ fontSize: 14, color: 'var(--text)', margin: '0 0 6px', fontStyle: 'italic' }}>
+                        You mentioned: &ldquo;{noteExcerpt}{firstNote.trim().length > 120 ? '\u2026' : ''}&rdquo;
+                      </p>
+                      <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0 }}>
+                        This helps highlight where gaps are showing up.
+                      </p>
+                    </div>
+                  )}
+                </>
+              )
+            })()}
+
             {error && <div className="error-banner">{error}</div>}
 
             <div className="results-actions">
@@ -309,6 +349,9 @@ export default function CivicSurvey({ onNavigate }) {
               <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
                 {submitting ? 'Saving\u2026' : 'Save my responses \u2192'}
               </button>
+              <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', margin: '8px 0 0' }}>
+                Your responses help surface what communities are actually experiencing.
+              </p>
               <button
                 style={{ background: 'none', border: 'none', fontSize: 13, color: 'var(--text-muted)', opacity: 0.6, cursor: 'pointer', padding: '4px 0' }}
                 onClick={reset}

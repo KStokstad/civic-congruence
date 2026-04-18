@@ -1,22 +1,19 @@
 export default function Home({ onNavigate }) {
   const features = [
     {
-      icon: '📡',
-      title: 'Signal',
-      anchor: 'What people are actually experiencing',
-      body: 'We collect structured civic signal: what people are experiencing, where gaps exist, and what communities are asking for. Not noise, but pattern.',
+      title: 'Signal →',
+      descriptor: 'What people are actually experiencing in their communities.',
+      role: 'This is the raw input the system captures.',
     },
     {
-      icon: '🔗',
-      title: 'Infrastructure',
-      anchor: 'How that information connects to decisions',
-      body: 'We build the connective tissue between lived experience and institutional decision-making, bridging the gap between residents and policy.',
+      title: 'Infrastructure →',
+      descriptor: 'How that information connects to decisions.',
+      role: 'This is what turns individual input into something usable.',
     },
     {
-      icon: '🔎',
-      title: 'Transparency',
-      anchor: 'How it becomes visible and usable',
-      body: 'We surface verified data to policymakers, advocates, and the public in ways that are accessible, interpretable, and actionable.',
+      title: 'Transparency →',
+      descriptor: 'How patterns become visible and verifiable.',
+      role: 'This is what makes the signal usable to institutions.',
     },
   ]
 
@@ -58,16 +55,17 @@ export default function Home({ onNavigate }) {
               provide. We make that gap visible.
             </p>
           </div>
+          <p className="features-connector">Raw community experience becomes usable signal when it moves through this system.</p>
           <div className="features-grid">
             {features.map((f) => (
               <div className="feature-card" key={f.title}>
-                <div className="feature-icon">{f.icon}</div>
                 <h3>{f.title}</h3>
-                <p className="feature-anchor">{f.anchor}</p>
-                <p>{f.body}</p>
+                <p className="feature-descriptor">{f.descriptor}</p>
+                <p className="feature-role">{f.role}</p>
               </div>
             ))}
           </div>
+          <p className="features-closing">This is how institutions see what's actually happening.</p>
         </div>
       </section>
 
