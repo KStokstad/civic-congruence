@@ -5,7 +5,7 @@ const EXPERIENCE_OPTIONS = [
   'Yes, it affected me directly',
   'Yes, someone in my household',
   'No direct impact',
-  'Prefer not to say',
+  'No strong lean either way',
 ]
 
 const TOPICS = [
@@ -14,9 +14,9 @@ const TOPICS = [
     label: 'Economy',
     icon: '📊',
     scale: {
-      text: 'When real tradeoffs have to be made in your community right now, where do you lean?',
-      lowLabel: 'Economic growth',
-      highLabel: 'Lower household costs',
+      text: 'In your day-to-day experience, when tradeoffs have to be made in your community — where do you lean?',
+      lowLabel: 'Keep the economy growing, even if household costs stay high',
+      highLabel: 'Lower costs for households, even if growth slows',
       fieldName: 'Economy Scale',
       labels: [
         'Strongly favor growth',
@@ -37,9 +37,9 @@ const TOPICS = [
     label: 'Safety',
     icon: '🛡️',
     scale: {
-      text: 'When real tradeoffs have to be made in your community right now, where do you lean?',
-      lowLabel: 'Enforcement',
-      highLabel: 'Prevention',
+      text: 'Based on what you\u2019ve seen locally, when tradeoffs have to be made — where do you lean?',
+      lowLabel: 'Focus on enforcement and accountability, even if prevention programs get less funding',
+      highLabel: 'Invest in prevention and root causes, even if enforcement stays limited',
       fieldName: 'Safety Scale',
       labels: [
         'Strongly favor enforcement',
@@ -50,7 +50,7 @@ const TOPICS = [
       ],
     },
     followUp: {
-      text: 'In the past year, has a safety issue — crime, violence, unsafe conditions, lack of emergency response — directly affected you or someone in your household?',
+      text: 'In the past year, has a safety issue — crime, violence, an unsafe situation, lack of emergency response — directly affected you or someone in your household?',
       options: EXPERIENCE_OPTIONS,
       fieldName: 'Safety Experience',
     },
@@ -60,9 +60,9 @@ const TOPICS = [
     label: 'Health',
     icon: '🏥',
     scale: {
-      text: 'When real tradeoffs have to be made in your community right now, where do you lean?',
-      lowLabel: 'Expand access',
-      highLabel: 'Maintain quality',
+      text: 'Thinking about your community\u2019s health system, when tradeoffs have to be made — where do you lean?',
+      lowLabel: 'Expand access to more people, even if quality varies',
+      highLabel: 'Maintain quality of care, even if not everyone can access it',
       fieldName: 'Health Scale',
       labels: [
         'Strongly favor expanding access',
@@ -83,9 +83,9 @@ const TOPICS = [
     label: 'Education',
     icon: '🎓',
     scale: {
-      text: 'When real tradeoffs have to be made in your community right now, where do you lean?',
-      lowLabel: 'Common standards',
-      highLabel: 'Local flexibility',
+      text: 'Based on what you see in your community\u2019s schools, when tradeoffs have to be made — where do you lean?',
+      lowLabel: 'Hold to common standards, even if local needs differ',
+      highLabel: 'Give schools local flexibility, even if outcomes vary',
       fieldName: 'Education Scale',
       labels: [
         'Strongly favor common standards',
@@ -106,7 +106,7 @@ const TOPICS = [
     label: 'Governance',
     icon: '🏛️',
     scale: {
-      text: 'How confident are you that local decisions actually reflect the needs of people in your community?',
+      text: 'Thinking about local decisions that affect your community — how confident are you that they actually reflect what people need?',
       lowLabel: 'Not confident',
       highLabel: 'Very confident',
       fieldName: 'Governance Scale',
@@ -148,10 +148,10 @@ function getScores(answers) {
 }
 
 const TOPIC_IMPLICATIONS = {
-  Economy:    'Economic conditions here may be placing more visible pressure on daily life than other areas reflect.',
-  Safety:     'Safety conditions here may be creating more tangible uncertainty than other civic systems in your responses.',
+  Economy:    'The economic situation here may be placing more visible pressure on daily life than other areas reflect.',
+  Safety:     'The safety situation here may be creating more tangible uncertainty than other civic systems in your responses.',
   Health:     'Health access or outcomes here may be generating more immediate strain than other areas suggest.',
-  Education:  'Education conditions here may be producing more acute concern than other domains currently show.',
+  Education:  'The education situation here may be producing more acute concern than other domains currently show.',
   Governance: 'Trust in governance here may be more fractured than other areas in your responses indicate.',
 }
 
@@ -383,6 +383,12 @@ export default function CivicSurvey({ onNavigate }) {
           </p>
         </div>
 
+        {step === 0 && (
+          <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 16 }}>
+            There are no right answers. Choose what feels closest to your experience, even if it&rsquo;s not perfect.
+          </p>
+        )}
+
         <div className="topic-step" key={topic.id}>
           <div className="survey-progress">
             <div className="progress-dots">
@@ -406,11 +412,9 @@ export default function CivicSurvey({ onNavigate }) {
           {/* Scale question */}
           <div className="question-block">
             <div className="question-text">{topic.scale.text}</div>
-            {topic.id === 'economy' && (
-              <div className="scale-instruct">Choose the option closest to your instinct — there are no perfect answers here.</div>
-            )}
             <div className="scale-wrapper">
               <p className="scale-range-hint">Select a point on the scale between the two options below.</p>
+              <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', textAlign: 'center', margin: '-4px 0 8px' }}>If you&rsquo;re unsure, go with your first instinct.</p>
               {!topic.scale.labels && (
                 <div className="scale-context">
                   1 = {topic.scale.lowLabel} &middot; 5 = {topic.scale.highLabel}
@@ -446,11 +450,14 @@ export default function CivicSurvey({ onNavigate }) {
           {scaleAnswered && (
             <div className="question-block question-block--fade-in">
               <div className="question-text">{topic.followUp.text}</div>
+              <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: '-8px 0 12px' }}>
+                Most people feel somewhere in between. Just choose the closest option.
+              </p>
               <div className="choice-options">
                 {topic.followUp.options.map((opt) => (
                   <button
                     key={opt}
-                    className={`choice-btn ${answers[topic.followUp.fieldName] === opt ? 'selected' : ''} ${opt === 'Prefer not to say' ? 'choice-btn-secondary' : ''}`}
+                    className={`choice-btn ${answers[topic.followUp.fieldName] === opt ? 'selected' : ''} ${opt === 'No strong lean either way' ? 'choice-btn-secondary' : ''}`}
                     onClick={() => answer(topic.followUp.fieldName, opt)}
                   >
                     {opt}
