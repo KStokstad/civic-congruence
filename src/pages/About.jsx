@@ -3,7 +3,7 @@ export default function About({ onNavigate }) {
     {
       label: 'What This Is',
       headline: 'Civic Congruence builds infrastructure, not content.',
-      body: 'Most decisions that affect people\u2019s lives are made with incomplete, delayed, or filtered information. Community experience is fragmented across surveys, meetings, and informal networks, while institutions operate on partial signals. Civic Congruence is designed to close that gap. It connects community input, local networks, and institutional decision-making into a continuous feedback loop. The result is better signal, so decisions can reflect what people are actually experiencing as it happens. Designed for communities, civic organizations, and institutions trying to make decisions with incomplete or outdated information.',
+      body: 'Designed for communities, civic organizations, and institutions trying to make decisions with incomplete or outdated information. Most decisions that affect people\u2019s lives are made with incomplete, delayed, or filtered information. Community experience is fragmented across surveys, meetings, and informal networks, while institutions operate on partial signals. Civic Congruence is designed to close that gap. It connects community input, local networks, and institutional decision-making into a continuous feedback loop. The result is better signal, so decisions can reflect what people are actually experiencing as it happens.',
     },
     {
       label: 'How It Works',
@@ -73,7 +73,6 @@ export default function About({ onNavigate }) {
           <div className="about-section about-section-contact">
             <div className="about-section-label">Get Involved</div>
             <div className="about-section-body">
-              <h2>Get involved.</h2>
               <p>
                 If you represent a community organization and want to join the pilot
                 network, use the application on the Network Pulse page. If you work in
