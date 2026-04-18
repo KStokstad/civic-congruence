@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { renderMarkdown } from '../utils/renderMarkdown'
-import { submitSubscriber } from '../services/airtable'
 
 const POLL_INTERVAL = 3000
 const MAX_POLLS = 100 // 5 minutes
@@ -9,8 +8,6 @@ export default function Report({ onNavigate }) {
   const [status, setStatus] = useState('loading') // 'loading' | 'ready' | 'error'
   const [report, setReport] = useState(null)
   const [error, setError] = useState(null)
-  const [subEmail, setSubEmail] = useState('')
-  const [subStatus, setSubStatus] = useState('idle') // 'idle' | 'submitting' | 'done' | 'error'
   const pollCount = useRef(0)
   const timer = useRef(null)
 
@@ -55,22 +52,6 @@ export default function Report({ onNavigate }) {
 
     return () => clearTimeout(timer.current)
   }, [sessionId])
-
-  async function handleSubscribe(e) {
-    e.preventDefault()
-    if (!subEmail) return
-    setSubStatus('submitting')
-    try {
-      await submitSubscriber({
-        'Email': subEmail,
-        'Subscribed At': new Date().toISOString(),
-      })
-      setSubStatus('done')
-    } catch (err) {
-      console.error('Subscribe error:', err)
-      setSubStatus('error')
-    }
-  }
 
   if (status === 'error') {
     return (
@@ -131,39 +112,6 @@ export default function Report({ onNavigate }) {
             <button className="btn btn-secondary" onClick={() => onNavigate('civic-survey')}>
               Take the Civic Survey
             </button>
-          </div>
-
-          <div className="report-subscribe">
-            <h3 className="report-subscribe-heading">Get the Weekly Signal Brief</h3>
-            <p className="report-subscribe-sub">
-              Weekly summary of civic signals across the network. No opinion. Just pattern.
-            </p>
-            {subStatus === 'done' ? (
-              <p className="report-subscribe-confirm">
-                You're on the list. We'll be in touch when the first brief is ready.
-              </p>
-            ) : (
-              <form className="report-subscribe-form" onSubmit={handleSubscribe}>
-                <input
-                  type="email"
-                  className="report-subscribe-input"
-                  placeholder="you@email.com"
-                  value={subEmail}
-                  onChange={(e) => setSubEmail(e.target.value)}
-                  required
-                />
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={subStatus === 'submitting'}
-                >
-                  {subStatus === 'submitting' ? 'Subscribing…' : 'Subscribe'}
-                </button>
-                {subStatus === 'error' && (
-                  <p className="report-subscribe-error">Something went wrong. Try again.</p>
-                )}
-              </form>
-            )}
           </div>
 
         </div>
