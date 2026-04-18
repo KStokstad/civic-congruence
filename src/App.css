@@ -799,7 +799,9 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 16px;
+  margin-top: 8px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
 }
 
 /* Submit success */
@@ -1964,16 +1966,18 @@
 
 /* Inline subscribe strip (survey completion screens) */
 .inline-subscribe {
-  margin-top: 64px;
+  margin-top: 32px;
   padding-top: 28px;
-  border-top: 1.5px solid var(--border);
+  border-top: 1px solid var(--border);
 }
 
 .inline-subscribe-heading {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-h);
-  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 8px;
 }
 
 .inline-subscribe-sub {
