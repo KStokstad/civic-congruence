@@ -1693,10 +1693,91 @@
   padding: 48px 0;
 }
 
+.report-back-link {
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 32px;
+  font-size: 14px;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-decoration: none;
+}
+.report-back-link:hover { color: var(--text); }
+
 .report-email-note {
   font-size: 14px;
   color: var(--text-muted);
   margin-bottom: 40px;
+}
+
+.report-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.report-subscribe {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.report-subscribe-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0 0 8px 0;
+}
+
+.report-subscribe-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+}
+
+.report-subscribe-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.report-subscribe-input {
+  flex: 1;
+  min-width: 220px;
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+}
+.report-subscribe-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.report-subscribe-confirm {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.report-subscribe-error {
+  font-size: 13px;
+  color: #c0392b;
+  margin: 8px 0 0;
+  width: 100%;
+}
+
+@media print {
+  .report-back-link,
+  .report-actions,
+  .report-subscribe { display: none; }
 }
 
 .report-content {

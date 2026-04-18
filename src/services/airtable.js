@@ -107,6 +107,19 @@ export async function submitApplication(fields) {
   return res.json()
 }
 
+export async function submitSubscriber(fields) {
+  const res = await fetch(`${API}/Subscribers`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({ fields }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}))
+    throw new Error(err?.error?.message || 'Failed to subscribe')
+  }
+  return res.json()
+}
+
 export async function fetchVerifiedSurveys() {
   const params = new URLSearchParams({ filterByFormula: '{Verified}=TRUE()' })
   const res = await fetch(`${API}/Survey%20Response?${params}`, {
