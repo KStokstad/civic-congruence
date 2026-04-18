@@ -3,23 +3,23 @@ export default function About({ onNavigate }) {
     {
       label: 'What This Is',
       headline: 'Civic Congruence builds infrastructure, not content.',
-      body: 'Designed for communities, civic organizations, and institutions trying to make decisions with incomplete or outdated information. Most decisions that affect people\u2019s lives are made with incomplete, delayed, or filtered information. Community experience is fragmented across surveys, meetings, and informal networks, while institutions operate on partial signals. Civic Congruence is designed to close that gap. It connects community input, local networks, and institutional decision-making into a continuous feedback loop. The result is better signal, so decisions can reflect what people are actually experiencing as it happens.',
+      body: 'Most decisions that affect people\u2019s lives are made with incomplete, delayed, or filtered information. Community experience is fragmented across surveys, meetings, and informal networks, while institutions operate on partial signals. Civic Congruence closes that gap by connecting community input, local networks, and institutional decision-making into a continuous feedback loop. The result is better signal, so decisions can reflect what people are actually experiencing. Designed for communities, civic organizations, and institutions trying to make decisions with incomplete or outdated information.',
     },
     {
       label: 'How It Works',
       headline: 'Three layers, one system.',
       bullets: [
-        'The Civic Survey maps what people are experiencing in their communities',
-        'The Political Alignment diagnostic maps how people think about tradeoffs',
-        'The Network Pulse connects vetted community organizations who submit weekly signal briefs',
+        'Civic Survey \u2014 what people are experiencing in their communities',
+        'Political Alignment diagnostic \u2014 how people think about tradeoffs',
+        'Network Pulse \u2014 vetted organizations submit weekly signal briefs',
       ],
-      example: 'For example: a local housing issue might show up in survey responses, be flagged by community partners, and then surface as a clear signal institutions can act on.',
+      example: 'A local housing issue might show up in survey responses, flagged by community partners, and surface as a clear signal institutions can act on.',
       body: 'Together, these layers reveal where agreement is stronger than expected, where real divides exist, and what institutions may be missing.',
     },
     {
       label: 'Data and Trust',
       headline: 'No editorial framing built into the system. No hidden weighting of results.',
-      body: 'Survey responses are reviewed for validity, not interpretation. Network Pulse inputs are synthesized without attribution. The system surfaces patterns that appear consistently across sources. Civic Congruence does not decide what matters. It makes visible what shows up repeatedly. If institutions ignore clear signals, that becomes visible. Transparency is the accountability mechanism.',
+      body: 'Survey responses are reviewed for validity, not interpretation. Network Pulse inputs are synthesized without attribution. The system surfaces patterns as they consistently appear.\n\nCivic Congruence does not decide what matters. It makes visible what shows up repeatedly.',
     },
   ]
 
@@ -35,18 +35,18 @@ export default function About({ onNavigate }) {
           <div className="section-label">ABOUT</div>
           <h1>Why this exists.</h1>
           <p className="about-hero-sub">
-            Civic Congruence helps communities and institutions see what's actually
-            happening on the ground, in real time. Not a media outlet. Not a think
-            tank. A feedback system.
+            Civic Congruence shows what&rsquo;s actually happening on the ground, in real time. Not a media outlet. Not a think tank. A feedback system.
           </p>
           <p className="about-hero-sub">
-            Currently being piloted with early community inputs and network partners. Designed to be deployed across communities.
+            Currently being piloted with early community inputs and network partners.
           </p>
         </div>
       </div>
 
       <div className="container">
         <div className="about-sections">
+          <p className="about-transition-line">This is the gap Civic Congruence is designed to solve.</p>
+
           {sections.map((s) => (
             <div className="about-section" key={s.label}>
               <div className="about-section-label">{s.label}</div>
@@ -63,7 +63,7 @@ export default function About({ onNavigate }) {
                     <p>{s.body}</p>
                   </>
                 ) : (
-                  <p>{s.body}</p>
+                  s.body.split('\n\n').map((para, i) => <p key={i}>{para}</p>)
                 )}
               </div>
             </div>
@@ -93,14 +93,7 @@ export default function About({ onNavigate }) {
             <div className="about-section-body">
               <h2>Who is behind this.</h2>
               <p>
-                Civic Congruence was created by a civic media and community engagement
-                leader with experience leading public media organizations and civic
-                engagement initiatives across local government and community networks.
-              </p>
-              <p>
-                This project exists because the gap between what institutions think
-                communities need and what communities are actually experiencing has
-                become too wide to ignore.
+                Civic Congruence was created by a civic media and community engagement leader with experience across local government, public media, and community networks. This project exists because the gap between what institutions think communities need and what communities are actually experiencing has become too wide to ignore.
               </p>
             </div>
           </div>

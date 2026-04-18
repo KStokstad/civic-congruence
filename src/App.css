@@ -1855,6 +1855,14 @@
   line-height: 1.7;
 }
 
+.about-transition-line {
+  font-size: 16px;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text);
+  margin: 0 0 48px;
+}
+
 .about-sections {
   max-width: 740px;
   margin: 0 auto;
