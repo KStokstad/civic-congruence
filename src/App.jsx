@@ -64,7 +64,7 @@ export default function App() {
           <div className="footer-left">
             <span className="footer-logo">Civic Congruence</span>
             <span className="footer-copy">
-              © {new Date().getFullYear()} · Civic Infrastructure Project
+              © {new Date().getFullYear()} · Civic Congruence · Pilot project
             </span>
           </div>
           <button className="footer-link" onClick={() => setPage('contact')}>
