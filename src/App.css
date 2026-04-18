@@ -760,6 +760,12 @@
   gap: 12px;
 }
 
+.btn-nav-ready {
+  box-shadow: 0 0 0 3px rgba(27, 75, 138, 0.2), 0 4px 12px rgba(27, 75, 138, 0.25);
+  transform: scale(1.03);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
 /* Results */
 .results-screen {
   animation: fadeUp 0.3s ease;

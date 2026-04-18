@@ -396,23 +396,18 @@ export default function CivicSurvey({ onNavigate }) {
           <div className="section-label">Civic Survey</div>
           <h2>Community Alignment Survey</h2>
           <p className="diagnostic-instruction" style={{ marginTop: 12 }}>
-            This survey focuses on your experiences and priorities in your community, not your political beliefs.
+            This survey captures what you&rsquo;re actually experiencing in your community — not your political beliefs.
           </p>
         </div>
 
         {step === 0 && (
           <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 16 }}>
-            There are no right answers. Choose what feels closest to your experience, even if it&rsquo;s not perfect.
+            Most answers will feel imperfect. Choose what&rsquo;s closest to your experience.
           </p>
         )}
 
         <div className="topic-step" key={topic.id}>
           <div className="survey-progress">
-            <div className="progress-dots">
-              {TOPICS.map((t, i) => (
-                <div key={t.id} className={`progress-dot ${i < step ? 'done' : i === step ? 'active' : ''}`} />
-              ))}
-            </div>
             <div className="progress-track">
               <div className="progress-fill" style={{ width: `${(step / total) * 100}%` }} />
             </div>
@@ -430,8 +425,7 @@ export default function CivicSurvey({ onNavigate }) {
           <div className="question-block">
             <div className="question-text">{topic.scale.text}</div>
             <div className="scale-wrapper">
-              <p className="scale-range-hint">Select a point on the scale between the two options below.</p>
-              <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', textAlign: 'center', margin: '-4px 0 8px' }}>If you&rsquo;re unsure, go with your first instinct.</p>
+              <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', textAlign: 'center', margin: '0 0 8px' }}>If you&rsquo;re unsure, go with your first instinct.</p>
               {!topic.scale.labels && (
                 <div className="scale-context">
                   1 = {topic.scale.lowLabel} &middot; 5 = {topic.scale.highLabel}
@@ -508,9 +502,8 @@ export default function CivicSurvey({ onNavigate }) {
               )}
             </div>
             <div className="survey-nav-right">
-              <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{step + 1} / {total}</span>
               <button
-                className="btn btn-primary"
+                className={`btn ${topicComplete() ? 'btn-primary btn-nav-ready' : 'btn-primary'}`}
                 onClick={() => setStep((s) => s + 1)}
                 disabled={!topicComplete()}
               >
