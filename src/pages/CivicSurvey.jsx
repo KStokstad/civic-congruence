@@ -352,11 +352,8 @@ export default function CivicSurvey({ onNavigate }) {
               <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', margin: '8px 0 0' }}>
                 Your responses help surface what communities are actually experiencing.
               </p>
-              <button
-                style={{ background: 'none', border: 'none', fontSize: 13, color: 'var(--text-muted)', opacity: 0.6, cursor: 'pointer', padding: '4px 0' }}
-                onClick={reset}
-              >
-                Start over
+              <button className="retake-link" onClick={reset}>
+                Retake survey
               </button>
             </div>
 
