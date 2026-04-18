@@ -1581,6 +1581,7 @@
   border: 1.5px solid var(--accent-mid);
   border-radius: var(--radius-lg);
   padding: 32px;
+  margin-top: 8px;
   margin-bottom: 28px;
   background: var(--surface);
 }
@@ -1967,6 +1968,7 @@
 /* Inline subscribe strip (survey completion screens) */
 .inline-subscribe {
   margin-top: 32px;
+  margin-bottom: 40px;
   padding-top: 28px;
   border-top: 1px solid var(--border);
 }
