@@ -28,7 +28,7 @@ const QUESTIONS = [
     topic: 'Economic Fairness',
     stem: 'When the gap between wealthy and lower-income Americans widens, your deeper concern is:',
     options: [
-      { id: 'A',  text: 'That we\u2019re discouraging the risk-taking and innovation that drives shared prosperity.' },
+      { id: 'A',  text: 'That we\u2019re discouraging the risk-taking and innovation that drives economic growth.' },
       { id: 'B',  text: 'That concentrated wealth quietly erodes democratic participation and social trust.' },
       { id: 'C',  text: 'That both are real \u2014 but trying to solve both simultaneously usually produces ineffective policy.' },
       { id: 'D1', text: 'That absolute quality of life matters more than how wealth is distributed across groups.' },
@@ -43,7 +43,7 @@ const QUESTIONS = [
     options: [
       { id: 'A',  text: 'Traditions and shared values that have held communities together over time deserve protection.' },
       { id: 'B',  text: 'Individual autonomy \u2014 people should live as they choose without interference from the state or majority opinion.' },
-      { id: 'C',  text: 'Maintaining social cohesion sometimes requires limiting individual expression \u2014 that\u2019s an acceptable tradeoff.' },
+      { id: 'C',  text: 'Maintaining social cohesion sometimes requires limits on individual expression \u2014 that\u2019s an acceptable tradeoff.' },
       { id: 'D',  text: 'Most social conflict is downstream of economic insecurity \u2014 fix that first.' },
     ],
   },
@@ -55,7 +55,7 @@ const QUESTIONS = [
       { id: 'A',  text: 'Our institutions have become self-serving and unaccountable \u2014 meaningful disruption is overdue.' },
       { id: 'B',  text: 'Imperfect institutions are still what stands between order and chaos \u2014 defend them.' },
       { id: 'C',  text: 'Serious reform is necessary, but tearing down institutions creates more problems than it solves.' },
-      { id: 'D',  text: 'What matters is outcomes \u2014 institutional form is secondary to whether things actually work.' },
+      { id: 'D',  text: 'What matters is whether things work \u2014 institutional form is secondary.' },
     ],
   },
   {
@@ -87,8 +87,8 @@ const QUESTIONS = [
     options: [
       { id: 'A',  text: 'I\u2019ve stopped trusting mainstream outlets \u2014 the bias is too consistent and too consequential.' },
       { id: 'B',  text: 'Independent and alternative sources have proven more honest to me than legacy media.' },
-      { id: 'C',  text: 'I triangulate across sources \u2014 I\u2019ve accepted I\u2019ll never have a complete picture and act accordingly.' },
-      { id: 'D1', text: 'I\u2019ve built my own filtering system over time and mostly trust my own judgment.' },
+      { id: 'C',  text: 'I triangulate across sources \u2014 no single source is complete.' },
+      { id: 'D1', text: 'I\u2019ve built my own filtering system over time and mostly trust my own judgment (I still engage with information).' },
       { id: 'D2', text: 'I\u2019ve largely disengaged from political news \u2014 the signal-to-noise ratio isn\u2019t worth it.' },
     ],
   },
