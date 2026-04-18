@@ -4,8 +4,7 @@ import { renderMarkdown } from '../utils/renderMarkdown'
 
 const OPENING_INSTRUCTION_LINES = [
   'Most options will feel partially true. Choose the one you would act on.',
-  'This is not a personality quiz.',
-  'It measures how you make tradeoffs under pressure.',
+  'This is not a personality quiz. It measures how you make tradeoffs under pressure.',
   'Choose the answer you would accept in reality, not the one that sounds best.',
 ]
 
@@ -458,13 +457,16 @@ export default function PoliticalAlignment({ onNavigate }) {
               style={{ width: '100%', maxWidth: 360 }}
               onClick={() => setPhase('questions')}
             >
-              Start 4-minute diagnostic
+              Start the 4-minute diagnostic
             </button>
             <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 8, marginBottom: 0 }}>
-              Private. Your responses aren&rsquo;t shared.
+              10 quick questions
             </p>
-            <p style={{ fontSize: 12, color: 'var(--text-muted)', opacity: 0.7, marginTop: 14, marginBottom: 0 }}>
+            <p style={{ fontSize: 13, color: 'var(--text)', marginTop: 12, marginBottom: 0 }}>
               You&rsquo;ll see how your answers fit together — and where the tensions are.
+            </p>
+            <p style={{ fontSize: 12, color: 'var(--text-muted)', opacity: 0.7, marginTop: 8, marginBottom: 0 }}>
+              Private. Your responses aren&rsquo;t shared.
             </p>
           </div>
         </div>
