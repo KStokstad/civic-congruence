@@ -88,7 +88,7 @@ const QUESTIONS = [
   {
     id: 'q7', fieldName: 'Q7', airtableField: 'Media and Information',
     topic: 'Media and Information',
-    stem: 'How do you actually navigate political information?',
+    stem: 'How do you actually navigate political information, honestly?',
     options: [
       { id: 'A',  text: 'I\u2019ve stopped trusting mainstream outlets \u2014 the bias is too consistent and too consequential.' },
       { id: 'B',  text: 'Independent and alternative sources have proven more honest to me than legacy media.' },
