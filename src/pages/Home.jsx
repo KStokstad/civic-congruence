@@ -38,10 +38,10 @@ export default function Home({ onNavigate }) {
           </p>
           <div className="hero-actions">
             <button className="btn btn-primary btn-lg" onClick={() => onNavigate('civic-survey')}>
-              Take the Survey
+              Contribute signal
             </button>
             <button className="btn btn-ghost btn-lg" onClick={() => onNavigate('dashboard')}>
-              View Dashboard
+              See the signal
             </button>
           </div>
         </div>
