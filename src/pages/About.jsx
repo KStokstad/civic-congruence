@@ -74,10 +74,7 @@ export default function About({ onNavigate }) {
             <div className="about-section-label">Get Involved</div>
             <div className="about-section-body">
               <p>
-                If you represent a community organization and want to join the pilot
-                network, use the application on the Network Pulse page. If you work in
-                media, policy, or civic infrastructure and want to learn more, reach out
-                directly.
+                If you represent a community organization, join the network. For media, policy, or civic infrastructure inquiries, reach out directly.
               </p>
               <div className="about-contact-actions">
                 <button className="btn btn-primary" onClick={goToContact}>
