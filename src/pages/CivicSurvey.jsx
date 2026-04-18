@@ -3,7 +3,7 @@ import { submitSurvey } from '../services/airtable'
 
 const EXPERIENCE_OPTIONS = [
   'Yes, it affected me directly',
-  'Yes, someone in my household or immediate family',
+  'Yes, someone in my household',
   'No direct impact',
   'Prefer not to say',
 ]
@@ -27,7 +27,7 @@ const TOPICS = [
       ],
     },
     followUp: {
-      text: 'In the past year, has an economic issue — job loss, wage pressure, housing cost, debt — directly affected you or someone in your household or immediate family?',
+      text: 'In the past year, has an economic issue — job loss, wage pressure, housing cost, debt — directly affected you or someone in your household?',
       options: EXPERIENCE_OPTIONS,
       fieldName: 'Economy Experience',
     },
@@ -50,7 +50,7 @@ const TOPICS = [
       ],
     },
     followUp: {
-      text: 'In the past year, has a safety issue — crime, violence, unsafe conditions, lack of emergency response — directly affected you or someone in your household or immediate family?',
+      text: 'In the past year, has a safety issue — crime, violence, unsafe conditions, lack of emergency response — directly affected you or someone in your household?',
       options: EXPERIENCE_OPTIONS,
       fieldName: 'Safety Experience',
     },
@@ -68,12 +68,12 @@ const TOPICS = [
         'Strongly favor expanding access',
         'Slightly favor expanding access',
         'Balance both',
-        'Slightly favor maintaining quality',
-        'Strongly favor maintaining quality',
+        'Slightly favor maintaining quality of care',
+        'Strongly favor maintaining quality of care',
       ],
     },
     followUp: {
-      text: 'In the past year, has a health issue — cost of care, access to providers, mental health, chronic illness — directly affected you or someone in your household or immediate family?',
+      text: 'In the past year, has a health issue — cost of care, access to providers, mental health, chronic illness — directly affected you or someone in your household?',
       options: EXPERIENCE_OPTIONS,
       fieldName: 'Health Experience',
     },
@@ -88,15 +88,15 @@ const TOPICS = [
       highLabel: 'Local flexibility',
       fieldName: 'Education Scale',
       labels: [
-        'Strongly favor standards',
-        'Slightly favor standards',
+        'Strongly favor common standards',
+        'Slightly favor common standards',
         'Balance both',
         'Slightly favor local flexibility',
         'Strongly favor local flexibility',
       ],
     },
     followUp: {
-      text: 'In the past year, has an education issue — school quality, access, cost, or outcomes — directly affected you or someone in your household or immediate family?',
+      text: 'In the past year, has an education issue — school quality, access, cost, or outcomes — directly affected you or someone in your household?',
       options: EXPERIENCE_OPTIONS,
       fieldName: 'Education Experience',
     },
@@ -106,7 +106,7 @@ const TOPICS = [
     label: 'Governance',
     icon: '🏛️',
     scale: {
-      text: 'How confident are you that local decisions reflect the needs of people in your community?',
+      text: 'How confident are you that local decisions actually reflect the needs of people in your community?',
       lowLabel: 'Not confident',
       highLabel: 'Very confident',
       fieldName: 'Governance Scale',
@@ -395,6 +395,9 @@ export default function CivicSurvey({ onNavigate }) {
           {/* Scale question */}
           <div className="question-block">
             <div className="question-text">{topic.scale.text}</div>
+            {topic.id === 'economy' && (
+              <div className="scale-instruct">Choose the option closest to your instinct — there are no perfect answers here.</div>
+            )}
             <div className="scale-wrapper">
               {!topic.scale.labels && (
                 <div className="scale-context">
@@ -430,7 +433,7 @@ export default function CivicSurvey({ onNavigate }) {
                 {topic.followUp.options.map((opt) => (
                   <button
                     key={opt}
-                    className={`choice-btn ${answers[topic.followUp.fieldName] === opt ? 'selected' : ''}`}
+                    className={`choice-btn ${answers[topic.followUp.fieldName] === opt ? 'selected' : ''} ${opt === 'Prefer not to say' ? 'choice-btn-secondary' : ''}`}
                     onClick={() => answer(topic.followUp.fieldName, opt)}
                   >
                     {opt}
