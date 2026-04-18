@@ -756,12 +756,28 @@
   color: var(--text-muted);
 }
 
+.results-group-header {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-h);
+  margin: 24px 0 10px;
+}
+
+.results-insight-group {
+  margin-bottom: 24px;
+}
+
 .results-summary {
-  background: var(--accent-light);
-  border: 1px solid rgba(27, 75, 138, 0.15);
+  background: rgba(27, 75, 138, 0.04);
+  border: 1px solid rgba(27, 75, 138, 0.1);
   border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-bottom: 28px;
+  padding: 14px 18px;
+  margin-bottom: 6px;
+}
+
+.results-insight-group .results-summary:last-child {
+  margin-bottom: 0;
 }
 
 .results-summary h4 {
@@ -783,6 +799,7 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  margin-top: 16px;
 }
 
 /* Submit success */
@@ -1947,9 +1964,9 @@
 
 /* Inline subscribe strip (survey completion screens) */
 .inline-subscribe {
-  margin-top: 40px;
+  margin-top: 64px;
   padding-top: 28px;
-  border-top: 1px solid var(--border);
+  border-top: 1.5px solid var(--border);
 }
 
 .inline-subscribe-heading {

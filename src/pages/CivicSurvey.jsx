@@ -177,7 +177,7 @@ function buildSnapshot(answers) {
   if (highest.score - avg > 1) {
     return `Your strongest area is ${highest.label}, though other areas score more modestly — suggesting uneven performance across civic systems.`
   }
-  return 'Your responses reflect a mixed picture across civic systems — some areas performing more consistently than others.'
+  return 'A mixed picture across civic systems. Some areas perform more consistently than others.'
 }
 
 function buildComparativeInsight(answers) {
@@ -325,26 +325,27 @@ export default function CivicSurvey({ onNavigate }) {
               })}
             </div>
 
-            {answers[CLOSING_FIELD] && (
-              <div className="results-summary" style={{ marginTop: 16 }}>
-                <h4>Where impact is being felt most: {answers[CLOSING_FIELD]}</h4>
-                <p>This suggests recent changes or pressures in this area are more visible or immediate than others.</p>
-              </div>
-            )}
+            <h4 className="results-group-header">Your alignment snapshot</h4>
+            <div className="results-insight-group">
+              {answers[CLOSING_FIELD] && (
+                <div className="results-summary">
+                  <p><strong>Where impact is being felt most:</strong> {answers[CLOSING_FIELD]}. Suggests recent changes or pressures are more visible here.</p>
+                </div>
+              )}
 
-            {buildComparativeInsight(answers) && (
+              {buildComparativeInsight(answers) && (
+                <div className="results-summary">
+                  <p className="results-insight">{buildComparativeInsight(answers)}</p>
+                </div>
+              )}
+
               <div className="results-summary">
-                <p className="results-insight">{buildComparativeInsight(answers)}</p>
+                <p>{buildSnapshot(answers)}</p>
               </div>
-            )}
 
-            <div className="results-summary">
-              <h4>Your alignment snapshot</h4>
-              <p>{buildSnapshot(answers)}</p>
-            </div>
-
-            <div className="results-summary">
-              <p className="results-insight">{buildClosingInsight(answers)}</p>
+              <div className="results-summary">
+                <p className="results-insight">{buildClosingInsight(answers)}</p>
+              </div>
             </div>
 
             {error && <div className="error-banner">{error}</div>}
@@ -356,15 +357,8 @@ export default function CivicSurvey({ onNavigate }) {
               <button className="btn btn-ghost" onClick={reset}>Start over</button>
             </div>
 
-            <div className="cross-link-nudge">
-              <span>Curious about your political values?</span>
-              <button className="btn btn-secondary" onClick={() => onNavigate('political-alignment')}>
-                Understand your political values →
-              </button>
-            </div>
-
             <div className="inline-subscribe">
-              <h4 className="inline-subscribe-heading">Stay in the loop</h4>
+              <h4 className="inline-subscribe-heading">Weekly Signal Brief</h4>
               <p className="inline-subscribe-sub">Weekly summary of civic signals across the network. No opinion. Just pattern.</p>
               {subStatus === 'done' ? (
                 <p className="inline-subscribe-confirm">You're on the list.</p>
