@@ -129,52 +129,23 @@ async function callAnthropic(answers) {
     return `${q.topic}: ${selected ? `${selected.id}) ${selected.text}` : 'No answer'}`
   }).join('\n')
 
-  const prompt = `You are generating a Political Alignment Deep Dive report for Civic Congruence. The respondent completed a 10-question values diagnostic designed to surface how they make tradeoffs under pressure.
+  const prompt = `You are analyzing a political values diagnostic for Civic Congruence. The respondent completed a 10-question diagnostic designed to surface how they make tradeoffs under pressure.
 
 Here are their answers:
 ${answersText}
 
-Generate a structured report with these exact sections:
+Produce exactly two outputs:
 
-YOUR KEY PATTERNS
-Write 3-4 paragraphs (not bullet points) describing the patterns visible in the respondent's answers. Follow this exact approach:
-- Open by naming the dominant orientation in neutral terms: "Your responses point to..." or "Across your answers, a pattern emerges..."
-- Describe the strength or logic of that orientation first — what makes it coherent or understandable
-- Then introduce the tension or tradeoff it creates — not as a flaw, but as a natural consequence
-- Use language like "there may be moments where," "this can create a tension between," "over time this might," "a pattern worth noticing is"
-- Never use accusatory framing — no "you consistently mistake," no "you've chosen," no "you are doing"
-- End with an open loop — a question or observation that invites reflection rather than delivering a verdict
-- The goal is for the reader to think "that's accurate" not "that's harsh"
-Example tone: "Your responses point to a strong preference for clarity and outcomes over process. That orientation can be a strength — it helps cut through noise. At the same time, it can create a tension: many real-world outcomes are produced through imperfect systems and sustained engagement with institutions that don't fully earn your trust."
-Total length for this section: 150-200 words. No bullet points. No bold headers within the section.
+OUTPUT 1 — IDEOLOGICAL LABEL
+Start with one sentence that mirrors something accurate and specific about how this person approaches political life — something that makes them feel seen before anything else. Then give a specific label (4-6 words) that names their orientation precisely. Follow with 2-3 sentences that explain what this label means in practice. Do not open with critique. Do not use generic terms like moderate or centrist. The first thing the reader experiences should feel accurate and affirming, not challenging.
 
-ALIGNMENT PROFILE
-2-3 paragraphs. Start with an affirming observation — something that mirrors back what the respondent values or how they approach political life. Make them feel accurately seen before introducing any tension or complexity. Do not open with critique or challenge. The first paragraph should make the reader think "yes, that's accurate" before they encounter anything that challenges them. Follow the sequence: mirror first, insight second, tension or challenge third. Use language like "your responses suggest," "this profile tends to," "there may be a pattern where." Do not say "you are doing X" — say "your responses suggest X may be happening." Acknowledge complexity and internal tension as features, not flaws. End with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
-
-HISTORICAL ANALOGUES
-3 specific historical figures or movements. For each: name, era, the specific parallel, and what they achieved or struggled with. Keep it concrete and interesting. End with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
-
-WHERE YOU HAVE LEVERAGE
-3-5 specific, actionable civic leverage points for someone with this profile. Label each clearly. Be concrete, not generic. This should feel like the most useful section. End with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
-
-WHERE YOU MAY BE STUCK
-2-3 patterns or tendencies that could limit effectiveness. Frame each as a tension or tradeoff, not a criticism. Use language like "there may be a tension between X and Y" or "a pattern worth watching is." End each with a constructive reframe or question to hold. End the section with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
-
-FACTION MAPPING
-Where does this profile fit within today's political landscape? Which factions would welcome, tolerate, or reject this profile? Be honest and specific. Avoid false balance. End with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
-
-POLITICAL HOMELESSNESS SCORE
-Rate 1-10 with a brief explanation. Be direct about what would need to change for this person to feel more represented. End with one sentence starting with "Where this becomes useful:" followed by a concrete observation about when or where this profile tends to be most effective.
-
-IMPORTANT TONE AND FORMAT RULES:
-- Never say 'you are doing X' — say 'your responses suggest X'
-- Never use accusatory language — reframe all criticism as tension or tradeoff
-- Use uncertainty language throughout: 'may,' 'suggest,' 'tends to,' 'pattern worth noting'
-- Write in second person (you/your) throughout
-- Keep intelligence high — do not dumb down insights
-- End the WHERE YOU MAY BE STUCK section with one actionable reframe per pattern
-- Total length: 900-1200 words
-- Do not use the phrase 'This person'`
+OUTPUT 2 — BEHAVIORAL PATTERNS
+Follow this exact sequence for the behavioral patterns section:
+First paragraph: Mirror — describe what this person values or how they approach political decisions in a way that feels accurate and affirming. Use language like "your responses point to" or "across your answers a pattern emerges." Make them feel understood before anything else.
+Second paragraph: Insight — name what that orientation reveals about how they process political decisions. What is the internal logic? What makes it coherent?
+Third paragraph: Tension — introduce the tradeoff or challenge this orientation creates. Frame it as a natural consequence, not a flaw. Use language like "at the same time," "this can create a tension between," "there may be moments where."
+End with one open question or observation that invites reflection rather than delivering a verdict.
+Never open with critique. Never use accusatory language. The reader should think "that is accurate" before they encounter anything that challenges them.`
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
