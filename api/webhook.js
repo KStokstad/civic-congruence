@@ -204,6 +204,16 @@ export default async function handler(req, res) {
   }
   const recordId = existingRecord.id
 
+  // Optimistic lock — claim the record before generating, so concurrent webhook
+  // duplicates that passed the idempotency check above will fail their own claim.
+  try {
+    await updateAirtableRecord(recordId, { 'Report Generated': true }, airtableToken)
+    console.log('Optimistic lock claimed for sessionId:', sessionId)
+  } catch (err) {
+    console.warn('Failed to claim optimistic lock — likely a duplicate webhook. Skipping.', err.message)
+    return res.status(200).json({ received: true })
+  }
+
   let alignmentData = {}
   try {
     alignmentData = JSON.parse(alignmentDataRaw ?? '{}')
@@ -232,7 +242,6 @@ export default async function handler(req, res) {
       'Report': reportText,
       'Stripe Session': session.id,
       'Report Email': email ?? '',
-      'Report Generated': true,
       'Session ID': sessionId,
     }, airtableToken)
     console.log('Airtable record updated successfully:', recordId)
