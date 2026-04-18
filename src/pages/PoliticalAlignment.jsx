@@ -156,6 +156,25 @@ When naming the orientation, introduce it with interpretive space rather than as
 
 The standard: the first 3-5 lines should make the reader think "that's exactly it" — not "that's interesting" and not "that's a lot."
 
+PATTERN PRECISION RULE — applies to every section:
+
+Do not include specific behavioral examples or situational guesses about what the person does in daily life.
+
+Instead, describe:
+- The internal logic of their pattern (why their answers hold together)
+- The tradeoff that pattern creates (what it gives them, what it costs)
+- Where the pattern holds and where it breaks
+
+Format for precision:
+'Your responses consistently [pattern]. This creates [what it enables]. As a result, [what it limits or complicates].'
+
+The goal is for the reader to think: 'That is exactly how I think, even if I wouldn't have said it that way' — not 'that sounds like something I might do.'
+
+The difference:
+- Too generic: 'You value outcomes over process'
+- Too behavioral: 'When a policy is proposed, you tend to...'
+- Correct: 'Your responses consistently prioritize whether something works over how it is structured. That creates a clear standard, but it narrows the range of approaches that register as legitimate.'
+
 OUTPUT 2 — How You Evaluate Systems
 Follow this exact sequence:
 First paragraph: Mirror — describe what this person values or how they approach political decisions in a way that feels accurate and affirming. Use language like "your responses point to" or "across your answers a pattern emerges." Make them feel understood before anything else.
