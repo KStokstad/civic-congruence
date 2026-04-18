@@ -775,6 +775,12 @@
 
 .results-summary p { font-size: 15px; }
 
+.results-insight {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 .results-actions {
   display: flex;
   gap: 12px;

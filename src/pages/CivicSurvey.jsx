@@ -140,22 +140,71 @@ function getScoreColor(score) {
   return 'score-high'
 }
 
-function buildSummary(answers) {
-  const scored = TOPICS.map((t) => ({
+function getScores(answers) {
+  return TOPICS.map((t) => ({
     label: t.label,
     score: answers[t.scale.fieldName] || 0,
-  })).sort((a, b) => a.score - b.score)
+  }))
+}
 
-  const topConcerns = scored.filter((t) => t.score <= 2).map((t) => t.label)
-  const strengths = scored.filter((t) => t.score >= 4).map((t) => t.label)
+function stdDev(scores) {
+  const vals = scores.map((s) => s.score)
+  const mean = vals.reduce((a, b) => a + b, 0) / vals.length
+  const variance = vals.reduce((a, b) => a + (b - mean) ** 2, 0) / vals.length
+  return Math.sqrt(variance)
+}
 
-  if (topConcerns.length > 0) {
-    return `Your top concern${topConcerns.length > 1 ? 's are' : ' is'} ${topConcerns.join(' and ')}. ${strengths.length > 0 ? `You feel relatively positive about ${strengths.join(' and ')}.` : 'Your responses show significant gaps across multiple civic areas.'}`
+function buildSnapshot(answers) {
+  const scores = getScores(answers)
+  const vals = scores.map((s) => s.score)
+  const avg = vals.reduce((a, b) => a + b, 0) / vals.length
+  const sorted = [...scores].sort((a, b) => a.score - b.score)
+  const lowest = sorted[0]
+  const highest = sorted[sorted.length - 1]
+
+  if (vals.every((v) => v < 2.5)) {
+    return 'Your responses reflect low confidence across all areas — a pattern that suggests systemic concerns rather than isolated problems.'
   }
-  if (strengths.length > 0) {
-    return `You feel positive about ${strengths.join(' and ')}. Areas with moderate scores represent room for local improvement.`
+  if (vals.every((v) => v > 3.5)) {
+    return 'Your responses reflect broadly positive views across civic systems — a relatively uncommon pattern worth noting.'
   }
-  return 'Your responses reflect mixed satisfaction across civic areas \u2014 a common pattern in communities navigating complex, interconnected challenges.'
+  if (vals.every((v) => v >= 2.5 && v <= 3.5)) {
+    return 'Your responses suggest moderate satisfaction across most areas, with no single system standing out as strongly effective — a pattern that often points to systems that are functioning, but not fully responsive.'
+  }
+  if (avg - lowest.score > 1) {
+    return `Your responses show relatively consistent views across most areas, with ${lowest.label} standing out as a clear concern.`
+  }
+  if (highest.score - avg > 1) {
+    return `Your strongest area is ${highest.label}, though other areas score more modestly — suggesting uneven performance across civic systems.`
+  }
+  return 'Your responses reflect a mixed picture across civic systems — some areas performing more consistently than others.'
+}
+
+function buildComparativeInsight(answers) {
+  const scores = getScores(answers)
+  const sorted = [...scores].sort((a, b) => a.score - b.score)
+  const lowest = sorted[0]
+  const highest = sorted[sorted.length - 1]
+  const spread = highest.score - lowest.score
+
+  if (scores.every((s) => s.score <= 3)) {
+    return 'No area scored above 3 — your community may not have a clear area of strong performance.'
+  }
+  if (spread < 1) {
+    return 'Your scores are closely grouped — suggesting consistent rather than uneven civic performance.'
+  }
+  if (spread > 1.5) {
+    return `Your scores show meaningful variation — ${highest.label} stands out relative to ${lowest.label}.`
+  }
+  return null
+}
+
+function buildClosingInsight(answers) {
+  const scores = getScores(answers)
+  if (stdDev(scores) < 1) {
+    return 'Your responses suggest a community where issues are present, but not sharply polarized — challenges are likely shared rather than concentrated.'
+  }
+  return 'Your responses show meaningful differences across areas — some systems may be working better than others in your community.'
 }
 
 export default function CivicSurvey({ onNavigate }) {
@@ -264,14 +313,24 @@ export default function CivicSurvey({ onNavigate }) {
 
             {answers[CLOSING_FIELD] && (
               <div className="results-summary" style={{ marginTop: 16 }}>
-                <h4>Biggest impact this year</h4>
-                <p>{answers[CLOSING_FIELD]}</p>
+                <h4>Where impact is being felt most: {answers[CLOSING_FIELD]}</h4>
+                <p>This suggests recent changes or pressures in this area are more visible or immediate than others.</p>
+              </div>
+            )}
+
+            {buildComparativeInsight(answers) && (
+              <div className="results-summary">
+                <p className="results-insight">{buildComparativeInsight(answers)}</p>
               </div>
             )}
 
             <div className="results-summary">
               <h4>Your alignment snapshot</h4>
-              <p>{buildSummary(answers)}</p>
+              <p>{buildSnapshot(answers)}</p>
+            </div>
+
+            <div className="results-summary">
+              <p className="results-insight">{buildClosingInsight(answers)}</p>
             </div>
 
             {error && <div className="error-banner">{error}</div>}
