@@ -75,6 +75,8 @@ Rules for this section:
 
 Use Title Case for all section headers, not ALL CAPS. Headers should feel like steps in a diagnostic system, not essay headings. Each header should answer the question: what is this section doing for the reader?
 
+Paragraph length: keep each paragraph to 2–4 sentences maximum. After every 2–3 paragraphs, insert a blank line to create visual breathing room. Use bold (**text**) sparingly — no more than 1–2 instances per section, only for genuinely load-bearing phrases.
+
 Write in second person ("You..."). Be direct. Do not hedge. This is what they paid for.`
 }
 
@@ -131,13 +133,13 @@ function markdownToHtml(text) {
   function flushPara() {
     if (!paraLines.length) return
     const content = paraLines.join(' ').trim()
-    if (content) out.push(`<p style="${s}font-size:15px;line-height:1.65;color:#333;margin:0 0 16px;">${content}</p>`)
+    if (content) out.push(`<p style="${s}font-size:16px;line-height:1.7;color:#333;margin:0 0 18px;">${content}</p>`)
     paraLines = []
   }
 
   function flushList() {
     if (!listItems.length) return
-    out.push(`<ul style="margin:0 0 16px;padding-left:20px;">${listItems.join('')}</ul>`)
+    out.push(`<ul style="margin:0 0 20px;padding-left:20px;">${listItems.join('')}</ul>`)
     listItems = []
   }
 
@@ -156,10 +158,10 @@ function markdownToHtml(text) {
       out.push(`<h1 style="${s}font-size:28px;margin:32px 0 8px;color:#111;">${inline(h1[1])}</h1>`)
     } else if (h2) {
       flushList(); flushPara()
-      out.push(`<h2 style="${s}font-size:20px;font-weight:600;margin:24px 0 6px;color:#111;">${inline(h2[1])}</h2>`)
+      out.push(`<h2 style="${s}font-size:20px;font-weight:500;margin:36px 0 8px;color:#111;">${inline(h2[1])}</h2>`)
     } else if (li) {
       flushPara()
-      listItems.push(`<li style="${s}font-size:15px;line-height:1.7;color:#333;margin-bottom:6px;">${inline(li[1])}</li>`)
+      listItems.push(`<li style="${s}font-size:16px;line-height:1.7;color:#333;margin-bottom:8px;">${inline(li[1])}</li>`)
     } else if (line.trim() === '') {
       flushList(); flushPara()
     } else {
@@ -174,9 +176,10 @@ function markdownToHtml(text) {
 function buildEmailHtml(reportText) {
   return `<!DOCTYPE html><html><body style="max-width:600px;margin:40px auto;padding:0 24px;background:#fff;">
     <h1 style="font-family:sans-serif;font-size:28px;margin-bottom:4px;color:#111;">Your Political Alignment Deep Dive</h1>
-    <p style="font-family:sans-serif;font-size:14px;color:#666;margin-top:0;margin-bottom:20px;border-bottom:1px solid #eee;padding-bottom:16px;">From Civic Congruence</p>
+    <p style="font-family:sans-serif;font-size:14px;color:#666;margin-top:0;margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:20px;">From Civic Congruence</p>
+    <p style="font-family:sans-serif;font-size:15px;color:#555;margin:20px 0 32px;">Your full report is below.</p>
     ${markdownToHtml(reportText)}
-    <hr style="margin:40px 0;border:none;border-top:1px solid #eee;">
+    <hr style="margin:48px 0;border:none;border-top:1px solid #eee;">
     <p style="font-family:sans-serif;font-size:13px;color:#999;">Civic Congruence · civiccongruence.org</p>
   </body></html>`
 }

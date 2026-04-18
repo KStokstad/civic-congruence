@@ -1528,7 +1528,7 @@
 
 .analysis-paragraphs p,
 .report-content p {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text);
 }
 
@@ -1539,7 +1539,7 @@
 
 .report-content p {
   line-height: 1.65;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .analysis-paragraphs p:last-child,
@@ -1563,8 +1563,9 @@
 .report-content h2 {
   font-size: 22px;
   font-weight: 500;
+  font-family: var(--font-display);
   text-transform: none;
-  margin-top: 32px;
+  margin-top: 36px;
   margin-bottom: 10px;
 }
 
@@ -1881,8 +1882,9 @@
 }
 
 .report-page h1 {
-  font-size: 36px;
+  font-size: 38px;
   font-weight: 500;
+  font-family: var(--font-display);
 }
 
 .report-back-link {
@@ -1972,12 +1974,70 @@
   .report-subscribe { display: none; }
   .report-page h1 { font-size: 38px; }
   .section-label, .report-email-note { opacity: 0.65; font-size: 12px; }
+  .report-print-footer { display: block; }
+}
+
+.report-print-footer {
+  display: none;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.at-a-glance {
+  max-width: 680px;
+  background: rgba(27, 75, 138, 0.04);
+  border: 1px solid rgba(27, 75, 138, 0.12);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin-bottom: 40px;
+}
+
+.at-a-glance-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.at-a-glance-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.at-a-glance-list li {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  display: flex;
+  gap: 10px;
+}
+
+.at-a-glance-key {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding-top: 2px;
+  min-width: 110px;
 }
 
 .report-content {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 0;
   max-width: 680px;
 }
 

@@ -1,6 +1,48 @@
 import { useState, useEffect, useRef } from 'react'
 import { renderMarkdown } from '../utils/renderMarkdown'
 
+function parseAtAGlance(text) {
+  function extractSection(name) {
+    const re = new RegExp(`##\\s+${name}[^\\n]*\\n([\\s\\S]*?)(?=##|$)`, 'i')
+    const m = text.match(re)
+    return m ? m[1].trim() : ''
+  }
+
+  function firstSentence(block) {
+    const clean = block.replace(/^[*-]\s+/, '').replace(/\*\*/g, '')
+    const m = clean.match(/[^.!?]+[.!?]/)
+    return m ? m[0].trim() : clean.split('\n')[0].trim()
+  }
+
+  function bullets(block) {
+    return [...block.matchAll(/^[*-]\s+(.+)/gm)].map(m => m[1].replace(/\*\*/g, '').trim())
+  }
+
+  function shorten(str, maxWords = 12) {
+    const words = str.split(/\s+/)
+    return words.length <= maxWords ? str : words.slice(0, maxWords).join(' ') + '\u2026'
+  }
+
+  const core = extractSection('Core Orientation')
+  const works = extractSection('Where This Works')
+  const breaks = extractSection('Where It Breaks Down')
+
+  const labelMatch = core.match(/one way to describe this orientation is ([^.,"]+)/i)
+  const orientation = labelMatch
+    ? labelMatch[1].trim().replace(/[."']$/, '')
+    : shorten(firstSentence(core))
+
+  const worksBullets = bullets(works)
+  const breaksBullets = bullets(breaks)
+
+  return {
+    orientation,
+    strength: shorten(worksBullets[0] || firstSentence(works)),
+    tension:  shorten(breaksBullets[0] || firstSentence(breaks)),
+    bestEnv:  shorten(worksBullets[2] || worksBullets[1] || firstSentence(works)),
+  }
+}
+
 const POLL_INTERVAL = 3000
 const MAX_POLLS = 100 // 5 minutes
 
@@ -101,8 +143,27 @@ export default function Report({ onNavigate }) {
             A copy has been sent to your email.
           </p>
 
+          {(() => {
+            const { orientation, strength, tension, bestEnv } = parseAtAGlance(report)
+            return (
+              <div className="at-a-glance">
+                <div className="at-a-glance-label">At a Glance</div>
+                <ul className="at-a-glance-list">
+                  <li><span className="at-a-glance-key">Orientation</span>{orientation}</li>
+                  <li><span className="at-a-glance-key">Strength</span>{strength}</li>
+                  <li><span className="at-a-glance-key">Tension</span>{tension}</li>
+                  <li><span className="at-a-glance-key">Best environments</span>{bestEnv}</li>
+                </ul>
+              </div>
+            )
+          })()}
+
           <div className="report-content">
             {renderMarkdown(report)}
+          </div>
+
+          <div className="report-print-footer">
+            civiccongruence.org &middot; Civic Infrastructure Project
           </div>
 
           <div className="report-actions">
