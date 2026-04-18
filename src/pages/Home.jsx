@@ -3,17 +3,17 @@ export default function Home({ onNavigate }) {
     {
       title: 'Signal →',
       descriptor: 'What people are actually experiencing in their communities.',
-      role: 'This is the raw input the system captures.',
+      body: 'This is the input. It comes directly from community members, not filtered through institutions.',
     },
     {
       title: 'Infrastructure →',
-      descriptor: 'How that information connects to decisions.',
-      role: 'This is what turns individual input into something usable.',
+      descriptor: 'How individual input becomes usable data.',
+      body: 'Responses are verified, synthesized, and connected to decision-making systems.',
     },
     {
       title: 'Transparency →',
-      descriptor: 'How patterns become visible and verifiable.',
-      role: 'This is what makes the signal usable to institutions.',
+      descriptor: 'How patterns become visible to the people who need to act on them.',
+      body: "Institutions see what's consistently showing up — not what's being reported to them.",
     },
   ]
 
@@ -55,17 +55,17 @@ export default function Home({ onNavigate }) {
               provide. We make that gap visible.
             </p>
           </div>
-          <p className="features-connector">Raw community experience becomes usable signal when it moves through this system.</p>
+          <p className="features-connector">Most community input gets lost before it reaches the people making decisions. This system makes sure it doesn&rsquo;t.</p>
           <div className="features-grid">
             {features.map((f) => (
               <div className="feature-card" key={f.title}>
                 <h3>{f.title}</h3>
                 <p className="feature-descriptor">{f.descriptor}</p>
-                <p className="feature-role">{f.role}</p>
+                <p className="feature-body">{f.body}</p>
               </div>
             ))}
           </div>
-          <p className="features-closing">This is how institutions see what's actually happening.</p>
+          <p className="features-closing">This is how community experience becomes policy signal.</p>
         </div>
       </section>
 
