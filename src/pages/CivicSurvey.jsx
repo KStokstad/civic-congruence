@@ -162,31 +162,13 @@ function buildSnapshot(answers) {
   const lowest = sorted[0]
   const spread = highest.score - lowest.score
 
-  const label = spread > 1.5
-    ? 'CONCENTRATED CONCERN'
+  const pattern = spread > 1.5
+    ? 'Pattern: Uneven experience across systems'
     : spread >= 0.5
-    ? 'MIXED EXPERIENCE'
-    : 'CONSISTENT ACROSS AREAS'
+    ? 'Pattern: Mixed experience across systems'
+    : 'Pattern: Consistent experience across systems'
 
-  return {
-    label,
-    headline: `${highest.label} is your strongest signal`,
-    detail: `Highest: ${highest.label} (${highest.score}/5) \u00b7 Lowest: ${lowest.label} (${lowest.score}/5)`,
-  }
-}
-
-function buildStatement2(answers) {
-  const scores = getScores(answers)
-  const sorted = [...scores].sort((a, b) => a.score - b.score)
-  const spread = sorted[sorted.length - 1].score - sorted[0].score
-
-  if (spread < 1) {
-    return `Your scores show close alignment across areas — pressure is relatively distributed.`
-  } else if (spread <= 2) {
-    return `Your scores show moderate variation, indicating selective pressure points rather than system-wide dissatisfaction.`
-  } else {
-    return `Your scores show significant variation — some areas are functioning considerably better than others in your responses.`
-  }
+  return { highest, lowest, pattern }
 }
 
 export default function CivicSurvey({ onNavigate }) {
@@ -271,41 +253,49 @@ export default function CivicSurvey({ onNavigate }) {
             <h2>Your Civic Alignment</h2>
             <p className="results-intro">Based on your answers across five civic domains.</p>
 
-            <div className="results-grid">
-              {TOPICS.map((t) => {
-                const score = answers[t.scale.fieldName]
-                const experience = answers[t.followUp.fieldName]
-                const pct = score ? (score / 5) * 100 : 0
-                return (
-                  <div className="result-row" key={t.id}>
-                    <div className="result-row-top">
-                      <div className="result-topic-name">
-                        <span>{t.icon}</span>{t.label}
+            {(() => {
+              const { highest, lowest } = buildSnapshot(answers)
+              return (
+                <div className="results-grid">
+                  {TOPICS.map((t) => {
+                    const score = answers[t.scale.fieldName]
+                    const experience = answers[t.followUp.fieldName]
+                    const pct = score ? (score / 5) * 100 : 0
+                    const isHighest = t.label === highest.label
+                    const isLowest = t.label === lowest.label
+                    return (
+                      <div className="result-row" key={t.id}>
+                        <div className="result-row-top">
+                          <div className="result-topic-name">
+                            <span>{t.icon}</span>{t.label}
+                            {isHighest && <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--accent)', background: 'var(--accent-light)', borderRadius: 4, padding: '1px 6px', marginLeft: 6 }}>Highest</span>}
+                            {isLowest && <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-muted)', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 4, padding: '1px 6px', marginLeft: 6 }}>Lowest</span>}
+                          </div>
+                          <span className="result-score-badge">{score} / 5</span>
+                        </div>
+                        <div className="result-bar-track">
+                          <div className={`result-bar-fill ${getScoreColor(score)}`} style={{ width: `${pct}%` }} />
+                        </div>
+                        {experience && <div className="result-choice-text">{experience}</div>}
                       </div>
-                      <span className="result-score-badge">{score} / 5</span>
-                    </div>
-                    <div className="result-bar-track">
-                      <div className={`result-bar-fill ${getScoreColor(score)}`} style={{ width: `${pct}%` }} />
-                    </div>
-                    {experience && <div className="result-choice-text">{experience}</div>}
-                  </div>
-                )
-              })}
-            </div>
+                    )
+                  })}
+                </div>
+              )
+            })()}
 
             <h4 className="results-group-header">Your alignment snapshot</h4>
             {(() => {
-              const snap = buildSnapshot(answers)
+              const { highest, lowest, pattern } = buildSnapshot(answers)
               return (
-                <div className="results-insight-group">
-                  <div className="results-summary results-summary--primary">
-                    <p style={{ fontSize: 11, letterSpacing: '0.08em', color: 'var(--text-muted)', marginBottom: 6, textTransform: 'uppercase' }}>{snap.label}</p>
-                    <p style={{ fontSize: 17, fontWeight: 600, color: 'var(--text-h)', margin: '0 0 4px' }}>{snap.headline}</p>
-                    <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0 }}>{snap.detail}</p>
-                  </div>
-                  <div className="results-summary results-summary--secondary">
-                    <p>{buildStatement2(answers)}</p>
-                  </div>
+                <div className="results-summary results-summary--primary">
+                  <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-h)', margin: '0 0 4px' }}>
+                    Strongest signal: {highest.label} ({highest.score}/5)
+                  </p>
+                  <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: '0 0 10px' }}>
+                    Lowest signal: {lowest.label} ({lowest.score}/5)
+                  </p>
+                  <p style={{ fontSize: 13, color: 'var(--text-muted)', margin: 0 }}>{pattern}</p>
                 </div>
               )
             })()}
