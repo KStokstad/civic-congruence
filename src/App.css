@@ -1497,9 +1497,17 @@
 .analysis-paragraphs p,
 .report-content p {
   font-size: 16px;
-  line-height: 1.8;
   color: var(--text);
+}
+
+.analysis-paragraphs p {
+  line-height: 1.8;
   margin-bottom: 16px;
+}
+
+.report-content p {
+  line-height: 1.65;
+  margin-bottom: 20px;
 }
 
 .analysis-paragraphs p:last-child,
@@ -1516,14 +1524,25 @@
   margin: 20px 0 8px;
 }
 
-.analysis-paragraphs h2,
-.report-content h2 {
+.analysis-paragraphs h2 {
   font-size: 18px;
 }
 
-.analysis-paragraphs h3,
-.report-content h3 {
+.report-content h2 {
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: none;
+  margin-top: 17px;
+}
+
+.analysis-paragraphs h3 {
   font-size: 16px;
+}
+
+.report-content h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 16px;
 }
 
 .analysis-paragraphs ul,
@@ -1813,6 +1832,11 @@
   padding: 48px 0;
 }
 
+.report-page h1 {
+  font-size: 36px;
+  font-weight: 500;
+}
+
 .report-back-link {
   display: inline-block;
   background: none;
@@ -1898,12 +1922,15 @@
   .report-back-link,
   .report-actions,
   .report-subscribe { display: none; }
+  .report-page h1 { font-size: 38px; }
+  .section-label, .report-email-note { opacity: 0.65; font-size: 12px; }
 }
 
 .report-content {
   display: flex;
   flex-direction: column;
   gap: 32px;
+  max-width: 680px;
 }
 
 .report-section {

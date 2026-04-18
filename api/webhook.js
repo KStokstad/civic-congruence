@@ -107,7 +107,7 @@ function markdownToHtml(text) {
   function flushPara() {
     if (!paraLines.length) return
     const content = paraLines.join(' ').trim()
-    if (content) out.push(`<p style="${s}font-size:15px;line-height:1.75;color:#333;margin:0 0 16px;">${content}</p>`)
+    if (content) out.push(`<p style="${s}font-size:15px;line-height:1.65;color:#333;margin:0 0 16px;">${content}</p>`)
     paraLines = []
   }
 
@@ -129,10 +129,10 @@ function markdownToHtml(text) {
 
     if (h1) {
       flushList(); flushPara()
-      out.push(`<h1 style="${s}font-size:22px;margin:32px 0 8px;color:#111;">${inline(h1[1])}</h1>`)
+      out.push(`<h1 style="${s}font-size:28px;margin:32px 0 8px;color:#111;">${inline(h1[1])}</h1>`)
     } else if (h2) {
       flushList(); flushPara()
-      out.push(`<h2 style="${s}font-size:17px;margin:28px 0 6px;color:#111;text-transform:uppercase;letter-spacing:.04em;">${inline(h2[1])}</h2>`)
+      out.push(`<h2 style="${s}font-size:20px;font-weight:600;margin:24px 0 6px;color:#111;">${inline(h2[1])}</h2>`)
     } else if (li) {
       flushPara()
       listItems.push(`<li style="${s}font-size:15px;line-height:1.7;color:#333;margin-bottom:6px;">${inline(li[1])}</li>`)
@@ -148,9 +148,9 @@ function markdownToHtml(text) {
 }
 
 function buildEmailHtml(reportText) {
-  return `<!DOCTYPE html><html><body style="max-width:640px;margin:40px auto;padding:0 24px;background:#fff;">
-    <h1 style="font-family:sans-serif;font-size:24px;margin-bottom:4px;color:#111;">Your Political Alignment Deep Dive</h1>
-    <p style="font-family:sans-serif;font-size:14px;color:#666;margin-top:0;margin-bottom:36px;border-bottom:1px solid #eee;padding-bottom:24px;">From Civic Congruence</p>
+  return `<!DOCTYPE html><html><body style="max-width:600px;margin:40px auto;padding:0 24px;background:#fff;">
+    <h1 style="font-family:sans-serif;font-size:28px;margin-bottom:4px;color:#111;">Your Political Alignment Deep Dive</h1>
+    <p style="font-family:sans-serif;font-size:14px;color:#666;margin-top:0;margin-bottom:20px;border-bottom:1px solid #eee;padding-bottom:16px;">From Civic Congruence</p>
     ${markdownToHtml(reportText)}
     <hr style="margin:40px 0;border:none;border-top:1px solid #eee;">
     <p style="font-family:sans-serif;font-size:13px;color:#999;">Civic Congruence · civiccongruence.org</p>
