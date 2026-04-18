@@ -141,10 +141,16 @@ ${answersText}
 Generate a structured report with these exact sections:
 
 YOUR KEY PATTERNS
-Start with exactly 3 bullet points summarizing the most distinctive patterns in their responses. Frame each as an insight, not a label. Example format:
-- You prioritize outcomes over process — institutional form matters less to you than whether things actually work
-- Your responses suggest tension between wanting effective change and skepticism about current channels
-- You show signs of [pattern] despite [contrasting value]
+Write 3-4 paragraphs (not bullet points) describing the patterns visible in the respondent's answers. Follow this exact approach:
+- Open by naming the dominant orientation in neutral terms: "Your responses point to..." or "Across your answers, a pattern emerges..."
+- Describe the strength or logic of that orientation first — what makes it coherent or understandable
+- Then introduce the tension or tradeoff it creates — not as a flaw, but as a natural consequence
+- Use language like "there may be moments where," "this can create a tension between," "over time this might," "a pattern worth noticing is"
+- Never use accusatory framing — no "you consistently mistake," no "you've chosen," no "you are doing"
+- End with an open loop — a question or observation that invites reflection rather than delivering a verdict
+- The goal is for the reader to think "that's accurate" not "that's harsh"
+Example tone: "Your responses point to a strong preference for clarity and outcomes over process. That orientation can be a strength — it helps cut through noise. At the same time, it can create a tension: many real-world outcomes are produced through imperfect systems and sustained engagement with institutions that don't fully earn your trust."
+Total length for this section: 150-200 words. No bullet points. No bold headers within the section.
 
 ALIGNMENT PROFILE
 2-3 paragraphs. Describe what this combination of answers reveals about how this person approaches political life. Use language like "your responses suggest," "this profile tends to," "there may be a pattern where." Do not use accusatory framing. Do not say "you are doing X" — say "your responses suggest X may be happening." Acknowledge complexity and internal tension as features, not flaws.
