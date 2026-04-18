@@ -3,8 +3,7 @@ import { submitAlignment, updateAlignment, checkRepeatEmail } from '../services/
 import { renderMarkdown } from '../utils/renderMarkdown'
 
 const OPENING_INSTRUCTION = `This is not a personality quiz. It measures how you make tradeoffs under pressure.
-
-Choose the answer you would accept in reality, not the one that sounds best.`
+Choose what you would actually accept — not what sounds best.`
 
 const QUESTIONS = [
   {
@@ -430,21 +429,33 @@ export default function PoliticalAlignment({ onNavigate }) {
     return (
       <div className="survey-page">
         <div className="container-sm">
-          <div className="survey-header">
+          <div className="survey-header" style={{ marginBottom: 12 }}>
             <div className="section-label">Political Alignment</div>
-            <h2>Values Diagnostic</h2>
-            <p>10 questions about your political values. Takes about 4 minutes.</p>
+            <h2 style={{ marginBottom: 4 }}>Values Diagnostic</h2>
+            <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 0 }}>See how you make tough tradeoffs in real situations.</p>
           </div>
+          <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 16px' }}>
+            10 questions &middot; 4 minutes &middot; no right answers
+          </p>
           <div className="diagnostic-instruction">
-            <div className="instruction-icon">&#9888;</div>
-            {OPENING_INSTRUCTION.split('\n\n').map((para, i) => (
-              <p key={i}>{para}</p>
+            {OPENING_INSTRUCTION.split('\n').map((line, i) => (
+              <p key={i}>{line}</p>
             ))}
           </div>
-          <div style={{ textAlign: 'center', marginTop: 32 }}>
-            <button className="btn btn-primary btn-lg" onClick={() => setPhase('questions')}>
-              Begin diagnostic &#8594;
+          <div style={{ textAlign: 'center', marginTop: 20 }}>
+            <button
+              className="btn btn-primary btn-lg"
+              style={{ width: '100%', maxWidth: 360 }}
+              onClick={() => setPhase('questions')}
+            >
+              Start the diagnostic &#8594;
             </button>
+            <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 10, marginBottom: 0 }}>
+              Private. Your responses aren&rsquo;t shared.
+            </p>
+            <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 20, marginBottom: 0 }}>
+              You&rsquo;ll see how your answers fit together — and where the tensions are.
+            </p>
           </div>
         </div>
       </div>

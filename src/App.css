@@ -1347,9 +1347,18 @@
   background: #FFFBEB;
   border: 1.5px solid #F59E0B;
   border-radius: var(--radius);
-  padding: 24px 28px;
+  padding: 18px 22px;
   width: 100%;
   box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .diagnostic-instruction {
+    padding: 14px 16px;
+  }
+  .diagnostic-instruction p {
+    font-size: 14px;
+  }
 }
 
 .instruction-icon {
