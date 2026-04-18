@@ -15,8 +15,8 @@ const TOPICS = [
     icon: '📊',
     scale: {
       text: 'When tradeoffs are required, what should be prioritized in your community right now?',
-      lowLabel: 'Economic growth and business activity',
-      highLabel: 'Reducing cost pressures on households',
+      lowLabel: 'Growth',
+      highLabel: 'Household costs',
       fieldName: 'Economy Scale',
     },
     followUp: {
@@ -31,8 +31,8 @@ const TOPICS = [
     icon: '🛡️',
     scale: {
       text: 'When resources are limited, where should your community focus?',
-      lowLabel: 'Enforcement and immediate response',
-      highLabel: 'Prevention and long-term root causes',
+      lowLabel: 'Enforcement',
+      highLabel: 'Prevention',
       fieldName: 'Safety Scale',
     },
     followUp: {
@@ -47,8 +47,8 @@ const TOPICS = [
     icon: '🏥',
     scale: {
       text: 'When making healthcare decisions for your community, what should take priority?',
-      lowLabel: 'Expanding access to basic care for everyone',
-      highLabel: 'Improving quality and specialization of existing care',
+      lowLabel: 'Expand access',
+      highLabel: 'Maintain quality',
       fieldName: 'Health Scale',
     },
     followUp: {
@@ -63,8 +63,8 @@ const TOPICS = [
     icon: '🎓',
     scale: {
       text: 'Where should local education investment be focused?',
-      lowLabel: 'Foundational skills and early childhood',
-      highLabel: 'Career readiness and advanced learning',
+      lowLabel: 'Standards',
+      highLabel: 'Local flexibility',
       fieldName: 'Education Scale',
     },
     followUp: {
@@ -78,9 +78,9 @@ const TOPICS = [
     label: 'Governance',
     icon: '🏛️',
     scale: {
-      text: 'What matters more to you in how government operates?',
-      lowLabel: 'Efficiency and decisive action',
-      highLabel: 'Transparency and community input',
+      text: 'How confident are you that your local government is responsive to people like you?',
+      lowLabel: 'Not confident',
+      highLabel: 'Very confident',
       fieldName: 'Governance Scale',
     },
     followUp: {
@@ -361,6 +361,9 @@ export default function CivicSurvey({ onNavigate }) {
           <div className="question-block">
             <div className="question-text">{topic.scale.text}</div>
             <div className="scale-wrapper">
+              <div className="scale-context">
+                1 = {topic.scale.lowLabel} &middot; 5 = {topic.scale.highLabel}
+              </div>
               <div className="scale-options">
                 {[1, 2, 3, 4, 5].map((n) => (
                   <button
