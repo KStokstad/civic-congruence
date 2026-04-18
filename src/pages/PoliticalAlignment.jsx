@@ -134,7 +134,7 @@ async function callAnthropic(answers) {
 Here are their answers:
 ${answersText}
 
-Produce exactly two outputs:
+Produce exactly three outputs:
 
 OUTPUT 1 — Core Orientation
 
@@ -184,6 +184,36 @@ Fourth paragraph: add one concrete behavioral observation directly derived from 
 End with one open question or observation that invites reflection rather than delivering a verdict.
 Never open with critique. Never use accusatory language. Never say "You reject," "You believe," "You don't trust," or "You are." Always use "Your responses suggest," "A pattern emerges," "Taken together your responses point to," or "One way to describe this orientation is." The reader should think "that is accurate" before they encounter anything that challenges them.
 
+OUTPUT 3 — Political Alignment Fit
+
+This section does three things only:
+1. Name where their responses sit relative to existing political categories
+2. Explain why the mismatch occurs — as a structural difference, not a personal failing
+3. Frame the gap as a property of how categories are built, not a verdict on the person
+
+Open with: "Your responses don't align cleanly with any single political framework."
+
+Follow immediately with: "This isn't because your views are inconsistent. It's because they follow a different structure than most political categories are built around."
+
+Second paragraph — explain the structural difference: Most systems group positions based on shared ideology or coalition alignment. Describe how this person's responses are organized differently — around outcomes, constraints, or what they consider functionally viable. Use "by contrast" to mark the distinction.
+
+Third paragraph — name the gap: "That difference creates a gap. It's not that your views don't fit anywhere — it's that they don't map cleanly onto how existing options are structured."
+
+Optional fourth paragraph if the pattern warrants it: "This pattern often results in partial alignment across multiple positions without full identification with any of them. As a result, the available categories may feel incomplete, even when individual elements resonate."
+
+Close with: "The key distinction is that your responses form a coherent system — they're just not organized in the same way most political frameworks are."
+
+What to avoid in this section:
+- Never say "You are politically homeless" or any variant — it's emotionally loaded and sounds absolute
+- No broad critiques of parties or political systems
+- Nothing that reads as your opinion or editorial judgment
+- Do not use "homeless," "alienated," or "disillusioned"
+
+Language rules:
+- Anchor everything in structure: "how categories are built," "how existing options are structured," "a different organizational logic"
+- If referencing alignment degree, use: "a low alignment fit with existing categories" — never "you don't belong"
+- The reader should think: "the system isn't built to reflect this pattern" — not "I don't belong anywhere"
+
 Do not include horizontal rule dividers (---) or standalone hash symbols (#) between sections. Use the section labels as the only visual separators.
 
 Use Title Case for all section headers, not ALL CAPS. Headers should feel like steps in a diagnostic system, not essay headings. Each header should answer the question: what is this section doing for the reader?
@@ -200,7 +230,7 @@ Paragraph length: keep each paragraph to 2–4 sentences maximum. After every 2�
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-5',
-      max_tokens: 2000,
+      max_tokens: 3000,
       messages: [{ role: 'user', content: prompt }],
     }),
   })
@@ -225,10 +255,12 @@ Paragraph length: keep each paragraph to 2–4 sentences maximum. After every 2�
 
 function parseAnalysis(text) {
   const o1 = text.match(/OUTPUT\s+1[^\n]*\n([\s\S]*?)(?=OUTPUT\s+2|$)/i)
-  const o2 = text.match(/OUTPUT\s+2[^\n]*\n([\s\S]*?)$/i)
+  const o2 = text.match(/OUTPUT\s+2[^\n]*\n([\s\S]*?)(?=OUTPUT\s+3|$)/i)
+  const o3 = text.match(/OUTPUT\s+3[^\n]*\n([\s\S]*?)$/i)
   return {
-    label:    o1 ? o1[1].trim() : text,
-    patterns: o2 ? o2[1].trim() : null,
+    label:     o1 ? o1[1].trim() : text,
+    patterns:  o2 ? o2[1].trim() : null,
+    alignment: o3 ? o3[1].trim() : null,
   }
 }
 
@@ -414,7 +446,7 @@ export default function PoliticalAlignment({ onNavigate }) {
 
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
-    const { label, patterns } = parseAnalysis(analysis)
+    const { label, patterns, alignment } = parseAnalysis(analysis)
     const topDomain = extractTopDomain(label, patterns)
     const bridgeLine = topDomain
       ? `${topDomain} stands out. But that\u2019s not the full story.`
@@ -450,6 +482,19 @@ export default function PoliticalAlignment({ onNavigate }) {
                 </div>
                 <div className="analysis-paragraphs">
                   {renderMarkdown(patterns)}
+                </div>
+              </div>
+            )}
+
+            {/* Output 3 — Political Alignment Fit */}
+            {alignment && (
+              <div className="analysis-section">
+                <div className="analysis-section-header">
+                  <span className="analysis-section-num">3</span>
+                  Political Alignment Fit
+                </div>
+                <div className="analysis-paragraphs">
+                  {renderMarkdown(alignment)}
                 </div>
               </div>
             )}
