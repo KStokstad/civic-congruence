@@ -410,6 +410,7 @@ export default function CivicSurvey({ onNavigate }) {
               <div className="scale-instruct">Choose the option closest to your instinct — there are no perfect answers here.</div>
             )}
             <div className="scale-wrapper">
+              <p className="scale-range-hint">Select a point on the scale between the two options below.</p>
               {!topic.scale.labels && (
                 <div className="scale-context">
                   1 = {topic.scale.lowLabel} &middot; 5 = {topic.scale.highLabel}
@@ -436,9 +437,14 @@ export default function CivicSurvey({ onNavigate }) {
             </div>
           </div>
 
+          {/* Follow-up hint — shown before scale is answered */}
+          {!scaleAnswered && (
+            <p className="followup-hint">A follow-up question will appear after you select.</p>
+          )}
+
           {/* Follow-up — revealed after scale selection */}
           {scaleAnswered && (
-            <div className="question-block">
+            <div className="question-block question-block--fade-in">
               <div className="question-text">{topic.followUp.text}</div>
               <div className="choice-options">
                 {topic.followUp.options.map((opt) => (
@@ -451,6 +457,23 @@ export default function CivicSurvey({ onNavigate }) {
                   </button>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Optional notes — revealed after scale selection */}
+          {scaleAnswered && (
+            <div className="topic-notes-block question-block--fade-in">
+              <label className="topic-notes-label" htmlFor={`notes-${topic.id}`}>
+                Anything else about {topic.label} in your community? (optional)
+              </label>
+              <textarea
+                id={`notes-${topic.id}`}
+                className="topic-notes-textarea"
+                rows={2}
+                value={answers[`${topic.label} Notes`] || ''}
+                onChange={(e) => answer(`${topic.label} Notes`, e.target.value)}
+                placeholder="Optional — share any additional context here."
+              />
             </div>
           )}
 
