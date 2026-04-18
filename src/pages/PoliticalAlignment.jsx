@@ -3,6 +3,7 @@ import { submitAlignment, updateAlignment, checkRepeatEmail } from '../services/
 import { renderMarkdown } from '../utils/renderMarkdown'
 
 const OPENING_INSTRUCTION_LINES = [
+  'Most options will feel partially true. Choose the one you would act on.',
   'This is not a personality quiz.',
   'It measures how you make tradeoffs under pressure.',
   'Choose the answer you would accept in reality, not the one that sounds best.',
@@ -24,7 +25,7 @@ const QUESTIONS = [
     id: 'q2', fieldName: 'Q2', airtableField: 'Economic Fairness',
     hint: 'You may find yourself agreeing with more than one option. Choose the one you would prioritize in practice.',
     topic: 'Economic Fairness',
-    stem: 'When the gap between wealthy and lower-income Americans widens, your deeper concern is:',
+    stem: 'When inequality increases, what concerns you more?',
     options: [
       { id: 'A',  text: 'That we\u2019re discouraging the risk-taking and innovation that drives economic growth.' },
       { id: 'B',  text: 'That concentrated wealth quietly erodes democratic participation and social trust.' },
@@ -59,7 +60,7 @@ const QUESTIONS = [
   {
     id: 'q5', fieldName: 'Q5', airtableField: 'Change and Stability',
     topic: 'Change and Stability',
-    stem: 'When the political environment feels volatile, the position you\u2019d stand behind is:',
+    stem: 'When things feel politically unstable, what position would you stand behind?',
     options: [
       { id: 'A',  text: 'Push harder \u2014 crises create openings for change that stability never allows.' },
       { id: 'B',  text: 'Hold the line \u2014 preserving stability matters more than advancing any agenda right now.' },
@@ -81,7 +82,7 @@ const QUESTIONS = [
   {
     id: 'q7', fieldName: 'Q7', airtableField: 'Media and Information',
     topic: 'Media and Information',
-    stem: 'How you actually navigate political information, honestly:',
+    stem: 'How do you actually navigate political information?',
     options: [
       { id: 'A',  text: 'I\u2019ve stopped trusting mainstream outlets \u2014 the bias is too consistent and too consequential.' },
       { id: 'B',  text: 'Independent and alternative sources have proven more honest to me than legacy media.' },
@@ -605,6 +606,9 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
             <div className="alignment-progress-label">{step + 1} of {total}</div>
           </div>
+          <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', margin: '4px 0 0' }}>
+            It&rsquo;s normal for multiple answers to feel right. Choose the one you&rsquo;d act on.
+          </p>
 
           <div className="alignment-question">
             <div className="alignment-topic-label">{question.topic}</div>
