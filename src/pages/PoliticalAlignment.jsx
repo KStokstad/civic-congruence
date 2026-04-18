@@ -9,6 +9,12 @@ const OPENING_INSTRUCTION_LINES = [
   'Choose the answer you would accept in reality, not the one that sounds best.',
 ]
 
+// INSTRUMENT DESIGN RULES — do not modify question text without review
+// Protect: "volatile", "under pressure", "even if unpopular", "even knowing its downside"
+// These create psychological commitment and cannot be softened
+// Answer choices must preserve real tradeoffs — do not make both options equally comfortable
+// Phrases like "some overreach is inevitable" and "some needs go unmet" are intentional
+// Any stem tightening must improve clarity without reducing precision or emotional weight
 const QUESTIONS = [
   {
     id: 'q1', fieldName: 'Q1', airtableField: 'Role of Government',
@@ -38,7 +44,7 @@ const QUESTIONS = [
     id: 'q3', fieldName: 'Q3', airtableField: 'Social Policy',
     hint: 'You may find yourself agreeing with more than one option. Choose the one you would prioritize in practice.',
     topic: 'Social Policy',
-    stem: 'When it comes to social issues, the principle you\u2019d defend even under pressure is:',
+    stem: 'On social issues, which principle would you defend even under pressure?',
     options: [
       { id: 'A',  text: 'Traditions and shared values that have held communities together over time deserve protection.' },
       { id: 'B',  text: 'Individual autonomy \u2014 people should live as they choose without interference from the state or majority opinion.' },
@@ -71,7 +77,7 @@ const QUESTIONS = [
   {
     id: 'q6', fieldName: 'Q6', airtableField: 'Leadership',
     topic: 'Leadership',
-    stem: 'The leader you\u2019d trust with real power, knowing the risks:',
+    stem: 'Which leader would you trust with real power, knowing the risks?',
     options: [
       { id: 'A',  text: 'The decisive disruptor \u2014 breaks with convention, forces issues others avoid.' },
       { id: 'B',  text: 'The empathetic consensus builder \u2014 listens, brings people along, builds coalitions.' },
@@ -106,7 +112,7 @@ const QUESTIONS = [
     id: 'q9', fieldName: 'Q9', airtableField: 'Compromise',
     hint: 'You may find yourself agreeing with more than one option. Choose the one you would prioritize in practice.',
     topic: 'Compromise',
-    stem: 'In a divided system, the position you\u2019d actually hold under pressure:',
+    stem: 'In a divided system, which position would you actually hold under pressure?',
     options: [
       { id: 'A',  text: 'Compromise signals weak conviction \u2014 real leadership means holding the line.' },
       { id: 'B',  text: 'Compromise on tactics is necessary \u2014 compromise on core values is capitulation. The difference matters.' },
