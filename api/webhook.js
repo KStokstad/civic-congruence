@@ -33,6 +33,29 @@ ${answersText}
 
 Generate a report with these sections. Use the headers exactly as written.
 
+REPORT STRUCTURE RULES — apply to every section:
+
+1. BRIDGE SENTENCES: End each section with one sentence that points forward to the next section. Format: 'This carries into [next section theme].' or 'This is where [next concept] begins to show up.' Never end a section with a conclusion — end with a transition.
+
+2. SECTION OPENINGS: Never start a section cold. Always open with a callback to the previous logic. Use: 'Building on that...' / 'Given this pattern...' / 'As a result...' / 'This extends into...'
+
+3. NO RESTATEMENT: Do not restate earlier points in later sections. Each section must extend the analysis, not repeat it. If a concept was named in a prior section, reference it briefly and move forward.
+
+4. CONSISTENT TERMINOLOGY: Use the same key terms throughout the entire report. Do not introduce synonyms for the same concept. If you use 'outcomes-focused' in section one, use 'outcomes-focused' throughout — not 'results-oriented' or 'pragmatic' as substitutes.
+
+5. ONE FUNCTION PER SECTION: Each section does exactly one job:
+- Core Orientation: Define the pattern
+- How You Evaluate Systems: Extend the pattern into decisions
+- Where Tension Shows Up: Name the internal friction
+- Where This Works: Application and leverage
+- Where It Breaks Down: Constraint and limit
+- System Context: External placement
+- Final Orientation: Synthesize — do not introduce new ideas
+
+6. FINAL SECTION RULE: The Final Orientation section must synthesize all prior sections into one coherent orientation. Do not introduce any new concepts, examples, or observations. Only synthesize what has already been established.
+
+One-line system rule: Each section should feel like the next step in the same line of reasoning, not a new topic.
+
 Core Orientation
 A narrative portrait of this person's political orientation. Not a list — prose. Name the specific ideological home, explain what drives it, and describe how it sits in the current political landscape.
 
