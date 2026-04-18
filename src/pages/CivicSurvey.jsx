@@ -147,64 +147,53 @@ function getScores(answers) {
   }))
 }
 
-function stdDev(scores) {
-  const vals = scores.map((s) => s.score)
-  const mean = vals.reduce((a, b) => a + b, 0) / vals.length
-  const variance = vals.reduce((a, b) => a + (b - mean) ** 2, 0) / vals.length
-  return Math.sqrt(variance)
+const TOPIC_IMPLICATIONS = {
+  Economy:    'Economic conditions here may be placing more visible pressure on daily life than other areas reflect.',
+  Safety:     'Safety conditions here may be creating more tangible uncertainty than other civic systems in your responses.',
+  Health:     'Health access or outcomes here may be generating more immediate strain than other areas suggest.',
+  Education:  'Education conditions here may be producing more acute concern than other domains currently show.',
+  Governance: 'Trust in governance here may be more fractured than other areas in your responses indicate.',
 }
 
-function buildSnapshot(answers) {
+function buildStatement1(answers) {
+  // Find topic with clearest direct experience, tie-break on lowest score
+  const directlyAffected = TOPICS.filter(
+    (t) => answers[t.followUp.fieldName] === 'Yes, it affected me directly'
+  )
+  const householdAffected = TOPICS.filter(
+    (t) => answers[t.followUp.fieldName] === 'Yes, someone in my household'
+  )
+  const candidates = directlyAffected.length ? directlyAffected
+    : householdAffected.length ? householdAffected
+    : TOPICS
+
+  const scored = candidates.map((t) => ({ label: t.label, score: answers[t.scale.fieldName] || 0 }))
+  const topic = scored.sort((a, b) => a.score - b.score)[0]
+  const implication = TOPIC_IMPLICATIONS[topic.label] ?? `Conditions here may reflect pressures not yet visible in other domains.`
+
+  return `${topic.label} stands out as the area where impact is most visible in your responses. ${implication}`
+}
+
+function buildStatement2(answers) {
   const scores = getScores(answers)
   const vals = scores.map((s) => s.score)
+  const sorted = [...scores].sort((a, b) => a.score - b.score)
+  const spread = sorted[sorted.length - 1].score - sorted[0].score
   const avg = vals.reduce((a, b) => a + b, 0) / vals.length
-  const sorted = [...scores].sort((a, b) => a.score - b.score)
-  const lowest = sorted[0]
   const highest = sorted[sorted.length - 1]
-
-  if (vals.every((v) => v < 2.5)) {
-    return 'Your responses reflect low confidence across all areas — a pattern that suggests systemic concerns rather than isolated problems.'
-  }
-  if (vals.every((v) => v > 3.5)) {
-    return 'Your responses reflect broadly positive views across civic systems — a relatively uncommon pattern worth noting.'
-  }
-  if (vals.every((v) => v >= 2.5 && v <= 3.5)) {
-    return 'Your responses suggest moderate satisfaction across most areas, with no single system standing out as strongly effective — a pattern that often points to systems that are functioning, but not fully responsive.'
-  }
-  if (avg - lowest.score > 1) {
-    return `Your responses show relatively consistent views across most areas, with ${lowest.label} standing out as a clear concern.`
-  }
-  if (highest.score - avg > 1) {
-    return `Your strongest area is ${highest.label}, though other areas score more modestly — suggesting uneven performance across civic systems.`
-  }
-  return 'A mixed picture across civic systems. Some areas perform more consistently than others.'
-}
-
-function buildComparativeInsight(answers) {
-  const scores = getScores(answers)
-  const sorted = [...scores].sort((a, b) => a.score - b.score)
   const lowest = sorted[0]
-  const highest = sorted[sorted.length - 1]
-  const spread = highest.score - lowest.score
 
-  if (scores.every((s) => s.score <= 3)) {
-    return 'No area scored above 3 — your community may not have a clear area of strong performance.'
-  }
-  if (spread < 1) {
-    return 'Your scores are closely grouped — suggesting consistent rather than uneven civic performance.'
-  }
-  if (spread > 1.5) {
-    return `Your scores show meaningful variation — ${highest.label} stands out relative to ${lowest.label}.`
-  }
-  return null
-}
+  const word = spread < 0.5 ? 'consistency'
+    : spread <= 1.5 ? 'moderate variation'
+    : 'notable variation'
 
-function buildClosingInsight(answers) {
-  const scores = getScores(answers)
-  if (stdDev(scores) < 1) {
-    return 'Your responses suggest a community where issues are present, but not sharply polarized — challenges are likely shared rather than concentrated.'
+  let qualifier = ''
+  if (spread >= 0.5) {
+    if (highest.score - avg > 0.75) qualifier = `, with ${highest.label} scoring notably higher than the others`
+    else if (avg - lowest.score > 0.75) qualifier = `, with ${lowest.label} scoring notably lower than the others`
   }
-  return 'Your responses show meaningful differences across areas — some systems may be working better than others in your community.'
+
+  return `Responses show ${word} across civic systems${qualifier}.`
 }
 
 export default function CivicSurvey({ onNavigate }) {
@@ -313,24 +302,11 @@ export default function CivicSurvey({ onNavigate }) {
 
             <h4 className="results-group-header">Your alignment snapshot</h4>
             <div className="results-insight-group">
-              {answers[CLOSING_FIELD] && (
-                <div className="results-summary">
-                  <p><strong>Where impact is being felt most:</strong> {answers[CLOSING_FIELD]}. Suggests recent changes or pressures are more visible here.</p>
-                </div>
-              )}
-
-              {buildComparativeInsight(answers) && (
-                <div className="results-summary">
-                  <p className="results-insight">{buildComparativeInsight(answers)}</p>
-                </div>
-              )}
-
-              <div className="results-summary">
-                <p>{buildSnapshot(answers)}</p>
+              <div className="results-summary results-summary--primary">
+                <p>{buildStatement1(answers)}</p>
               </div>
-
-              <div className="results-summary">
-                <p className="results-insight">{buildClosingInsight(answers)}</p>
+              <div className="results-summary results-summary--secondary">
+                <p>{buildStatement2(answers)}</p>
               </div>
             </div>
 

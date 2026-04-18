@@ -780,6 +780,21 @@
   margin-bottom: 0;
 }
 
+.results-summary--primary {
+  border-color: rgba(27, 75, 138, 0.28);
+  background: rgba(27, 75, 138, 0.06);
+}
+
+.results-summary--secondary {
+  border-color: rgba(27, 75, 138, 0.07);
+  background: rgba(27, 75, 138, 0.02);
+}
+
+.results-summary--secondary p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
 .results-summary h4 {
   font-family: var(--font-display);
   font-size: 17px;
