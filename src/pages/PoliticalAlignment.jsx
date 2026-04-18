@@ -389,10 +389,10 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="report-checkout">
               <h3>Get your full report</h3>
               <p className="report-checkout-hook">
-                You're not hard to place politically. You're just not well served by what's available.
+                You're not hard to place politically. The available categories don't fully capture how you think.
               </p>
               <div className="report-checkout-deeper">
-                <p className="report-checkout-deeper-label">The full report goes deeper into:</p>
+                <p className="report-checkout-deeper-label">Inside, you'll see:</p>
                 <ul>
                   <li>Why you feel politically out of place and where that comes from</li>
                   <li>The environments where your thinking actually works</li>
