@@ -181,6 +181,20 @@ INTENSITY DISTRIBUTION RULE: Do not front-load heavy or charged language. Follow
 - Section 3 onwards: escalate into implications and constraints
 Replace reactive language like 'system is too broken' with grounded observations like 'you tend to interpret current systems as constrained in their ability to self-correct.' Same meaning, less resistance.
 
+CROSS-ANSWER SYNTHESIS RULES — apply to every output:
+
+The first paragraph must show how the answers interact with each other — not what they were individually. Lead with a combined insight that could only emerge from seeing all 10 answers together. Never restate individual answer selections.
+
+Include 1-2 observations that are only visible when the answers are considered together — patterns or tensions that wouldn't be apparent from any single answer. Work these naturally into the analysis. Only label explicitly if it adds clarity: 'What stands out when these are combined:...'
+
+Each paragraph must be 2-3 sentences maximum. No dense blocks. If a paragraph exceeds 3 sentences, split it.
+
+Remove all filler phrases: 'in the current landscape,' 'what stands out is,' 'taken together' (limit to once per output), 'it's worth noting.' Cut any sentence that could be removed without losing meaning.
+
+Each output must contain exactly one central idea per section. If two ideas appear, move the second to where it belongs or cut it.
+
+Include one sharp, surprising observation per output — something the reader wouldn't have said about themselves but will recognize as true when they read it. This should emerge from an unexpected combination of answers, not from generic pattern description.
+
 OUTPUT 2 — How You Evaluate Systems
 Follow this exact sequence:
 First paragraph: Mirror — describe what this person values or how they approach political decisions in a way that feels accurate and affirming. Use language like "your responses point to" or "across your answers a pattern emerges." Make them feel understood before anything else.

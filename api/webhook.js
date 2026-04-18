@@ -62,7 +62,7 @@ A narrative portrait of this person's political orientation. Not a list — pros
 Regardless of what profile emerges from the answers, always open this section with an observation the respondent would recognize as accurate and non-threatening before introducing any complexity or tension. Even profiles that lean toward disruption or anti-institutionalism should feel seen and understood in the first paragraph before the analysis deepens.
 
 Historical Context
-Three figures from history whose political orientation resembles this person's pattern. For each: name, era, one sentence on the resemblance, one sentence on where they diverged or were tested.
+2-3 figures whose political orientation resembles this person's pattern. For each: name, era, one sentence of parallel, one sentence of divergence or test. Cut anything that explains rather than illuminates. 2 sentences maximum per figure.
 
 System Context
 Which factions within current American political parties would welcome this person, which would tolerate them, and which would reject them — and why. Be specific about intra-party dynamics, not just party labels.
@@ -71,10 +71,10 @@ Where You Sit
 A score from 1–10 (1 = fully at home in existing parties, 10 = no real home in current politics). Explain the score. What would need to change in the political landscape for this person to feel more represented?
 
 Where This Works
-Three specific areas where this person's orientation gives them unusual effectiveness or credibility — places where their values and instincts align with real civic need. Be concrete.
+2-3 specific leverage points where this orientation gives unusual effectiveness. Each leverage point = one short paragraph: context, why this profile is effective there, one concrete example. No scenario-heavy descriptions.
 
 Where It Breaks Down
-Two or three patterns in how this person processes political information or makes decisions that could work against them — not character flaws, but cognitive or emotional tendencies revealed by their answers. Frame these as useful self-knowledge, not criticism.
+Exactly 2-3 constraints revealed by this person's answer patterns — not character flaws, but cognitive or emotional tendencies. Each constraint = 2-3 sentences maximum. Focus on the tradeoff, not the explanation. Frame as useful self-knowledge, not criticism.
 
 Final Orientation (final section, no additional header label needed)
 
