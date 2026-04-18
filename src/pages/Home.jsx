@@ -23,7 +23,7 @@ export default function Home({ onNavigate }) {
       <section className="hero">
         <div className="container">
           <div className="hero-eyebrow">
-            <span>●</span> Civic Infrastructure Project
+            Civic Infrastructure Project
           </div>
           <h1 className="hero-headline">Better signal. Not more noise.</h1>
           <p className="hero-subtitle">Where civic signal becomes policy clarity.</p>

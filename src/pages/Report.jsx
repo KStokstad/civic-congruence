@@ -19,10 +19,6 @@ export default function Report({ onNavigate }) {
   const emailFromCheckout = params.get('email') ?? ''
 
   useEffect(() => {
-    if (emailFromCheckout) setSubEmail(emailFromCheckout)
-  }, [emailFromCheckout])
-
-  useEffect(() => {
     if (!sessionId) {
       setError('No session ID found in the URL.')
       setStatus('error')
@@ -140,7 +136,7 @@ export default function Report({ onNavigate }) {
           <div className="report-subscribe">
             <h3 className="report-subscribe-heading">Get the Weekly Signal Brief</h3>
             <p className="report-subscribe-sub">
-              A weekly summary of civic signals from communities across the network. No opinion. Just pattern.
+              Weekly summary of civic signals across the network. No opinion. Just pattern.
             </p>
             {subStatus === 'done' ? (
               <p className="report-subscribe-confirm">
@@ -151,7 +147,7 @@ export default function Report({ onNavigate }) {
                 <input
                   type="email"
                   className="report-subscribe-input"
-                  placeholder="Your email address"
+                  placeholder="you@email.com"
                   value={subEmail}
                   onChange={(e) => setSubEmail(e.target.value)}
                   required

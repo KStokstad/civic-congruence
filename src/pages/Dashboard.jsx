@@ -290,15 +290,15 @@ export default function Dashboard() {
             <div className="empty-icon">📊</div>
             <h3>No verified data yet.</h3>
             <p>
-              This is what the system looks like when communities aren't feeding
-              signal into it. Be one of the first to contribute.
+              This is what the system looks like before communities begin contributing signal.
+              Be one of the first.
             </p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               <button className="btn btn-primary" onClick={() => setMode('sample')}>
                 Preview sample data
               </button>
               <button className="btn btn-ghost" onClick={loadLiveData}>
-                Try loading live data
+                Check for live data
               </button>
             </div>
           </div>

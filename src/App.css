@@ -210,12 +210,11 @@
 .hero-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   background: var(--accent-light);
-  border: 1px solid rgba(27, 75, 138, 0.2);
+  border: 1px solid rgba(27, 75, 138, 0.12);
   border-radius: 999px;
-  padding: 4px 14px;
-  font-size: 13px;
+  padding: 3px 12px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--accent);
   letter-spacing: 0.5px;
@@ -1859,12 +1858,12 @@
 .report-actions {
   display: flex;
   gap: 12px;
-  margin-top: 48px;
+  margin-top: 58px;
   flex-wrap: wrap;
 }
 
 .report-subscribe {
-  margin-top: 56px;
+  margin-top: 66px;
   padding-top: 40px;
   border-top: 1px solid var(--border);
 }
