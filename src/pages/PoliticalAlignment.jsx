@@ -175,6 +175,12 @@ The difference:
 - Too behavioral: 'When a policy is proposed, you tend to...'
 - Correct: 'Your responses consistently prioritize whether something works over how it is structured. That creates a clear standard, but it narrows the range of approaches that register as legitimate.'
 
+INTENSITY DISTRIBUTION RULE: Do not front-load heavy or charged language. Follow this progression:
+- Core Orientation section: describe the pattern neutrally — no crisis, breakdown, or disruption language
+- How You Evaluate Systems: introduce tension gently
+- Section 3 onwards: escalate into implications and constraints
+Replace reactive language like 'system is too broken' with grounded observations like 'you tend to interpret current systems as constrained in their ability to self-correct.' Same meaning, less resistance.
+
 OUTPUT 2 — How You Evaluate Systems
 Follow this exact sequence:
 First paragraph: Mirror — describe what this person values or how they approach political decisions in a way that feels accurate and affirming. Use language like "your responses point to" or "across your answers a pattern emerges." Make them feel understood before anything else.
@@ -265,7 +271,7 @@ function parseAnalysis(text) {
 }
 
 const CURIOSITY_LINES = [
-  "Most people with your pattern miss one key contradiction.",
+  "Most people with this pattern overlook one key tension.",
   "There\u2019s a tension in your responses that only shows up when analyzed together.",
   "Your answers point to something deeper than a typical political profile.",
 ]

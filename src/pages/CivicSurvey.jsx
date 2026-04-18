@@ -156,44 +156,25 @@ const TOPIC_IMPLICATIONS = {
 }
 
 function buildStatement1(answers) {
-  // Find topic with clearest direct experience, tie-break on lowest score
-  const directlyAffected = TOPICS.filter(
-    (t) => answers[t.followUp.fieldName] === 'Yes, it affected me directly'
-  )
-  const householdAffected = TOPICS.filter(
-    (t) => answers[t.followUp.fieldName] === 'Yes, someone in my household'
-  )
-  const candidates = directlyAffected.length ? directlyAffected
-    : householdAffected.length ? householdAffected
-    : TOPICS
-
-  const scored = candidates.map((t) => ({ label: t.label, score: answers[t.scale.fieldName] || 0 }))
-  const topic = scored.sort((a, b) => a.score - b.score)[0]
-  const implication = TOPIC_IMPLICATIONS[topic.label] ?? `Conditions here may reflect pressures not yet visible in other domains.`
-
-  return `${topic.label} stands out as the area where impact is most visible in your responses. ${implication}`
+  const scores = getScores(answers)
+  const sorted = [...scores].sort((a, b) => a.score - b.score)
+  const highest = sorted[sorted.length - 1]
+  const lowest = sorted[0]
+  return `${highest.label} stands out as your highest-impact area (${highest.score}/5 vs ${lowest.label} at ${lowest.score}/5). This suggests concern is more concentrated than evenly distributed.`
 }
 
 function buildStatement2(answers) {
   const scores = getScores(answers)
-  const vals = scores.map((s) => s.score)
   const sorted = [...scores].sort((a, b) => a.score - b.score)
   const spread = sorted[sorted.length - 1].score - sorted[0].score
-  const avg = vals.reduce((a, b) => a + b, 0) / vals.length
-  const highest = sorted[sorted.length - 1]
-  const lowest = sorted[0]
 
-  const word = spread < 0.5 ? 'consistency'
-    : spread <= 1.5 ? 'moderate variation'
-    : 'notable variation'
-
-  let qualifier = ''
-  if (spread >= 0.5) {
-    if (highest.score - avg > 0.75) qualifier = `, with ${highest.label} scoring notably higher than the others`
-    else if (avg - lowest.score > 0.75) qualifier = `, with ${lowest.label} scoring notably lower than the others`
+  if (spread < 1) {
+    return `Your scores show close alignment across areas — pressure is relatively distributed.`
+  } else if (spread <= 2) {
+    return `Your scores show moderate variation, indicating selective pressure points rather than system-wide dissatisfaction.`
+  } else {
+    return `Your scores show significant variation — some areas are functioning considerably better than others in your responses.`
   }
-
-  return `Responses show ${word} across civic systems${qualifier}.`
 }
 
 export default function CivicSurvey({ onNavigate }) {

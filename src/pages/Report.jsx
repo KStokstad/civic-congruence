@@ -154,6 +154,10 @@ export default function Report({ onNavigate }) {
             A copy has been sent to your email.
           </p>
 
+          <p style={{ fontSize: 14, color: 'var(--text-muted, #888)', marginBottom: 24, textAlign: 'center' }}>
+            Your responses form a consistent pattern. Here&rsquo;s how that pattern plays out in practice.
+          </p>
+
           {(() => {
             const { orientation, strength, tension, bestEnv } = parseAtAGlance(report)
             return (
