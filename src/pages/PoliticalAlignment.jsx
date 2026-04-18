@@ -133,32 +133,46 @@ async function callAnthropic(answers) {
     return `${q.topic}: ${selected ? `${selected.id}) ${selected.text}` : 'No answer'}`
   }).join('\n')
 
-  const prompt = `You are analyzing a political values diagnostic for Civic Congruence. The respondent was told: 'Several of these questions involve real tradeoffs — there's no cost-free answer. Choose the option you would accept even knowing its downside.'
+  const prompt = `You are generating a Political Alignment Deep Dive report for Civic Congruence. The respondent completed a 10-question values diagnostic designed to surface how they make tradeoffs under pressure.
 
-Here are their 10 answers:
+Here are their answers:
 ${answersText}
 
-Your job is NOT to summarize what they chose. They already know what they chose.
+Generate a structured report with these exact sections:
 
-Your job is to find what their answers reveal that they may not have noticed themselves — tensions, contradictions, patterns, and what their choices suggest about how they actually process political decisions under pressure.
+YOUR KEY PATTERNS
+Start with exactly 3 bullet points summarizing the most distinctive patterns in their responses. Frame each as an insight, not a label. Example format:
+- You prioritize outcomes over process — institutional form matters less to you than whether things actually work
+- Your responses suggest tension between wanting effective change and skepticism about current channels
+- You show signs of [pattern] despite [contrasting value]
 
-Produce exactly two sections:
+ALIGNMENT PROFILE
+2-3 paragraphs. Describe what this combination of answers reveals about how this person approaches political life. Use language like "your responses suggest," "this profile tends to," "there may be a pattern where." Do not use accusatory framing. Do not say "you are doing X" — say "your responses suggest X may be happening." Acknowledge complexity and internal tension as features, not flaws.
 
-OUTPUT 1 — IDEOLOGICAL LABEL
-One specific label (4-6 words maximum) followed by 2-3 sentences. The label should name something precise and non-obvious — not 'moderate' or 'progressive' or 'conservative.' Find the specific orientation their combination of answers reveals. Then explain what that orientation means in practice — what tradeoffs they habitually accept, what they habitually resist.
+HISTORICAL ANALOGUES
+3 specific historical figures or movements. For each: name, era, the specific parallel, and what they achieved or struggled with. Keep it concrete and interesting.
 
-OUTPUT 2 — BEHAVIORAL PATTERNS
-Three insights, each starting with 'You consistently...' These should reveal something the person might find surprising or clarifying — not obvious restatements of their choices. Look for:
-- Where their answers create internal tension (e.g. they want reform but distrust the reformers)
-- What they prioritize when forced to choose between two things they value
-- What their answer to Question 10 (the discomfort test) reveals about their deeper political instinct
-- Any pattern across multiple questions that points to an underlying value not explicitly named
+WHERE YOU HAVE LEVERAGE
+3-5 specific, actionable civic leverage points for someone with this profile. Label each clearly. Be concrete, not generic. This should feel like the most useful section.
 
-Be direct. Be specific. If their answers show a genuine contradiction, name it. That is more useful than flattery.
+WHERE YOU MAY BE STUCK
+2-3 patterns or tendencies that could limit effectiveness. Frame each as a tension or tradeoff, not a criticism. Use language like "there may be a tension between X and Y" or "a pattern worth watching is." End each with a constructive reframe or question to hold.
 
-Do not use the phrase 'This person.' Address them directly as 'You.'
-Do not repeat their answer choices back to them.
-Do not use hedging language like 'suggests' or 'may indicate' — state what you see.`
+FACTION MAPPING
+Where does this profile fit within today's political landscape? Which factions would welcome, tolerate, or reject this profile? Be honest and specific. Avoid false balance.
+
+POLITICAL HOMELESSNESS SCORE
+Rate 1-10 with a brief explanation. Be direct about what would need to change for this person to feel more represented.
+
+IMPORTANT TONE AND FORMAT RULES:
+- Never say 'you are doing X' — say 'your responses suggest X'
+- Never use accusatory language — reframe all criticism as tension or tradeoff
+- Use uncertainty language throughout: 'may,' 'suggest,' 'tends to,' 'pattern worth noting'
+- Write in second person (you/your) throughout
+- Keep intelligence high — do not dumb down insights
+- End the WHERE YOU MAY BE STUCK section with one actionable reframe per pattern
+- Total length: 900-1200 words
+- Do not use the phrase 'This person'`
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -170,7 +184,7 @@ Do not use hedging language like 'suggests' or 'may indicate' — state what you
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-5',
-      max_tokens: 1000,
+      max_tokens: 2000,
       messages: [{ role: 'user', content: prompt }],
     }),
   })
