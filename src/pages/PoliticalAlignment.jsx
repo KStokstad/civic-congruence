@@ -136,7 +136,7 @@ ${answersText}
 
 Produce exactly two outputs:
 
-OUTPUT 1 — IDEOLOGICAL LABEL
+OUTPUT 1 — Core Orientation
 
 Open with exactly three sentences following this structure:
 
@@ -156,7 +156,7 @@ When naming the orientation, introduce it with interpretive space rather than as
 
 The standard: the first 3-5 lines should make the reader think "that's exactly it" — not "that's interesting" and not "that's a lot."
 
-OUTPUT 2 — BEHAVIORAL PATTERNS
+OUTPUT 2 — How You Evaluate Systems
 Follow this exact sequence:
 First paragraph: Mirror — describe what this person values or how they approach political decisions in a way that feels accurate and affirming. Use language like "your responses point to" or "across your answers a pattern emerges." Make them feel understood before anything else.
 Second paragraph: Insight — name what that orientation reveals about how they process political decisions. Use "taken together, your responses point toward" or "one way to read this combination is." Avoid asserting coherence the user didn't claim — never say "what makes this coherent is."
@@ -165,7 +165,9 @@ Fourth paragraph: add one concrete behavioral observation directly derived from 
 End with one open question or observation that invites reflection rather than delivering a verdict.
 Never open with critique. Never use accusatory language. Never say "You reject," "You believe," "You don't trust," or "You are." Always use "Your responses suggest," "A pattern emerges," "Taken together your responses point to," or "One way to describe this orientation is." The reader should think "that is accurate" before they encounter anything that challenges them.
 
-Do not include horizontal rule dividers (---) or standalone hash symbols (#) between sections. Use the section labels as the only visual separators.`
+Do not include horizontal rule dividers (---) or standalone hash symbols (#) between sections. Use the section labels as the only visual separators.
+
+Use Title Case for all section headers, not ALL CAPS. Headers should feel like steps in a diagnostic system, not essay headings. Each header should answer the question: what is this section doing for the reader?`
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',

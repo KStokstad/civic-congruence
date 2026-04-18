@@ -1562,9 +1562,10 @@
 
 .report-content h2 {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: none;
-  margin-top: 17px;
+  margin-top: 32px;
+  margin-bottom: 10px;
 }
 
 .analysis-paragraphs h3 {

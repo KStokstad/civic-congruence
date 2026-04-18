@@ -33,27 +33,27 @@ ${answersText}
 
 Generate a report with these sections. Use the headers exactly as written.
 
-ALIGNMENT PROFILE
+Core Orientation
 A narrative portrait of this person's political orientation. Not a list — prose. Name the specific ideological home, explain what drives it, and describe how it sits in the current political landscape.
 
 Regardless of what profile emerges from the answers, always open this section with an observation the respondent would recognize as accurate and non-threatening before introducing any complexity or tension. Even profiles that lean toward disruption or anti-institutionalism should feel seen and understood in the first paragraph before the analysis deepens.
 
-HISTORICAL ANALOGUES
+Historical Context
 Three figures from history whose political orientation resembles this person's pattern. For each: name, era, one sentence on the resemblance, one sentence on where they diverged or were tested.
 
-PARTY FACTION MAPPING
+System Context
 Which factions within current American political parties would welcome this person, which would tolerate them, and which would reject them — and why. Be specific about intra-party dynamics, not just party labels.
 
-POLITICAL HOMELESSNESS SCORE
+Where You Sit
 A score from 1–10 (1 = fully at home in existing parties, 10 = no real home in current politics). Explain the score. What would need to change in the political landscape for this person to feel more represented?
 
-CIVIC LEVERAGE POINTS
+Where This Works
 Three specific areas where this person's orientation gives them unusual effectiveness or credibility — places where their values and instincts align with real civic need. Be concrete.
 
-PSYCHOLOGICAL TENDENCIES TO WATCH
+Where It Breaks Down
 Two or three patterns in how this person processes political information or makes decisions that could work against them — not character flaws, but cognitive or emotional tendencies revealed by their answers. Frame these as useful self-knowledge, not criticism.
 
-CLOSING (final section, no header label needed)
+Final Orientation (final section, no additional header label needed)
 
 End the report with exactly 3-4 sentences following this structure:
 
@@ -72,6 +72,8 @@ Rules for this section:
 - Do not add a header — let it close naturally after the last section
 - The reader should finish feeling: "that showed me how I think" not "that told me what to think"
 - Maximum 4 sentences. Do not exceed this.
+
+Use Title Case for all section headers, not ALL CAPS. Headers should feel like steps in a diagnostic system, not essay headings. Each header should answer the question: what is this section doing for the reader?
 
 Write in second person ("You..."). Be direct. Do not hedge. This is what they paid for.`
 }
