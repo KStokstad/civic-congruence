@@ -72,7 +72,7 @@ export default async function handler(req, res) {
       line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
       mode: 'payment',
       customer_email: email,
-      success_url: `${process.env.VITE_SITE_URL}/report?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.VITE_SITE_URL}/report?session_id={CHECKOUT_SESSION_ID}&email=${encodeURIComponent(email)}`,
       cancel_url: `${process.env.VITE_SITE_URL}/political-alignment`,
       metadata: {
         email,
