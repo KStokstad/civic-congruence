@@ -4,7 +4,7 @@ export default function Home({ onNavigate }) {
       icon: '📡',
       title: 'Signal',
       anchor: 'What people are actually experiencing',
-      body: 'We collect structured civic signal — what people are experiencing, where gaps exist, and what communities are asking for. Not noise, but pattern.',
+      body: 'We collect structured civic signal: what people are experiencing, where gaps exist, and what communities are asking for. Not noise, but pattern.',
     },
     {
       icon: '🔗',
@@ -79,7 +79,7 @@ export default function Home({ onNavigate }) {
               <div className="pilot-label">Pilot Network</div>
               <h2>Join the Civic Congruence Network</h2>
               <p>
-                Join the network and contribute real-time community signal — getting it in front of decision-makers.
+                Join the network and contribute real-time community signal, getting it in front of decision-makers.
               </p>
             </div>
             <div className="pilot-actions">
