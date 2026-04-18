@@ -137,15 +137,16 @@ ${answersText}
 Produce exactly two outputs:
 
 OUTPUT 1 — IDEOLOGICAL LABEL
-Start with one sentence that mirrors something accurate and specific about how this person approaches political life — something that makes them feel seen before anything else. Then give a specific label (4-6 words) that names their orientation precisely. Follow with 2-3 sentences that explain what this label means in practice. Do not open with critique. Do not use generic terms like moderate or centrist. The first thing the reader experiences should feel accurate and affirming, not challenging.
+Start with one sentence that mirrors something accurate and specific about how this person approaches political life — something that makes them feel seen before anything else. When naming the orientation, introduce it with interpretive space rather than assertion. Instead of stating the label as fact, frame it as one way to describe the pattern: "One way to describe this orientation is [label]" — this gives the reader room to agree rather than react. Follow with 2-3 sentences that explain what this label means in practice. Do not open with critique. Do not use generic terms like moderate or centrist. The first thing the reader experiences should feel accurate and affirming, not challenging.
 
 OUTPUT 2 — BEHAVIORAL PATTERNS
-Follow this exact sequence for the behavioral patterns section:
+Follow this exact sequence:
 First paragraph: Mirror — describe what this person values or how they approach political decisions in a way that feels accurate and affirming. Use language like "your responses point to" or "across your answers a pattern emerges." Make them feel understood before anything else.
-Second paragraph: Insight — name what that orientation reveals about how they process political decisions. What is the internal logic? What makes it coherent?
-Third paragraph: Tension — introduce the tradeoff or challenge this orientation creates. Frame it as a natural consequence, not a flaw. Use language like "at the same time," "this can create a tension between," "there may be moments where."
+Second paragraph: Insight — name what that orientation reveals about how they process political decisions. Use "taken together, your responses point toward" or "one way to read this combination is." Avoid asserting coherence the user didn't claim — never say "what makes this coherent is."
+Third paragraph: Tension — introduce the tradeoff or challenge this orientation creates as an open question rather than a confrontation. Instead of stating the problem directly, ask it: "This raises an open question: if [outcome], what ensures [value]?" Frame it as a natural consequence, not a flaw.
+Fourth paragraph: add one concrete behavioral observation directly derived from the specific combination of answers this person gave — something that describes a recognizable behavior, not a generic trait. This should feel specific to their actual answers, not applicable to everyone. Format: "This can show up as [specific behavior] even when [contrasting outcome] might be possible."
 End with one open question or observation that invites reflection rather than delivering a verdict.
-Never open with critique. Never use accusatory language. The reader should think "that is accurate" before they encounter anything that challenges them.
+Never open with critique. Never use accusatory language. Never say "You reject," "You believe," "You don't trust," or "You are." Always use "Your responses suggest," "A pattern emerges," "Taken together your responses point to," or "One way to describe this orientation is." The reader should think "that is accurate" before they encounter anything that challenges them.
 
 Do not include horizontal rule dividers (---) or standalone hash symbols (#) between sections. Use the section labels as the only visual separators.`
 
