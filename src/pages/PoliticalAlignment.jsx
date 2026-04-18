@@ -145,7 +145,9 @@ First paragraph: Mirror — describe what this person values or how they approac
 Second paragraph: Insight — name what that orientation reveals about how they process political decisions. What is the internal logic? What makes it coherent?
 Third paragraph: Tension — introduce the tradeoff or challenge this orientation creates. Frame it as a natural consequence, not a flaw. Use language like "at the same time," "this can create a tension between," "there may be moments where."
 End with one open question or observation that invites reflection rather than delivering a verdict.
-Never open with critique. Never use accusatory language. The reader should think "that is accurate" before they encounter anything that challenges them.`
+Never open with critique. Never use accusatory language. The reader should think "that is accurate" before they encounter anything that challenges them.
+
+Do not include horizontal rule dividers (---) or standalone hash symbols (#) between sections. Use the section labels as the only visual separators.`
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',

@@ -26,16 +26,24 @@ export function renderMarkdown(text) {
   }
 
   for (const line of lines) {
-    const h3 = line.match(/^###\s+(.+)/)
+    const h1 = line.match(/^#\s+(.+)/)
     const h2 = line.match(/^##\s+(.+)/)
+    const h3 = line.match(/^###\s+(.+)/)
+    const hr = /^(-{3,}|\*{3,})$/.test(line.trim())
     const li = line.match(/^[*-]\s+(.+)/)
 
-    if (h3) {
+    if (hr) {
+      flushList(); flushPara()
+      elements.push(<hr key={key++} />)
+    } else if (h3) {
       flushList(); flushPara()
       elements.push(<h3 key={key++}>{renderInline(h3[1], key)}</h3>)
     } else if (h2) {
       flushList(); flushPara()
       elements.push(<h2 key={key++}>{renderInline(h2[1], key)}</h2>)
+    } else if (h1) {
+      flushList(); flushPara()
+      elements.push(<h1 key={key++}>{renderInline(h1[1], key)}</h1>)
     } else if (li) {
       flushPara()
       listItems.push(<li key={key++}>{renderInline(li[1], key)}</li>)
