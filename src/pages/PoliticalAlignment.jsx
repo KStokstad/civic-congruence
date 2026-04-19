@@ -459,9 +459,6 @@ export default function PoliticalAlignment({ onNavigate }) {
             >
               Start the 4-minute diagnostic
             </button>
-            <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 8, marginBottom: 0 }}>
-              10 quick questions
-            </p>
             <p style={{ fontSize: 13, color: 'var(--text)', marginTop: 12, marginBottom: 0 }}>
               You&rsquo;ll see how your answers fit together — and where the tensions are.
             </p>
