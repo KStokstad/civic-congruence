@@ -44,7 +44,7 @@ export default function Home({ onNavigate }) {
             Civic Infrastructure Project
           </div>
           <h1 className="hero-headline">Better Signal. Not More Noise.</h1>
-          <p className="hero-subtitle">Where community engagement becomes civic policy</p>
+          <p className="hero-subtitle">Where community engagement becomes civic policy clarity</p>
           <p className="hero-sub">
             Your community input gets drowned out by noise before it reaches decision-makers. They react to what&rsquo;s loudest, or worse, don&rsquo;t act at all. Either way, the gap widens. We capture what communities are actually experiencing. What&rsquo;s working and what isn&rsquo;t. With your help we can close the gap.
           </p>
