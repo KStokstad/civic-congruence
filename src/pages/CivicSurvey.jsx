@@ -40,7 +40,7 @@ const ALL_TOPICS = [
     id: 'safety',
     label: 'Safety',
     scale: {
-      text: 'Based on what you\u2019ve seen locally, when tradeoffs have to be made \u2014 where do you lean?',
+      text: 'Based on what you've seen locally, when tradeoffs have to be made — where do you lean?',
       lowLabel: 'Focus on enforcement and accountability, even if prevention programs get less funding',
       highLabel: 'Invest in prevention and root causes, even if enforcement stays limited',
       fieldName: 'Safety Scale',
@@ -74,7 +74,7 @@ const ALL_TOPICS = [
     id: 'health',
     label: 'Health',
     scale: {
-      text: 'Thinking about your community\u2019s health system, when tradeoffs have to be made \u2014 where do you lean?',
+      text: 'Thinking about your community's health system, when tradeoffs have to be made — where do you lean?',
       lowLabel: 'Expand access to more people, even if quality varies',
       highLabel: 'Maintain quality of care, even if not everyone can access it',
       fieldName: 'Health Scale',
@@ -108,7 +108,7 @@ const ALL_TOPICS = [
     id: 'education',
     label: 'Education',
     scale: {
-      text: 'Based on what you see in your community\u2019s schools, when tradeoffs have to be made \u2014 where do you lean?',
+      text: 'Based on what you see in your community's schools, when tradeoffs have to be made — where do you lean?',
       lowLabel: 'Hold to common standards, even if local needs differ',
       highLabel: 'Give schools local flexibility, even if outcomes vary',
       fieldName: 'Education Scale',
@@ -142,7 +142,7 @@ const ALL_TOPICS = [
     id: 'governance',
     label: 'Governance',
     scale: {
-      text: 'Thinking about local decisions that affect your community \u2014 how confident are you that they actually reflect what people need?',
+      text: 'Thinking about local decisions that affect your community — how confident are you that they actually reflect what people need?',
       lowLabel: 'Not confident',
       highLabel: 'Very confident',
       fieldName: 'Governance Scale',
@@ -365,7 +365,7 @@ Rules:
       <div className="survey-page">
         <div className="container-sm">
           <p style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 14, marginTop: 60 }}>
-            Loading\u2026
+            Loading…
           </p>
         </div>
       </div>
@@ -378,7 +378,7 @@ Rules:
       <div className="survey-page">
         <div className="container-sm">
           <div className="submit-success">
-            <div className="success-icon">\u2713</div>
+            <div className="success-icon">✓</div>
             <h3>Thank you for your response</h3>
             <p>
               Your civic data has been recorded. Once verified it will contribute
@@ -386,7 +386,7 @@ Rules:
             </p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               <button className="btn btn-primary" onClick={() => onNavigate('political-alignment')}>
-                Understand your political values \u2192
+                Understand your political values →
               </button>
             </div>
           </div>
@@ -408,7 +408,7 @@ Rules:
 
             {reflectionLoading && (
               <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 28px', fontStyle: 'italic' }}>
-                Reflecting on your responses\u2026
+                Reflecting on your responses…
               </p>
             )}
 
@@ -467,10 +467,10 @@ Rules:
 
             <div className="results-actions">
               <p style={{ fontSize: 14, color: 'var(--text-secondary, var(--text))', textAlign: 'center', margin: '0 0 12px', lineHeight: 1.6 }}>
-                Thank you for sharing your experience. Submit your responses to add them to the community dataset \u2014 your input helps surface what communities are actually experiencing.
+                Thank you for sharing your experience. Submit your responses to add them to the community dataset — your input helps surface what communities are actually experiencing.
               </p>
               <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
-                {submitting ? 'Saving\u2026' : 'Save my responses \u2192'}
+                {submitting ? 'Saving…' : 'Save my responses →'}
               </button>
             </div>
           </div>
@@ -492,7 +492,7 @@ Rules:
             </div>
             <div style={{ textAlign: 'center', padding: '32px 0 24px' }}>
               <p style={{ fontSize: 18, fontWeight: 600, color: 'var(--text-h)', margin: '0 0 8px' }}>
-                You\u2019ve shared your experience in 3 areas.
+                You've shared your experience in 3 areas.
               </p>
               <p style={{ fontSize: 15, color: 'var(--text)', margin: '0 0 32px' }}>
                 Want to continue with the remaining topics?
@@ -556,7 +556,7 @@ Rules:
                   setTopicPhase(1)
                   setSurveyPhase('topics')
                 }}>
-                  \u2190 Back
+                  ← Back
                 </button>
               </div>
               <div className="survey-nav-right">
@@ -566,7 +566,7 @@ Rules:
                   onClick={() => setSurveyPhase('results')}
                   disabled={answers[CLOSING_FIELD] === undefined}
                 >
-                  See my results \u2192
+                  See my results →
                 </button>
               </div>
             </div>
@@ -637,7 +637,7 @@ Rules:
 
             <div className="survey-nav">
               <div>
-                <button className="btn btn-ghost" onClick={goBack}>\u2190 Back</button>
+                <button className="btn btn-ghost" onClick={goBack}>← Back</button>
               </div>
               <div className="survey-nav-right">
                 <button
@@ -645,7 +645,7 @@ Rules:
                   onClick={goNext}
                   disabled={!canAdvance}
                 >
-                  {isLastTopic ? 'Final question \u2192' : 'Next \u2192'}
+                  {isLastTopic ? 'Final question →' : 'Next →'}
                 </button>
               </div>
             </div>
@@ -738,7 +738,7 @@ Rules:
                 rows={2}
                 value={answers[topic.notesField] || ''}
                 onChange={(e) => answer(topic.notesField, e.target.value)}
-                placeholder="Optional \u2014 share any additional context here."
+                placeholder="Optional — share any additional context here."
               />
             </div>
           )}
@@ -746,7 +746,7 @@ Rules:
           <div className="survey-nav">
             <div>
               {topicIdx > 0 && (
-                <button className="btn btn-ghost" onClick={goBack}>\u2190 Back</button>
+                <button className="btn btn-ghost" onClick={goBack}>← Back</button>
               )}
             </div>
             <div className="survey-nav-right">
@@ -755,7 +755,7 @@ Rules:
                 onClick={goNext}
                 disabled={!scaleAnswered}
               >
-                Next \u2192
+                Next →
               </button>
             </div>
           </div>
