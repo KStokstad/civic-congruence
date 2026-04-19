@@ -46,9 +46,10 @@ export default function Home({ onNavigate }) {
           <h1 className="hero-headline">Better signal. Not more noise.</h1>
           <p className="hero-subtitle">Turn real community experience into usable policy signal.</p>
           <p className="hero-sub">
-            Right now, institutions react to noise.<br />
-            We capture what people are actually experiencing. What&rsquo;s working and what isn&rsquo;t.<br />
-            We make it visible to decision-makers.
+            Noise drowns out important community input before it reaches decision-makers.
+            They react to what&rsquo;s loudest, or worse, don&rsquo;t act at all.
+            Either way, the gap widens. We capture what people are actually experiencing.
+            What&rsquo;s working and what isn&rsquo;t. We help close the gap.
           </p>
           <div className="hero-actions">
             <button className="btn btn-primary btn-lg" onClick={() => onNavigate('civic-survey')}>
@@ -61,7 +62,7 @@ export default function Home({ onNavigate }) {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Signal section */}
       <section className="features">
         <div className="container">
           <div className="features-header">
@@ -83,13 +84,6 @@ export default function Home({ onNavigate }) {
               </span>
               {' '}better decisions
             </h2>
-            <p>
-              Congruence happens when what communities need matches what institutions
-              provide. We make that gap visible.
-            </p>
-            <p>
-              Most community input gets lost before it reaches the people making decisions. This system makes sure it doesn&rsquo;t.
-            </p>
           </div>
           <div className="features-grid">
             {features.map((f) => (
@@ -103,7 +97,27 @@ export default function Home({ onNavigate }) {
         </div>
       </section>
 
-      {/* Pilot Card */}
+      {/* Call to action */}
+      <section className="cta-section">
+        <div className="container">
+          <div className="cta-block">
+            <p className="cta-text">
+              Congruence happens when what communities need matches what institutions provide.
+              We make that gap visible and we need your help.
+            </p>
+            <div className="cta-actions">
+              <button className="btn btn-primary btn-lg" onClick={() => onNavigate('civic-survey')}>
+                Contribute your experience
+              </button>
+              <button className="btn btn-ghost btn-lg" onClick={() => onNavigate('network-pulse')}>
+                Join the network
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pilot network */}
       <section className="pilot-section">
         <div className="container">
           <div className="pilot-card">

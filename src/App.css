@@ -394,6 +394,30 @@ h1, h2, h3, h4 {
   margin-top: 24px;
 }
 
+.cta-section {
+  padding: 64px 0;
+  text-align: center;
+}
+
+.cta-block {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-text {
+  font-size: 18px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .pilot-section {
   padding: 0 0 80px;
 }
