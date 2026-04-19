@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { submitSurvey } from '../services/airtable'
 
 const EXPERIENCE_OPTIONS = [
@@ -172,6 +172,8 @@ export default function CivicSurvey({ onNavigate }) {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState(null)
+  const [reflection, setReflection] = useState(null)
+  const [reflectionLoading, setReflectionLoading] = useState(false)
 
   const total = TOPICS.length
   const isClosingStep = step === total
@@ -207,11 +209,62 @@ export default function CivicSurvey({ onNavigate }) {
     }
   }
 
+  useEffect(() => {
+    if (!isResultsStep) return
+    const key = import.meta.env.VITE_ANTHROPIC_KEY
+    if (!key) return
+
+    setReflectionLoading(true)
+    const topicLines = TOPICS.map((t) => {
+      const score = answers[t.scale.fieldName] ?? 'not answered'
+      const followUp = answers[t.followUp.fieldName] ?? 'not answered'
+      const notes = answers[`${t.label} Notes`]?.trim() || 'none provided'
+      return `${t.label}: ${score}/5. Follow-up: ${followUp}. Notes: ${notes}`
+    }).join('\n')
+
+    const prompt = `A community member just completed a civic experience survey. Based on their responses, write a brief, grounded reflection (3-4 sentences) that makes them feel accurately heard. Reference their specific written comments directly if they provided any. Connect their scale scores to their lived experience. Do not be analytical or use policy language. Sound human, specific, and observational — like someone who read what they wrote and understood it.
+
+Their responses:
+${topicLines}
+
+Rules:
+- If they provided written notes, reference the specific content directly
+- If no notes were provided, work from scale scores and follow-up answers only
+- Do not use the words 'survey', 'data', 'responses', or 'analysis'
+- Do not start with 'Your responses suggest'
+- Sound like a thoughtful person reading what they wrote, not an AI summarizing data
+- Maximum 4 sentences`
+
+    fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 300,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        const text = data?.content?.[0]?.text
+        if (text) setReflection(text.trim())
+      })
+      .catch(() => {})
+      .finally(() => setReflectionLoading(false))
+  }, [isResultsStep])
+
   function reset() {
     setStep(0)
     setAnswers({})
     setSubmitted(false)
     setError(null)
+    setReflection(null)
+    setReflectionLoading(false)
   }
 
   // ── Submitted confirmation ──────────────────────
@@ -247,6 +300,20 @@ export default function CivicSurvey({ onNavigate }) {
             <div className="section-label" style={{ textAlign: 'center', marginBottom: 8 }}>Your Profile</div>
             <h2>Your Civic Alignment</h2>
             <p className="results-intro">Based on your answers across five civic domains.</p>
+
+            {reflectionLoading && (
+              <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 28px', fontStyle: 'italic' }}>
+                Reflecting on your responses…
+              </p>
+            )}
+
+            {reflection && (
+              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '20px 24px', marginBottom: 28 }}>
+                <p style={{ fontSize: 17, color: 'var(--text)', lineHeight: 1.7, margin: 0, fontWeight: 400 }}>
+                  {reflection}
+                </p>
+              </div>
+            )}
 
             {(() => {
               const { highest, lowest } = buildSnapshot(answers)
