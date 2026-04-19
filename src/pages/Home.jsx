@@ -100,7 +100,6 @@ export default function Home({ onNavigate }) {
       {/* Cards */}
       <section className="cards-section">
         <div className="container">
-          <p className="cards-connector">Most community input gets lost before it reaches the people making decisions. This system makes sure it doesn&rsquo;t.</p>
           <div className="features-grid">
             {features.map((f) => (
               <div className="feature-card" key={f.title}>
