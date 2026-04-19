@@ -46,10 +46,9 @@ export default function Home({ onNavigate }) {
           <h1 className="hero-headline">Better signal. Not more noise.</h1>
           <p className="hero-subtitle">Turn real community experience into usable policy signal.</p>
           <p className="hero-sub">
-            We capture what people are actually experiencing. What's working and what isn't. We make it visible to decision-makers.
-          </p>
-          <p className="hero-signal-line">
-            Right now, institutions react to noise. This system captures signal.
+            Right now, institutions react to noise.<br />
+            We capture what people are actually experiencing. What&rsquo;s working and what isn&rsquo;t.<br />
+            We make it visible to decision-makers.
           </p>
           <div className="hero-actions">
             <button className="btn btn-primary btn-lg" onClick={() => onNavigate('civic-survey')}>
