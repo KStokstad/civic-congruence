@@ -20,17 +20,17 @@ export default function Home({ onNavigate }) {
   const features = [
     {
       title: 'Signal →',
-      descriptor: 'What people are actually experiencing in their communities.',
-      body: 'This is the input. It comes directly from community members, not filtered through institutions.',
+      descriptor: 'What communities are actually experiencing.',
+      body: 'Direct from communities. Not filtered through institutions.',
     },
     {
       title: 'Infrastructure →',
-      descriptor: 'How individual input becomes usable data.',
-      body: 'Responses are verified, synthesized, and connected to decision-making systems.',
+      descriptor: 'How input connects to decisions.',
+      body: 'Verified, synthesized, and routed to where it can be used.',
     },
     {
       title: 'Transparency →',
-      descriptor: 'How patterns become visible to the people who need to act on them.',
+      descriptor: 'How patterns become visible.',
       body: "Institutions see what's consistently showing up — not what's being reported to them.",
     },
   ]
@@ -88,7 +88,7 @@ export default function Home({ onNavigate }) {
       {/* Cards */}
       <section className="cards-section">
         <div className="container">
-          <p className="cards-connector">We turn your voice into signal. This is how.</p>
+          <p className="cards-connector">We turn community input into something decision-makers can use. This is how.</p>
           <div className="features-grid">
             {features.map((f) => (
               <div className="feature-card" key={f.title}>
@@ -109,7 +109,7 @@ export default function Home({ onNavigate }) {
               <div className="pilot-label">Pilot Network</div>
               <h2>Join the Civic Congruence Network</h2>
               <p>
-                Join the network and contribute real-time community signal, getting it in front of decision-makers.
+                Join the network and contribute real-time community input, getting it in front of decision-makers.
               </p>
             </div>
             <div className="pilot-actions">
