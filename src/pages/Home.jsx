@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react'
 
-const CYCLE_WORDS = ['informs', 'creates', 'enables']
+const HEADINGS = [
+  'Signal informs better decisions',
+  'Better decisions start with better signal',
+]
 
 export default function Home({ onNavigate }) {
-  const [wordIndex, setWordIndex] = useState(0)
-  const [visible, setVisible] = useState(true)
+  const [headingIndex, setHeadingIndex] = useState(0)
+  const [headingVisible, setHeadingVisible] = useState(true)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setVisible(false)
+    const timer = setTimeout(() => {
+      setHeadingVisible(false)
       setTimeout(() => {
-        setWordIndex((i) => (i + 1) % CYCLE_WORDS.length)
-        setVisible(true)
+        setHeadingIndex(1)
+        setHeadingVisible(true)
       }, 400)
-    }, 2500)
-    return () => clearInterval(interval)
+    }, 3000)
+    return () => clearTimeout(timer)
   }, [])
 
   const features = [
@@ -66,27 +69,17 @@ export default function Home({ onNavigate }) {
       <section className="features">
         <div className="container">
           <div className="features-header">
-            <div className="section-label">What We Do</div>
-            <h2>
-              Signal{' '}
-              <span
-                style={{
-                  color: 'var(--accent)',
-                  opacity: visible ? 1 : 0,
-                  transition: 'opacity 0.4s ease',
-                  display: 'inline-block',
-                }}
-              >
-                {CYCLE_WORDS[wordIndex]}
-              </span>
-              {' '}better decisions
+            <h2 style={{ opacity: headingVisible ? 1 : 0, transition: 'opacity 0.4s ease' }}>
+              {HEADINGS[headingIndex]}
             </h2>
             <p>
               Congruence happens when what communities need matches what institutions
               provide. We make that gap visible.
             </p>
+            <p>
+              Most community input gets lost before it reaches the people making decisions. This system makes sure it doesn&rsquo;t.
+            </p>
           </div>
-          <p className="features-connector">Most community input gets lost before it reaches the people making decisions. This system makes sure it doesn&rsquo;t.</p>
           <div className="features-grid">
             {features.map((f) => (
               <div className="feature-card" key={f.title}>
@@ -96,7 +89,6 @@ export default function Home({ onNavigate }) {
               </div>
             ))}
           </div>
-          <p className="features-closing">This is how community experience becomes policy signal.</p>
         </div>
       </section>
 
