@@ -1,14 +1,7 @@
 import { useState, useEffect } from 'react'
-import { submitSurvey } from '../services/airtable'
+import { submitSurvey, fetchSurveyCount } from '../services/airtable'
 
-const EXPERIENCE_OPTIONS = [
-  'Yes, it affected me directly',
-  'Yes, someone in my household',
-  'No direct impact',
-  'No strong lean either way',
-]
-
-const TOPICS = [
+const ALL_TOPICS = [
   {
     id: 'economy',
     label: 'Economy',
@@ -25,17 +18,29 @@ const TOPICS = [
         'Strongly favor reducing costs',
       ],
     },
-    followUp: {
-      text: 'In the past year, has an economic issue — job loss, wage pressure, housing cost, debt — directly affected you or someone in your household?',
-      options: EXPERIENCE_OPTIONS,
-      fieldName: 'Economy Experience',
-    },
+    notesField: 'Economy Notes',
+    concernField: 'Economy Concern',
+    improvementField: 'Economy Improvement',
+    concerns: [
+      'Housing costs',
+      'Wages and income stability',
+      'Job availability',
+      'Cost of everyday goods',
+      'Small business and local economy',
+    ],
+    improvements: [
+      'More affordable housing',
+      'Higher wages and worker protections',
+      'More local job opportunities',
+      'Lower cost of everyday goods',
+      'Support for small and local businesses',
+    ],
   },
   {
     id: 'safety',
     label: 'Safety',
     scale: {
-      text: 'Based on what you\u2019ve seen locally, when tradeoffs have to be made — where do you lean?',
+      text: 'Based on what you\u2019ve seen locally, when tradeoffs have to be made \u2014 where do you lean?',
       lowLabel: 'Focus on enforcement and accountability, even if prevention programs get less funding',
       highLabel: 'Invest in prevention and root causes, even if enforcement stays limited',
       fieldName: 'Safety Scale',
@@ -47,17 +52,29 @@ const TOPICS = [
         'Strongly favor prevention',
       ],
     },
-    followUp: {
-      text: 'In the past year, has a safety issue — crime, violence, an unsafe situation, lack of emergency response — directly affected you or someone in your household?',
-      options: EXPERIENCE_OPTIONS,
-      fieldName: 'Safety Experience',
-    },
+    notesField: 'Safety Notes',
+    concernField: 'Safety Concern',
+    improvementField: 'Safety Improvement',
+    concerns: [
+      'Police response and accountability',
+      'Neighborhood crime',
+      'Drug and addiction issues',
+      'Domestic violence and family safety',
+      'Traffic and pedestrian safety',
+    ],
+    improvements: [
+      'More mental health and crisis resources',
+      'Youth programs and activities',
+      'Better lighting and infrastructure',
+      'More community-oriented policing',
+      'Neighborhood watch and community programs',
+    ],
   },
   {
     id: 'health',
     label: 'Health',
     scale: {
-      text: 'Thinking about your community\u2019s health system, when tradeoffs have to be made — where do you lean?',
+      text: 'Thinking about your community\u2019s health system, when tradeoffs have to be made \u2014 where do you lean?',
       lowLabel: 'Expand access to more people, even if quality varies',
       highLabel: 'Maintain quality of care, even if not everyone can access it',
       fieldName: 'Health Scale',
@@ -69,17 +86,29 @@ const TOPICS = [
         'Strongly favor maintaining quality of care',
       ],
     },
-    followUp: {
-      text: 'In the past year, has a health issue — cost of care, access to providers, mental health, chronic illness — directly affected you or someone in your household?',
-      options: EXPERIENCE_OPTIONS,
-      fieldName: 'Health Experience',
-    },
+    notesField: 'Health Notes',
+    concernField: 'Health Concern',
+    improvementField: 'Health Improvement',
+    concerns: [
+      'Cost of care',
+      'Access to providers',
+      'Mental health services',
+      'Insurance coverage',
+      'Emergency and urgent care',
+    ],
+    improvements: [
+      'Lower cost of care',
+      'More local providers and clinics',
+      'Expanded mental health services',
+      'Better insurance options',
+      'Faster access to emergency care',
+    ],
   },
   {
     id: 'education',
     label: 'Education',
     scale: {
-      text: 'Based on what you see in your community\u2019s schools, when tradeoffs have to be made — where do you lean?',
+      text: 'Based on what you see in your community\u2019s schools, when tradeoffs have to be made \u2014 where do you lean?',
       lowLabel: 'Hold to common standards, even if local needs differ',
       highLabel: 'Give schools local flexibility, even if outcomes vary',
       fieldName: 'Education Scale',
@@ -91,17 +120,29 @@ const TOPICS = [
         'Strongly favor local flexibility',
       ],
     },
-    followUp: {
-      text: 'In the past year, has an education issue — school quality, access, cost, or outcomes — directly affected you or someone in your household?',
-      options: EXPERIENCE_OPTIONS,
-      fieldName: 'Education Experience',
-    },
+    notesField: 'Education Notes',
+    concernField: 'Education Concern',
+    improvementField: 'Education Improvement',
+    concerns: [
+      'School funding',
+      'Teacher quality and retention',
+      'Curriculum and standards',
+      'Special needs and support services',
+      'School safety',
+    ],
+    improvements: [
+      'More school funding',
+      'Better teacher pay and retention',
+      'More support services for students',
+      'Safer school environments',
+      'More vocational and skills programs',
+    ],
   },
   {
     id: 'governance',
     label: 'Governance',
     scale: {
-      text: 'Thinking about local decisions that affect your community — how confident are you that they actually reflect what people need?',
+      text: 'Thinking about local decisions that affect your community \u2014 how confident are you that they actually reflect what people need?',
       lowLabel: 'Not confident',
       highLabel: 'Very confident',
       fieldName: 'Governance Scale',
@@ -113,21 +154,36 @@ const TOPICS = [
         'Very confident',
       ],
     },
-    followUp: {
-      text: 'In the past year, have you participated in a local civic process — attending a meeting, contacting a representative, voting in a local election, or signing a petition?',
-      options: [
-        'Yes, I participated',
-        'No, I did not',
-        'I wanted to but didn\u2019t know how',
-        'I didn\u2019t think it would make a difference',
-      ],
-      fieldName: 'Governance Action',
-    },
+    notesField: 'Governance Notes',
+    concernField: 'Governance Concern',
+    improvementField: 'Governance Improvement',
+    concerns: [
+      'Greater transparency',
+      'More public input on decisions',
+      'Faster response to community concerns',
+      'Independent oversight',
+      'Better communication from officials',
+    ],
+    improvements: [
+      'Greater transparency in decisions',
+      'More public input opportunities',
+      'Faster response to community concerns',
+      'Independent oversight',
+      'Better communication from officials',
+    ],
   },
 ]
 
+const TOPIC_SETS = [
+  ['economy', 'safety', 'health'],
+  ['safety', 'health', 'education'],
+  ['health', 'education', 'governance'],
+  ['education', 'governance', 'economy'],
+  ['governance', 'economy', 'safety'],
+]
+
+const TOPICS_BY_ID = Object.fromEntries(ALL_TOPICS.map((t) => [t.id, t]))
 const CLOSING_FIELD = 'Biggest Impact'
-const CLOSING_OPTIONS = ['Economy', 'Safety', 'Health', 'Education', 'Governance']
 
 function getScoreColor(score) {
   if (score <= 2) return 'score-low'
@@ -135,39 +191,27 @@ function getScoreColor(score) {
   return 'score-high'
 }
 
-function getScores(answers) {
-  return TOPICS.map((t) => ({
-    label: t.label,
-    score: answers[t.scale.fieldName] || 0,
-  }))
-}
-
-const TOPIC_IMPLICATIONS = {
-  Economy:    'The economic situation here may be placing more visible pressure on daily life than other areas reflect.',
-  Safety:     'The safety situation here may be creating more tangible uncertainty than other civic systems in your responses.',
-  Health:     'Health access or outcomes here may be generating more immediate strain than other areas suggest.',
-  Education:  'The education situation here may be producing more acute concern than other domains currently show.',
-  Governance: 'Trust in governance here may be more fractured than other areas in your responses indicate.',
-}
-
-function buildSnapshot(answers) {
-  const scores = getScores(answers)
+function buildSnapshot(topics, answers) {
+  const scores = topics.map((t) => ({ label: t.label, score: answers[t.scale.fieldName] || 0 }))
   const sorted = [...scores].sort((a, b) => a.score - b.score)
   const highest = sorted[sorted.length - 1]
   const lowest = sorted[0]
   const spread = highest.score - lowest.score
-
   const pattern = spread > 1.5
     ? 'Pattern: Uneven experience across systems'
     : spread >= 0.5
     ? 'Pattern: Mixed experience across systems'
     : 'Pattern: Consistent experience across systems'
-
   return { highest, lowest, pattern }
 }
 
 export default function CivicSurvey({ onNavigate }) {
-  const [step, setStep] = useState(0)
+  const [surveyPhase, setSurveyPhase] = useState('loading')
+  const [topicQueue, setTopicQueue] = useState([])
+  const [extensionTopics, setExtensionTopics] = useState([])
+  const [topicIdx, setTopicIdx] = useState(0)
+  const [topicPhase, setTopicPhase] = useState(0)
+  const [extensionOffered, setExtensionOffered] = useState(false)
   const [answers, setAnswers] = useState({})
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -175,51 +219,34 @@ export default function CivicSurvey({ onNavigate }) {
   const [reflection, setReflection] = useState(null)
   const [reflectionLoading, setReflectionLoading] = useState(false)
 
-  const total = TOPICS.length
-  const isClosingStep = step === total
-  const isResultsStep = step > total
-
-  const topic = step < total ? TOPICS[step] : null
-
-  function answer(fieldName, value) {
-    setAnswers((prev) => ({ ...prev, [fieldName]: value }))
-  }
-
-  function topicComplete() {
-    if (!topic) return false
-    const scaleAnswered = answers[topic.scale.fieldName] !== undefined
-    const followUpAnswered = answers[topic.followUp.fieldName] !== undefined
-    return scaleAnswered && followUpAnswered
-  }
-
-  function closingComplete() {
-    return answers[CLOSING_FIELD] !== undefined
-  }
-
-  async function handleSubmit() {
-    setSubmitting(true)
-    setError(null)
-    try {
-      await submitSurvey({ ...answers, 'Submitted At': new Date().toISOString() })
-      setSubmitted(true)
-    } catch (e) {
-      setError(e.message)
-    } finally {
-      setSubmitting(false)
-    }
+  function initSurvey(count) {
+    const setIdx = (count || 0) % 5
+    const requiredIds = TOPIC_SETS[setIdx]
+    const required = requiredIds.map((id) => TOPICS_BY_ID[id])
+    const extension = ALL_TOPICS.filter((t) => !requiredIds.includes(t.id))
+    setTopicQueue(required)
+    setExtensionTopics(extension)
+    setSurveyPhase('topics')
   }
 
   useEffect(() => {
-    if (!isResultsStep) return
+    fetchSurveyCount()
+      .then(initSurvey)
+      .catch(() => initSurvey(0))
+  }, [])
+
+  useEffect(() => {
+    if (surveyPhase !== 'results') return
     const key = import.meta.env.VITE_ANTHROPIC_KEY
     if (!key) return
 
     setReflectionLoading(true)
-    const topicLines = TOPICS.map((t) => {
+    const topicLines = topicQueue.map((t) => {
       const score = answers[t.scale.fieldName] ?? 'not answered'
-      const followUp = answers[t.followUp.fieldName] ?? 'not answered'
-      const notes = answers[`${t.label} Notes`]?.trim() || 'none provided'
-      return `${t.label}: ${score}/5. Follow-up: ${followUp}. Notes: ${notes}`
+      const concern = answers[t.concernField] ?? 'none provided'
+      const improvement = answers[t.improvementField] ?? 'none provided'
+      const notes = answers[t.notesField]?.trim() || 'none provided'
+      return `${t.label}: ${score}/5. Main concern: ${concern}. Wanted improvement: ${improvement}. Notes: ${notes}`
     }).join('\n')
 
     const prompt = `A community member just completed a civic experience survey. Based on their responses, write a brief, grounded reflection that makes them feel accurately heard. Reference their specific written comments directly if they provided any. Connect their scale scores to their lived experience. Do not be analytical or use policy language. Sound human, specific, and observational — like someone who read what they wrote and understood it.
@@ -229,7 +256,7 @@ ${topicLines}
 
 Rules:
 - If they provided written notes, reference the specific content directly
-- If no notes were provided, work from scale scores and follow-up answers only
+- If no notes were provided, work from scale scores and selected concerns/improvements
 - Do not use the words 'survey', 'data', 'responses', or 'analysis'
 - Do not start with 'Your responses suggest'
 - Sound like a thoughtful person reading what they wrote, not an AI summarizing data
@@ -258,24 +285,100 @@ Rules:
       })
       .catch(() => {})
       .finally(() => setReflectionLoading(false))
-  }, [isResultsStep])
+  }, [surveyPhase])
+
+  function answer(fieldName, value) {
+    setAnswers((prev) => ({ ...prev, [fieldName]: value }))
+  }
 
   function reset() {
-    setStep(0)
+    setTopicIdx(0)
+    setTopicPhase(0)
+    setExtensionOffered(false)
     setAnswers({})
+    setSubmitting(false)
     setSubmitted(false)
     setError(null)
     setReflection(null)
     setReflectionLoading(false)
+    setTopicQueue([])
+    setExtensionTopics([])
+    setSurveyPhase('loading')
+    fetchSurveyCount()
+      .then(initSurvey)
+      .catch(() => initSurvey(0))
   }
 
-  // ── Submitted confirmation ──────────────────────
+  async function handleSubmit() {
+    setSubmitting(true)
+    setError(null)
+    try {
+      await submitSurvey({ ...answers, 'Submitted At': new Date().toISOString() })
+      setSubmitted(true)
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  function goNext() {
+    if (topicPhase === 0) {
+      setTopicPhase(1)
+    } else {
+      const nextIdx = topicIdx + 1
+      if (nextIdx < topicQueue.length) {
+        setTopicIdx(nextIdx)
+        setTopicPhase(0)
+      } else if (!extensionOffered) {
+        setExtensionOffered(true)
+        setSurveyPhase('extension-prompt')
+      } else {
+        setSurveyPhase('closing')
+      }
+    }
+  }
+
+  function goBack() {
+    if (topicPhase === 1) {
+      setTopicPhase(0)
+    } else if (topicIdx > 0) {
+      setTopicIdx(topicIdx - 1)
+      setTopicPhase(1)
+    }
+  }
+
+  function acceptExtension() {
+    setTopicQueue((prev) => [...prev, ...extensionTopics])
+    setTopicIdx(3)
+    setTopicPhase(0)
+    setSurveyPhase('topics')
+  }
+
+  function skipExtension() {
+    setSurveyPhase('closing')
+  }
+
+  // ── Loading ──────────────────────────────────────
+  if (surveyPhase === 'loading') {
+    return (
+      <div className="survey-page">
+        <div className="container-sm">
+          <p style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: 14, marginTop: 60 }}>
+            Loading\u2026
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Submitted ────────────────────────────────────
   if (submitted) {
     return (
       <div className="survey-page">
         <div className="container-sm">
           <div className="submit-success">
-            <div className="success-icon">✓</div>
+            <div className="success-icon">\u2713</div>
             <h3>Thank you for your response</h3>
             <p>
               Your civic data has been recorded. Once verified it will contribute
@@ -283,9 +386,8 @@ Rules:
             </p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               <button className="btn btn-primary" onClick={() => onNavigate('political-alignment')}>
-                Understand your political values →
+                Understand your political values \u2192
               </button>
-              <button className="btn btn-ghost" onClick={reset}>Take it again</button>
             </div>
           </div>
         </div>
@@ -293,19 +395,20 @@ Rules:
     )
   }
 
-  // ── Results screen ──────────────────────────────
-  if (isResultsStep) {
+  // ── Results ──────────────────────────────────────
+  if (surveyPhase === 'results') {
+    const { highest, lowest, pattern } = buildSnapshot(topicQueue, answers)
     return (
       <div className="survey-page">
         <div className="container-sm">
           <div className="results-screen">
             <div className="section-label" style={{ textAlign: 'center', marginBottom: 8 }}>Your Profile</div>
             <h2>Your Civic Alignment</h2>
-            <p className="results-intro">Based on your answers across five civic domains.</p>
+            <p className="results-intro">Based on your answers across {topicQueue.length} civic areas.</p>
 
             {reflectionLoading && (
               <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 28px', fontStyle: 'italic' }}>
-                Reflecting on your responses…
+                Reflecting on your responses\u2026
               </p>
             )}
 
@@ -322,90 +425,107 @@ Rules:
               </div>
             )}
 
-            {(() => {
-              const { highest, lowest } = buildSnapshot(answers)
-              return (
-                <div className="results-grid">
-                  {TOPICS.map((t) => {
-                    const score = answers[t.scale.fieldName]
-                    const experience = answers[t.followUp.fieldName]
-                    const pct = score ? (score / 5) * 100 : 0
-                    const isHighest = t.label === highest.label
-                    const isLowest = t.label === lowest.label
-                    return (
-                      <div className="result-row" key={t.id}>
-                        <div className="result-row-top">
-                          <div className="result-topic-name">
-                            {t.label}
-                            {isHighest && <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--accent)', background: 'var(--accent-light)', borderRadius: 4, padding: '1px 6px', marginLeft: 6 }}>Highest</span>}
-                            {isLowest && <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-muted)', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 4, padding: '1px 6px', marginLeft: 6 }}>Lowest</span>}
-                          </div>
-                          <span className="result-score-badge">{score} / 5</span>
-                        </div>
-                        <div className="result-bar-track">
-                          <div className={`result-bar-fill ${getScoreColor(score)}`} style={{ width: `${pct}%` }} />
-                        </div>
-                        {experience && <div className="result-choice-text">{experience}</div>}
+            <div className="results-grid">
+              {topicQueue.map((t) => {
+                const score = answers[t.scale.fieldName]
+                const pct = score ? (score / 5) * 100 : 0
+                const isHighest = t.label === highest.label
+                const isLowest = t.label === lowest.label
+                return (
+                  <div className="result-row" key={t.id}>
+                    <div className="result-row-top">
+                      <div className="result-topic-name">
+                        {t.label}
+                        {isHighest && <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--accent)', background: 'var(--accent-light)', borderRadius: 4, padding: '1px 6px', marginLeft: 6 }}>Highest</span>}
+                        {isLowest && <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-muted)', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 4, padding: '1px 6px', marginLeft: 6 }}>Lowest</span>}
                       </div>
-                    )
-                  })}
-                </div>
-              )
-            })()}
+                      <span className="result-score-badge">{score} / 5</span>
+                    </div>
+                    <div className="result-bar-track">
+                      <div className={`result-bar-fill ${getScoreColor(score)}`} style={{ width: `${pct}%` }} />
+                    </div>
+                    {answers[t.concernField] && (
+                      <div className="result-choice-text">{answers[t.concernField]}</div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
 
             <h4 className="results-group-header">Your alignment snapshot</h4>
-            {(() => {
-              const { highest, lowest, pattern } = buildSnapshot(answers)
-              return (
-                <div className="results-summary results-summary--primary">
-                  <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-h)', margin: '0 0 4px' }}>
-                    Strongest signal: {highest.label} ({highest.score}/5)
-                  </p>
-                  <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: '0 0 10px' }}>
-                    Lowest signal: {lowest.label} ({lowest.score}/5)
-                  </p>
-                  <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: 0 }}>{pattern}</p>
-                </div>
-              )
-            })()}
-
+            <div className="results-summary results-summary--primary">
+              <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-h)', margin: '0 0 4px' }}>
+                Strongest signal: {highest.label} ({highest.score}/5)
+              </p>
+              <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: '0 0 10px' }}>
+                Lowest signal: {lowest.label} ({lowest.score}/5)
+              </p>
+              <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: 0 }}>{pattern}</p>
+            </div>
 
             {error && <div className="error-banner">{error}</div>}
 
             <div className="results-actions">
               <p style={{ fontSize: 14, color: 'var(--text-secondary, var(--text))', textAlign: 'center', margin: '0 0 12px', lineHeight: 1.6 }}>
-                Thank you for sharing your experience. Submit your responses to add them to the community dataset — your input helps surface what communities are actually experiencing.
+                Thank you for sharing your experience. Submit your responses to add them to the community dataset \u2014 your input helps surface what communities are actually experiencing.
               </p>
               <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
                 {submitting ? 'Saving\u2026' : 'Save my responses \u2192'}
               </button>
             </div>
-
           </div>
         </div>
       </div>
     )
   }
 
-  // ── Closing question ────────────────────────────
-  if (isClosingStep) {
+  // ── Extension prompt ─────────────────────────────
+  if (surveyPhase === 'extension-prompt') {
     return (
       <div className="survey-page">
         <div className="container-sm">
           <div className="topic-step">
             <div className="survey-progress">
-              <div className="progress-dots">
-                {TOPICS.map((t, i) => (
-                  <div key={t.id} className="progress-dot done" />
-                ))}
+              <div className="progress-track">
+                <div className="progress-fill" style={{ width: '60%' }} />
               </div>
+            </div>
+            <div style={{ textAlign: 'center', padding: '32px 0 24px' }}>
+              <p style={{ fontSize: 18, fontWeight: 600, color: 'var(--text-h)', margin: '0 0 8px' }}>
+                You\u2019ve shared your experience in 3 areas.
+              </p>
+              <p style={{ fontSize: 15, color: 'var(--text)', margin: '0 0 32px' }}>
+                Want to continue with the remaining topics?
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 320, margin: '0 auto' }}>
+                <button className="btn btn-primary" onClick={acceptExtension}>
+                  Yes, continue
+                </button>
+                <button className="btn btn-ghost" onClick={skipExtension}>
+                  Submit my responses
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Closing ──────────────────────────────────────
+  if (surveyPhase === 'closing') {
+    const closingOptions = topicQueue.map((t) => t.label)
+    return (
+      <div className="survey-page">
+        <div className="container-sm">
+          <div className="topic-step">
+            <div className="survey-progress">
               <div className="progress-track">
                 <div className="progress-fill" style={{ width: '100%' }} />
               </div>
             </div>
 
             <div className="topic-heading">
-              <span style={{ fontSize: 28 }}>🗳️</span>
               <div>
                 <div className="topic-num">Final Question</div>
                 <h3>Biggest Impact</h3>
@@ -417,7 +537,7 @@ Rules:
                 Which of these issues has had the biggest impact on your daily life in the past year?
               </div>
               <div className="choice-options">
-                {CLOSING_OPTIONS.map((opt) => (
+                {closingOptions.map((opt) => (
                   <button
                     key={opt}
                     className={`choice-btn ${answers[CLOSING_FIELD] === opt ? 'selected' : ''}`}
@@ -431,16 +551,22 @@ Rules:
 
             <div className="survey-nav">
               <div>
-                <button className="btn btn-ghost" onClick={() => setStep((s) => s - 1)}>← Back</button>
+                <button className="btn btn-ghost" onClick={() => {
+                  setTopicIdx(topicQueue.length - 1)
+                  setTopicPhase(1)
+                  setSurveyPhase('topics')
+                }}>
+                  \u2190 Back
+                </button>
               </div>
               <div className="survey-nav-right">
                 <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>Final</span>
                 <button
                   className="btn btn-primary"
-                  onClick={() => setStep((s) => s + 1)}
-                  disabled={!closingComplete()}
+                  onClick={() => setSurveyPhase('results')}
+                  disabled={answers[CLOSING_FIELD] === undefined}
                 >
-                  See my results →
+                  See my results \u2192
                 </button>
               </div>
             </div>
@@ -450,46 +576,127 @@ Rules:
     )
   }
 
-  // ── Topic step ──────────────────────────────────
+  // ── Topic step ───────────────────────────────────
+  const topic = topicQueue[topicIdx]
+  if (!topic) return null
+
+  const totalTopics = topicQueue.length
+  const progressPct = ((topicIdx * 2 + topicPhase) / (totalTopics * 2)) * 100
+
+  // ── Phase 1: Concern + Improvement ───────────────
+  if (topicPhase === 1) {
+    const canAdvance = answers[topic.concernField] !== undefined && answers[topic.improvementField] !== undefined
+    const isLastTopic = topicIdx === topicQueue.length - 1
+
+    return (
+      <div className="survey-page">
+        <div className="container-sm">
+          <div className="topic-step" key={`${topic.id}-1`}>
+            <div className="survey-progress">
+              <div className="progress-track">
+                <div className="progress-fill" style={{ width: `${progressPct}%` }} />
+              </div>
+            </div>
+
+            <div className="topic-heading">
+              <div>
+                <div className="topic-num">Topic {topicIdx + 1} of {totalTopics}</div>
+                <h3>{topic.label}</h3>
+              </div>
+            </div>
+
+            <div className="question-block">
+              <div className="question-text">What concerns you most right now?</div>
+              <div className="choice-options">
+                {topic.concerns.map((opt) => (
+                  <button
+                    key={opt}
+                    className={`choice-btn ${answers[topic.concernField] === opt ? 'selected' : ''}`}
+                    onClick={() => answer(topic.concernField, opt)}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="question-block">
+              <div className="question-text">What would help most?</div>
+              <div className="choice-options">
+                {topic.improvements.map((opt) => (
+                  <button
+                    key={opt}
+                    className={`choice-btn ${answers[topic.improvementField] === opt ? 'selected' : ''}`}
+                    onClick={() => answer(topic.improvementField, opt)}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="survey-nav">
+              <div>
+                <button className="btn btn-ghost" onClick={goBack}>\u2190 Back</button>
+              </div>
+              <div className="survey-nav-right">
+                <button
+                  className={`btn ${canAdvance ? 'btn-primary btn-nav-ready' : 'btn-primary'}`}
+                  onClick={goNext}
+                  disabled={!canAdvance}
+                >
+                  {isLastTopic ? 'Final question \u2192' : 'Next \u2192'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Phase 0: Scale + Notes ────────────────────────
   const scaleAnswered = answers[topic.scale.fieldName] !== undefined
 
   return (
     <div className="survey-page">
       <div className="container-sm">
-        <div className="survey-header">
-          <div className="section-label">Civic Survey</div>
-          <h2>Community Alignment Survey</h2>
-          <div className="diagnostic-instruction">
-            <p>This survey captures what you&rsquo;re actually experiencing in your community, not your political beliefs.</p>
+        {topicIdx === 0 && (
+          <div className="survey-header">
+            <div className="section-label">Civic Survey</div>
+            <h2>Community Alignment Survey</h2>
+            <div className="diagnostic-instruction">
+              <p>This survey captures what you&rsquo;re actually experiencing in your community, not your political beliefs.</p>
+            </div>
           </div>
-        </div>
+        )}
 
-        {step === 0 && (
+        {topicIdx === 0 && (
           <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 16 }}>
             Most answers will feel imperfect. Choose what&rsquo;s closest to your experience.
           </p>
         )}
 
-        <div className="topic-step" key={topic.id}>
+        <div className="topic-step" key={`${topic.id}-0`}>
           <div className="survey-progress">
             <div className="progress-track">
-              <div className="progress-fill" style={{ width: `${(step / total) * 100}%` }} />
+              <div className="progress-fill" style={{ width: `${progressPct}%` }} />
             </div>
           </div>
 
           <div className="topic-heading">
-
             <div>
-              <div className="topic-num">Topic {step + 1} of {total}</div>
+              <div className="topic-num">Topic {topicIdx + 1} of {totalTopics}</div>
               <h3>{topic.label}</h3>
             </div>
           </div>
 
-          {/* Scale question */}
           <div className="question-block">
             <div className="question-text">{topic.scale.text}</div>
             <div className="scale-wrapper">
-              <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', textAlign: 'center', margin: '0 0 8px' }}>If you&rsquo;re unsure, go with your first instinct.</p>
+              <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', textAlign: 'center', margin: '0 0 8px' }}>
+                If you&rsquo;re unsure, go with your first instinct.
+              </p>
               {!topic.scale.labels && (
                 <div className="scale-context">
                   1 = {topic.scale.lowLabel} &middot; 5 = {topic.scale.highLabel}
@@ -516,33 +723,10 @@ Rules:
             </div>
           </div>
 
-          {/* Follow-up hint — shown before scale is answered */}
           {!scaleAnswered && (
-            <p className="followup-hint">A follow-up question will appear after you select.</p>
+            <p className="followup-hint">Additional questions will appear after you select.</p>
           )}
 
-          {/* Follow-up — revealed after scale selection */}
-          {scaleAnswered && (
-            <div className="question-block question-block--fade-in">
-              <div className="question-text">{topic.followUp.text}</div>
-              <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: '-8px 0 12px' }}>
-                Most people feel somewhere in between. Just choose the closest option.
-              </p>
-              <div className="choice-options">
-                {topic.followUp.options.map((opt) => (
-                  <button
-                    key={opt}
-                    className={`choice-btn ${answers[topic.followUp.fieldName] === opt ? 'selected' : ''} ${opt === 'No strong lean either way' ? 'choice-btn-secondary' : ''}`}
-                    onClick={() => answer(topic.followUp.fieldName, opt)}
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Optional notes — revealed after scale selection */}
           {scaleAnswered && (
             <div className="topic-notes-block question-block--fade-in">
               <label className="topic-notes-label" htmlFor={`notes-${topic.id}`}>
@@ -552,26 +736,26 @@ Rules:
                 id={`notes-${topic.id}`}
                 className="topic-notes-textarea"
                 rows={2}
-                value={answers[`${topic.label} Notes`] || ''}
-                onChange={(e) => answer(`${topic.label} Notes`, e.target.value)}
-                placeholder="Optional — share any additional context here."
+                value={answers[topic.notesField] || ''}
+                onChange={(e) => answer(topic.notesField, e.target.value)}
+                placeholder="Optional \u2014 share any additional context here."
               />
             </div>
           )}
 
           <div className="survey-nav">
             <div>
-              {step > 0 && (
-                <button className="btn btn-ghost" onClick={() => setStep((s) => s - 1)}>← Back</button>
+              {topicIdx > 0 && (
+                <button className="btn btn-ghost" onClick={goBack}>\u2190 Back</button>
               )}
             </div>
             <div className="survey-nav-right">
               <button
-                className={`btn ${topicComplete() ? 'btn-primary btn-nav-ready' : 'btn-primary'}`}
-                onClick={() => setStep((s) => s + 1)}
-                disabled={!topicComplete()}
+                className={`btn ${scaleAnswered ? 'btn-primary btn-nav-ready' : 'btn-primary'}`}
+                onClick={goNext}
+                disabled={!scaleAnswered}
               >
-                {step === total - 1 ? 'Final question →' : 'Next →'}
+                Next \u2192
               </button>
             </div>
           </div>

@@ -135,6 +135,25 @@ export async function submitSubscriber(fields) {
   return res.json()
 }
 
+export async function fetchSurveyCount() {
+  let count = 0
+  let offset
+  do {
+    const params = new URLSearchParams()
+    params.append('fields[]', 'Submitted At')
+    params.append('pageSize', '100')
+    if (offset) params.append('offset', offset)
+    const res = await fetch(`${API}/Survey%20Response?${params}`, {
+      headers: { Authorization: `Bearer ${TOKEN}` },
+    })
+    if (!res.ok) throw new Error('Failed to fetch survey count')
+    const data = await res.json()
+    count += data.records.length
+    offset = data.offset
+  } while (offset)
+  return count
+}
+
 export async function fetchVerifiedSurveys() {
   const params = new URLSearchParams({ filterByFormula: '{Verified}=TRUE()' })
   const res = await fetch(`${API}/Survey%20Response?${params}`, {
