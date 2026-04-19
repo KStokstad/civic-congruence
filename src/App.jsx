@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
@@ -18,20 +18,42 @@ const NAV = [
   { id: 'dashboard',           label: 'Dashboard' },
 ]
 
+const VALID_PAGES = new Set([
+  'home', 'about', 'contact', 'civic-survey',
+  'political-alignment', 'network-pulse', 'dashboard', 'report',
+])
+
+function pageFromHash(hash) {
+  const id = hash.replace(/^#\//, '')
+  return VALID_PAGES.has(id) ? id : 'home'
+}
+
 function getInitialPage() {
   const path = window.location.pathname
   if (path === '/report' || path.startsWith('/report/')) return 'report'
+  if (window.location.hash) return pageFromHash(window.location.hash)
   return 'home'
 }
 
 export default function App() {
   const [page, setPage] = useState(getInitialPage)
 
+  const navigate = useCallback((id) => {
+    setPage(id)
+    window.location.hash = id === 'home' ? '' : `/${id}`
+  }, [])
+
+  useEffect(() => {
+    const onPopState = () => setPage(pageFromHash(window.location.hash))
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+
   return (
     <div className="app">
       <nav className="nav">
         <div className="nav-inner">
-          <button className="nav-logo" onClick={() => setPage('home')}>
+          <button className="nav-logo" onClick={() => navigate('home')}>
             Civic Congruence
           </button>
           <div className="nav-links">
@@ -39,7 +61,7 @@ export default function App() {
               <button
                 key={id}
                 className={`nav-link ${page === id ? 'active' : ''}`}
-                onClick={() => setPage(id)}
+                onClick={() => navigate(id)}
               >
                 {label}
               </button>
@@ -49,14 +71,14 @@ export default function App() {
       </nav>
 
       <main className="main-content">
-        {page === 'home'                && <Home onNavigate={setPage} />}
-        {page === 'about'               && <About onNavigate={setPage} />}
-        {page === 'contact'             && <Contact onNavigate={setPage} />}
-        {page === 'civic-survey'        && <CivicSurvey onNavigate={setPage} />}
-        {page === 'political-alignment' && <PoliticalAlignment onNavigate={setPage} />}
+        {page === 'home'                && <Home onNavigate={navigate} />}
+        {page === 'about'               && <About onNavigate={navigate} />}
+        {page === 'contact'             && <Contact onNavigate={navigate} />}
+        {page === 'civic-survey'        && <CivicSurvey onNavigate={navigate} />}
+        {page === 'political-alignment' && <PoliticalAlignment onNavigate={navigate} />}
         {page === 'network-pulse'       && <NetworkPulse />}
-        {page === 'dashboard'           && <Dashboard onNavigate={setPage} />}
-        {page === 'report'              && <Report onNavigate={setPage} />}
+        {page === 'dashboard'           && <Dashboard onNavigate={navigate} />}
+        {page === 'report'              && <Report onNavigate={navigate} />}
       </main>
 
       <footer className="footer">
@@ -67,7 +89,7 @@ export default function App() {
               © {new Date().getFullYear()} · Civic Congruence · Pilot project
             </span>
           </div>
-          <button className="footer-link" onClick={() => setPage('contact')}>
+          <button className="footer-link" onClick={() => navigate('contact')}>
             Contact
           </button>
         </div>
