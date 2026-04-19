@@ -292,10 +292,14 @@ h1, h2, h3, h4 {
   margin-bottom: 28px;
 }
 
+.features-header h2 {
+  margin-bottom: 10px;
+}
+
 .features-header p {
   font-size: 17px;
   max-width: 540px;
-  margin: 12px auto 0;
+  margin: 8px auto 0;
   line-height: 1.7;
 }
 

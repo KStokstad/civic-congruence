@@ -1,23 +1,20 @@
 import { useState, useEffect } from 'react'
 
-const HEADINGS = [
-  'Signal informs better decisions',
-  'Better decisions start with better signal',
-]
+const VERBS = ['informs', 'supports', 'enables']
 
 export default function Home({ onNavigate }) {
-  const [headingIndex, setHeadingIndex] = useState(0)
-  const [headingVisible, setHeadingVisible] = useState(true)
+  const [verbIndex, setVerbIndex] = useState(0)
+  const [verbVisible, setVerbVisible] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setHeadingVisible(false)
+    const interval = setInterval(() => {
+      setVerbVisible(false)
       setTimeout(() => {
-        setHeadingIndex(1)
-        setHeadingVisible(true)
-      }, 400)
-    }, 3000)
-    return () => clearTimeout(timer)
+        setVerbIndex((i) => (i + 1) % VERBS.length)
+        setVerbVisible(true)
+      }, 300)
+    }, 2500)
+    return () => clearInterval(interval)
   }, [])
 
   const features = [
@@ -69,8 +66,23 @@ export default function Home({ onNavigate }) {
       <section className="features">
         <div className="container">
           <div className="features-header">
-            <h2 style={{ opacity: headingVisible ? 1 : 0, transition: 'opacity 0.4s ease' }}>
-              {HEADINGS[headingIndex]}
+            <h2>
+              Signal{' '}
+              <span style={{ position: 'relative', display: 'inline-block' }}>
+                <span style={{ visibility: 'hidden', userSelect: 'none' }} aria-hidden="true">supports</span>
+                <span style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  color: 'var(--accent)',
+                  opacity: verbVisible ? 1 : 0,
+                  transition: 'opacity 0.3s ease',
+                  whiteSpace: 'nowrap',
+                }}>
+                  {VERBS[verbIndex]}
+                </span>
+              </span>
+              {' '}better decisions
             </h2>
             <p>
               Congruence happens when what communities need matches what institutions
