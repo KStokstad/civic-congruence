@@ -45,8 +45,6 @@ export default function About({ onNavigate }) {
 
       <div className="container">
         <div className="about-sections">
-          <p className="about-transition-line">This is the gap Civic Congruence is designed to solve.</p>
-
           {sections.map((s) => (
             <div className="about-section" key={s.label}>
               <div className="about-section-label">{s.label}</div>
