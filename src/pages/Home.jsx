@@ -51,7 +51,7 @@ export default function Home({ onNavigate }) {
         </div>
       </section>
 
-      {/* Signal section */}
+      {/* Animated headline */}
       <section className="features">
         <div className="container">
           <div className="features-header">
@@ -74,15 +74,6 @@ export default function Home({ onNavigate }) {
               {' '}better decisions
             </h2>
           </div>
-          <div className="features-grid">
-            {features.map((f) => (
-              <div className="feature-card" key={f.title}>
-                <h3>{f.title}</h3>
-                <p className="feature-descriptor">{f.descriptor}</p>
-                <p className="feature-body">{f.body}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -102,6 +93,22 @@ export default function Home({ onNavigate }) {
                 View the signal
               </button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cards */}
+      <section className="cards-section">
+        <div className="container">
+          <p className="cards-connector">Most community input gets lost before it reaches the people making decisions. This system makes sure it doesn&rsquo;t.</p>
+          <div className="features-grid">
+            {features.map((f) => (
+              <div className="feature-card" key={f.title}>
+                <h3>{f.title}</h3>
+                <p className="feature-descriptor">{f.descriptor}</p>
+                <p className="feature-body">{f.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
