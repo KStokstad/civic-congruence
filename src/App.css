@@ -258,11 +258,11 @@ h1, h2, h3, h4 {
 }
 
 .hero-sub {
-  font-size: 18px;
+  font-size: 17px;
   color: var(--text);
-  max-width: 480px;
-  margin: 20px auto 28px;
-  line-height: 1.8;
+  max-width: 440px;
+  margin: 20px auto 0;
+  line-height: 1.9;
 }
 
 .hero-signal-line {
@@ -281,10 +281,11 @@ h1, h2, h3, h4 {
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 36px;
 }
 
 .features {
-  padding: 44px 0 80px;
+  padding: 28px 0 56px;
 }
 
 .features-header {
@@ -306,7 +307,8 @@ h1, h2, h3, h4 {
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 20px;
+  align-items: start;
 }
 
 @media (max-width: 768px) {
@@ -317,10 +319,10 @@ h1, h2, h3, h4 {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 32px;
+  padding: 24px 28px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
@@ -395,7 +397,7 @@ h1, h2, h3, h4 {
 }
 
 .cta-section {
-  padding: 64px 0;
+  padding: 40px 0 56px;
   text-align: center;
 }
 
@@ -408,7 +410,7 @@ h1, h2, h3, h4 {
   font-size: 18px;
   color: var(--text);
   line-height: 1.7;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .cta-actions {
@@ -426,7 +428,7 @@ h1, h2, h3, h4 {
   background: #F8F7F4;
   border: 1.5px solid #6BAE8A;
   border-radius: var(--radius-lg);
-  padding: 56px 64px;
+  padding: 40px 48px;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 40px;

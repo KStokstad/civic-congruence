@@ -46,10 +46,11 @@ export default function Home({ onNavigate }) {
           <h1 className="hero-headline">Better signal. Not more noise.</h1>
           <p className="hero-subtitle">Turn real community experience into usable policy signal.</p>
           <p className="hero-sub">
-            Noise drowns out important community input before it reaches decision-makers.
-            They react to what&rsquo;s loudest, or worse, don&rsquo;t act at all.
-            Either way, the gap widens. We capture what people are actually experiencing.
-            What&rsquo;s working and what isn&rsquo;t. We help close the gap.
+            Your community input gets drowned out by noise before it reaches decision-makers.<br />
+            They react to what&rsquo;s loudest, or worse, don&rsquo;t act at all.<br />
+            Either way, the gap widens.<br />
+            We capture what communities are actually experiencing. What&rsquo;s working and what isn&rsquo;t.<br />
+            We help close the gap.
           </p>
           <div className="hero-actions">
             <button className="btn btn-primary btn-lg" onClick={() => onNavigate('civic-survey')}>
