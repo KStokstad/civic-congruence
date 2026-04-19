@@ -43,10 +43,10 @@ export default function Home({ onNavigate }) {
           <div className="hero-eyebrow">
             Civic Infrastructure Project
           </div>
-          <h1 className="hero-headline">Better signal. Not more noise.</h1>
-          <p className="hero-subtitle">Turn real community experience into usable policy signal.</p>
+          <h1 className="hero-headline">Better Signal. Not More Noise.</h1>
+          <p className="hero-subtitle">Where community engagement becomes civic policy</p>
           <p className="hero-sub">
-            Your community input gets drowned out by noise before it reaches decision-makers. They react to what&rsquo;s loudest, or worse, don&rsquo;t act at all. Either way, the gap widens. We capture what communities are actually experiencing. What&rsquo;s working and what isn&rsquo;t. We help close the gap.
+            Your community input gets drowned out by noise before it reaches decision-makers. They react to what&rsquo;s loudest, or worse, don&rsquo;t act at all. Either way, the gap widens. We capture what communities are actually experiencing. What&rsquo;s working and what isn&rsquo;t. With your help we can close the gap.
           </p>
         </div>
       </section>
@@ -77,29 +77,10 @@ export default function Home({ onNavigate }) {
         </div>
       </section>
 
-      {/* Call to action */}
-      <section className="cta-section">
-        <div className="container">
-          <div className="cta-block">
-            <p className="cta-text">
-              Congruence happens when what communities need matches what institutions provide.
-              We make that gap visible and we need your help.
-            </p>
-            <div className="cta-actions">
-              <button className="btn btn-primary btn-lg" onClick={() => onNavigate('civic-survey')}>
-                Contribute your experience
-              </button>
-              <button className="btn btn-ghost btn-lg" onClick={() => onNavigate('dashboard')}>
-                View the signal
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Cards */}
       <section className="cards-section">
         <div className="container">
+          <p className="cards-connector">We turn your voice into signal. This is how.</p>
           <div className="features-grid">
             {features.map((f) => (
               <div className="feature-card" key={f.title}>

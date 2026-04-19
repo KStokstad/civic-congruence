@@ -1982,6 +1982,15 @@ h1, h2, h3, h4 {
   margin: 12px 0 18px;
 }
 
+.about-hero-lead {
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-h);
+  max-width: 600px;
+  line-height: 1.55;
+  margin: 0 0 24px;
+}
+
 .about-hero-sub {
   font-size: 18px;
   color: var(--text);

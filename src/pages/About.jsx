@@ -34,6 +34,9 @@ export default function About({ onNavigate }) {
         <div className="container">
           <div className="section-label">ABOUT</div>
           <h1>Why this exists.</h1>
+          <p className="about-hero-lead">
+            Congruence happens when what communities need matches what institutions provide. We turn your voice into signal.
+          </p>
           <p className="about-hero-sub">
             Civic Congruence shows what&rsquo;s actually happening on the ground, in real time. Not a media outlet. Not a think tank. A feedback system.
           </p>
