@@ -285,12 +285,12 @@ h1, h2, h3, h4 {
 }
 
 .features {
-  padding: 16px 0 32px;
+  padding: 16px 0 16px;
 }
 
 .features-header {
   text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 8px;
 }
 
 .features-header h2 {
@@ -397,7 +397,7 @@ h1, h2, h3, h4 {
 }
 
 .cards-section {
-  padding: 40px 0 64px;
+  padding: 24px 0 64px;
 }
 
 .cards-connector {
@@ -409,7 +409,7 @@ h1, h2, h3, h4 {
 }
 
 .cta-section {
-  padding: 16px 0 32px;
+  padding: 16px 0 16px;
   text-align: center;
 }
 
