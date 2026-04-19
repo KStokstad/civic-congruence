@@ -29,7 +29,7 @@ export default function Home({ onNavigate }) {
       body: 'Verified, synthesized, and routed to where it can be used.',
     },
     {
-      title: 'Transparency →',
+      title: 'Transparency',
       descriptor: 'How patterns become visible.',
       body: "Institutions see what's consistently showing up — not what's being reported to them.",
     },
