@@ -40,7 +40,7 @@ const ALL_TOPICS = [
     id: 'safety',
     label: 'Safety',
     scale: {
-      text: 'Based on what you've seen locally, when tradeoffs have to be made — where do you lean?',
+      text: `Based on what you've seen locally, when tradeoffs have to be made — where do you lean?`,
       lowLabel: 'Focus on enforcement and accountability, even if prevention programs get less funding',
       highLabel: 'Invest in prevention and root causes, even if enforcement stays limited',
       fieldName: 'Safety Scale',
@@ -74,7 +74,7 @@ const ALL_TOPICS = [
     id: 'health',
     label: 'Health',
     scale: {
-      text: 'Thinking about your community's health system, when tradeoffs have to be made — where do you lean?',
+      text: `Thinking about your community's health system, when tradeoffs have to be made — where do you lean?`,
       lowLabel: 'Expand access to more people, even if quality varies',
       highLabel: 'Maintain quality of care, even if not everyone can access it',
       fieldName: 'Health Scale',
@@ -108,7 +108,7 @@ const ALL_TOPICS = [
     id: 'education',
     label: 'Education',
     scale: {
-      text: 'Based on what you see in your community's schools, when tradeoffs have to be made — where do you lean?',
+      text: `Based on what you see in your community's schools, when tradeoffs have to be made — where do you lean?`,
       lowLabel: 'Hold to common standards, even if local needs differ',
       highLabel: 'Give schools local flexibility, even if outcomes vary',
       fieldName: 'Education Scale',
