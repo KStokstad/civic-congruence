@@ -222,7 +222,7 @@ export default function CivicSurvey({ onNavigate }) {
       return `${t.label}: ${score}/5. Follow-up: ${followUp}. Notes: ${notes}`
     }).join('\n')
 
-    const prompt = `A community member just completed a civic experience survey. Based on their responses, write a brief, grounded reflection (3-4 sentences) that makes them feel accurately heard. Reference their specific written comments directly if they provided any. Connect their scale scores to their lived experience. Do not be analytical or use policy language. Sound human, specific, and observational — like someone who read what they wrote and understood it.
+    const prompt = `A community member just completed a civic experience survey. Based on their responses, write a brief, grounded reflection that makes them feel accurately heard. Reference their specific written comments directly if they provided any. Connect their scale scores to their lived experience. Do not be analytical or use policy language. Sound human, specific, and observational — like someone who read what they wrote and understood it.
 
 Their responses:
 ${topicLines}
@@ -233,7 +233,9 @@ Rules:
 - Do not use the words 'survey', 'data', 'responses', or 'analysis'
 - Do not start with 'Your responses suggest'
 - Sound like a thoughtful person reading what they wrote, not an AI summarizing data
-- Maximum 4 sentences`
+- Use observational language, not confident interpretation. Use softer alternatives: "One thing that stands out" not "What stands out most", "It suggests" not "You clearly", "It sounds like" not "You are", "This may reflect" not "This reflects"
+- Write in 2-3 short paragraphs separated by a blank line between each. Do not write one continuous block of text
+- Never state something as certain fact about the person — always frame as observation from their input`
 
     fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -308,10 +310,15 @@ Rules:
             )}
 
             {reflection && (
-              <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '20px 24px', marginBottom: 28 }}>
-                <p style={{ fontSize: 17, color: 'var(--text)', lineHeight: 1.7, margin: 0, fontWeight: 400 }}>
-                  {reflection}
+              <div style={{ marginBottom: 28 }}>
+                <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', margin: '0 0 8px' }}>
+                  Based on your responses
                 </p>
+                <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '20px 24px' }}>
+                  <p style={{ fontSize: 17, color: 'var(--text)', lineHeight: 1.7, margin: 0, fontWeight: 400, whiteSpace: 'pre-wrap' }}>
+                    {reflection}
+                  </p>
+                </div>
               </div>
             )}
 
