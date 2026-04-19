@@ -88,7 +88,7 @@ export default function Home({ onNavigate }) {
       {/* Cards */}
       <section className="cards-section">
         <div className="container">
-          <p className="cards-connector">We turn community input into something decision-makers can use. This is how.</p>
+          <p className="cards-connector">We turn community input into usable signal. This is how.</p>
           <div className="features-grid">
             {features.map((f) => (
               <div className="feature-card" key={f.title}>
