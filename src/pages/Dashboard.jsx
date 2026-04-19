@@ -300,7 +300,7 @@ export default function Dashboard({ onNavigate }) {
 
         {mode === 'empty' && (
           <div className="empty-state">
-            <div className="empty-icon">📊</div>
+
             <h3>No verified data yet.</h3>
             <p>
               This is what the system looks like before verified signal is coming in.
