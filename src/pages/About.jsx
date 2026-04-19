@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { submitSubscriber } from '../services/airtable'
+
 export default function About({ onNavigate }) {
   const sections = [
     {
@@ -22,6 +25,21 @@ export default function About({ onNavigate }) {
       body: 'Survey responses are reviewed for validity, not interpretation. Network Pulse inputs are synthesized without attribution. Patterns surface as they appear consistently across inputs.\n\nCivic Congruence does not decide what matters. It makes visible what shows up repeatedly.',
     },
   ]
+
+  const [subEmail, setSubEmail] = useState('')
+  const [subState, setSubState] = useState('idle') // 'idle' | 'loading' | 'done' | 'error'
+
+  async function handleSubscribe(e) {
+    e.preventDefault()
+    if (!subEmail) return
+    setSubState('loading')
+    try {
+      await submitSubscriber({ Email: subEmail })
+      setSubState('done')
+    } catch {
+      setSubState('error')
+    }
+  }
 
   function goToContact() {
     window.scrollTo(0, 0)
@@ -81,6 +99,28 @@ export default function About({ onNavigate }) {
                 <button className="btn btn-primary" onClick={goToContact}>
                   Contact us
                 </button>
+              </div>
+
+              <div className="about-subscribe">
+                <div className="about-subscribe-heading">Weekly Signal Brief</div>
+                <p className="about-subscribe-sub">Weekly summary of civic patterns across the network. No opinion. Just pattern.</p>
+                {subState === 'done' ? (
+                  <p className="about-subscribe-confirm">You&rsquo;re on the list.</p>
+                ) : (
+                  <form className="about-subscribe-form" onSubmit={handleSubscribe}>
+                    <input
+                      className="field-input"
+                      type="email"
+                      placeholder="you@email.com"
+                      value={subEmail}
+                      onChange={(e) => setSubEmail(e.target.value)}
+                      required
+                    />
+                    <button className="btn btn-ghost" type="submit" disabled={subState === 'loading'}>
+                      {subState === 'loading' ? 'Subscribing…' : 'Subscribe'}
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>

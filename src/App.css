@@ -2082,6 +2082,44 @@ h1, h2, h3, h4 {
   margin-top: 24px;
 }
 
+.about-subscribe {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.about-subscribe-heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+  margin-bottom: 6px;
+}
+
+.about-subscribe-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0 0 14px;
+}
+
+.about-subscribe-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.about-subscribe-form .field-input {
+  flex: 1;
+  min-width: 200px;
+  font-size: 14px;
+  padding: 8px 12px;
+}
+
+.about-subscribe-confirm {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
 /* Application form */
 .application-form-wrap {
   animation: fadeUp 0.25s ease;
