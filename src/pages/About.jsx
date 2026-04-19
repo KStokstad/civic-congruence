@@ -3,23 +3,23 @@ export default function About({ onNavigate }) {
     {
       label: 'What This Is',
       headline: 'Civic Congruence builds infrastructure, not content.',
-      body: 'Most decisions that affect people\u2019s lives are made with incomplete, delayed, or filtered information. Community experience is fragmented across surveys, meetings, and informal networks, while institutions operate on partial signals. Civic Congruence closes that gap by connecting community input, local networks, and institutional decision-making into a continuous feedback loop. The result is better signal, so decisions can reflect what people are actually experiencing. Designed for communities, civic organizations, and institutions trying to make decisions with incomplete or outdated information.',
+      body: 'Most decisions that affect people\u2019s lives are made with incomplete or delayed information. Community experience is scattered across surveys, meetings, and informal networks, while institutions rely on partial views.\n\nCivic Congruence connects community input, local networks, and institutional decision-making into a continuous feedback loop, so decisions reflect what people are actually experiencing.\n\nDesigned for communities, civic organizations, and institutions working with incomplete or outdated information.',
     },
     {
       label: 'How It Works',
-      headline: 'Three layers, one system.',
+      headline: 'Three inputs. One clear picture.',
       bullets: [
         'Civic Survey: what people are experiencing in their communities',
-        'Political Alignment diagnostic: how people think about tradeoffs',
-        'Network Pulse: vetted organizations submit weekly signal briefs',
+        'Political Alignment diagnostic: how people prioritize issues, weigh tradeoffs, and align with others',
+        'Network Pulse: vetted organizations submit weekly brief updates',
       ],
-      example: 'A local housing issue might show up in survey responses, flagged by community partners, and surface as a clear signal institutions can act on.',
-      body: 'Together, these layers reveal where agreement is stronger than expected, where real divides exist, and what institutions may be missing.',
+      example: 'A local housing issue might show up in survey responses, be reinforced by community partners, and surface as something institutions can act on.',
+      body: 'Together, these inputs reveal where agreement is stronger than expected, where real divides exist, and what institutions may be missing.',
     },
     {
       label: 'Data and Trust',
-      headline: 'No editorial framing built into the system. No hidden weighting of results.',
-      body: 'Survey responses are reviewed for validity, not interpretation. Network Pulse inputs are synthesized without attribution. The system surfaces patterns as they consistently appear.\n\nCivic Congruence does not decide what matters. It makes visible what shows up repeatedly.',
+      headline: 'No editorial framing. No hidden weighting.',
+      body: 'Survey responses are reviewed for validity, not interpretation. Network Pulse inputs are synthesized without attribution. Patterns surface as they appear consistently across inputs.\n\nCivic Congruence does not decide what matters. It makes visible what shows up repeatedly.',
     },
   ]
 
@@ -35,10 +35,10 @@ export default function About({ onNavigate }) {
           <div className="section-label">ABOUT</div>
           <h1>Why this exists.</h1>
           <p className="about-hero-lead">
-            Congruence happens when what communities need matches what institutions provide. We turn your voice into signal.
+            Congruence happens when what communities need matches what institutions provide. We make that visible.
           </p>
           <p className="about-hero-sub">
-            Civic Congruence shows what&rsquo;s actually happening on the ground, in real time. Not a media outlet. Not a think tank. A feedback system.
+            Civic Congruence shows what&rsquo;s actually happening on the ground, as it happens. Not a media outlet. Not a think tank. A feedback system.
           </p>
           <p className="about-hero-sub">
             Currently being piloted with early community inputs and network partners.
