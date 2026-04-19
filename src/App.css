@@ -223,7 +223,7 @@ h1, h2, h3, h4 {
 .hero {
   background: linear-gradient(160deg, #F0EFF8 0%, #EBF1FB 50%, #F8F7F4 100%);
   border-bottom: 1px solid var(--border);
-  padding: 72px 0 40px;
+  padding: 72px 0 24px;
   text-align: center;
 }
 
@@ -285,7 +285,7 @@ h1, h2, h3, h4 {
 }
 
 .features {
-  padding: 28px 0 56px;
+  padding: 16px 0 48px;
 }
 
 .features-header {
