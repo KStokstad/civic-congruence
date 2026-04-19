@@ -409,7 +409,7 @@ h1, h2, h3, h4 {
 }
 
 .cta-section {
-  padding: 20px 0 56px;
+  padding: 16px 0 32px;
   text-align: center;
 }
 
@@ -422,7 +422,7 @@ h1, h2, h3, h4 {
   font-size: 18px;
   color: var(--text);
   line-height: 1.7;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .cta-actions {
