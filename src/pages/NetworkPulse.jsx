@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { submitPulse, validateAccessCode, submitApplication, submitSubscriber } from '../services/airtable'
+import { submitPulse, validateAccessCode, submitApplication } from '../services/airtable'
 
 function ApplicationForm({ onBack }) {
   const [form, setForm] = useState({
@@ -391,24 +391,10 @@ function PulseForm({ networkName, onReset }) {
 export default function NetworkPulse() {
   const [view, setView] = useState('gate') // 'gate' | 'apply' | 'pulse'
   const [networkName, setNetworkName] = useState(null)
-  const [subEmail, setSubEmail] = useState('')
-  const [subStatus, setSubStatus] = useState('idle')
 
   function handleUnlock(name) {
     setNetworkName(name)
     setView('pulse')
-  }
-
-  async function handleSubscribe(e) {
-    e.preventDefault()
-    if (!subEmail) return
-    setSubStatus('submitting')
-    try {
-      await submitSubscriber({ 'Email': subEmail, 'Subscribed At': new Date().toISOString() })
-      setSubStatus('done')
-    } catch {
-      setSubStatus('idle')
-    }
   }
 
   return (
@@ -428,33 +414,6 @@ export default function NetworkPulse() {
         )}
         {view === 'pulse' && (
           <PulseForm networkName={networkName} onReset={() => setView('gate')} />
-        )}
-
-        {view === 'gate' && (
-          <div className="inline-subscribe">
-            <div style={{ borderTop: '1px solid var(--border)', margin: '32px 0 20px', paddingTop: 20 }}>
-              <p style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', margin: '0 0 12px' }}>Public updates</p>
-            </div>
-            <h4 className="inline-subscribe-heading">Weekly Signal Brief</h4>
-            <p className="inline-subscribe-sub">Weekly summary of civic signals across the network. No opinion. Just pattern.</p>
-            {subStatus === 'done' ? (
-              <p className="inline-subscribe-confirm">You're on the list.</p>
-            ) : (
-              <form className="inline-subscribe-form" onSubmit={handleSubscribe}>
-                <input
-                  type="email"
-                  className="field-input"
-                  placeholder="you@email.com"
-                  value={subEmail}
-                  onChange={(e) => setSubEmail(e.target.value)}
-                  required
-                />
-                <button type="submit" className="btn btn-secondary" disabled={subStatus === 'submitting'}>
-                  {subStatus === 'submitting' ? 'Subscribing\u2026' : 'Subscribe'}
-                </button>
-              </form>
-            )}
-          </div>
         )}
       </div>
     </div>
