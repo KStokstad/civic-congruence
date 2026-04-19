@@ -48,6 +48,14 @@ export default function Home({ onNavigate }) {
           <p className="hero-sub">
             Your community input gets drowned out by noise before it reaches decision-makers. They react to what&rsquo;s loudest, or worse, don&rsquo;t act at all. Either way, the gap widens. We capture what communities are actually experiencing. What&rsquo;s working and what isn&rsquo;t. With your help we can close the gap.
           </p>
+          <div className="hero-actions">
+            <button className="btn btn-primary btn-lg" onClick={() => onNavigate('civic-survey')}>
+              Share your experience
+            </button>
+            <button className="btn btn-ghost btn-lg" onClick={() => onNavigate('dashboard')}>
+              View the signal
+            </button>
+          </div>
         </div>
       </section>
 
