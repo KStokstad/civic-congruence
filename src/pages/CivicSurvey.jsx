@@ -12,7 +12,6 @@ const TOPICS = [
   {
     id: 'economy',
     label: 'Economy',
-    icon: '📊',
     scale: {
       text: 'In your day-to-day experience, when tradeoffs have to be made in your community — where do you lean?',
       lowLabel: 'Keep the economy growing, even if household costs stay high',
@@ -35,7 +34,6 @@ const TOPICS = [
   {
     id: 'safety',
     label: 'Safety',
-    icon: '🛡️',
     scale: {
       text: 'Based on what you\u2019ve seen locally, when tradeoffs have to be made — where do you lean?',
       lowLabel: 'Focus on enforcement and accountability, even if prevention programs get less funding',
@@ -58,7 +56,6 @@ const TOPICS = [
   {
     id: 'health',
     label: 'Health',
-    icon: '🏥',
     scale: {
       text: 'Thinking about your community\u2019s health system, when tradeoffs have to be made — where do you lean?',
       lowLabel: 'Expand access to more people, even if quality varies',
@@ -81,7 +78,6 @@ const TOPICS = [
   {
     id: 'education',
     label: 'Education',
-    icon: '🎓',
     scale: {
       text: 'Based on what you see in your community\u2019s schools, when tradeoffs have to be made — where do you lean?',
       lowLabel: 'Hold to common standards, even if local needs differ',
@@ -104,7 +100,6 @@ const TOPICS = [
   {
     id: 'governance',
     label: 'Governance',
-    icon: '🏛️',
     scale: {
       text: 'Thinking about local decisions that affect your community — how confident are you that they actually reflect what people need?',
       lowLabel: 'Not confident',
@@ -267,7 +262,7 @@ export default function CivicSurvey({ onNavigate }) {
                       <div className="result-row" key={t.id}>
                         <div className="result-row-top">
                           <div className="result-topic-name">
-                            <span>{t.icon}</span>{t.label}
+                            {t.label}
                             {isHighest && <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--accent)', background: 'var(--accent-light)', borderRadius: 4, padding: '1px 6px', marginLeft: 6 }}>Highest</span>}
                             {isLowest && <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--text-muted)', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 4, padding: '1px 6px', marginLeft: 6 }}>Lowest</span>}
                           </div>
@@ -454,7 +449,7 @@ export default function CivicSurvey({ onNavigate }) {
           </div>
 
           <div className="topic-heading">
-            <span style={{ fontSize: 28 }}>{topic.icon}</span>
+
             <div>
               <div className="topic-num">Topic {step + 1} of {total}</div>
               <h3>{topic.label}</h3>
