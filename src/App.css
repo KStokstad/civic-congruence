@@ -285,7 +285,7 @@ h1, h2, h3, h4 {
 }
 
 .features {
-  padding: 16px 0 48px;
+  padding: 16px 0 32px;
 }
 
 .features-header {
@@ -409,7 +409,7 @@ h1, h2, h3, h4 {
 }
 
 .cta-section {
-  padding: 40px 0 56px;
+  padding: 20px 0 56px;
   text-align: center;
 }
 
