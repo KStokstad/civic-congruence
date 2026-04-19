@@ -372,9 +372,6 @@ Rules:
               <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
                 {submitting ? 'Saving\u2026' : 'Save my responses \u2192'}
               </button>
-              <button className="retake-link" onClick={reset}>
-                Retake survey
-              </button>
             </div>
 
           </div>
