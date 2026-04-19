@@ -1,4 +1,22 @@
+import { useState, useEffect } from 'react'
+
+const CYCLE_WORDS = ['informs', 'creates', 'enables']
+
 export default function Home({ onNavigate }) {
+  const [wordIndex, setWordIndex] = useState(0)
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(false)
+      setTimeout(() => {
+        setWordIndex((i) => (i + 1) % CYCLE_WORDS.length)
+        setVisible(true)
+      }, 400)
+    }, 2500)
+    return () => clearInterval(interval)
+  }, [])
+
   const features = [
     {
       title: 'Signal →',
@@ -49,7 +67,20 @@ export default function Home({ onNavigate }) {
         <div className="container">
           <div className="features-header">
             <div className="section-label">What We Do</div>
-            <h2>How the system works</h2>
+            <h2>
+              Signal{' '}
+              <span
+                style={{
+                  color: 'var(--accent)',
+                  opacity: visible ? 1 : 0,
+                  transition: 'opacity 0.4s ease',
+                  display: 'inline-block',
+                }}
+              >
+                {CYCLE_WORDS[wordIndex]}
+              </span>
+              {' '}better decisions
+            </h2>
             <p>
               Congruence happens when what communities need matches what institutions
               provide. We make that gap visible.
