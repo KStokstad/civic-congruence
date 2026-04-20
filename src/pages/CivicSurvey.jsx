@@ -224,6 +224,7 @@ Rules:
 - If no notes were provided, work from scale scores, selected concerns, and what's missing text
 - Do not use the words 'survey', 'data', 'responses', or 'analysis'
 - Do not start with 'Your responses suggest'
+- Do not start with 'Based on your responses' or any similar opener. Do not include any header or title line. Begin directly with the observation.
 - Sound like a thoughtful person reading what they wrote, not an AI summarizing data
 - Use observational language, not confident interpretation. Use softer alternatives: "One thing that stands out" not "What stands out most", "It suggests" not "You clearly", "It sounds like" not "You are", "This may reflect" not "This reflects"
 - Write in 2-3 short paragraphs separated by a blank line between each. Do not write one continuous block of text
@@ -372,9 +373,11 @@ Rules:
             <p className="results-intro">Based on your answers across {topicQueue.length} civic areas.</p>
 
             {reflectionLoading && (
-              <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 28px', fontStyle: 'italic' }}>
-                Reflecting on your responses…
-              </p>
+              <div style={{ marginBottom: 28, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '20px 24px', textAlign: 'center' }}>
+                <p style={{ fontSize: 15, color: 'var(--text-muted)', margin: 0, fontStyle: 'italic' }}>
+                  Reflecting on your responses…
+                </p>
+              </div>
             )}
 
             {reflection && (
