@@ -590,7 +590,7 @@ Rules:
 
             <div className="topic-notes-block">
               <label className="topic-notes-label" htmlFor={`missing-${topic.id}`}>
-                What's missing right now? (optional)
+                Tell us more about what's behind this (optional)
               </label>
               <textarea
                 id={`missing-${topic.id}`}
@@ -598,7 +598,7 @@ Rules:
                 rows={2}
                 value={answers[topic.missingField] || ''}
                 onChange={(e) => answer(topic.missingField, e.target.value)}
-                placeholder="Optional — describe what's not there yet."
+                placeholder="Optional — what feels missing in your experience?"
               />
             </div>
 
