@@ -474,7 +474,7 @@ Rules:
                   Yes, continue
                 </button>
                 <button className="btn btn-ghost" onClick={skipExtension}>
-                  Skip to my results
+                  Skip ahead to final question
                 </button>
               </div>
             </div>
