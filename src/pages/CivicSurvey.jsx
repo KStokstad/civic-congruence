@@ -20,20 +20,13 @@ const ALL_TOPICS = [
     },
     notesField: 'Economy Notes',
     concernField: 'Economy Concern',
-    improvementField: 'Economy Improvement',
+    missingField: 'Economy Missing',
     concerns: [
       'Housing costs',
       'Wages and income stability',
       'Job availability',
       'Cost of everyday goods',
       'Small business and local economy',
-    ],
-    improvements: [
-      'Rent control or affordable housing programs',
-      'Minimum wage increases or living wage policies',
-      'Job training and local hiring initiatives',
-      'Price relief on groceries and essential goods',
-      'Grants and support for small and local businesses',
     ],
   },
   {
@@ -54,20 +47,13 @@ const ALL_TOPICS = [
     },
     notesField: 'Safety Notes',
     concernField: 'Safety Concern',
-    improvementField: 'Safety Improvement',
+    missingField: 'Safety Missing',
     concerns: [
       'Police response and accountability',
       'Neighborhood crime',
       'Drug and addiction issues',
       'Domestic violence and family safety',
       'Traffic and pedestrian safety',
-    ],
-    improvements: [
-      'Expanded mental health crisis response teams',
-      'After-school and youth employment programs',
-      'Street lighting and infrastructure improvements',
-      'Community policing and neighborhood liaison programs',
-      'Restorative justice and conflict resolution programs',
     ],
   },
   {
@@ -88,20 +74,13 @@ const ALL_TOPICS = [
     },
     notesField: 'Health Notes',
     concernField: 'Health Concern',
-    improvementField: 'Health Improvement',
+    missingField: 'Health Missing',
     concerns: [
       'Cost of care',
       'Access to providers',
       'Mental health services',
       'Insurance coverage',
       'Emergency and urgent care',
-    ],
-    improvements: [
-      'Sliding scale or subsidized care options',
-      'More clinics and providers in underserved areas',
-      'Dedicated mental health facilities and staffing',
-      'Expanded Medicaid or public insurance options',
-      'Faster emergency response and urgent care access',
     ],
   },
   {
@@ -122,20 +101,13 @@ const ALL_TOPICS = [
     },
     notesField: 'Education Notes',
     concernField: 'Education Concern',
-    improvementField: 'Education Improvement',
+    missingField: 'Education Missing',
     concerns: [
       'School funding',
       'Teacher quality and retention',
       'Curriculum and standards',
       'Special needs and support services',
       'School safety',
-    ],
-    improvements: [
-      'Increased per-pupil funding and resource equity',
-      'Competitive teacher salaries and reduced turnover',
-      'Expanded counseling and learning support staff',
-      'Better security measures and mental health resources',
-      'Apprenticeship and vocational training pathways',
     ],
   },
   {
@@ -156,20 +128,13 @@ const ALL_TOPICS = [
     },
     notesField: 'Governance Notes',
     concernField: 'Governance Concern',
-    improvementField: 'Governance Improvement',
+    missingField: 'Governance Missing',
     concerns: [
       'Greater transparency',
       'More public input on decisions',
       'Faster response to community concerns',
       'Independent oversight',
       'Better communication from officials',
-    ],
-    improvements: [
-      'Public reporting on how decisions are made',
-      'Regular community input sessions before major decisions',
-      'A dedicated community response team',
-      'An independent review board for major decisions',
-      'Plain-language updates from local officials',
     ],
   },
 ]
@@ -244,9 +209,9 @@ export default function CivicSurvey({ onNavigate }) {
     const topicLines = topicQueue.map((t) => {
       const score = answers[t.scale.fieldName] ?? 'not answered'
       const concern = answers[t.concernField] ?? 'none provided'
-      const improvement = answers[t.improvementField] ?? 'none provided'
+      const missing = answers[t.missingField]?.trim() || 'none provided'
       const notes = answers[t.notesField]?.trim() || 'none provided'
-      return `${t.label}: ${score}/5. Main concern: ${concern}. Wanted improvement: ${improvement}. Notes: ${notes}`
+      return `${t.label}: ${score}/5. Main concern: ${concern}. What's missing: ${missing}. Notes: ${notes}`
     }).join('\n')
 
     const prompt = `A community member just completed a civic experience survey. Based on their responses, write a brief, grounded reflection that makes them feel accurately heard. Reference their specific written comments directly if they provided any. Connect their scale scores to their lived experience. Do not be analytical or use policy language. Sound human, specific, and observational — like someone who read what they wrote and understood it.
@@ -256,7 +221,7 @@ ${topicLines}
 
 Rules:
 - If they provided written notes, reference the specific content directly
-- If no notes were provided, work from scale scores and selected concerns/improvements
+- If no notes were provided, work from scale scores, selected concerns, and what's missing text
 - Do not use the words 'survey', 'data', 'responses', or 'analysis'
 - Do not start with 'Your responses suggest'
 - Sound like a thoughtful person reading what they wrote, not an AI summarizing data
@@ -583,9 +548,9 @@ Rules:
   const totalTopics = topicQueue.length
   const progressPct = ((topicIdx * 2 + topicPhase) / (totalTopics * 2)) * 100
 
-  // ── Phase 1: Concern + Improvement ───────────────
+  // ── Phase 1: Concern + Missing ────────────────────
   if (topicPhase === 1) {
-    const canAdvance = answers[topic.concernField] !== undefined && answers[topic.improvementField] !== undefined
+    const canAdvance = answers[topic.concernField] !== undefined
     const isLastTopic = topicIdx === topicQueue.length - 1
 
     return (
@@ -620,19 +585,18 @@ Rules:
               </div>
             </div>
 
-            <div className="question-block">
-              <div className="question-text">What would help most?</div>
-              <div className="choice-options">
-                {topic.improvements.map((opt) => (
-                  <button
-                    key={opt}
-                    className={`choice-btn ${answers[topic.improvementField] === opt ? 'selected' : ''}`}
-                    onClick={() => answer(topic.improvementField, opt)}
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
+            <div className="topic-notes-block">
+              <label className="topic-notes-label" htmlFor={`missing-${topic.id}`}>
+                What's missing right now? (optional)
+              </label>
+              <textarea
+                id={`missing-${topic.id}`}
+                className="topic-notes-textarea"
+                rows={2}
+                value={answers[topic.missingField] || ''}
+                onChange={(e) => answer(topic.missingField, e.target.value)}
+                placeholder="Optional — describe what's not there yet."
+              />
             </div>
 
             <div className="survey-nav">
