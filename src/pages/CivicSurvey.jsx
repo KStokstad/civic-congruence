@@ -228,7 +228,8 @@ Rules:
 - Sound like a thoughtful person reading what they wrote, not an AI summarizing data
 - Use observational language, not confident interpretation. Use softer alternatives: "One thing that stands out" not "What stands out most", "It suggests" not "You clearly", "It sounds like" not "You are", "This may reflect" not "This reflects"
 - Write in 2-3 short paragraphs separated by a blank line between each. Do not write one continuous block of text
-- Never state something as certain fact about the person — always frame as observation from their input`
+- Never state something as certain fact about the person — always frame as observation from their input
+- Use reflective language, not interpretive language. Instead of 'This suggests...' or 'That says something...' use 'It sounds like...' or 'You're pointing to...' or 'What you shared highlights...' The tone should feel like someone listening carefully, not someone analyzing data.`
 
     fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -438,8 +439,11 @@ Rules:
                 Thank you for sharing your experience. Submit your responses to add them to the community dataset — your input helps surface what communities are actually experiencing.
               </p>
               <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
-                {submitting ? 'Saving…' : 'Save my responses →'}
+                {submitting ? 'Saving…' : 'Add my responses to the dataset'}
               </button>
+              <p style={{ fontSize: 12, color: 'var(--text-secondary, var(--text))', textAlign: 'center', margin: '8px 0 0', opacity: 0.7 }}>
+                Your responses will be included anonymously in the community dataset.
+              </p>
             </div>
           </div>
         </div>
@@ -470,7 +474,7 @@ Rules:
                   Yes, continue
                 </button>
                 <button className="btn btn-ghost" onClick={skipExtension}>
-                  Submit my responses
+                  Skip to my results
                 </button>
               </div>
             </div>
