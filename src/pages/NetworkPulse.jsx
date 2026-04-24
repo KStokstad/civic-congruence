@@ -226,7 +226,7 @@ function AccessGate({ onUnlock, onApply }) {
         Weekly signal from organizations working directly with communities. This
         is where early patterns show up before they become visible publicly.
       </p>
-      <p style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: -8, marginBottom: 20 }}>
+      <p style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: -8, marginBottom: 20 }}>
         Access is limited to preserve signal quality.
       </p>
       <form onSubmit={handleSubmit} className="gate-form">
@@ -403,7 +403,6 @@ export default function NetworkPulse() {
         <div className="survey-header">
           <div className="section-label">Network Pulse</div>
           <h2>Weekly Pulse Check-In</h2>
-          <p>Weekly check-in for Civic Congruence network participants.</p>
         </div>
 
         {view === 'gate' && (
