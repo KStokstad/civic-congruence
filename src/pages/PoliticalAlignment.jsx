@@ -4,7 +4,7 @@ import { renderMarkdown } from '../utils/renderMarkdown'
 
 const OPENING_INSTRUCTION_LINES = [
   'Most options will feel partially true. Choose the one you would act on.',
-  'This is not a personality quiz. It measures how you make tradeoffs under pressure.',
+  'This is not a personality quiz. It shows how you make tradeoffs under pressure.',
   'Choose the answer you would accept in reality, not the one that sounds best.',
 ]
 
@@ -446,9 +446,8 @@ export default function PoliticalAlignment({ onNavigate }) {
           <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 14px' }}>
             10 questions &middot; ~4 minutes &middot; no right answers
           </p>
-          <div style={{ textAlign: 'center', margin: '28px 0 28px', lineHeight: 1.65 }}>
-            <p style={{ fontSize: 17, color: 'var(--text)', margin: '0 0 10px' }}>Most people don&rsquo;t struggle with their values.</p>
-            <p style={{ fontSize: 17, color: 'var(--text)', margin: '0 0 10px' }}>They struggle when two of them collide.</p>
+          <div style={{ textAlign: 'center', margin: '28px 0 28px', lineHeight: 1.5 }}>
+            <p style={{ fontSize: 17, color: 'var(--text)', margin: '0 0 6px' }}>Most people don&rsquo;t struggle with their values. They struggle when two of them collide.</p>
             <p style={{ fontSize: 17, color: 'var(--text)', margin: 0 }}>This shows you how you decide when they do.</p>
           </div>
           <div className="diagnostic-instruction">
@@ -465,7 +464,7 @@ export default function PoliticalAlignment({ onNavigate }) {
               Start the 4-minute diagnostic
             </button>
             <p style={{ fontSize: 13, color: 'var(--text)', marginTop: 12, marginBottom: 0 }}>
-              You&rsquo;ll see how your answers fit together — and where the tensions are.
+              You&rsquo;ll see how your answers fit together and where your tensions are.
             </p>
             <p style={{ fontSize: 12, color: 'var(--text-muted)', opacity: 0.7, marginTop: 8, marginBottom: 0 }}>
               Private. Your responses aren&rsquo;t shared.
