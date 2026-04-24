@@ -436,14 +436,11 @@ Rules:
 
             <div className="results-actions">
               <p style={{ fontSize: 14, color: 'var(--text-secondary, var(--text))', textAlign: 'center', margin: '0 0 12px', lineHeight: 1.6 }}>
-                Thank you for sharing your experience. Submit your responses to add them to the community dataset — your input helps surface what communities are actually experiencing.
+                Thank you for sharing your experience. Submit your responses to add them to the community dataset. Your input helps surface what communities are actually experiencing. Your responses will remain anonymous.
               </p>
               <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
                 {submitting ? 'Saving…' : 'Add my responses to the dataset'}
               </button>
-              <p style={{ fontSize: 16, color: 'var(--text)', textAlign: 'center', margin: '8px 0 0' }}>
-                Your responses will be included anonymously in the community dataset.
-              </p>
             </div>
           </div>
         </div>
