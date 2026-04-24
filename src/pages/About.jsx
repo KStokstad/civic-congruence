@@ -6,7 +6,7 @@ export default function About({ onNavigate }) {
     {
       label: 'What This Is',
       headline: 'A signal system.',
-      body: 'Civic Congruence is a signal system. It uses structured individual input \u2014 how people prioritize, where they see tension, what they experience day to day \u2014 to surface patterns that are otherwise hard to see.',
+      body: 'Civic Congruence is a signal system. It uses structured individual input, how people prioritize, where they see tension, what they experience day to day, to surface patterns that are otherwise hard to see.',
     },
     {
       label: 'Why It Exists',
@@ -21,7 +21,7 @@ export default function About({ onNavigate }) {
     {
       label: 'Where It Goes',
       headline: 'Signal that can be used.',
-      body: 'That signal becomes visible \u2014 to communities, to civic organizations, and to anyone trying to understand what\u2019s actually happening on the ground.',
+      body: 'That signal becomes visible, to communities, to civic organizations, and to anyone trying to understand what\u2019s actually happening on the ground.',
     },
   ]
 
@@ -52,10 +52,10 @@ export default function About({ onNavigate }) {
           <div className="section-label">ABOUT</div>
           <h1>Why this exists.</h1>
           <p className="about-hero-lead">
-            Congruence happens when what communities need matches what institutions provide. We make that visible.
+            Congruence happens when what communities need matches what institutions provide.
           </p>
           <p className="about-hero-sub">
-            Civic Congruence shows what&rsquo;s actually happening on the ground, as it happens. Not a media outlet. Not a think tank. A feedback system. Currently being piloted with early community inputs and network partners.
+            Civic Congruence shows what&rsquo;s actually happening on the ground, as it happens. We help close the gap. Not a media outlet. Not a think tank. A feedback system. Currently being piloted with early community responses and network partners.
           </p>
         </div>
       </div>
