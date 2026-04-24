@@ -442,9 +442,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="section-label">Political Alignment</div>
             <h2>Values Diagnostic</h2>
             <div className="diagnostic-instruction">
-              {OPENING_INSTRUCTION_LINES.map((line, i) => (
-                <p key={i}>{line}</p>
-              ))}
+              <p>{OPENING_INSTRUCTION_LINES.join(' ')}</p>
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: 16 }}>
