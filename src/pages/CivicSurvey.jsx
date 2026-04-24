@@ -441,7 +441,7 @@ Rules:
               <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
                 {submitting ? 'Saving…' : 'Add my responses to the dataset'}
               </button>
-              <p style={{ fontSize: 12, color: 'var(--text-secondary, var(--text))', textAlign: 'center', margin: '8px 0 0', opacity: 0.7 }}>
+              <p style={{ fontSize: 16, color: 'var(--text)', textAlign: 'center', margin: '8px 0 0' }}>
                 Your responses will be included anonymously in the community dataset.
               </p>
             </div>

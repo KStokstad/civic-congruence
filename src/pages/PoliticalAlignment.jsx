@@ -438,9 +438,9 @@ export default function PoliticalAlignment({ onNavigate }) {
     return (
       <div className="survey-page">
         <div className="container-sm">
-          <div className="survey-header" style={{ marginBottom: 8 }}>
+          <div className="survey-header">
             <div className="section-label">Political Alignment</div>
-            <h2 style={{ marginBottom: 4 }}>Values Diagnostic</h2>
+            <h2>Values Diagnostic</h2>
             <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 0 }}>See how you make tough tradeoffs in real situations.</p>
             <div className="diagnostic-instruction">
               {OPENING_INSTRUCTION_LINES.map((line, i) => (
@@ -448,7 +448,7 @@ export default function PoliticalAlignment({ onNavigate }) {
               ))}
             </div>
           </div>
-          <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 14px' }}>
+          <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 14px' }}>
             10 questions &middot; ~4 minutes &middot; no right answers
           </p>
           <div style={{ textAlign: 'center', margin: '28px 0 28px', lineHeight: 1.5 }}>
