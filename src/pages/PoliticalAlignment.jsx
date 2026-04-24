@@ -603,9 +603,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
             <div className="alignment-progress-label">{step + 1} of {total}</div>
           </div>
-          <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', margin: '4px 0 0' }}>
-            It&rsquo;s normal for multiple answers to feel right. Choose the one you&rsquo;d act on.
-          </p>
+
 
           <div className="alignment-question">
             <div className="alignment-topic-label">{question.topic}</div>
