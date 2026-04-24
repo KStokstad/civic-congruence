@@ -1997,6 +1997,7 @@ h1, h2, h3, h4 {
   color: var(--text);
   max-width: 600px;
   line-height: 1.7;
+  margin: 0;
 }
 
 .about-transition-line {
@@ -2010,7 +2011,7 @@ h1, h2, h3, h4 {
 .about-sections {
   max-width: 740px;
   margin: 0 auto;
-  padding-top: 72px;
+  padding-top: 64px;
   display: flex;
   flex-direction: column;
   gap: 0;
