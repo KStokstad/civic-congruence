@@ -31,7 +31,7 @@ export default function Home({ onNavigate }) {
     {
       title: 'Transparency',
       descriptor: 'How patterns become visible.',
-      body: "Institutions see what's consistently showing up — not what's being reported to them.",
+      body: "Institutions see what's consistently showing up, not what's being reported to them.",
     },
   ]
 
