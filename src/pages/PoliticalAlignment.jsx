@@ -242,7 +242,7 @@ Language rules:
 - If referencing alignment degree, use: "a low alignment fit with existing categories" — never "you don't belong"
 - The reader should think: "the system isn't built to reflect this pattern" — not "I don't belong anywhere"
 
-Do not include horizontal rule dividers (---) or standalone hash symbols (#) between sections. Use the section labels as the only visual separators.
+Do not include any # symbols, --- dividers, or markdown section markers between sections. Do not use ## or # for section headers. Sections should flow as continuous prose separated only by paragraph breaks. No horizontal rules, no hash symbols, no markdown dividers of any kind.
 
 Use Title Case for all section headers, not ALL CAPS. Headers should feel like steps in a diagnostic system, not essay headings. Each header should answer the question: what is this section doing for the reader?
 
