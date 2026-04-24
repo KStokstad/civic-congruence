@@ -14,33 +14,106 @@ const SAMPLE = {
   ],
   topIssues: {
     Economy: [
-      { name: 'Housing costs',           pct: 42 },
-      { name: 'Wage stagnation',         pct: 26 },
-      { name: 'Job availability',        pct: 19 },
-      { name: 'Infrastructure invest.',  pct: 8  },
-      { name: 'Small business support',  pct: 5  },
+      { name: 'Housing costs',                   pct: 42 },
+      { name: 'Wages and income stability',       pct: 26 },
+      { name: 'Job availability',                 pct: 19 },
+      { name: 'Cost of everyday goods',           pct: 8  },
+      { name: 'Small business and local economy', pct: 5  },
     ],
     Safety: [
-      { name: 'Mental health resources',       pct: 35 },
-      { name: 'Youth programs',                pct: 28 },
-      { name: 'Better lighting & infra.',      pct: 22 },
-      { name: 'More community policing',       pct: 10 },
-      { name: 'Neighborhood watch',            pct: 5  },
+      { name: 'Police response and accountability', pct: 35 },
+      { name: 'Neighborhood crime',                 pct: 28 },
+      { name: 'Drug and addiction issues',          pct: 22 },
+      { name: 'Domestic violence and family safety',pct: 10 },
+      { name: 'Traffic and pedestrian safety',      pct: 5  },
+    ],
+    Health: [
+      { name: 'Cost of care',              pct: 38 },
+      { name: 'Access to providers',       pct: 27 },
+      { name: 'Mental health services',    pct: 20 },
+      { name: 'Insurance coverage',        pct: 10 },
+      { name: 'Emergency and urgent care', pct: 5  },
+    ],
+    Education: [
+      { name: 'School funding',                    pct: 35 },
+      { name: 'Teacher quality and retention',     pct: 28 },
+      { name: 'Curriculum and standards',          pct: 18 },
+      { name: 'Special needs and support services',pct: 12 },
+      { name: 'School safety',                     pct: 7  },
     ],
     Governance: [
-      { name: 'Greater transparency',          pct: 44 },
-      { name: 'More public input',             pct: 29 },
-      { name: 'Faster response to issues',     pct: 16 },
-      { name: 'Independent oversight',         pct: 7  },
-      { name: 'Better communication',          pct: 4  },
+      { name: 'Greater transparency',                  pct: 44 },
+      { name: 'More public input on decisions',        pct: 29 },
+      { name: 'Faster response to community concerns', pct: 16 },
+      { name: 'Independent oversight',                 pct: 7  },
+      { name: 'Better communication from officials',   pct: 4  },
     ],
   },
+}
+
+const TOPICS = ['Economy', 'Safety', 'Health', 'Education', 'Governance']
+
+const CONCERN_FIELD_MAP = {
+  Economy:    'Economy Concern',
+  Safety:     'Safety Concern',
+  Health:     'Health Concern',
+  Education:  'Education Concern',
+  Governance: 'Governance Concern',
+}
+
+function aggregateConcerns(records, field) {
+  const counts = {}
+  let total = 0
+  records.forEach((r) => {
+    const val = r.fields[field]
+    if (!val) return
+    const items = Array.isArray(val) ? val : [val]
+    items.forEach((item) => {
+      counts[item] = (counts[item] || 0) + 1
+      total++
+    })
+  })
+  if (total === 0) return []
+  return Object.entries(counts)
+    .map(([name, count]) => ({ name, pct: Math.round((count / total) * 100) }))
+    .sort((a, b) => b.pct - a.pct)
 }
 
 function getBarClass(score) {
   if (score < 2.5) return 'bar-low'
   if (score < 3.5) return 'bar-mid'
   return 'bar-high'
+}
+
+function ConcernCard({ topic, items, verified = false }) {
+  return (
+    <div className="chart-card">
+      <h4>
+        {topic} — Top Concerns
+        {verified && <span className="verified-badge">✓ Verified</span>}
+      </h4>
+      <div className="chart-subtitle">Most selected concern by respondents</div>
+      {items.length === 0 ? (
+        <p style={{ fontSize: 14, color: 'var(--text-muted)', margin: '12px 0 0' }}>
+          No concern data yet for this topic.
+        </p>
+      ) : (
+        <div className="breakdown-list">
+          {items.map(({ name, pct }) => (
+            <div className="breakdown-item" key={name}>
+              <div className="breakdown-header">
+                <span className="breakdown-name">{name}</span>
+                <span className="breakdown-pct">{pct}%</span>
+              </div>
+              <div className="breakdown-track">
+                <div className="breakdown-fill" style={{ width: `${pct}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 function SampleDashboard({ onReset }) {
@@ -82,7 +155,6 @@ function SampleDashboard({ onReset }) {
       </div>
 
       <div className="dashboard-grid">
-        {/* Avg scores by topic */}
         <div className="chart-card">
           <h4>Avg. Satisfaction by Topic</h4>
           <div className="chart-subtitle">Scale 1–5 · {SAMPLE.verifiedResponses} verified responses</div>
@@ -102,62 +174,9 @@ function SampleDashboard({ onReset }) {
           </div>
         </div>
 
-        {/* Top economy issues */}
-        <div className="chart-card">
-          <h4>Economy — Top Issues</h4>
-          <div className="chart-subtitle">Most selected concern by respondents</div>
-          <div className="breakdown-list">
-            {SAMPLE.topIssues.Economy.map(({ name, pct }) => (
-              <div className="breakdown-item" key={name}>
-                <div className="breakdown-header">
-                  <span className="breakdown-name">{name}</span>
-                  <span className="breakdown-pct">{pct}%</span>
-                </div>
-                <div className="breakdown-track">
-                  <div className="breakdown-fill" style={{ width: `${pct}%` }} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Top safety improvements */}
-        <div className="chart-card">
-          <h4>Safety — Top Improvements Wanted</h4>
-          <div className="chart-subtitle">Most selected response by respondents</div>
-          <div className="breakdown-list">
-            {SAMPLE.topIssues.Safety.map(({ name, pct }) => (
-              <div className="breakdown-item" key={name}>
-                <div className="breakdown-header">
-                  <span className="breakdown-name">{name}</span>
-                  <span className="breakdown-pct">{pct}%</span>
-                </div>
-                <div className="breakdown-track">
-                  <div className="breakdown-fill" style={{ width: `${pct}%` }} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Top governance improvements */}
-        <div className="chart-card">
-          <h4>Governance — What Would Build Trust</h4>
-          <div className="chart-subtitle">Most selected response by respondents</div>
-          <div className="breakdown-list">
-            {SAMPLE.topIssues.Governance.map(({ name, pct }) => (
-              <div className="breakdown-item" key={name}>
-                <div className="breakdown-header">
-                  <span className="breakdown-name">{name}</span>
-                  <span className="breakdown-pct">{pct}%</span>
-                </div>
-                <div className="breakdown-track">
-                  <div className="breakdown-fill" style={{ width: `${pct}%` }} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {TOPICS.map((topic) => (
+          <ConcernCard key={topic} topic={topic} items={SAMPLE.topIssues[topic]} />
+        ))}
       </div>
     </div>
   )
@@ -166,13 +185,7 @@ function SampleDashboard({ onReset }) {
 function LiveDashboard({ records, onReset }) {
   const count = records.length
 
-  const topicsAvg = [
-    'Economy',
-    'Safety',
-    'Health',
-    'Education',
-    'Governance',
-  ].map((label) => {
+  const topicsAvg = TOPICS.map((label) => {
     const fieldMap = {
       Economy:    'Economy Scale',
       Safety:     'Safety Scale',
@@ -185,6 +198,11 @@ function LiveDashboard({ records, onReset }) {
       .filter((v) => typeof v === 'number')
     const avg = vals.length ? (vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1) : 'N/A'
     return { label, score: parseFloat(avg) || 0 }
+  })
+
+  const topConcerns = {}
+  TOPICS.forEach((topic) => {
+    topConcerns[topic] = aggregateConcerns(records, CONCERN_FIELD_MAP[topic])
   })
 
   const sortedByScore = [...topicsAvg].sort((a, b) => a.score - b.score)
@@ -253,6 +271,12 @@ function LiveDashboard({ records, onReset }) {
           </p>
         )}
       </div>
+
+      <div className="dashboard-grid">
+        {TOPICS.map((topic) => (
+          <ConcernCard key={topic} topic={topic} items={topConcerns[topic]} verified />
+        ))}
+      </div>
     </div>
   )
 }
@@ -287,7 +311,6 @@ export default function Dashboard({ onNavigate }) {
 
         {mode === 'empty' && (
           <div className="empty-state">
-
             <h3>No verified data yet.</h3>
             <p>
               This is what the system looks like before verified signal is coming in.
