@@ -8,7 +8,7 @@ h1, h2, h3, h4 {
 .hero-signal-line,
 .features-header p,
 .pilot-card p,
-.survey-header p,
+.survey-header > p,
 .dashboard-header p,
 .about-hero-sub,
 .about-transition-line,
@@ -520,7 +520,7 @@ h1, h2, h3, h4 {
 
 .survey-header h2 { margin-bottom: 10px; }
 
-.survey-header p {
+.survey-header > p {
   font-size: 16px;
   max-width: 520px;
   margin: 0 auto;
