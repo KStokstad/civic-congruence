@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { submitSubscriber } from '../services/airtable'
 
-export default function About() {
+export default function About({ onNavigate }) {
   const sections = [
     {
       label: 'What This Is',
@@ -38,6 +38,11 @@ export default function About() {
     } catch {
       setSubState('error')
     }
+  }
+
+  function goToContact() {
+    window.scrollTo(0, 0)
+    onNavigate('contact')
   }
 
   return (
@@ -80,9 +85,17 @@ export default function About() {
             </div>
           </div>
 
-          <div className="about-section about-section-contact">
-            <div className="about-section-label">&nbsp;</div>
+          <div className="about-section">
+            <div className="about-section-label">Get Involved</div>
             <div className="about-section-body">
+              <h2>Get involved.</h2>
+              <p>If you represent a community organization, join the network. For media, policy, or civic infrastructure inquiries, reach out directly.</p>
+              <div className="about-contact-actions">
+                <button className="btn btn-primary" onClick={goToContact}>
+                  Contact us
+                </button>
+              </div>
+
               <div className="about-subscribe">
                 <div className="about-subscribe-heading">Weekly Signal Brief</div>
                 <p className="about-subscribe-sub">Weekly summary of civic patterns across the network. No opinion. Just pattern.</p>
