@@ -3,9 +3,7 @@ import { submitAlignment, updateAlignment, checkRepeatEmail } from '../services/
 import { renderMarkdown } from '../utils/renderMarkdown'
 
 const OPENING_INSTRUCTION_LINES = [
-  'Most options will feel partially true. Choose the one you would act on.',
-  'This is not a personality quiz. It shows how you make tradeoffs under pressure.',
-  'Choose the answer you would accept in reality, not the one that sounds best.',
+  'The Values Diagnostic shows you how you decide when two of your values collide. It forces real choices because every question has a downside, so there’s no right answer, only the one you’d actually act on. The result is a map of your decision-making pattern under pressure, not a personality quiz.',
 ]
 
 // INSTRUMENT DESIGN RULES — do not modify question text without review
