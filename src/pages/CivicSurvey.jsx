@@ -643,7 +643,7 @@ Rules:
         )}
 
         {topicIdx === 0 && (
-          <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 16 }}>
+          <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 16 }}>
             Most answers will feel imperfect. Choose what&rsquo;s closest to your experience.
           </p>
         )}

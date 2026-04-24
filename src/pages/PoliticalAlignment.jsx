@@ -453,7 +453,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             >
               Start the 4-minute diagnostic
             </button>
-            <p style={{ fontSize: 16, color: 'var(--text)', marginTop: 12, marginBottom: 0 }}>
+            <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginTop: 12, marginBottom: 0 }}>
               Private. Your responses aren&rsquo;t shared.
             </p>
           </div>
