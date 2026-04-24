@@ -446,6 +446,11 @@ export default function PoliticalAlignment({ onNavigate }) {
           <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 14px' }}>
             10 questions &middot; ~4 minutes &middot; no right answers
           </p>
+          <div style={{ textAlign: 'center', margin: '28px 0 28px', lineHeight: 1.65 }}>
+            <p style={{ fontSize: 17, color: 'var(--text)', margin: '0 0 10px' }}>Most people don&rsquo;t struggle with their values.</p>
+            <p style={{ fontSize: 17, color: 'var(--text)', margin: '0 0 10px' }}>They struggle when two of them collide.</p>
+            <p style={{ fontSize: 17, color: 'var(--text)', margin: 0 }}>This shows you how you decide when they do.</p>
+          </div>
           <div className="diagnostic-instruction">
             {OPENING_INSTRUCTION_LINES.map((line, i) => (
               <p key={i}>{line}</p>
