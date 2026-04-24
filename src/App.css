@@ -1995,7 +1995,7 @@ h1, h2, h3, h4 {
 .about-hero-sub {
   font-size: 18px;
   color: var(--text);
-  max-width: 520px;
+  max-width: 600px;
   line-height: 1.7;
 }
 
