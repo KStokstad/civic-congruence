@@ -55,10 +55,7 @@ export default function About({ onNavigate }) {
             Congruence happens when what communities need matches what institutions provide. We make that visible.
           </p>
           <p className="about-hero-sub">
-            Civic Congruence shows what&rsquo;s actually happening on the ground, as it happens. Not a media outlet. Not a think tank. A feedback system.
-          </p>
-          <p className="about-hero-sub">
-            Currently being piloted with early&nbsp;community inputs and network partners.
+            Civic Congruence shows what&rsquo;s actually happening on the ground, as it happens. Not a media outlet. Not a think tank. A feedback system. Currently being piloted with early community inputs and network partners.
           </p>
         </div>
       </div>
