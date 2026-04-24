@@ -447,7 +447,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             10 questions &middot; ~4 minutes &middot; no right answers
           </p>
           <div style={{ textAlign: 'center', margin: '28px 0 28px', lineHeight: 1.5 }}>
-            <p style={{ fontSize: 17, color: 'var(--text)', margin: '0 0 6px' }}>Most people don&rsquo;t struggle with their values. They struggle when two of them collide.</p>
+            <p style={{ fontSize: 17, color: 'var(--text)', margin: '0 0 16px' }}>Most people don&rsquo;t struggle with their values. They struggle when two of them collide.</p>
             <p style={{ fontSize: 17, color: 'var(--text)', margin: 0 }}>This shows you how you decide when they do.</p>
           </div>
           <div className="diagnostic-instruction">
@@ -463,10 +463,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             >
               Start the 4-minute diagnostic
             </button>
-            <p style={{ fontSize: 13, color: 'var(--text)', marginTop: 12, marginBottom: 0 }}>
-              You&rsquo;ll see how your answers fit together and where your tensions are.
-            </p>
-            <p style={{ fontSize: 12, color: 'var(--text-muted)', opacity: 0.7, marginTop: 8, marginBottom: 0 }}>
+            <p style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 12, marginBottom: 0 }}>
               Private. Your responses aren&rsquo;t shared.
             </p>
           </div>
