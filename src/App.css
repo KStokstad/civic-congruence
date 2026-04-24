@@ -1494,7 +1494,7 @@ h1, h2, h3, h4 {
 
 /* Opening instruction */
 .diagnostic-instruction {
-  background: #f8f8f8;
+  background: #f0f0ed;
   border: 1px solid var(--accent-mid);
   border-radius: var(--radius);
   padding: 14px 18px;

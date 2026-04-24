@@ -442,6 +442,11 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="section-label">Political Alignment</div>
             <h2 style={{ marginBottom: 4 }}>Values Diagnostic</h2>
             <p style={{ color: 'var(--text-muted)', fontSize: 15, marginBottom: 0 }}>See how you make tough tradeoffs in real situations.</p>
+            <div className="diagnostic-instruction">
+              {OPENING_INSTRUCTION_LINES.map((line, i) => (
+                <p key={i}>{line}</p>
+              ))}
+            </div>
           </div>
           <p style={{ fontSize: 12, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 14px' }}>
             10 questions &middot; ~4 minutes &middot; no right answers
@@ -449,11 +454,6 @@ export default function PoliticalAlignment({ onNavigate }) {
           <div style={{ textAlign: 'center', margin: '28px 0 28px', lineHeight: 1.5 }}>
             <p style={{ fontSize: 17, color: 'var(--text)', margin: '0 0 16px' }}>Most people don&rsquo;t struggle with their values. They struggle when two of them collide.</p>
             <p style={{ fontSize: 17, color: 'var(--text)', margin: 0 }}>This shows you how you decide when they do.</p>
-          </div>
-          <div className="diagnostic-instruction">
-            {OPENING_INSTRUCTION_LINES.map((line, i) => (
-              <p key={i}>{line}</p>
-            ))}
           </div>
           <div style={{ textAlign: 'center', marginTop: 16 }}>
             <button
@@ -463,7 +463,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             >
               Start the 4-minute diagnostic
             </button>
-            <p style={{ fontSize: 14, color: 'var(--text-muted)', marginTop: 12, marginBottom: 0 }}>
+            <p style={{ fontSize: 16, color: 'var(--text)', marginTop: 12, marginBottom: 0 }}>
               Private. Your responses aren&rsquo;t shared.
             </p>
           </div>
