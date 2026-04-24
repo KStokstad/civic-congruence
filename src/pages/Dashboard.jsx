@@ -301,7 +301,7 @@ export default function Dashboard({ onNavigate }) {
               </button>
             </div>
             <div style={{ marginTop: 28, paddingTop: 20, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-              <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 12 }}>
+              <p style={{ fontSize: 16, fontWeight: 500, color: 'var(--text-h)', marginBottom: 12 }}>
                 Be one of the first to contribute signal.
               </p>
               <button
