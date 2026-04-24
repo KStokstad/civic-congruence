@@ -283,16 +283,6 @@ export default function Dashboard({ onNavigate }) {
             <div className="section-label">Public Data</div>
             <h2>Civic Alignment Dashboard</h2>
           </div>
-          {mode === 'empty' && (
-            <div className="dashboard-actions">
-              <button className="btn btn-ghost" onClick={() => setMode('sample')}>
-                See example output
-              </button>
-              <button className="btn btn-primary" onClick={loadLiveData}>
-                Load live data
-              </button>
-            </div>
-          )}
         </div>
 
         {mode === 'empty' && (
