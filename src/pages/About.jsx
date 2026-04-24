@@ -1,28 +1,27 @@
 import { useState } from 'react'
 import { submitSubscriber } from '../services/airtable'
 
-export default function About({ onNavigate }) {
+export default function About() {
   const sections = [
     {
       label: 'What This Is',
-      headline: 'Civic Congruence builds infrastructure, not content.',
-      body: 'Most decisions that affect people\u2019s lives are made with incomplete or delayed information. Community experience is scattered across surveys, meetings, and informal networks, while institutions rely on partial views.\n\nCivic Congruence connects community input, local networks, and institutional decision-making into a continuous feedback loop, so decisions reflect what people are actually experiencing.\n\nDesigned for communities, civic organizations, and institutions working with incomplete or outdated information.',
+      headline: 'A signal system.',
+      body: 'Civic Congruence is a signal system. It uses structured individual input \u2014 how people prioritize, where they see tension, what they experience day to day \u2014 to surface patterns that are otherwise hard to see.',
     },
     {
-      label: 'How It Works',
-      headline: 'Three inputs. One clear picture.',
-      bullets: [
-        'Civic Survey: what people are experiencing in their communities',
-        'Political Alignment diagnostic: how people prioritize issues, weigh tradeoffs, and align with others',
-        'Network Pulse: vetted organizations submit weekly brief updates',
-      ],
-      example: 'A local housing issue might show up in survey responses, be reinforced by community partners, and surface as something institutions can act on.',
-      body: 'Together, these inputs reveal where agreement is stronger than expected, where real divides exist, and what institutions may be missing.',
+      label: 'Why It Exists',
+      headline: 'The gap is real.',
+      body: 'Most decisions that affect communities are made without clear, current signal about what people are actually experiencing. Surveys are slow. Meetings are unrepresentative. Perceived divisions are often misread. Civic Congruence is designed to reduce that gap.',
     },
     {
-      label: 'Data and Trust',
-      headline: 'No editorial framing. No hidden weighting.',
-      body: 'Survey responses are reviewed for validity, not interpretation. Network Pulse inputs are synthesized without attribution. Patterns surface as they appear consistently across inputs.\n\nCivic Congruence does not decide what matters. It makes visible what shows up repeatedly.',
+      label: 'What Your Input Does',
+      headline: 'Individual input becomes shared signal.',
+      body: 'Your responses don\u2019t just describe your own views. They contribute to a pattern. Aggregated across many responses, those patterns reveal where alignment is stronger than assumed, where real divides exist, and what institutions are missing. That\u2019s the core mechanism. Individual input becomes shared signal.',
+    },
+    {
+      label: 'Where It Goes',
+      headline: 'Signal that can be used.',
+      body: 'That signal becomes visible \u2014 to communities, to civic organizations, and to anyone trying to understand what\u2019s actually happening on the ground.',
     },
   ]
 
@@ -39,11 +38,6 @@ export default function About({ onNavigate }) {
     } catch {
       setSubState('error')
     }
-  }
-
-  function goToContact() {
-    window.scrollTo(0, 0)
-    onNavigate('contact')
   }
 
   return (
@@ -71,36 +65,24 @@ export default function About({ onNavigate }) {
               <div className="about-section-label">{s.label}</div>
               <div className="about-section-body">
                 <h2>{s.headline}</h2>
-                {s.bullets ? (
-                  <>
-                    <ul>
-                      {s.bullets.map((b) => (
-                        <li key={b}>{b}</li>
-                      ))}
-                    </ul>
-                    {s.example && <p className="about-example">{s.example}</p>}
-                    <p>{s.body}</p>
-                  </>
-                ) : (
-                  s.body.split('\n\n').map((para, i) => <p key={i}>{para}</p>)
-                )}
+                {s.body.split('\n\n').map((para, i) => <p key={i}>{para}</p>)}
               </div>
             </div>
           ))}
 
-          {/* Get involved — appears before Who Is Behind This */}
-          <div className="about-section about-section-contact">
-            <div className="about-section-label">Get Involved</div>
+          <div className="about-section">
+            <div className="about-section-label">Why</div>
             <div className="about-section-body">
+              <h2>Why.</h2>
               <p>
-                If you represent a community organization, join the network. For media, policy, or civic infrastructure inquiries, reach out directly.
+                Civic Congruence was created by a civic media and community engagement leader with experience across local government, public media, and community networks. This project exists because the gap between what institutions think communities need and what communities are actually experiencing has become too wide to ignore.
               </p>
-              <div className="about-contact-actions">
-                <button className="btn btn-primary" onClick={goToContact}>
-                  Contact us
-                </button>
-              </div>
+            </div>
+          </div>
 
+          <div className="about-section about-section-contact">
+            <div className="about-section-label">&nbsp;</div>
+            <div className="about-section-body">
               <div className="about-subscribe">
                 <div className="about-subscribe-heading">Weekly Signal Brief</div>
                 <p className="about-subscribe-sub">Weekly summary of civic patterns across the network. No opinion. Just pattern.</p>
@@ -122,16 +104,6 @@ export default function About({ onNavigate }) {
                   </form>
                 )}
               </div>
-            </div>
-          </div>
-
-          {/* Why — last */}
-          <div className="about-section">
-            <div className="about-section-label">Why</div>
-            <div className="about-section-body">
-              <p>
-                Civic Congruence was created by a civic media and community engagement leader with experience across local government, public media, and community networks. This project exists because the gap between what institutions think communities need and what communities are actually experiencing has become too wide to ignore.
-              </p>
             </div>
           </div>
         </div>
