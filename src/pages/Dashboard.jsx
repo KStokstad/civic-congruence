@@ -282,9 +282,6 @@ export default function Dashboard({ onNavigate }) {
           <div>
             <div className="section-label">Public Data</div>
             <h2>Civic Alignment Dashboard</h2>
-            <p>
-              What people in your community are actually experiencing — not what's being debated.
-            </p>
           </div>
           {mode === 'empty' && (
             <div className="dashboard-actions">
