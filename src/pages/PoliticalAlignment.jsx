@@ -444,6 +444,9 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: 16 }}>
+            <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 12, marginTop: 0 }}>
+              Most options will feel partially true. Choose the answer you would accept in reality, not the one that sounds best.
+            </p>
             <button
               className="btn btn-primary btn-lg"
               style={{ width: '100%', maxWidth: 360 }}
