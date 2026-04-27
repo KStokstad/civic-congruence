@@ -278,7 +278,8 @@ Paragraph length: keep each paragraph to 2â€“4 sentences maximum. After every 2â
   }
 
   const data = await res.json()
-  return data.content[0].text
+  const raw = data.content[0].text
+  return raw.replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
 }
 
 function parseAnalysis(text) {
@@ -575,7 +576,7 @@ export default function PoliticalAlignment({ onNavigate }) {
                 >
                   {checkoutLoading ? 'Redirecting\u2026' : 'See your full report \u2014 $7'}
                 </button>
-                <p className="report-checkout-sent">2\u20133 minute read. Delivered instantly.</p>
+                <p className="report-checkout-sent">2\xe2\x80\x933 minute read. Delivered instantly.</p>
               </div>
             </div>
 
