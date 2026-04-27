@@ -539,7 +539,7 @@ export default function PoliticalAlignment({ onNavigate }) {
               <h3>Get your full report</h3>
               <p className="report-checkout-hook">{bridgeLine}</p>
               <p className="report-checkout-body">
-                Your responses reveal a deeper pattern in how you evaluate civic systems \u2014 where your views hold together, and where they come under tension.
+                Your responses reveal a deeper pattern in how you evaluate civic systems — where your views hold together, and where they come under tension.
               </p>
               <div className="report-checkout-deeper">
                 <p className="report-checkout-deeper-label">Inside, you'll see:</p>
@@ -576,7 +576,7 @@ export default function PoliticalAlignment({ onNavigate }) {
                 >
                   {checkoutLoading ? 'Redirecting\u2026' : 'See your full report \u2014 $7'}
                 </button>
-                <p className="report-checkout-sent">2\xe2\x80\x933 minute read. Delivered instantly.</p>
+                <p className="report-checkout-sent">2–3 minute read. Delivered instantly.</p>
               </div>
             </div>
 
