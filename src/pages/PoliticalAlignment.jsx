@@ -140,7 +140,18 @@ async function callAnthropic(answers) {
 Here are their answers:
 ${answersText}
 
-Produce exactly three outputs:
+Produce exactly four outputs:
+
+OUTPUT 0 — RECOGNITION SUMMARY
+Generate two things:
+
+PATTERN LABEL: A 4-6 word phrase that names the core orientation. Should feel precise and non-generic. Not a political label — a behavioral description. Example: "Stability-Oriented Institutional Pragmatist" or "Crisis-Responsive Reform Defender"
+
+RECOGNITION SUMMARY: Exactly 2-3 sentences under 75 words total. Use pattern language only — "your responses suggest," "across your answers," "a pattern emerges of." Name the central tension in plain language. Make the reader think "that's exactly how I think." No jargon, no framework terms, no assertive identity language. No "you believe" or "you are."
+
+Format your response exactly as:
+PATTERN: [label here]
+SUMMARY: [2-3 sentences here]
 
 OUTPUT 1 — Core Orientation
 
@@ -288,16 +299,24 @@ Paragraph length: keep each paragraph to 2–4 sentences maximum. After every 2�
     throw new Error(`Anthropic API: ${msg}`)
   }
 
+  console.log('PA API call complete')
   const data = await res.json()
   const raw = data.content[0].text
+  console.log('[PA raw response]', raw)
   return raw.replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
 }
 
 function parseAnalysis(text) {
+  const o0 = text.match(/OUTPUT\s+0[^\n]*\n([\s\S]*?)(?=OUTPUT\s+1|$)/i)
   const o1 = text.match(/OUTPUT\s+1[^\n]*\n([\s\S]*?)(?=OUTPUT\s+2|$)/i)
   const o2 = text.match(/OUTPUT\s+2[^\n]*\n([\s\S]*?)(?=OUTPUT\s+3|$)/i)
   const o3 = text.match(/OUTPUT\s+3[^\n]*\n([\s\S]*?)$/i)
+  const o0text = o0 ? o0[1].trim() : null
+  const patternMatch = o0text && o0text.match(/^PATTERN:\s*(.+)/im)
+  const summaryMatch = o0text && o0text.match(/^SUMMARY:\s*([\s\S]+)/im)
   return {
+    patternLabel:      patternMatch ? patternMatch[1].trim() : null,
+    recognitionSummary: summaryMatch ? summaryMatch[1].trim() : null,
     label:     o1 ? o1[1].trim() : text,
     patterns:  o2 ? o2[1].trim() : null,
     alignment: o3 ? o3[1].trim() : null,
@@ -492,7 +511,7 @@ export default function PoliticalAlignment({ onNavigate }) {
 
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
-    const { label, patterns, alignment } = parseAnalysis(analysis)
+    const { patternLabel, recognitionSummary, label, patterns, alignment } = parseAnalysis(analysis)
     const topDomain = extractTopDomain(label, patterns)
     const bridgeLine = topDomain
       ? `${topDomain} stands out. But that\u2019s not the full story.`
@@ -507,6 +526,19 @@ export default function PoliticalAlignment({ onNavigate }) {
             <p style={{ textAlign: 'center', marginBottom: 32, color: 'var(--text)' }}>
               Based on your answers to 10 values questions.
             </p>
+
+            {/* Output 0 — Recognition Card */}
+            {(patternLabel || recognitionSummary) && (
+              <div className="recognition-card">
+                {patternLabel && (
+                  <div className="recognition-card-label">{patternLabel}</div>
+                )}
+                {recognitionSummary && (
+                  <p className="recognition-card-summary">{renderInline(recognitionSummary, 'rec')}</p>
+                )}
+              </div>
+            )}
+            <div className="recognition-divider">Full analysis below</div>
 
             {/* Output 1 — Ideological Label */}
             <div className="analysis-section">

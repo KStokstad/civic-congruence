@@ -1536,6 +1536,55 @@ h1, h2, h3, h4 {
   margin-bottom: 0;
 }
 
+/* Recognition card */
+.recognition-card {
+  background: var(--accent-subtle, #eef3fb);
+  border: 1px solid var(--accent-border, #c2d4ef);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin-bottom: 12px;
+}
+
+.recognition-card-label {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.recognition-card-summary {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 0;
+}
+
+.recognition-divider {
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.recognition-divider::before,
+.recognition-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: var(--border);
+}
+
+.recognition-divider::before { left: 0; }
+.recognition-divider::after  { right: 0; }
+
 /* Analysis sections */
 .analysis-section {
   background: var(--surface);
