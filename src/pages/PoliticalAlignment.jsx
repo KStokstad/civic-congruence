@@ -157,7 +157,9 @@ Purpose: Name the orientation. Explain what holds it together. Introduce the cor
 Rules: Do not expand beyond one paragraph. Do not add additional sections. Do not fully explain the system. Maintain curiosity. End with an implied or explicit open loop.
 
 GENERAL RULES
-Use pattern language, not identity claims. Avoid ideological labels unless explicitly qualified. FREE OUTPUT must create curiosity, not closure. FREE OUTPUT must be significantly shorter than any full analysis. Do not generate any PAID OUTPUT sections in this response. Avoid em-dashes throughout. Use periods, commas, or restructure instead.`
+Use pattern language, not identity claims. Avoid ideological labels unless explicitly qualified. FREE OUTPUT must create curiosity, not closure. FREE OUTPUT must be significantly shorter than any full analysis. Do not generate any PAID OUTPUT sections in this response. Avoid em-dashes throughout. Use periods, commas, or restructure instead.
+
+Do not use markdown formatting in your response. Do not use ## headers, ** bold markers, or # symbols. Use plain text only. Format the response exactly as specified with plain PATTERN: and SUMMARY: labels.`
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -196,8 +198,8 @@ Use pattern language, not identity claims. Avoid ideological labels unless expli
 }
 
 function parseAnalysis(text) {
-  const patternMatch = text.match(/^PATTERN:\s*(.+)/m)
-  const summaryMatch = text.match(/^SUMMARY:\s*([\s\S]+?)(?=\n\n|OUTPUT\s+1|$)/m)
+  const patternMatch = text.match(/^\*{0,2}PATTERN:\*{0,2}\s*(.+)/m)
+  const summaryMatch = text.match(/^\*{0,2}SUMMARY:\*{0,2}\s*([\s\S]+?)(?=\n\n|#{1,3}\s*OUTPUT\s+1|OUTPUT\s+1|$)/m)
   const o1 = text.match(/OUTPUT\s+1[^\n]*\n([\s\S]*?)$/i)
   return {
     patternLabel:       patternMatch ? patternMatch[1].trim() : null,
