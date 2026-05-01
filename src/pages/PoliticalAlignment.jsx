@@ -208,8 +208,8 @@ Do not use markdown formatting in your response. Do not use ## headers, ** bold 
 }
 
 function parseAnalysis(text) {
-  const patternMatch = text.match(/^\*{0,2}PATTERN:\*{0,2}\s*(.+)/m)
-  const summaryMatch = text.match(/^\*{0,2}SUMMARY:\*{0,2}\s*([\s\S]+?)(?=\n\n|#{1,3}\s*OUTPUT\s+1|OUTPUT\s+1|$)/m)
+  const patternMatch = text.match(/^\*{0,2}PATTERN(?:\s+LABEL)?:\*{0,2}\s*(.+)/m)
+  const summaryMatch = text.match(/^\*{0,2}(?:RECOGNITION\s+)?SUMMARY:\*{0,2}\s*([\s\S]+?)(?=\n\n|#{1,3}\s*OUTPUT\s+[12]|OUTPUT\s+[12]|$)/m)
   const o1 = text.match(/#{0,3}\s*OUTPUT\s+1[^\n]*\n([\s\S]+?)(?=#{0,3}\s*OUTPUT\s+2|$)/i)
   const o2 = text.match(/#{0,3}\s*OUTPUT\s+2[^\n]*\n([\s\S]+?)(?=#{0,3}\s*OUTPUT\s+3|$)/i)
   return {
