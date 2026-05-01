@@ -140,98 +140,24 @@ async function callAnthropic(answers) {
 Here are their answers:
 ${answersText}
 
-Produce exactly two outputs:
+Generate a structured analysis with two tiers: FREE OUTPUT only. Do not generate PAID OUTPUT in this call.
+
+FREE OUTPUT
 
 OUTPUT 0 — RECOGNITION SUMMARY
-Generate two things:
+PATTERN LABEL: A 4-6 word phrase that names the core orientation. Precise, non-generic, not ideological. A behavioral description, not a political label.
+RECOGNITION SUMMARY: Exactly 2 sentences under 75 words total. The first sentence names the core pattern. The second sentence names the central tension. Use pattern language only: "your responses suggest," "a pattern emerges of." Do not use "you believe" or "you are." Do not repeat language that will appear in OUTPUT 1. Create curiosity, not closure.
+Format exactly as:
+PATTERN: [label]
+SUMMARY: [text]
 
-PATTERN LABEL: A 4-6 word phrase that names the core orientation. Should feel precise and non-generic. Not a political label — a behavioral description. Example: "Stability-Oriented Institutional Pragmatist" or "Crisis-Responsive Reform Defender"
+OUTPUT 1 — IDEOLOGICAL LABEL (SHORT)
+Write exactly one paragraph. Maximum 4 sentences. 80-120 words total.
+Purpose: Name the orientation. Explain what holds it together. Introduce the core tension.
+Rules: Do not expand beyond one paragraph. Do not add additional sections. Do not fully explain the system. Maintain curiosity. End with an implied or explicit open loop.
 
-RECOGNITION SUMMARY: Write exactly 2 sentences. First sentence: name the core pattern in one plain observation. Second sentence: name the central tension only — do not restate or expand the pattern. Total must be under 50 words. Do not explain or justify. Create curiosity, not closure.
-
-The SUMMARY must not restate or paraphrase the PATTERN LABEL. The label names what it is. The summary names the tension it creates. These are different jobs.
-
-Use pattern language only — "your responses suggest," "across your answers," "a pattern emerges of." No jargon, no framework terms, no assertive identity language. No "you believe" or "you are." Do not repeat language that will appear in OUTPUT 1.
-
-Format your response exactly as:
-PATTERN: [label here]
-SUMMARY: [2 sentences here]
-
-OUTPUT 1 — Core Orientation
-
-Open OUTPUT 1 with exactly 2-3 sentences that create immediate recognition before any label or analytical framing. These sentences must:
-- Use pattern language not assertion: "your responses point to someone who..." or "across your answers, a pattern emerges of..." — never "you believe" or "you reject"
-- Name the core tension in plain everyday language — no jargon, no framework terms
-- Make the reader think "that's exactly how I think" before they encounter any analysis
-- Be derived from the most distinctive combination of answers, not generic observations
-
-Example format:
-"Your responses point to someone who sees institutions as necessary but not sufficient — worth defending, but not worth protecting from the pressure needed to make them move. Across your answers, a pattern emerges of wanting systems that can actually deliver, not just systems that survive."
-
-After these 2-3 opening sentences, introduce the ideological label and explanation as currently structured.
-
-Open with exactly three sentences following this structure:
-
-Line 1 — Recognition: Describe what the respondent is doing or how they think, using "Your responses suggest" not "You are" or "You reject". Name the pattern without labeling it yet.
-
-Line 2 — Pattern: Describe how their answers fit together — what the combination reveals about their underlying orientation. Use "Across your responses" or "A consistent pattern emerges."
-
-Line 3 — Tension: Name where it gets complicated. Where do their values or instincts pull in different directions? This should feel like something they hadn't fully articulated. Use "This creates a tension between" or "This raises a question about."
-
-After those three sentences, develop the full profile. You may now introduce specific patterns, institutional skepticism, identity framing, etc. — but earn that specificity rather than leading with it.
-
-Replace all instances of "You reject," "You don't trust," "You see through" with "Your responses suggest," "You tend to," "A pattern emerges of."
-
-Apply the 30% rule: before finalizing any section, ask if it can be said in fewer words without losing meaning. If yes, cut it.
-
-When naming the orientation, introduce it with interpretive space rather than assertion: "One way to describe this orientation is [label]."
-
-Write exactly one paragraph for this section. Maximum 4 sentences. Name the orientation, explain what holds it together, and name the core tension. Do not add additional paragraphs.
-
-The standard: the first 3-5 lines should make the reader think "that's exactly it" — not "that's interesting" and not "that's a lot."
-
-PATTERN PRECISION RULE — applies to every section:
-
-Do not include specific behavioral examples or situational guesses about what the person does in daily life.
-
-Instead, describe:
-- The internal logic of their pattern (why their answers hold together)
-- The tradeoff that pattern creates (what it gives them, what it costs)
-- Where the pattern holds and where it breaks
-
-Format for precision:
-'Your responses consistently [pattern]. This creates [what it enables]. As a result, [what it limits or complicates].'
-
-The goal is for the reader to think: 'That is exactly how I think, even if I wouldn't have said it that way' — not 'that sounds like something I might do.'
-
-The difference:
-- Too generic: 'You value outcomes over process'
-- Too behavioral: 'When a policy is proposed, you tend to...'
-- Correct: 'Your responses consistently prioritize whether something works over how it is structured. That creates a clear standard, but it narrows the range of approaches that register as legitimate.'
-
-INTENSITY DISTRIBUTION RULE: Describe the pattern neutrally. No crisis, breakdown, or disruption language. Replace reactive language like 'system is too broken' with grounded observations like 'you tend to interpret current systems as constrained in their ability to self-correct.' Same meaning, less resistance.
-
-CROSS-ANSWER SYNTHESIS RULES — apply to every output:
-
-The first paragraph must show how the answers interact with each other — not what they were individually. Lead with a combined insight that could only emerge from seeing all 10 answers together. Never restate individual answer selections.
-
-Include 1-2 observations that are only visible when the answers are considered together — patterns or tensions that wouldn't be apparent from any single answer. Work these naturally into the analysis. Only label explicitly if it adds clarity: 'What stands out when these are combined:...'
-
-Each paragraph must be 2-3 sentences maximum. No dense blocks. If a paragraph exceeds 3 sentences, split it.
-
-Remove all filler phrases: 'in the current landscape,' 'what stands out is,' 'taken together' (limit to once per output), 'it's worth noting.' Cut any sentence that could be removed without losing meaning.
-
-Each output must contain exactly one central idea per section. If two ideas appear, move the second to where it belongs or cut it.
-
-Include one sharp, surprising observation per output — something the reader wouldn't have said about themselves but will recognize as true when they read it. This should emerge from an unexpected combination of answers, not from generic pattern description.
-
-REPETITION RULE: Before finalizing any section, check whether the core idea has already appeared in a previous section. If yes, either cut it or advance it — show a new implication, not the same point restated. Every paragraph must add information that was not present in any prior paragraph. If a paragraph could be removed without losing meaning, remove it.
-
-Do not include any # symbols, --- dividers, or markdown section markers between sections. Do not use ## or # for section headers. Sections should flow as continuous prose separated only by paragraph breaks. No horizontal rules, no hash symbols, no markdown dividers of any kind.
-
-Paragraph length: keep each paragraph to 2–4 sentences maximum. After every 2–3 paragraphs, insert a blank line to create visual breathing room. Use bold (**text**) sparingly — no more than 1–2 instances per section, only for genuinely load-bearing phrases.
-
-Avoid em-dashes throughout. Use periods, commas, or restructure the sentence instead. Em-dashes create visual noise and interrupt reading flow. If you find yourself writing an em-dash, rewrite the sentence to eliminate it.`
+GENERAL RULES
+Use pattern language, not identity claims. Avoid ideological labels unless explicitly qualified. FREE OUTPUT must create curiosity, not closure. FREE OUTPUT must be significantly shorter than any full analysis. Do not generate any PAID OUTPUT sections in this response. Avoid em-dashes throughout. Use periods, commas, or restructure instead.`
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
