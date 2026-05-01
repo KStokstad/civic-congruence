@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { submitAlignment, updateAlignment, checkRepeatEmail } from '../services/airtable'
-import { renderMarkdown } from '../utils/renderMarkdown'
+import { renderMarkdown, renderInline } from '../utils/renderMarkdown'
 
 const OPENING_INSTRUCTION_LINES = [
   'The Values Diagnostic shows you how you decide when two of your values collide. It forces real choices because every question has a downside, so there’s no right answer, only the one you’d actually act on. The result is a map of your decision-making pattern under pressure, not a personality quiz.',
@@ -537,7 +537,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             {/* Full Report Checkout */}
             <div className="report-checkout">
               <h3>Get your full report</h3>
-              <p className="report-checkout-hook">{bridgeLine}</p>
+              <p className="report-checkout-hook">{renderInline(bridgeLine, 'bridge')}</p>
               <p className="report-checkout-body">
                 Your responses reveal a deeper pattern in how you evaluate civic systems — where your views hold together, and where they come under tension.
               </p>

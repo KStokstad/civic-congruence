@@ -1,4 +1,4 @@
-function renderInline(text, keyPrefix) {
+export function renderInline(text, keyPrefix) {
   const parts = text.split(/\*\*(.+?)\*\*/g)
   return parts.map((part, i) =>
     i % 2 === 1 ? <strong key={`${keyPrefix}-b${i}`}>{part}</strong> : part
