@@ -44,7 +44,7 @@ export function renderMarkdown(text, subLines = {}) {
       if (subLines[h2[1]]) {
         elements.push(
           <p key={key++} style={{ fontSize: 13, color: 'var(--text-muted)', fontWeight: 'normal', marginTop: 2, marginBottom: 12 }}>
-            {subLines[h2[1]]}
+            {renderInline(subLines[h2[1]], key)}
           </p>
         )
       }
