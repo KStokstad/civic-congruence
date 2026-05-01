@@ -140,18 +140,18 @@ async function callAnthropic(answers) {
 Here are their answers:
 ${answersText}
 
-Produce exactly four outputs:
+Produce exactly two outputs:
 
 OUTPUT 0 — RECOGNITION SUMMARY
 Generate two things:
 
 PATTERN LABEL: A 4-6 word phrase that names the core orientation. Should feel precise and non-generic. Not a political label — a behavioral description. Example: "Stability-Oriented Institutional Pragmatist" or "Crisis-Responsive Reform Defender"
 
-RECOGNITION SUMMARY: Exactly 2-3 sentences under 75 words total. Use pattern language only — "your responses suggest," "across your answers," "a pattern emerges of." Name the central tension in plain language. Make the reader think "that's exactly how I think." No jargon, no framework terms, no assertive identity language. No "you believe" or "you are."
+RECOGNITION SUMMARY: 2 sentences maximum, under 60 words total. The first sentence names the core pattern. The second names the central tension. Use pattern language only — "your responses suggest," "across your answers," "a pattern emerges of." No jargon, no framework terms, no assertive identity language. No "you believe" or "you are." Do not repeat language that will appear in OUTPUT 1. The summary should create curiosity, not satisfy it.
 
 Format your response exactly as:
 PATTERN: [label here]
-SUMMARY: [2-3 sentences here]
+SUMMARY: [2 sentences here]
 
 OUTPUT 1 — Core Orientation
 
@@ -182,6 +182,8 @@ Apply the 30% rule: before finalizing any section, ask if it can be said in fewe
 
 When naming the orientation, introduce it with interpretive space rather than assertion: "One way to describe this orientation is [label]."
 
+Write exactly one paragraph for this section. Maximum 4 sentences. Name the orientation, explain what holds it together, and name the core tension. Do not add additional paragraphs.
+
 The standard: the first 3-5 lines should make the reader think "that's exactly it" — not "that's interesting" and not "that's a lot."
 
 PATTERN PRECISION RULE — applies to every section:
@@ -203,11 +205,7 @@ The difference:
 - Too behavioral: 'When a policy is proposed, you tend to...'
 - Correct: 'Your responses consistently prioritize whether something works over how it is structured. That creates a clear standard, but it narrows the range of approaches that register as legitimate.'
 
-INTENSITY DISTRIBUTION RULE: Do not front-load heavy or charged language. Follow this progression:
-- Core Orientation section: describe the pattern neutrally — no crisis, breakdown, or disruption language
-- How You Evaluate Systems: introduce tension gently
-- Section 3 onwards: escalate into implications and constraints
-Replace reactive language like 'system is too broken' with grounded observations like 'you tend to interpret current systems as constrained in their ability to self-correct.' Same meaning, less resistance.
+INTENSITY DISTRIBUTION RULE: Describe the pattern neutrally. No crisis, breakdown, or disruption language. Replace reactive language like 'system is too broken' with grounded observations like 'you tend to interpret current systems as constrained in their ability to self-correct.' Same meaning, less resistance.
 
 CROSS-ANSWER SYNTHESIS RULES — apply to every output:
 
@@ -225,48 +223,7 @@ Include one sharp, surprising observation per output — something the reader wo
 
 REPETITION RULE: Before finalizing any section, check whether the core idea has already appeared in a previous section. If yes, either cut it or advance it — show a new implication, not the same point restated. Every paragraph must add information that was not present in any prior paragraph. If a paragraph could be removed without losing meaning, remove it.
 
-OUTPUT 2 — How You Evaluate Systems
-Follow this exact sequence:
-First paragraph: Mirror — describe what this person values or how they approach political decisions in a way that feels accurate and affirming. Use language like "your responses point to" or "across your answers a pattern emerges." Make them feel understood before anything else.
-Second paragraph: Insight — name what that orientation reveals about how they process political decisions. Use "taken together, your responses point toward" or "one way to read this combination is." Avoid asserting coherence the user didn't claim — never say "what makes this coherent is."
-Third paragraph: Tension — introduce the tradeoff or challenge this orientation creates as an open question rather than a confrontation. Instead of stating the problem directly, ask it: "This raises an open question: if [outcome], what ensures [value]?" Frame it as a natural consequence, not a flaw.
-Fourth paragraph: add one concrete behavioral observation directly derived from the specific combination of answers this person gave — something that describes a recognizable behavior, not a generic trait. This should feel specific to their actual answers, not applicable to everyone. Format: "This can show up as [specific behavior] even when [contrasting outcome] might be possible."
-End with one open question or observation that invites reflection rather than delivering a verdict.
-Never open with critique. Never use accusatory language. Never say "You reject," "You believe," "You don't trust," or "You are." Always use "Your responses suggest," "A pattern emerges," "Taken together your responses point to," or "One way to describe this orientation is." The reader should think "that is accurate" before they encounter anything that challenges them.
-
-OUTPUT 3 — Political Alignment Fit
-
-This section does three things only:
-1. Name where their responses sit relative to existing political categories
-2. Explain why the mismatch occurs — as a structural difference, not a personal failing
-3. Frame the gap as a property of how categories are built, not a verdict on the person
-
-Open with: "Your responses don't align cleanly with any single political framework."
-
-Follow immediately with: "This isn't because your views are inconsistent. It's because they follow a different structure than most political categories are built around."
-
-Second paragraph — explain the structural difference: Most systems group positions based on shared ideology or coalition alignment. Describe how this person's responses are organized differently — around outcomes, constraints, or what they consider functionally viable. Use "by contrast" to mark the distinction.
-
-Third paragraph — name the gap: "That difference creates a gap. It's not that your views don't fit anywhere — it's that they don't map cleanly onto how existing options are structured."
-
-Optional fourth paragraph if the pattern warrants it: "This pattern often results in partial alignment across multiple positions without full identification with any of them. As a result, the available categories may feel incomplete, even when individual elements resonate."
-
-Close with: "The key distinction is that your responses form a coherent system — they're just not organized in the same way most political frameworks are."
-
-What to avoid in this section:
-- Never say "You are politically homeless" or any variant — it's emotionally loaded and sounds absolute
-- No broad critiques of parties or political systems
-- Nothing that reads as your opinion or editorial judgment
-- Do not use "homeless," "alienated," or "disillusioned"
-
-Language rules:
-- Anchor everything in structure: "how categories are built," "how existing options are structured," "a different organizational logic"
-- If referencing alignment degree, use: "a low alignment fit with existing categories" — never "you don't belong"
-- The reader should think: "the system isn't built to reflect this pattern" — not "I don't belong anywhere"
-
 Do not include any # symbols, --- dividers, or markdown section markers between sections. Do not use ## or # for section headers. Sections should flow as continuous prose separated only by paragraph breaks. No horizontal rules, no hash symbols, no markdown dividers of any kind.
-
-Use Title Case for all section headers, not ALL CAPS. Headers should feel like steps in a diagnostic system, not essay headings. Each header should answer the question: what is this section doing for the reader?
 
 Paragraph length: keep each paragraph to 2–4 sentences maximum. After every 2–3 paragraphs, insert a blank line to create visual breathing room. Use bold (**text**) sparingly — no more than 1–2 instances per section, only for genuinely load-bearing phrases.
 
@@ -311,15 +268,11 @@ Avoid em-dashes throughout. Use periods, commas, or restructure the sentence ins
 function parseAnalysis(text) {
   const patternMatch = text.match(/^PATTERN:\s*(.+)/m)
   const summaryMatch = text.match(/^SUMMARY:\s*([\s\S]+?)(?=\n\n|OUTPUT\s+1|$)/m)
-  const o1 = text.match(/OUTPUT\s+1[^\n]*\n([\s\S]*?)(?=OUTPUT\s+2|$)/i)
-  const o2 = text.match(/OUTPUT\s+2[^\n]*\n([\s\S]*?)(?=OUTPUT\s+3|$)/i)
-  const o3 = text.match(/OUTPUT\s+3[^\n]*\n([\s\S]*?)$/i)
+  const o1 = text.match(/OUTPUT\s+1[^\n]*\n([\s\S]*?)$/i)
   return {
     patternLabel:       patternMatch ? patternMatch[1].trim() : null,
     recognitionSummary: summaryMatch ? summaryMatch[1].trim() : null,
     label:     o1 ? o1[1].trim() : text,
-    patterns:  o2 ? o2[1].trim() : null,
-    alignment: o3 ? o3[1].trim() : null,
   }
 }
 
@@ -328,13 +281,6 @@ const CURIOSITY_LINES = [
   "There\u2019s a tension in your responses that only shows up when analyzed together.",
   "Your answers point to something deeper than a typical political profile.",
 ]
-
-function extractTopDomain(labelText, patternsText) {
-  const combined = labelText + ' ' + (patternsText || '')
-  const match = combined.match(/One way to describe this orientation is ([^.]+)/i)
-  if (match) return match[1].trim()
-  return null
-}
 
 export default function PoliticalAlignment({ onNavigate }) {
   const [phase, setPhase] = useState('intro') // 'intro' | 'questions' | 'generating' | 'results'
@@ -511,11 +457,10 @@ export default function PoliticalAlignment({ onNavigate }) {
 
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
-    const { patternLabel, recognitionSummary, label, patterns, alignment } = parseAnalysis(analysis)
-    const topDomain = extractTopDomain(label, patterns)
-    const bridgeLine = topDomain
-      ? `${topDomain} stands out. But that\u2019s not the full story.`
-      : "Your responses stand out. But that\u2019s not the full story."
+    const { patternLabel, recognitionSummary, label } = parseAnalysis(analysis)
+    const hookLine = patternLabel
+      ? `${patternLabel}. The full report unpacks what holds this pattern together and where it creates tension.`
+      : "Your responses point to a distinctive pattern. The full report unpacks what holds it together and where it creates tension."
 
     return (
       <div className="survey-page">
@@ -538,7 +483,7 @@ export default function PoliticalAlignment({ onNavigate }) {
                 )}
               </div>
             )}
-            <div className="recognition-divider">Full analysis below</div>
+            <div className="recognition-divider">Full analysis below ↓</div>
 
             {/* Output 1 — Ideological Label */}
             <div className="analysis-section">
@@ -551,36 +496,10 @@ export default function PoliticalAlignment({ onNavigate }) {
               </div>
             </div>
 
-            {/* Output 2 — Behavioral Patterns */}
-            {patterns && (
-              <div className="analysis-section">
-                <div className="analysis-section-header">
-                  <span className="analysis-section-num">2</span>
-                  Behavioral Patterns
-                </div>
-                <div className="analysis-paragraphs">
-                  {renderMarkdown(patterns)}
-                </div>
-              </div>
-            )}
-
-            {/* Output 3 — Political Alignment Fit */}
-            {alignment && (
-              <div className="analysis-section">
-                <div className="analysis-section-header">
-                  <span className="analysis-section-num">3</span>
-                  Political Alignment Fit
-                </div>
-                <div className="analysis-paragraphs">
-                  {renderMarkdown(alignment)}
-                </div>
-              </div>
-            )}
-
             {/* Full Report Checkout */}
             <div className="report-checkout">
               <h3>Get your full report</h3>
-              <p className="report-checkout-hook">{renderInline(bridgeLine, 'bridge')}</p>
+              <p className="report-checkout-hook">{renderInline(hookLine, 'hook')}</p>
               <p className="report-checkout-body">
                 Your responses reveal a deeper pattern in how you evaluate civic systems: where your views hold together, and where they come under tension.
               </p>
