@@ -307,15 +307,13 @@ Paragraph length: keep each paragraph to 2â€“4 sentences maximum. After every 2â
 }
 
 function parseAnalysis(text) {
-  const o0 = text.match(/OUTPUT\s+0[^\n]*\n([\s\S]*?)(?=OUTPUT\s+1|$)/i)
+  const patternMatch = text.match(/^PATTERN:\s*(.+)/m)
+  const summaryMatch = text.match(/^SUMMARY:\s*([\s\S]+?)(?=\n\n|OUTPUT\s+1|$)/m)
   const o1 = text.match(/OUTPUT\s+1[^\n]*\n([\s\S]*?)(?=OUTPUT\s+2|$)/i)
   const o2 = text.match(/OUTPUT\s+2[^\n]*\n([\s\S]*?)(?=OUTPUT\s+3|$)/i)
   const o3 = text.match(/OUTPUT\s+3[^\n]*\n([\s\S]*?)$/i)
-  const o0text = o0 ? o0[1].trim() : null
-  const patternMatch = o0text && o0text.match(/^PATTERN:\s*(.+)/im)
-  const summaryMatch = o0text && o0text.match(/^SUMMARY:\s*([\s\S]+)/im)
   return {
-    patternLabel:      patternMatch ? patternMatch[1].trim() : null,
+    patternLabel:       patternMatch ? patternMatch[1].trim() : null,
     recognitionSummary: summaryMatch ? summaryMatch[1].trim() : null,
     label:     o1 ? o1[1].trim() : text,
     patterns:  o2 ? o2[1].trim() : null,
