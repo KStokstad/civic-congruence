@@ -144,6 +144,17 @@ Produce exactly three outputs:
 
 OUTPUT 1 — Core Orientation
 
+Open OUTPUT 1 with exactly 2-3 sentences that create immediate recognition before any label or analytical framing. These sentences must:
+- Use pattern language not assertion: "your responses point to someone who..." or "across your answers, a pattern emerges of..." — never "you believe" or "you reject"
+- Name the core tension in plain everyday language — no jargon, no framework terms
+- Make the reader think "that's exactly how I think" before they encounter any analysis
+- Be derived from the most distinctive combination of answers, not generic observations
+
+Example format:
+"Your responses point to someone who sees institutions as necessary but not sufficient — worth defending, but not worth protecting from the pressure needed to make them move. Across your answers, a pattern emerges of wanting systems that can actually deliver, not just systems that survive."
+
+After these 2-3 opening sentences, introduce the ideological label and explanation as currently structured.
+
 Open with exactly three sentences following this structure:
 
 Line 1 — Recognition: Describe what the respondent is doing or how they think, using "Your responses suggest" not "You are" or "You reject". Name the pattern without labeling it yet.
