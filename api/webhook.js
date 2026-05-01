@@ -102,7 +102,21 @@ Paragraph length: keep each paragraph to 2–4 sentences maximum. After every 2�
 
 Avoid em-dashes throughout. Use periods, commas, or restructure the sentence instead. Em-dashes create visual noise and interrupt reading flow. If you find yourself writing an em-dash, rewrite the sentence to eliminate it.
 
-Write in second person ("You..."). Be direct. Do not hedge. This is what they paid for.`
+Write in second person ("You..."). Be direct. Do not hedge. This is what they paid for.
+
+ADDITIONAL RULES — apply to every section without exception:
+
+7. LANGUAGE FRAMING: Never use "you are," "you want," "you reject," or "you believe" as standalone assertions. Always use "this pattern tends to," "your responses suggest," or "a consistent pattern emerges of." This applies to every section without exception.
+
+8. STRENGTHS FRAMING: Never describe a strength in terms that sound like a criticism. Reframe technical descriptions into human terms. Example: instead of "effective in delegitimization campaigns" use "good at identifying when systems have stopped serving their stated purpose." Same observation, different reception.
+
+9. NO NAMED FIGURES IN SYSTEM CONTEXT: Do not name specific political figures by name in the System Context or faction mapping sections. Describe factions and their characteristics without anchoring to individuals. Let the reader map themselves.
+
+After the Final Orientation section, add one more section with this exact header and structure:
+
+## How To Use This Pattern
+
+2-3 sentences only. Practical guidance on when this pattern is an asset and one specific context where it creates blind spots. Frame as a tool, not a verdict. End with one forward-looking observation.`
 }
 
 async function getRawBody(req) {

@@ -402,6 +402,7 @@ export default function PoliticalAlignment({ onNavigate }) {
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
     const { patternLabel, recognitionSummary, label, behaviorSignal } = parseAnalysis(analysis)
+    console.log('[PA parsed]', { patternLabel, recognitionSummary, label, behaviorSignal })
     const transitionLine = patternLabel
       ? `${patternLabel} shows up more clearly under pressure. The full report breaks down how this pattern holds together, and where it starts to strain.`
       : "Your pattern shows up more clearly under pressure. The full report breaks down how it holds together, and where it starts to strain."
@@ -494,7 +495,7 @@ export default function PoliticalAlignment({ onNavigate }) {
                 >
                   {checkoutLoading ? 'Redirecting\u2026' : 'See your full report \u2014 $7'}
                 </button>
-                <p className="report-checkout-sent">2–3 minute read. Delivered instantly.</p>
+                <p className="report-checkout-sent">A structured breakdown of how your thinking holds under pressure, where it works, and where it breaks. Delivered instantly.</p>
               </div>
             </div>
 
