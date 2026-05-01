@@ -388,9 +388,9 @@ export default function PoliticalAlignment({ onNavigate }) {
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
     const { patternLabel, recognitionSummary, label } = parseAnalysis(analysis)
-    const hookLine = patternLabel
-      ? `${patternLabel}. The full report unpacks what holds this pattern together and where it creates tension.`
-      : "Your responses point to a distinctive pattern. The full report unpacks what holds it together and where it creates tension."
+    const transitionLine = patternLabel
+      ? `${patternLabel} shows up more clearly under pressure. The full report breaks down how this pattern holds together, and where it starts to strain.`
+      : "Your pattern shows up more clearly under pressure. The full report breaks down how it holds together, and where it starts to strain."
 
     return (
       <div className="survey-page">
@@ -431,12 +431,7 @@ export default function PoliticalAlignment({ onNavigate }) {
 
             {/* Full Report Checkout */}
             <div className="report-checkout">
-              <p className="report-checkout-invite">Want to go deeper?</p>
-              <h3>Get your full report</h3>
-              <p className="report-checkout-hook">{renderInline(hookLine, 'hook')}</p>
-              <p className="report-checkout-body">
-                Your responses reveal a deeper pattern in how you evaluate civic systems: where your views hold together, and where they come under tension.
-              </p>
+              <p className="report-checkout-transition">{renderInline(transitionLine, 'transition')}</p>
               <div className="report-checkout-deeper">
                 <p className="report-checkout-deeper-label">Inside, you'll see:</p>
                 <ul>
