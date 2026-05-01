@@ -156,6 +156,16 @@ Write exactly one paragraph. Maximum 4 sentences. 80-120 words total.
 Purpose: Name the orientation. Explain what holds it together. Introduce the core tension.
 Rules: Do not expand beyond one paragraph. Do not add additional sections. Do not fully explain the system. Maintain curiosity. End with an implied or explicit open loop.
 
+OUTPUT 2 — WHERE THIS SHOWS UP
+Write exactly 2-3 sentences describing one concrete behavioral pattern — how this orientation tends to manifest in real decisions or reactions.
+Rules:
+- Name one specific behavior, not a general trait
+- Show a real-world implication or tension
+- Use pattern language: "this can show up as," "a pattern worth noting is," "your responses suggest this tends to manifest as"
+- Do not introduce new frameworks or expand into analysis
+- Do not repeat what was said in OUTPUT 0 or OUTPUT 1
+- This should make the reader think: "Oh, that's actually true about how I respond"
+
 GENERAL RULES
 Use pattern language, not identity claims. Avoid ideological labels unless explicitly qualified. FREE OUTPUT must create curiosity, not closure. FREE OUTPUT must be significantly shorter than any full analysis. Do not generate any PAID OUTPUT sections in this response. Avoid em-dashes throughout. Use periods, commas, or restructure instead.
 
@@ -200,11 +210,13 @@ Do not use markdown formatting in your response. Do not use ## headers, ** bold 
 function parseAnalysis(text) {
   const patternMatch = text.match(/^\*{0,2}PATTERN:\*{0,2}\s*(.+)/m)
   const summaryMatch = text.match(/^\*{0,2}SUMMARY:\*{0,2}\s*([\s\S]+?)(?=\n\n|#{1,3}\s*OUTPUT\s+1|OUTPUT\s+1|$)/m)
-  const o1 = text.match(/OUTPUT\s+1[^\n]*\n([\s\S]*?)$/i)
+  const o1 = text.match(/#{0,3}\s*OUTPUT\s+1[^\n]*\n([\s\S]+?)(?=#{0,3}\s*OUTPUT\s+2|$)/i)
+  const o2 = text.match(/#{0,3}\s*OUTPUT\s+2[^\n]*\n([\s\S]+?)(?=#{0,3}\s*OUTPUT\s+3|$)/i)
   return {
     patternLabel:       patternMatch ? patternMatch[1].trim() : null,
     recognitionSummary: summaryMatch ? summaryMatch[1].trim() : null,
-    label:     o1 ? o1[1].trim() : text,
+    label:          o1 ? o1[1].trim() : text,
+    behaviorSignal: o2 ? o2[1].trim() : null,
   }
 }
 
@@ -389,7 +401,7 @@ export default function PoliticalAlignment({ onNavigate }) {
 
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
-    const { patternLabel, recognitionSummary, label } = parseAnalysis(analysis)
+    const { patternLabel, recognitionSummary, label, behaviorSignal } = parseAnalysis(analysis)
     const transitionLine = patternLabel
       ? `${patternLabel} shows up more clearly under pressure. The full report breaks down how this pattern holds together, and where it starts to strain.`
       : "Your pattern shows up more clearly under pressure. The full report breaks down how it holds together, and where it starts to strain."
@@ -430,6 +442,19 @@ export default function PoliticalAlignment({ onNavigate }) {
                 {renderMarkdown(label)}
               </div>
             </div>
+
+            {/* Output 2 — Where This Shows Up */}
+            {behaviorSignal && (
+              <div className="analysis-section">
+                <div className="analysis-section-header">
+                  <span className="analysis-section-num">2</span>
+                  Where This Shows Up
+                </div>
+                <div className="analysis-paragraphs">
+                  {renderMarkdown(behaviorSignal)}
+                </div>
+              </div>
+            )}
 
             {/* Full Report Checkout */}
             <div className="report-checkout">
