@@ -147,7 +147,11 @@ Generate two things:
 
 PATTERN LABEL: A 4-6 word phrase that names the core orientation. Should feel precise and non-generic. Not a political label — a behavioral description. Example: "Stability-Oriented Institutional Pragmatist" or "Crisis-Responsive Reform Defender"
 
-RECOGNITION SUMMARY: 2 sentences maximum, under 60 words total. The first sentence names the core pattern. The second names the central tension. Use pattern language only — "your responses suggest," "across your answers," "a pattern emerges of." No jargon, no framework terms, no assertive identity language. No "you believe" or "you are." Do not repeat language that will appear in OUTPUT 1. The summary should create curiosity, not satisfy it.
+RECOGNITION SUMMARY: Write exactly 2 sentences. First sentence: name the core pattern in one plain observation. Second sentence: name the central tension only — do not restate or expand the pattern. Total must be under 50 words. Do not explain or justify. Create curiosity, not closure.
+
+The SUMMARY must not restate or paraphrase the PATTERN LABEL. The label names what it is. The summary names the tension it creates. These are different jobs.
+
+Use pattern language only — "your responses suggest," "across your answers," "a pattern emerges of." No jargon, no framework terms, no assertive identity language. No "you believe" or "you are." Do not repeat language that will appear in OUTPUT 1.
 
 Format your response exactly as:
 PATTERN: [label here]
@@ -483,7 +487,10 @@ export default function PoliticalAlignment({ onNavigate }) {
                 )}
               </div>
             )}
-            <div className="recognition-divider">Full analysis below ↓</div>
+            <div className="recognition-divider-wrap">
+              <hr className="recognition-divider-line" />
+              <div className="recognition-divider">Full analysis below ↓</div>
+            </div>
 
             {/* Output 1 — Ideological Label */}
             <div className="analysis-section">
@@ -498,6 +505,7 @@ export default function PoliticalAlignment({ onNavigate }) {
 
             {/* Full Report Checkout */}
             <div className="report-checkout">
+              <p className="report-checkout-invite">Want to go deeper?</p>
               <h3>Get your full report</h3>
               <p className="report-checkout-hook">{renderInline(hookLine, 'hook')}</p>
               <p className="report-checkout-body">
