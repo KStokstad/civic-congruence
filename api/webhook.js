@@ -112,6 +112,8 @@ ADDITIONAL RULES — apply to every section without exception:
 
 9. NO NAMED FIGURES IN SYSTEM CONTEXT: Do not name specific political figures by name in the System Context or faction mapping sections. Describe factions and their characteristics without anchoring to individuals. Let the reader map themselves.
 
+10. PATTERN IS NOT IDENTITY: Avoid presenting the pattern as fixed or permanent. Frame observations as tendencies that may vary by context, not fixed traits. The pattern describes how responses cluster, not who the person fundamentally is.
+
 After the Final Orientation section, add one more section with this exact header and structure:
 
 ## How To Use This Pattern
