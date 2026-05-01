@@ -91,7 +91,7 @@ const QUESTIONS = [
       { id: 'B',  text: 'Independent and alternative sources have proven more honest to me than legacy media.' },
       { id: 'C',  text: 'I triangulate across sources. No single source is complete.' },
       { id: 'D1', text: 'I\u2019ve built my own filtering system over time and mostly trust my own judgment (I still engage with information).' },
-      { id: 'D2', text: 'I\u2019ve largely disengaged from political news \u2014 the signal-to-noise ratio isn\u2019t worth it.' },
+      { id: 'D2', text: 'I\u2019ve largely disengaged from political news. The signal-to-noise ratio isn\u2019t worth it.' },
     ],
   },
   {
@@ -100,9 +100,9 @@ const QUESTIONS = [
     stem: 'Which position would you defend in a room that disagreed with you?',
     options: [
       { id: 'A',  text: 'Lived experience is political knowledge. Identity should substantially shape policy and representation.' },
-      { id: 'B',  text: 'Identity matters, but it shouldn\u2019t override other considerations \u2014 it\u2019s one input among many.' },
+      { id: 'B',  text: 'Identity matters, but it shouldn\u2019t override other considerations. It\u2019s one input among many.' },
       { id: 'C',  text: 'Policy should be designed around needs and outcomes, not group membership.' },
-      { id: 'D',  text: 'Identity-based politics has become counterproductive \u2014 it creates more division than insight.' },
+      { id: 'D',  text: 'Identity-based politics has become counterproductive. It creates more division than insight.' },
     ],
   },
   {
@@ -111,11 +111,11 @@ const QUESTIONS = [
     topic: 'Compromise',
     stem: 'In a divided system, which position would you actually hold under pressure?',
     options: [
-      { id: 'A',  text: 'Compromise signals weak conviction \u2014 real leadership means holding the line.' },
-      { id: 'B',  text: 'Compromise on tactics is necessary \u2014 compromise on core values is capitulation. The difference matters.' },
-      { id: 'C',  text: 'Compromise is the basic requirement of democratic governance \u2014 without it, nothing functions.' },
-      { id: 'D1', text: 'Whether to compromise depends entirely on what\u2019s being traded \u2014 values versus tactics are different things.' },
-      { id: 'D2', text: 'The system is too broken for compromise to matter \u2014 the premise no longer applies.' },
+      { id: 'A',  text: 'Compromise signals weak conviction. Real leadership means holding the line.' },
+      { id: 'B',  text: 'Compromise on tactics is necessary, but compromise on core values is capitulation. The difference matters.' },
+      { id: 'C',  text: 'Compromise is the basic requirement of democratic governance. Without it, nothing functions.' },
+      { id: 'D1', text: 'Whether to compromise depends entirely on what\u2019s being traded. Values versus tactics are different things.' },
+      { id: 'D2', text: 'The system is too broken for compromise to matter. The premise no longer applies.' },
     ],
   },
   {
