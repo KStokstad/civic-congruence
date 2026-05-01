@@ -18,10 +18,10 @@ const QUESTIONS = [
     topic: 'Role of Government',
     stem: 'When you think about the proper scope of government, which would you accept even knowing its downside?',
     options: [
-      { id: 'A',  text: 'Government stays limited \u2014 some needs go unmet, but autonomy and efficiency are preserved.' },
-      { id: 'B',  text: 'Government actively intervenes \u2014 some overreach is inevitable, but vulnerable people get protection.' },
-      { id: 'C',  text: 'Government is strong on core functions, restrained elsewhere \u2014 the hard part is deciding which is which.' },
-      { id: 'D',  text: 'I reject fixed frameworks \u2014 good governance is situational, not ideological.' },
+      { id: 'A',  text: 'Government stays limited. Some needs go unmet, but autonomy and efficiency are preserved.' },
+      { id: 'B',  text: 'Government actively intervenes. Some overreach is inevitable, but vulnerable people get protection.' },
+      { id: 'C',  text: 'Government is strong on core functions, restrained elsewhere. The hard part is deciding which is which.' },
+      { id: 'D',  text: 'I reject fixed frameworks. Good governance is situational, not ideological.' },
     ],
   },
   {
@@ -32,9 +32,9 @@ const QUESTIONS = [
     options: [
       { id: 'A',  text: 'That we\u2019re discouraging the risk-taking and innovation that drives economic growth.' },
       { id: 'B',  text: 'That concentrated wealth quietly erodes democratic participation and social trust.' },
-      { id: 'C',  text: 'That both are real \u2014 but trying to solve both simultaneously usually produces ineffective policy.' },
+      { id: 'C',  text: 'That both are real, but trying to solve both simultaneously usually produces ineffective policy.' },
       { id: 'D1', text: 'That absolute quality of life matters more than how wealth is distributed across groups.' },
-      { id: 'D2', text: 'That this framing assumes a fixed pie \u2014 I reject the premise of the question.' },
+      { id: 'D2', text: 'That this framing assumes a fixed pie. I reject the premise of the question.' },
     ],
   },
   {
@@ -44,9 +44,9 @@ const QUESTIONS = [
     stem: 'On social issues, which principle would you defend even under pressure?',
     options: [
       { id: 'A',  text: 'Traditions and shared values that have held communities together over time deserve protection.' },
-      { id: 'B',  text: 'Individual autonomy \u2014 people should live as they choose without interference from the state or majority opinion.' },
-      { id: 'C',  text: 'Maintaining social cohesion sometimes requires limits on individual expression \u2014 that\u2019s an acceptable tradeoff.' },
-      { id: 'D',  text: 'Most social conflict is downstream of economic insecurity \u2014 fix that first.' },
+      { id: 'B',  text: 'Individual autonomy: people should live as they choose without interference from the state or majority opinion.' },
+      { id: 'C',  text: 'Maintaining social cohesion sometimes requires limits on individual expression. That\u2019s an acceptable tradeoff.' },
+      { id: 'D',  text: 'Most social conflict is downstream of economic insecurity. Fix that first.' },
     ],
   },
   {
@@ -54,10 +54,10 @@ const QUESTIONS = [
     topic: 'Institutions and Democracy',
     stem: 'Which position would you hold even if it made you unpopular?',
     options: [
-      { id: 'A',  text: 'Our institutions have become self-serving and unaccountable \u2014 meaningful disruption is overdue.' },
-      { id: 'B',  text: 'Imperfect institutions are still what stands between order and chaos \u2014 defend them.' },
+      { id: 'A',  text: 'Our institutions have become self-serving and unaccountable. Meaningful disruption is overdue.' },
+      { id: 'B',  text: 'Imperfect institutions are still what stands between order and chaos. Defend them.' },
       { id: 'C',  text: 'Serious reform is necessary, but tearing down institutions creates more problems than it solves.' },
-      { id: 'D',  text: 'What matters is whether things work \u2014 institutional form is secondary.' },
+      { id: 'D',  text: 'What matters is whether things work. Institutional form is secondary.' },
     ],
   },
   {
@@ -65,10 +65,10 @@ const QUESTIONS = [
     topic: 'Change and Stability',
     stem: 'When things feel politically unstable, what position would you stand behind?',
     options: [
-      { id: 'A',  text: 'Push harder \u2014 crises create openings for change that stability never allows.' },
-      { id: 'B',  text: 'Hold the line \u2014 preserving stability matters more than advancing any agenda right now.' },
-      { id: 'C',  text: 'Work incrementally \u2014 change that lasts has to be built carefully, even when it\u2019s frustrating.' },
-      { id: 'D',  text: 'Step back \u2014 overcorrecting in turbulent times usually makes things worse.' },
+      { id: 'A',  text: 'Push harder. Crises create openings for change that stability never allows.' },
+      { id: 'B',  text: 'Hold the line. Preserving stability matters more than advancing any agenda right now.' },
+      { id: 'C',  text: 'Work incrementally. Change that lasts has to be built carefully, even when it\u2019s frustrating.' },
+      { id: 'D',  text: 'Step back. Overcorrecting in turbulent times usually makes things worse.' },
     ],
   },
   {
@@ -76,10 +76,10 @@ const QUESTIONS = [
     topic: 'Leadership',
     stem: 'Which leader would you trust with real power, knowing the risks?',
     options: [
-      { id: 'A',  text: 'The decisive disruptor \u2014 breaks with convention, forces issues others avoid.' },
-      { id: 'B',  text: 'The empathetic consensus builder \u2014 listens, brings people along, builds coalitions.' },
-      { id: 'C',  text: 'The technocratic problem-solver \u2014 evidence-based, expert, less concerned with politics.' },
-      { id: 'D',  text: 'The principled outsider \u2014 limited power, independent, accountable to no establishment.' },
+      { id: 'A',  text: 'The decisive disruptor: breaks with convention, forces issues others avoid.' },
+      { id: 'B',  text: 'The empathetic consensus builder: listens, brings people along, builds coalitions.' },
+      { id: 'C',  text: 'The technocratic problem-solver: evidence-based, expert, less concerned with politics.' },
+      { id: 'D',  text: 'The principled outsider: limited power, independent, accountable to no establishment.' },
     ],
   },
   {
@@ -87,9 +87,9 @@ const QUESTIONS = [
     topic: 'Media and Information',
     stem: 'How do you actually navigate political information, honestly?',
     options: [
-      { id: 'A',  text: 'I\u2019ve stopped trusting mainstream outlets \u2014 the bias is too consistent and too consequential.' },
+      { id: 'A',  text: 'I\u2019ve stopped trusting mainstream outlets. The bias is too consistent and too consequential.' },
       { id: 'B',  text: 'Independent and alternative sources have proven more honest to me than legacy media.' },
-      { id: 'C',  text: 'I triangulate across sources \u2014 no single source is complete.' },
+      { id: 'C',  text: 'I triangulate across sources. No single source is complete.' },
       { id: 'D1', text: 'I\u2019ve built my own filtering system over time and mostly trust my own judgment (I still engage with information).' },
       { id: 'D2', text: 'I\u2019ve largely disengaged from political news \u2014 the signal-to-noise ratio isn\u2019t worth it.' },
     ],
@@ -99,7 +99,7 @@ const QUESTIONS = [
     topic: 'Identity and Politics',
     stem: 'Which position would you defend in a room that disagreed with you?',
     options: [
-      { id: 'A',  text: 'Lived experience is political knowledge \u2014 identity should substantially shape policy and representation.' },
+      { id: 'A',  text: 'Lived experience is political knowledge. Identity should substantially shape policy and representation.' },
       { id: 'B',  text: 'Identity matters, but it shouldn\u2019t override other considerations \u2014 it\u2019s one input among many.' },
       { id: 'C',  text: 'Policy should be designed around needs and outcomes, not group membership.' },
       { id: 'D',  text: 'Identity-based politics has become counterproductive \u2014 it creates more division than insight.' },
@@ -268,7 +268,9 @@ Do not include any # symbols, --- dividers, or markdown section markers between 
 
 Use Title Case for all section headers, not ALL CAPS. Headers should feel like steps in a diagnostic system, not essay headings. Each header should answer the question: what is this section doing for the reader?
 
-Paragraph length: keep each paragraph to 2–4 sentences maximum. After every 2–3 paragraphs, insert a blank line to create visual breathing room. Use bold (**text**) sparingly — no more than 1–2 instances per section, only for genuinely load-bearing phrases.`
+Paragraph length: keep each paragraph to 2–4 sentences maximum. After every 2–3 paragraphs, insert a blank line to create visual breathing room. Use bold (**text**) sparingly — no more than 1–2 instances per section, only for genuinely load-bearing phrases.
+
+Avoid em-dashes throughout. Use periods, commas, or restructure the sentence instead. Em-dashes create visual noise and interrupt reading flow. If you find yourself writing an em-dash, rewrite the sentence to eliminate it.`
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -580,7 +582,7 @@ export default function PoliticalAlignment({ onNavigate }) {
               <h3>Get your full report</h3>
               <p className="report-checkout-hook">{renderInline(bridgeLine, 'bridge')}</p>
               <p className="report-checkout-body">
-                Your responses reveal a deeper pattern in how you evaluate civic systems — where your views hold together, and where they come under tension.
+                Your responses reveal a deeper pattern in how you evaluate civic systems: where your views hold together, and where they come under tension.
               </p>
               <div className="report-checkout-deeper">
                 <p className="report-checkout-deeper-label">Inside, you'll see:</p>
