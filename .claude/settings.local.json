@@ -6,7 +6,10 @@
       "Bash(git commit *)",
       "Bash(git push *)",
       "Bash(python *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\18057\\\\Documents\\\\civic-congruence\\\\civic-congruence\\\\src\" -Recurse -Exclude node_modules | ForEach-Object { $_.FullName } | Sort-Object)",
+      "Bash(npm run *)",
+      "Bash(curl *)"
     ]
   }
 }

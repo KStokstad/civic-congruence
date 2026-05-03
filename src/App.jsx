@@ -37,9 +37,11 @@ function getInitialPage() {
 
 export default function App() {
   const [page, setPage] = useState(getInitialPage)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const navigate = useCallback((id) => {
     setPage(id)
+    setMenuOpen(false)
     window.location.hash = id === 'home' ? '' : `/${id}`
   }, [])
 
@@ -56,7 +58,7 @@ export default function App() {
           <button className="nav-logo" onClick={() => navigate('home')}>
             Civic Congruence
           </button>
-          <div className="nav-links">
+          <div className={`nav-links${menuOpen ? ' nav-links--open' : ''}`}>
             {NAV.map(({ id, label }) => (
               <button
                 key={id}
@@ -67,6 +69,15 @@ export default function App() {
               </button>
             ))}
           </div>
+          <button
+            className="nav-hamburger"
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Toggle menu"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
       </nav>
 

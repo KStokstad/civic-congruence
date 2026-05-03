@@ -5,33 +5,55 @@
 }
 
 :root {
-  --bg: #F8F7F4;
-  --surface: #FFFFFF;
-  --surface-2: #F2F1EE;
-  --border: #E2E1DC;
-  --border-strong: #C8C7C0;
-  --text: #4A4860;
-  --text-h: #1A1A2E;
-  --text-muted: #8A89A0;
-  --accent: #1B4B8A;
-  --accent-hover: #153A6E;
-  --accent-light: #EBF1FB;
-  --accent-mid: #3B72CC;
+  /* Core palette */
+  --bg: #F5F2EC;
+  --surface: #ffffff;
+  --surface-2: #EFECE5;
+  --ink: #1a1814;
+  --text: #1a1814;
+  --text-h: #1a1814;
+  --text-muted: #7a6e5e;
+
+  /* Gold */
+  --gold: #c8a96e;
+  --gold-text: #966e2a;
+  --gold-hover: #a8843e;
+
+  /* Inverted section */
+  --inverted-bg: #1e1c17;
+  --inverted-text: #EDE6DA;
+
+  /* Borders */
+  --border: #beb6a4;
+  --border-soft: rgba(0,0,0,0.08);
+  --border-strong: #9b9080;
+
+  /* Legacy aliases — used by survey/dashboard/alignment pages */
+  --accent: #966e2a;
+  --accent-hover: #7a5820;
+  --accent-light: rgba(200,169,110,0.12);
+  --accent-mid: #c8a96e;
+
+  /* Status */
   --success: #2D6A4F;
   --success-light: #D8F3DC;
   --error: #C0392B;
   --error-light: #FDECEA;
 
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Fonts */
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
-  --radius-sm: 6px;
-  --radius: 10px;
+  /* Radii */
+  --radius-sm: 9px;
+  --radius: 12px;
   --radius-lg: 16px;
+  --radius-pill: 20px;
 
-  --shadow-sm: 0 1px 3px rgba(26, 26, 46, 0.08);
-  --shadow: 0 4px 12px rgba(26, 26, 46, 0.10);
-  --shadow-lg: 0 8px 32px rgba(26, 26, 46, 0.12);
+  /* Shadows — kept for legacy components */
+  --shadow-sm: 0 1px 3px rgba(26, 24, 20, 0.06);
+  --shadow: 0 4px 12px rgba(26, 24, 20, 0.08);
+  --shadow-lg: 0 8px 32px rgba(26, 24, 20, 0.10);
 
   font-family: var(--font-sans);
   font-size: 16px;
@@ -40,6 +62,26 @@
   background-color: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #18160f;
+    --surface: #211f18;
+    --surface-2: #2a2820;
+    --ink: #EDE6DA;
+    --text: #EDE6DA;
+    --text-h: #EDE6DA;
+    --text-muted: #a09070;
+    --gold-text: #c8a96e;
+    --inverted-bg: #EDE6DA;
+    --inverted-text: #1e1c17;
+    --border: rgba(190,182,164,0.25);
+    --border-soft: rgba(255,255,255,0.06);
+    --border-strong: rgba(190,182,164,0.45);
+    --accent-light: rgba(200,169,110,0.15);
+    --accent: #c8a96e;
+  }
 }
 
 body {
