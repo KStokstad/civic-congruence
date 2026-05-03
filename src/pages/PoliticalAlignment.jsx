@@ -213,13 +213,15 @@ Do not use markdown formatting in your response. Do not use ## headers, ** bold 
 function parseAnalysis(text) {
   const patternMatch = text.match(/^\*{0,2}PATTERN(?:\s+LABEL)?:\*{0,2}\s*(.+)/m)
   const summaryMatch = text.match(/^\*{0,2}(?:RECOGNITION\s+)?SUMMARY:\*{0,2}\s*([\s\S]+?)(?=\n\n|#{1,3}\s*OUTPUT\s+[12]|OUTPUT\s+[12]|TENSION:|$)/m)
-  const tensionMatch = text.match(/^\*{0,2}(?:TENSION):\*{0,2}\s*(.+)/m)
+  const tensionMatch = text.match(/^\*{0,2}TENSION:\*{0,2}\s*(.+)/m)
+  const tensionLine = tensionMatch ? tensionMatch[1].trim() : null
+  console.log('[PA tension]', tensionLine)
   const o1 = text.match(/#{0,3}\s*OUTPUT\s+1[^\n]*\n([\s\S]+?)(?=#{0,3}\s*OUTPUT\s+2|$)/i)
   const o2 = text.match(/#{0,3}\s*OUTPUT\s+2[^\n]*\n([\s\S]+?)(?=#{0,3}\s*OUTPUT\s+3|$)/i)
   return {
     patternLabel:       patternMatch ? patternMatch[1].trim() : null,
     recognitionSummary: summaryMatch ? summaryMatch[1].trim() : null,
-    tensionLine:        tensionMatch ? tensionMatch[1].trim() : null,
+    tensionLine,
     label:          o1 ? o1[1].trim() : text,
     behaviorSignal: o2 ? o2[1].trim() : null,
   }
