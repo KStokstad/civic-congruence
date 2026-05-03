@@ -245,7 +245,7 @@ h1, h2, h3, h4 {
 
 /* Hero ─────────────────────────────────────────── */
 .home-hero {
-  background: #1e1c17;
+  background: var(--inverted-bg);
   position: relative;
   overflow: hidden;
   padding: 96px 0 84px;
@@ -253,9 +253,7 @@ h1, h2, h3, h4 {
 }
 
 @media (prefers-color-scheme: dark) {
-  .home-hero { background: #EDE6DA; }
   .home-hero-circle { border-color: rgba(150, 110, 42, 0.18); }
-  .home-hero-h1 { color: #1a1814; }
   .home-hero-subtitle { color: rgba(80, 55, 20, 0.85); }
   .home-hero-body { color: rgba(26, 24, 20, 0.5); }
   .btn-home-ghost {
@@ -324,7 +322,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-size: clamp(36px, 5vw, 52px);
   font-weight: 400;
-  color: #EDE6DA;
+  color: var(--inverted-text);
   line-height: 1.15;
   letter-spacing: -0.3px;
   margin: 0 auto 16px;
