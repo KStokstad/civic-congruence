@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { submitAlignment, updateAlignment, checkRepeatEmail } from '../services/airtable'
 import { renderMarkdown, renderInline } from '../utils/renderMarkdown'
 
@@ -237,6 +237,8 @@ export default function PoliticalAlignment({ onNavigate }) {
   const [checkoutLoading, setCheckoutLoading] = useState(false)
   const [checkoutError, setCheckoutError] = useState(null)
   const [curiosityIdx] = useState(() => Math.floor(Math.random() * CURIOSITY_LINES.length))
+  const [shareCopied, setShareCopied] = useState(false)
+  const shareCardRef = useRef(null)
 
   const total = QUESTIONS.length
   const question = QUESTIONS[step]
@@ -338,6 +340,38 @@ export default function PoliticalAlignment({ onNavigate }) {
       setCheckoutError(err.message)
       setCheckoutLoading(false)
     }
+  }
+
+  function firstSentence(text) {
+    if (!text) return ''
+    const match = text.match(/^[^.!?]+[.!?]/)
+    return match ? match[0].trim() : text.split('\n')[0].trim()
+  }
+
+  async function handleShare(patternLabel, recognitionSummary) {
+    const tension = firstSentence(recognitionSummary)
+    const shareText = tension ? `${patternLabel}. ${tension}` : patternLabel
+    const shareUrl = 'https://civiccongruence.org/#/political-alignment'
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'My Civic Alignment', text: shareText, url: shareUrl })
+        return
+      } catch (_) { /* fall through to clipboard */ }
+    }
+    await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`)
+    setShareCopied(true)
+    setTimeout(() => setShareCopied(false), 2500)
+  }
+
+  async function handleSaveImage(patternLabel) {
+    if (!shareCardRef.current) return
+    const { default: html2canvas } = await import('html2canvas')
+    const canvas = await html2canvas(shareCardRef.current, { scale: 2, useCORS: true })
+    const link = document.createElement('a')
+    const slug = (patternLabel || 'alignment').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+    link.download = `civic-alignment-${slug}.png`
+    link.href = canvas.toDataURL('image/png')
+    link.click()
   }
 
   function reset() {
@@ -453,6 +487,32 @@ export default function PoliticalAlignment({ onNavigate }) {
                 </div>
                 <div className="analysis-paragraphs">
                   {renderMarkdown(behaviorSignal)}
+                </div>
+              </div>
+            )}
+
+            {/* Share Card */}
+            {patternLabel && (
+              <div className="share-card-wrap">
+                <div className="share-card" ref={shareCardRef}>
+                  <div className="share-card-eyebrow">My Civic Alignment</div>
+                  <div className="share-card-pattern">{patternLabel}</div>
+                  <div className="share-card-tension">{firstSentence(recognitionSummary)}</div>
+                  <div className="share-card-url">civiccongruence.org</div>
+                </div>
+                <div className="share-card-actions">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleShare(patternLabel, recognitionSummary)}
+                  >
+                    {shareCopied ? 'Copied!' : 'Share your pattern'}
+                  </button>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => handleSaveImage(patternLabel)}
+                  >
+                    Save as image
+                  </button>
                 </div>
               </div>
             )}
