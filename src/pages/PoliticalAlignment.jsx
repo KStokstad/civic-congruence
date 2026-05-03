@@ -147,9 +147,12 @@ FREE OUTPUT
 OUTPUT 0 — RECOGNITION SUMMARY
 PATTERN LABEL: A 4-6 word phrase that names the core orientation. Precise, non-generic, not ideological. A behavioral description, not a political label.
 RECOGNITION SUMMARY: Exactly 2 sentences under 75 words total. The first sentence names the core pattern. The second sentence names the central tension. Use pattern language only: "your responses suggest," "a pattern emerges of." Do not use "you believe" or "you are." Do not repeat language that will appear in OUTPUT 1. Create curiosity, not closure.
+TENSION: One sentence only. 10-16 words maximum. Active voice. Describes a decision pattern, not an identity. No "your responses suggest," "you are," or political party labels. Should be directly shareable on social media as a self-description of how someone thinks under pressure.
+Example: "Favors decisive action when institutions feel too compromised to repair."
 Format exactly as:
 PATTERN: [label]
-SUMMARY: [text]
+SUMMARY: [2 sentences]
+TENSION: [one sentence]
 
 OUTPUT 1 — IDEOLOGICAL LABEL (SHORT)
 Write exactly one paragraph. Maximum 4 sentences. 80-120 words total.
@@ -209,12 +212,14 @@ Do not use markdown formatting in your response. Do not use ## headers, ** bold 
 
 function parseAnalysis(text) {
   const patternMatch = text.match(/^\*{0,2}PATTERN(?:\s+LABEL)?:\*{0,2}\s*(.+)/m)
-  const summaryMatch = text.match(/^\*{0,2}(?:RECOGNITION\s+)?SUMMARY:\*{0,2}\s*([\s\S]+?)(?=\n\n|#{1,3}\s*OUTPUT\s+[12]|OUTPUT\s+[12]|$)/m)
+  const summaryMatch = text.match(/^\*{0,2}(?:RECOGNITION\s+)?SUMMARY:\*{0,2}\s*([\s\S]+?)(?=\n\n|#{1,3}\s*OUTPUT\s+[12]|OUTPUT\s+[12]|TENSION:|$)/m)
+  const tensionMatch = text.match(/^\*{0,2}(?:TENSION):\*{0,2}\s*(.+)/m)
   const o1 = text.match(/#{0,3}\s*OUTPUT\s+1[^\n]*\n([\s\S]+?)(?=#{0,3}\s*OUTPUT\s+2|$)/i)
   const o2 = text.match(/#{0,3}\s*OUTPUT\s+2[^\n]*\n([\s\S]+?)(?=#{0,3}\s*OUTPUT\s+3|$)/i)
   return {
     patternLabel:       patternMatch ? patternMatch[1].trim() : null,
     recognitionSummary: summaryMatch ? summaryMatch[1].trim() : null,
+    tensionLine:        tensionMatch ? tensionMatch[1].trim() : null,
     label:          o1 ? o1[1].trim() : text,
     behaviorSignal: o2 ? o2[1].trim() : null,
   }
