@@ -423,11 +423,23 @@ Rules:
               <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: 0 }}>{pattern}</p>
             </div>
 
+            {error && <div className="error-banner">{error}</div>}
+
+            <div className="results-actions">
+              <p className="cs-result-contribute-eyebrow">CONTRIBUTE YOUR SIGNAL</p>
+              <p style={{ fontSize: 14, color: 'var(--text-secondary, var(--text))', textAlign: 'center', margin: '0 0 16px', lineHeight: 1.6 }}>
+                Thank you for sharing your experience. Submit your responses to add them to the community dataset. Your input helps surface what communities are actually experiencing.<br />Your responses will remain anonymous.
+              </p>
+              <button className="btn btn-primary btn-lg cs-result-submit-btn" onClick={handleSubmit} disabled={submitting}>
+                {submitting ? 'Saving…' : 'Add my responses to the dataset'}
+              </button>
+            </div>
+
             <div className="cs-result-share-card">
               <div className="cs-result-share-circle cs-result-share-circle--1" />
               <div className="cs-result-share-circle cs-result-share-circle--2" />
               <div style={{ position: 'relative' }}>
-                <p className="cs-result-share-eyebrow">MY CIVIC SIGNAL</p>
+                <p className="cs-result-share-eyebrow">SHARE YOUR RESULT</p>
                 <p className="cs-result-share-headline">
                   {(() => {
                     const adj = highest.score >= 4 ? 'stronger' : highest.score === 3 ? 'moderate' : 'present'
@@ -447,24 +459,13 @@ Rules:
                 className="cs-result-share-action cs-result-share-action--dark"
                 onClick={() => navigator.share?.({ title: 'My Civic Signal', url: window.location.href })}
               >
-                Share your signal
+                Share image
               </button>
               <button
                 className="cs-result-share-action cs-result-share-action--light"
                 onClick={() => navigator.clipboard?.writeText(window.location.href)}
               >
                 Copy link
-              </button>
-            </div>
-
-            {error && <div className="error-banner">{error}</div>}
-
-            <div className="results-actions">
-              <p style={{ fontSize: 14, color: 'var(--text-secondary, var(--text))', textAlign: 'center', margin: '0 0 12px', lineHeight: 1.6 }}>
-                Thank you for sharing your experience. Submit your responses to add them to the community dataset. Your input helps surface what communities are actually experiencing.<br />Your responses will remain anonymous.
-              </p>
-              <button className="btn btn-primary btn-lg" onClick={handleSubmit} disabled={submitting}>
-                {submitting ? 'Saving…' : 'Add my responses to the dataset'}
               </button>
             </div>
           </div>
