@@ -340,10 +340,8 @@ Rules:
         <div className="container-sm">
           <div className="submit-success">
             <div className="success-icon">✓</div>
-            <h3>Thank you for your response</h3>
-            <p>
-              Your civic data has been recorded. Once verified it will contribute
-              to the Civic Congruence dashboard.
+            <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', lineHeight: 1.6, margin: '0 0 24px' }}>
+              Thank you. Your anonymous responses have been added to the Civic Congruence dataset.
             </p>
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
               <button className="btn btn-primary" onClick={() => onNavigate('political-alignment')}>
@@ -423,17 +421,31 @@ Rules:
               <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: 0 }}>{pattern}</p>
             </div>
 
+            <hr className="cs-result-divider" />
+
             {error && <div className="error-banner">{error}</div>}
 
             <div className="results-actions">
               <p className="cs-result-contribute-eyebrow">CONTRIBUTE YOUR SIGNAL</p>
-              <p style={{ fontSize: 14, color: 'var(--text-secondary, var(--text))', textAlign: 'center', margin: '0 0 16px', lineHeight: 1.6 }}>
-                Thank you for sharing your experience. Submit your responses to add them to the community dataset. Your input helps surface what communities are actually experiencing.<br />Your responses will remain anonymous.
+              <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 6px', lineHeight: 1.6 }}>
+                Your result has been generated from your responses. Your responses have not been added to the community dataset yet.
+              </p>
+              <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 20px' }}>
+                Your input helps surface what communities are actually experiencing. Responses remain anonymous.
               </p>
               <button className="btn btn-primary btn-lg cs-result-submit-btn" onClick={handleSubmit} disabled={submitting}>
                 {submitting ? 'Saving…' : 'Submit my responses to the dataset'}
               </button>
             </div>
+
+            <hr className="cs-result-divider" />
+
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4, textAlign: 'center' }}>
+              OPTIONAL: SHARE YOUR RESULT
+            </p>
+            <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', marginBottom: 16, textAlign: 'center' }}>
+              This shares your civic signal publicly. It does not submit your responses to the dataset.
+            </p>
 
             <div className="cs-result-share-card">
               <div className="cs-result-share-circle cs-result-share-circle--1" />
@@ -684,6 +696,12 @@ Rules:
         {topicIdx === 0 && (
           <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 16 }}>
             Most answers will feel imperfect. Choose what&rsquo;s closest to your experience.
+          </p>
+        )}
+
+        {topicIdx === 0 && (
+          <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', maxWidth: 480, margin: '0 auto', padding: '12px 0', fontStyle: 'italic' }}>
+            Your answers are used to generate your private result. They are not added to the community dataset unless you choose to submit them.
           </p>
         )}
 

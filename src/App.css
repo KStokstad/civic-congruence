@@ -1350,6 +1350,12 @@ h1, h2, h3, h4 {
   margin-bottom: 16px;
 }
 
+.cs-result-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+
 .cs-result-contribute-eyebrow {
   font-family: var(--font-sans);
   font-size: 11px;
