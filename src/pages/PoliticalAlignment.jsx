@@ -600,7 +600,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
             <div className="pa-rarity-divider" />
             <div className="pa-rarity-stat">
-              <div className="pa-rarity-val">Your Region</div>
+              <div className="pa-rarity-val pa-rarity-val--plain">Your Region</div>
               <div className="pa-rarity-label">Most Common In</div>
             </div>
           </div>
