@@ -147,8 +147,8 @@ FREE OUTPUT
 OUTPUT 0 — RECOGNITION SUMMARY
 PATTERN LABEL: A 4-6 word phrase that names the core orientation. Precise, non-generic, not ideological. A behavioral description, not a political label.
 RECOGNITION SUMMARY: Exactly 2 sentences under 75 words total. The first sentence names the core pattern. The second sentence names the central tension. Use pattern language only: "your responses suggest," "a pattern emerges of." Do not use "you believe" or "you are." Do not repeat language that will appear in OUTPUT 1. Create curiosity, not closure.
-TENSION: One sentence only. Maximum 12 words. Active voice. Express the central tension in plain, direct language. Use the pattern: "[verb phrase], but [contrasting verb phrase]." Avoid abstract nouns. Make it sound like something a person would actually say, not a clinical description. No "your responses suggest," "you are," or political party labels.
-Example: "Wants systemic change, but distrusts the institutions that would deliver it."
+TENSION: One sentence only. Maximum 10 words. Active voice. Use exactly this pattern: "[verb phrase], but [contrasting verb phrase]." Both sides must be concrete verbs. No abstract nouns. No "your responses suggest," "you are," or party labels.
+Example: "Demands change, but only through trusted structures."
 Format exactly as:
 PATTERN: [label]
 SUMMARY: [2 sentences]
@@ -614,17 +614,17 @@ export default function PoliticalAlignment({ onNavigate }) {
           {/* object here before production launch    */}
           <div className="pa-rarity-strip">
             <div className="pa-rarity-stat">
-              <div className="pa-rarity-val">6%</div>
+              <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>6%</div>
               <div className="pa-rarity-label">Of Respondents</div>
             </div>
             <div className="pa-rarity-divider" />
             <div className="pa-rarity-stat">
-              <div className="pa-rarity-val">2nd</div>
+              <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>2nd</div>
               <div className="pa-rarity-label">Rarest Type</div>
             </div>
             <div className="pa-rarity-divider" />
             <div className="pa-rarity-stat">
-              <div className="pa-rarity-val">Your Area</div>
+              <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>Your Area</div>
               <div className="pa-rarity-label">Most Common In</div>
             </div>
           </div>
@@ -735,28 +735,24 @@ export default function PoliticalAlignment({ onNavigate }) {
               <div className="pa-insight-label">Ideological Pattern</div>
               <div className="pa-insight-body">
                 {label ? renderMarkdown(label) : '—'}
-                <div className="pa-insight-fade" />
               </div>
             </div>
             <div className="pa-insight-card">
               <div className="pa-insight-label">Where This Shows Up</div>
               <div className="pa-insight-body">
                 {behaviorSignal ? renderMarkdown(behaviorSignal) : '—'}
-                <div className="pa-insight-fade" />
               </div>
             </div>
             <div className="pa-insight-card">
               <div className="pa-insight-label">Common In</div>
               <div className="pa-insight-body pa-insight-body--clamp">
                 {firstSentence(recognitionSummary) || '—'}
-                <div className="pa-insight-fade" />
               </div>
             </div>
             <div className="pa-insight-card">
               <div className="pa-insight-label">The Central Tension</div>
               <div className="pa-insight-body">
                 {tensionLine || '—'}
-                <div className="pa-insight-fade" />
               </div>
             </div>
           </div>
@@ -766,7 +762,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-upsell-left">
               <p className="pa-upsell-eyebrow">Full Report</p>
               <h3 className="pa-upsell-h3">Where this pattern holds &mdash; and where it breaks</h3>
-              <p className="pa-upsell-body">Your full report breaks down why this pattern shows up, where it works, where it strains, and what to watch under pressure.</p>
+              <p className="pa-upsell-body" style={{ color: 'rgba(160, 144, 112, 0.8)' }}>Your full report breaks down why this pattern shows up, where it works, where it strains, and what to watch under pressure.</p>
             </div>
             <div className="pa-upsell-right">
               <div className="pa-upsell-price">$7</div>

@@ -3755,8 +3755,19 @@ h1, h2, h3, h4 {
   line-height: 1.6;
   color: var(--text-h);
   position: relative;
-  max-height: 80px;
+  max-height: 70px;
   overflow: hidden;
+}
+
+.pa-insight-body::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: linear-gradient(transparent, var(--surface));
+  pointer-events: none;
 }
 
 .pa-insight-body--clamp {
@@ -3767,14 +3778,8 @@ h1, h2, h3, h4 {
   max-height: none;
 }
 
-.pa-insight-fade {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 28px;
-  background: linear-gradient(transparent, var(--surface));
-  pointer-events: none;
+.pa-insight-body--clamp::after {
+  display: none;
 }
 
 .pa-insight-body p {
