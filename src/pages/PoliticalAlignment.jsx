@@ -733,7 +733,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
             <div className="pa-insight-card">
               <div className="pa-insight-label">Common In</div>
-              <div className="pa-insight-body">
+              <div className="pa-insight-body" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                 {firstSentence(recognitionSummary) || '—'}
                 <div className="pa-insight-fade" />
               </div>
