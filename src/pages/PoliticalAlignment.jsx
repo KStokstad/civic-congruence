@@ -587,7 +587,9 @@ export default function PoliticalAlignment({ onNavigate }) {
             <p className="pa-results-sub">Based on your answers to 10 values questions.</p>
           </div>
 
-          {/* 2. RARITY STRIP — TODO: wire up real rarity/rank/region from Airtable aggregates */}
+          {/* 2. RARITY STRIP */}
+          {/* TODO: Wire real region data from result */}
+          {/* object here before production launch    */}
           <div className="pa-rarity-strip">
             <div className="pa-rarity-stat">
               <div className="pa-rarity-val">6%</div>
@@ -600,7 +602,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
             <div className="pa-rarity-divider" />
             <div className="pa-rarity-stat">
-              <div className="pa-rarity-val pa-rarity-val--plain">Your Region</div>
+              <div className="pa-rarity-val">Your Area</div>
               <div className="pa-rarity-label">Most Common In</div>
             </div>
           </div>
@@ -622,9 +624,14 @@ export default function PoliticalAlignment({ onNavigate }) {
                 <div className="pa-share-circle pa-share-circle--md" />
                 <div className="pa-share-circle pa-share-circle--sm" />
                 <div className="pa-share-card-inner">
-                  <div className="pa-share-pattern">{tensionLine || patternLabel}</div>
+                  <div className="pa-share-pattern">
+                    {(() => {
+                      const t = tensionLine || patternLabel || ''
+                      return t.length > 65 ? t.slice(0, t.lastIndexOf(' ', 65)) + '.' : t
+                    })()}
+                  </div>
                   <div className="pa-share-meta-row">
-                    <span className="pa-share-badge">My Alignment</span>
+                    <span className="pa-share-badge">Pattern</span>
                     <span className="pa-share-type-name">{patternLabel}</span>
                   </div>
                   <div className="pa-share-footer">
@@ -682,9 +689,9 @@ export default function PoliticalAlignment({ onNavigate }) {
                 </div>
               ))}
             </div>
-            <div className="pa-dist-blurred">
+            <div className="pa-dist-gated">
               {DIST_BLURRED.map((t) => (
-                <div className="pa-dist-row" key={t.name}>
+                <div className="pa-dist-row pa-dist-row--muted" key={t.name}>
                   <span className="pa-dist-label">{t.name}</span>
                   <div className="pa-dist-track">
                     <div className="pa-dist-fill" style={{ width: `${(t.pct / MAX_PCT) * 82}%`, background: 'var(--border)' }} />
@@ -692,29 +699,41 @@ export default function PoliticalAlignment({ onNavigate }) {
                   <span className="pa-dist-pct">{t.pct}%</span>
                 </div>
               ))}
+              <div className="pa-dist-overlay">
+                Full breakdown included in the full report
+              </div>
             </div>
-            <p className="pa-dist-upsell">
-              Full breakdown of all 12 types &mdash; <span className="pa-dist-upsell-link">included in the full report</span>
-            </p>
           </div>
 
           {/* 6. INSIGHT CARDS */}
           <div className="pa-insight-grid">
             <div className="pa-insight-card">
               <div className="pa-insight-label">Ideological Pattern</div>
-              <div className="pa-insight-body">{label ? renderMarkdown(label) : '—'}</div>
+              <div className="pa-insight-body">
+                {label ? renderMarkdown(label) : '—'}
+                <div className="pa-insight-fade" />
+              </div>
             </div>
             <div className="pa-insight-card">
               <div className="pa-insight-label">Where This Shows Up</div>
-              <div className="pa-insight-body">{behaviorSignal ? renderMarkdown(behaviorSignal) : '—'}</div>
+              <div className="pa-insight-body">
+                {behaviorSignal ? renderMarkdown(behaviorSignal) : '—'}
+                <div className="pa-insight-fade" />
+              </div>
             </div>
             <div className="pa-insight-card">
               <div className="pa-insight-label">Common In</div>
-              <div className="pa-insight-body">{firstSentence(recognitionSummary) || '—'}</div>
+              <div className="pa-insight-body">
+                {firstSentence(recognitionSummary) || '—'}
+                <div className="pa-insight-fade" />
+              </div>
             </div>
             <div className="pa-insight-card">
               <div className="pa-insight-label">The Central Tension</div>
-              <div className="pa-insight-body">{tensionLine || '—'}</div>
+              <div className="pa-insight-body">
+                {tensionLine || '—'}
+                <div className="pa-insight-fade" />
+              </div>
             </div>
           </div>
 
@@ -727,7 +746,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
             <div className="pa-upsell-right">
               <div className="pa-upsell-price">$7</div>
-              <p className="pa-upsell-delivery">Delivered instantly</p>
+              <p className="pa-upsell-delivery">Full report delivered instantly</p>
               <input
                 id="report-email"
                 className="pa-upsell-input"

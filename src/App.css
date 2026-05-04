@@ -3054,12 +3054,8 @@ h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-size: 32px;
   font-weight: 400;
-  color: var(--gold);
+  color: rgba(240, 234, 224, 0.95);
   line-height: 1.1;
-}
-
-.pa-rarity-val--plain {
-  color: var(--inverted-text);
 }
 
 .pa-rarity-label {
@@ -3365,26 +3361,32 @@ h1, h2, h3, h4 {
   font-weight: 500;
 }
 
-.pa-dist-blurred {
-  filter: blur(4px);
-  opacity: 0.45;
-  pointer-events: none;
+.pa-dist-gated {
+  position: relative;
 }
 
-.pa-dist-upsell {
-  font-family: var(--font-sans);
+.pa-dist-row--muted .pa-dist-name,
+.pa-dist-row--muted .pa-dist-pct {
+  color: var(--border);
+}
+
+.pa-dist-row--muted .pa-dist-fill {
+  background: var(--border);
+}
+
+.pa-dist-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 242, 236, 0.82);
+  backdrop-filter: blur(2px);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 13px;
   color: var(--text-muted);
   text-align: center;
-  margin-top: -52px;
-  position: relative;
-  z-index: 1;
-  padding: 14px;
-}
-
-.pa-dist-upsell-link {
-  color: var(--gold-text);
-  text-decoration: underline;
+  padding: 16px;
 }
 
 /* 6. Insight cards */
@@ -3416,10 +3418,19 @@ h1, h2, h3, h4 {
   font-size: 13px;
   line-height: 1.6;
   color: var(--text);
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
+  position: relative;
+  max-height: 80px;
   overflow: hidden;
+}
+
+.pa-insight-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: linear-gradient(transparent, var(--surface));
+  pointer-events: none;
 }
 
 .pa-insight-body p {
