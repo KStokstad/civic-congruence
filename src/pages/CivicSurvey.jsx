@@ -334,7 +334,7 @@ Rules:
   }
 
   // ── Submitted ────────────────────────────────────
-  if (submitted) {
+  if (submitted && surveyPhase !== 'results') {
     return (
       <div className="survey-page">
         <div className="container-sm">
@@ -425,59 +425,63 @@ Rules:
 
             {error && <div className="error-banner">{error}</div>}
 
-            <div className="results-actions">
-              <p className="cs-result-contribute-eyebrow">CONTRIBUTE YOUR SIGNAL</p>
-              <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 6px', lineHeight: 1.6 }}>
-                Your result has been generated from your responses. Your responses have not been added to the community dataset yet.
-              </p>
-              <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 20px' }}>
-                Your input helps surface what communities are actually experiencing. Responses remain anonymous.
-              </p>
-              <button className="btn btn-primary btn-lg cs-result-submit-btn" onClick={handleSubmit} disabled={submitting}>
-                {submitting ? 'Saving…' : 'Submit my responses to the dataset'}
-              </button>
-            </div>
-
-            <hr className="cs-result-divider" />
-
-            <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4, textAlign: 'center' }}>
-              OPTIONAL: SHARE YOUR RESULT
-            </p>
-            <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', marginBottom: 16, textAlign: 'center' }}>
-              This shares your civic signal publicly. It does not submit your responses to the dataset.
-            </p>
-
-            <div className="cs-result-share-card">
-              <div className="cs-result-share-circle cs-result-share-circle--1" />
-              <div className="cs-result-share-circle cs-result-share-circle--2" />
-              <div style={{ position: 'relative' }}>
-                <p className="cs-result-share-eyebrow">SHARE YOUR RESULT</p>
-                <p className="cs-result-share-headline">
-                  {(() => {
-                    const adj = highest.score >= 4 ? 'stronger' : highest.score === 3 ? 'moderate' : 'present'
-                    return `${highest.label} feels ${adj} — but ${lowest.label.toLowerCase()} still feels uncertain.`
-                  })()}
+            {submitted ? (
+              <div className="results-actions">
+                <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 32, lineHeight: 1.6 }}>
+                  Thank you. Your anonymous responses have been added to the Civic Congruence dataset.
                 </p>
-                <p style={{ fontSize: 13, color: '#8a7e6e', margin: '0 0 8px' }}>See what your experience points to:</p>
-                <div className="cs-result-share-footer">
-                  <span className="cs-result-share-url">civiccongruence.org</span>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4, textAlign: 'center' }}>
+                  OPTIONAL: SHARE YOUR RESULT
+                </p>
+                <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', marginBottom: 16, textAlign: 'center' }}>
+                  This shares your civic signal publicly. It does not submit additional data.
+                </p>
+                <div className="cs-result-share-card" style={{ width: '100%' }}>
+                  <div className="cs-result-share-circle cs-result-share-circle--1" />
+                  <div className="cs-result-share-circle cs-result-share-circle--2" />
+                  <div style={{ position: 'relative' }}>
+                    <p className="cs-result-share-eyebrow">SHARE YOUR RESULT</p>
+                    <p className="cs-result-share-headline">
+                      {(() => {
+                        const adj = highest.score >= 4 ? 'stronger' : highest.score === 3 ? 'moderate' : 'present'
+                        return `${highest.label} feels ${adj} — but ${lowest.label.toLowerCase()} still feels uncertain.`
+                      })()}
+                    </p>
+                    <p style={{ fontSize: 13, color: '#8a7e6e', margin: '0 0 8px' }}>See what your experience points to:</p>
+                    <div className="cs-result-share-footer">
+                      <span className="cs-result-share-url">civiccongruence.org</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="cs-result-share-btns" style={{ width: '100%' }}>
+                  <button
+                    className="cs-result-share-action cs-result-share-action--dark"
+                    onClick={() => navigator.share?.({ title: 'My Civic Signal', url: window.location.href })}
+                  >
+                    Share image
+                  </button>
+                  <button
+                    className="cs-result-share-action cs-result-share-action--light"
+                    onClick={() => navigator.clipboard?.writeText(window.location.href)}
+                  >
+                    Copy link
+                  </button>
                 </div>
               </div>
-            </div>
-            <div className="cs-result-share-btns">
-              <button
-                className="cs-result-share-action cs-result-share-action--dark"
-                onClick={() => navigator.share?.({ title: 'My Civic Signal', url: window.location.href })}
-              >
-                Share image
-              </button>
-              <button
-                className="cs-result-share-action cs-result-share-action--light"
-                onClick={() => navigator.clipboard?.writeText(window.location.href)}
-              >
-                Copy link
-              </button>
-            </div>
+            ) : (
+              <div className="results-actions">
+                <p className="cs-result-contribute-eyebrow">CONTRIBUTE YOUR SIGNAL</p>
+                <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 6px', lineHeight: 1.6 }}>
+                  Your result has been generated from your responses. Your responses have not been added to the community dataset yet.
+                </p>
+                <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 20px' }}>
+                  Your input helps surface what communities are actually experiencing. Responses remain anonymous.
+                </p>
+                <button className="btn btn-primary btn-lg cs-result-submit-btn" onClick={handleSubmit} disabled={submitting}>
+                  {submitting ? 'Saving…' : 'Submit my responses to the dataset'}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
