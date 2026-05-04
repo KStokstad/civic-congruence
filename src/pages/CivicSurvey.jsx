@@ -689,16 +689,6 @@ Rules:
     <div className="survey-page" id="cs-survey-anchor">
       <div className="container-sm">
         {topicIdx === 0 && (
-          <div className="survey-header">
-            <div className="section-label">Civic Survey</div>
-            <h2>Community Alignment Survey</h2>
-            <div className="diagnostic-instruction">
-              <p>The Civic Survey captures what you&rsquo;re actually experiencing in your community across five areas: economy, safety, health, education, and governance. It asks where you stand, what concerns you most, and what feels missing. Your responses join a shared dataset that reveals patterns across the community, not just your individual view.</p>
-            </div>
-          </div>
-        )}
-
-        {topicIdx === 0 && (
           <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 16 }}>
             Most answers will feel imperfect. Choose what&rsquo;s closest to your experience.
           </p>
