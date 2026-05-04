@@ -437,13 +437,53 @@ Rules:
 
             <hr className="cs-result-divider" style={{ margin: '32px 0' }} />
 
-            {error && <div className="error-banner">{error}</div>}
-
-            {submitted ? (
-              <div className="results-actions">
-                <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 32, lineHeight: 1.6 }}>
-                  Thank you. Your anonymous responses have been added to the Civic Congruence dataset.
+            <div style={{ background: 'var(--inverted-bg)', borderRadius: 16, padding: '28px 32px', marginTop: 32, position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: -30, right: -30, width: 160, height: 160, borderRadius: '50%', border: '1.5px solid rgba(200,169,110,0.12)' }} />
+              <div style={{ position: 'absolute', bottom: -40, left: 10, width: 120, height: 120, borderRadius: '50%', border: '1.5px solid rgba(200,169,110,0.08)' }} />
+              <div style={{ position: 'relative' }}>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--gold)', marginBottom: 10 }}>
+                  CONTRIBUTE YOUR SIGNAL
                 </p>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 22, color: 'var(--inverted-text)', marginBottom: 10, fontWeight: 400 }}>
+                  Your experience becomes part of the community dataset.
+                </h3>
+
+                {submitted ? (
+                  <p style={{ fontSize: 14, color: 'rgba(184,168,136,0.9)', textAlign: 'center', lineHeight: 1.6, margin: '16px 0 0' }}>
+                    Thank you. Your anonymous responses have been added to the Civic Congruence dataset.
+                  </p>
+                ) : (
+                  <>
+                    <p style={{ fontSize: 14, color: 'rgba(184,168,136,0.8)', lineHeight: 1.6, marginBottom: 6 }}>
+                      Your result has been generated from your responses. Your responses have not been added to the community dataset yet.
+                    </p>
+                    <p style={{ fontSize: 13, color: 'rgba(160,144,112,0.6)', marginBottom: 24 }}>
+                      Responses remain anonymous.
+                    </p>
+                    {error && <div className="error-banner">{error}</div>}
+                    <button
+                      onClick={handleSubmit}
+                      disabled={submitting}
+                      style={{
+                        background: 'var(--gold)', color: '#1a1814', border: 'none',
+                        borderRadius: 9, padding: 13, width: '100%',
+                        fontSize: 15, fontWeight: 500, cursor: 'pointer',
+                        fontFamily: 'var(--font-sans)', transition: 'background 0.15s',
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = '#a8843e'; e.currentTarget.style.color = '#ffffff' }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--gold)'; e.currentTarget.style.color = '#1a1814' }}
+                      onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.98)' }}
+                      onMouseUp={(e) => { e.currentTarget.style.transform = '' }}
+                    >
+                      {submitting ? 'Saving…' : 'Submit my responses to the dataset'}
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {submitted && (
+              <div style={{ marginTop: 24 }}>
                 <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4, textAlign: 'center' }}>
                   OPTIONAL: SHARE YOUR RESULT
                 </p>
@@ -481,19 +521,6 @@ Rules:
                     Copy link
                   </button>
                 </div>
-              </div>
-            ) : (
-              <div className="results-actions">
-                <p className="cs-result-contribute-eyebrow">CONTRIBUTE YOUR SIGNAL</p>
-                <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 6px', lineHeight: 1.6 }}>
-                  Your result has been generated from your responses. Your responses have not been added to the community dataset yet.
-                </p>
-                <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', margin: '0 0 20px' }}>
-                  Your input helps surface what communities are actually experiencing. Responses remain anonymous.
-                </p>
-                <button className="btn btn-primary btn-lg cs-result-submit-btn" onClick={handleSubmit} disabled={submitting}>
-                  {submitting ? 'Saving…' : 'Submit my responses to the dataset'}
-                </button>
               </div>
             )}
           </div>
