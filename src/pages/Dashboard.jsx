@@ -210,9 +210,9 @@ function LiveDashboard({ records, onReset }) {
 
   return (
     <div className="dashboard-data">
-      <div className="data-notice" style={{ background: '#f0fdf4', borderColor: '#86efac', color: '#166534' }}>
+      <div className="data-notice" style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--ink)' }}>
         <div>
-          <div>✓ Showing live verified data</div>
+          <div style={{ color: 'var(--gold-text)' }}>✓ Showing live verified data</div>
           <div style={{ fontSize: 12, opacity: 0.75, marginTop: 2 }}>Updated in real time</div>
         </div>
         <button

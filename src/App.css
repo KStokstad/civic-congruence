@@ -386,7 +386,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   background: transparent;
   color: rgba(237, 230, 218, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: all 0.15s ease;
   white-space: nowrap;
@@ -1496,8 +1496,8 @@ h1, h2, h3, h4 {
 }
 
 .bar-low  { background: #E85D3E; }
-.bar-mid  { background: #E8A53E; }
-.bar-high { background: #2D9C5F; }
+.bar-mid  { background: var(--gold); }
+.bar-high { background: var(--gold); }
 
 .bar-value {
   font-size: 14px;
@@ -1545,8 +1545,8 @@ h1, h2, h3, h4 {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: var(--success-light);
-  color: var(--success);
+  background: var(--accent-light);
+  color: var(--gold-text);
   font-size: 12px;
   font-weight: 600;
   padding: 2px 8px;
@@ -2164,22 +2164,29 @@ h1, h2, h3, h4 {
 }
 
 .about-hero {
-  background: linear-gradient(160deg, #F0EFF8 0%, #EBF1FB 50%, #F8F7F4 100%);
-  border-bottom: 1px solid var(--border);
+  background: var(--inverted-bg);
+  border-bottom: 1px solid rgba(240, 234, 224, 0.08);
   padding: 72px 0 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero-inner {
+  position: relative;
+  z-index: 1;
 }
 
 .about-hero h1 {
   font-size: clamp(32px, 4vw, 48px);
-  font-weight: 600;
-  color: var(--text-h);
+  font-weight: 400;
+  color: var(--inverted-text);
   margin: 12px 0 18px;
 }
 
 .about-hero-lead {
   font-size: 22px;
-  font-weight: 400;
-  color: var(--text-h);
+  font-weight: 300;
+  color: var(--inverted-text);
   max-width: 600px;
   line-height: 1.55;
   margin: 0 0 24px;
@@ -2187,7 +2194,8 @@ h1, h2, h3, h4 {
 
 .about-hero-sub {
   font-size: 18px;
-  color: var(--text);
+  font-weight: 300;
+  color: rgba(240, 234, 224, 0.6);
   max-width: 600px;
   line-height: 1.7;
   margin: 0;

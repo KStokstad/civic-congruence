@@ -48,7 +48,10 @@ export default function About({ onNavigate }) {
   return (
     <div className="about-page">
       <div className="about-hero">
-        <div className="container">
+        <div className="home-hero-circle home-hero-circle--large" />
+        <div className="home-hero-circle home-hero-circle--medium" />
+        <div className="home-hero-circle home-hero-circle--small" />
+        <div className="container about-hero-inner">
           <div className="section-label">ABOUT</div>
           <h1>Why this exists.</h1>
           <p className="about-hero-lead">

@@ -220,7 +220,12 @@ function AccessGate({ onUnlock, onApply }) {
 
   return (
     <div className="access-gate-card">
-      <div className="gate-icon">🔑</div>
+      <div className="gate-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="20" cy="20" r="18" stroke="var(--gold)" strokeWidth="2"/>
+          <circle cx="20" cy="20" r="8" stroke="var(--gold)" strokeWidth="2"/>
+        </svg>
+      </div>
       <h3>Network participants only</h3>
       <p>
         Weekly signal from organizations working directly with communities. This
