@@ -442,9 +442,14 @@ Rules:
               <div style={{ position: 'absolute', bottom: -40, left: 10, width: 120, height: 120, borderRadius: '50%', border: '1.5px solid rgba(200,169,110,0.08)' }} />
               <div style={{ position: 'relative' }}>
                 {submitted ? (
-                  <p style={{ fontSize: 14, color: 'rgba(184,168,136,0.9)', textAlign: 'center', lineHeight: 1.6, margin: 0 }}>
-                    Thank you. Your anonymous responses have been added to the Civic Congruence dataset.
-                  </p>
+                  <>
+                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--gold)', marginBottom: 8 }}>
+                      SUBMISSION COMPLETE
+                    </p>
+                    <p style={{ fontSize: 14, color: 'rgba(184,168,136,0.9)', textAlign: 'center', lineHeight: 1.6, margin: 0 }}>
+                      Thank you. Your anonymous responses have been added to the Civic Congruence dataset.
+                    </p>
+                  </>
                 ) : (
                   <>
                     <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--gold)', marginBottom: 10 }}>
@@ -454,7 +459,7 @@ Rules:
                       Your experience becomes part of the community dataset.
                     </h3>
                     <p style={{ fontSize: 14, color: 'rgba(184,168,136,0.8)', lineHeight: 1.6, marginBottom: 6 }}>
-                      Your result has been generated from your responses. Your responses have not been added to the community dataset yet.
+                      Your result is ready. Your responses have not yet been added to the community dataset.
                     </p>
                     <p style={{ fontSize: 13, color: 'rgba(160,144,112,0.6)', marginBottom: 24 }}>
                       Responses remain anonymous.
@@ -495,9 +500,9 @@ Rules:
                   <div style={{ position: 'relative' }}>
                     <p className="cs-result-share-eyebrow">SHARE YOUR RESULT</p>
                     <p className="cs-result-share-headline">{pattern}</p>
-                    <p style={{ fontSize: 13, color: '#8a7e6e', margin: '0 0 8px' }}>See what your experience points to:</p>
+                    <p style={{ fontSize: 13, color: '#8a7e6e', margin: '0 0 4px' }}>Map your civic alignment at</p>
                     <div className="cs-result-share-footer">
-                      <span className="cs-result-share-url">civiccongruence.org</span>
+                      <span className="cs-result-share-url" style={{ fontWeight: 500 }}>civiccongruence.org</span>
                     </div>
                   </div>
                 </div>
