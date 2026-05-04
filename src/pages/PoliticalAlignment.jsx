@@ -608,7 +608,7 @@ export default function PoliticalAlignment({ onNavigate }) {
           {/* 3. RECOGNITION QUOTE */}
           {(tensionLine || recognitionSummary) && (
             <div className="pa-quote-card">
-              <p className="pa-quote-card-text">{tensionLine || firstSentence(recognitionSummary)}</p>
+              <p className="pa-quote-card-text">{tensionLine || firstSentence(behaviorSignal) || firstSentence(recognitionSummary)}</p>
               <p className="pa-quote-card-attr">Pattern Recognition &mdash; What This Looks Like in Practice</p>
             </div>
           )}
@@ -622,7 +622,7 @@ export default function PoliticalAlignment({ onNavigate }) {
                 <div className="pa-share-circle pa-share-circle--md" />
                 <div className="pa-share-circle pa-share-circle--sm" />
                 <div className="pa-share-card-inner">
-                  <div className="pa-share-pattern">{patternLabel}</div>
+                  <div className="pa-share-pattern">{tensionLine || patternLabel}</div>
                   <div className="pa-share-meta-row">
                     <span className="pa-share-badge">My Alignment</span>
                     <span className="pa-share-type-name">{patternLabel}</span>
@@ -710,7 +710,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
             <div className="pa-insight-card">
               <div className="pa-insight-label">Common In</div>
-              <div className="pa-insight-body">{recognitionSummary ? renderMarkdown(recognitionSummary) : '—'}</div>
+              <div className="pa-insight-body">{firstSentence(recognitionSummary) || '—'}</div>
             </div>
             <div className="pa-insight-card">
               <div className="pa-insight-label">The Central Tension</div>

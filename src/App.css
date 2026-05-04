@@ -3048,7 +3048,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-size: 32px;
   font-weight: 400;
-  color: var(--gold);
+  color: var(--inverted-text);
   line-height: 1.1;
 }
 
@@ -3406,6 +3406,10 @@ h1, h2, h3, h4 {
   font-size: 13px;
   line-height: 1.6;
   color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .pa-insight-body p {
@@ -3450,7 +3454,7 @@ h1, h2, h3, h4 {
 .pa-upsell-body {
   font-family: var(--font-sans);
   font-size: 13px;
-  color: rgba(160, 144, 112, 0.8);
+  color: rgba(240, 234, 224, 0.55);
   line-height: 1.6;
   margin: 0;
 }
