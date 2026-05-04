@@ -695,8 +695,12 @@ h1, h2, h3, h4 {
 
 .cs-signal {
   background: var(--bg);
-  padding: 64px 40px;
+  padding: 48px 40px 16px;
   text-align: center;
+}
+
+.cs-signal + #cs-survey-anchor {
+  padding-top: 20px;
 }
 
 .cs-signal-inner {
