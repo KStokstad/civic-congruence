@@ -370,15 +370,27 @@ export default function PoliticalAlignment({ onNavigate }) {
     setTimeout(() => setShareCopied(false), 2500)
   }
 
-  async function handleSaveImage(patternLabel) {
+  async function handleSaveImage() {
     if (!shareCardRef.current) return
     const { default: html2canvas } = await import('html2canvas')
     const canvas = await html2canvas(shareCardRef.current, { scale: 2, useCORS: true })
-    const link = document.createElement('a')
-    const slug = (patternLabel || 'alignment').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-    link.download = `civic-alignment-${slug}.png`
-    link.href = canvas.toDataURL('image/png')
-    link.click()
+    canvas.toBlob(async (blob) => {
+      if (!blob) return
+      const file = new File([blob], 'civic-congruence-result.png', { type: 'image/png' })
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try { await navigator.share({ files: [file] }); return } catch (_) {}
+      }
+      const link = document.createElement('a')
+      link.download = 'civic-congruence-result.png'
+      link.href = URL.createObjectURL(blob)
+      link.click()
+    })
+  }
+
+  async function handleCopyLink() {
+    await navigator.clipboard.writeText(window.location.href)
+    setShareCopied(true)
+    setTimeout(() => setShareCopied(false), 2000)
   }
 
   function reset() {
@@ -658,18 +670,18 @@ export default function PoliticalAlignment({ onNavigate }) {
                 </div>
               </div>
               <div className="pa-share-btns">
-                <button className="pa-share-btn pa-share-btn--dark" onClick={() => handleSaveImage(patternLabel)}>
+                <button className="pa-share-btn pa-share-btn--dark" onClick={handleSaveImage}>
                   Share image
                 </button>
-                <button className="pa-share-btn pa-share-btn--surface" onClick={() => handleShare(patternLabel, recognitionSummary)}>
+                <button className="pa-share-btn pa-share-btn--surface" onClick={handleCopyLink}>
                   {shareCopied ? 'Copied!' : 'Copy link'}
                 </button>
                 <button
                   className="pa-share-btn pa-share-btn--surface"
                   onClick={() => {
-                    const shareText = encodeURIComponent((tensionLine || patternLabel) + ' — find yours at')
-                    const shareUrl = encodeURIComponent('https://civiccongruence.org/#/political-alignment')
-                    window.open('https://twitter.com/intent/tweet?text=' + shareText + '&url=' + shareUrl, '_blank')
+                    const text = encodeURIComponent((tensionLine || patternLabel) + ' — find yours at')
+                    const url = encodeURIComponent('https://civiccongruence.org/#/political-alignment')
+                    window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank')
                   }}
                 >
                   Post to X

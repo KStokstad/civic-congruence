@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { submitSurvey, fetchSurveyCount } from '../services/airtable'
 
 const ALL_TOPICS = [
@@ -177,6 +177,8 @@ export default function CivicSurvey({ onNavigate }) {
   const [error, setError] = useState(null)
   const [reflection, setReflection] = useState(null)
   const [reflectionLoading, setReflectionLoading] = useState(false)
+  const [copiedLink, setCopiedLink] = useState(false)
+  const csShareCardRef = useRef(null)
 
   function initSurvey(count) {
     const setIdx = (count || 0) % 5
@@ -250,6 +252,29 @@ Rules:
 
   function answer(fieldName, value) {
     setAnswers((prev) => ({ ...prev, [fieldName]: value }))
+  }
+
+  async function handleShareImage() {
+    if (!csShareCardRef.current) return
+    const { default: html2canvas } = await import('html2canvas')
+    const canvas = await html2canvas(csShareCardRef.current, { scale: 2, useCORS: true })
+    canvas.toBlob(async (blob) => {
+      if (!blob) return
+      const file = new File([blob], 'civic-congruence-result.png', { type: 'image/png' })
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try { await navigator.share({ files: [file] }); return } catch (_) {}
+      }
+      const link = document.createElement('a')
+      link.download = 'civic-congruence-result.png'
+      link.href = URL.createObjectURL(blob)
+      link.click()
+    })
+  }
+
+  async function handleCopyLink() {
+    await navigator.clipboard.writeText(window.location.href)
+    setCopiedLink(true)
+    setTimeout(() => setCopiedLink(false), 2000)
   }
 
   function reset() {
@@ -494,7 +519,7 @@ Rules:
                 <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', marginBottom: 16, textAlign: 'center' }}>
                   This shares your civic signal publicly. It does not submit additional data.
                 </p>
-                <div className="cs-result-share-card" style={{ width: '100%' }}>
+                <div className="cs-result-share-card" ref={csShareCardRef} style={{ width: '100%' }}>
                   <div className="cs-result-share-circle cs-result-share-circle--1" />
                   <div className="cs-result-share-circle cs-result-share-circle--2" />
                   <div style={{ position: 'relative' }}>
@@ -509,15 +534,15 @@ Rules:
                 <div className="cs-result-share-btns" style={{ width: '100%' }}>
                   <button
                     className="cs-result-share-action cs-result-share-action--dark"
-                    onClick={() => navigator.share?.({ title: 'My Civic Signal', url: window.location.href })}
+                    onClick={handleShareImage}
                   >
                     Share image
                   </button>
                   <button
                     className="cs-result-share-action cs-result-share-action--light"
-                    onClick={() => navigator.clipboard?.writeText(window.location.href)}
+                    onClick={handleCopyLink}
                   >
-                    Copy link
+                    {copiedLink ? 'Copied!' : 'Copy link'}
                   </button>
                 </div>
               </div>
