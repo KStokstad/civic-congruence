@@ -557,137 +557,206 @@ export default function PoliticalAlignment({ onNavigate }) {
 
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
-    const { patternLabel, recognitionSummary, label, behaviorSignal } = parseAnalysis(analysis)
-    console.log('[PA parsed]', { patternLabel, recognitionSummary, label, behaviorSignal })
+    const { patternLabel, recognitionSummary, tensionLine, label, behaviorSignal } = parseAnalysis(analysis)
+    console.log('[PA parsed]', { patternLabel, recognitionSummary, tensionLine, label, behaviorSignal })
     const transitionLine = patternLabel
       ? `${patternLabel} shows up more clearly under pressure. The full report breaks down how this pattern holds together, and where it starts to strain.`
       : "Your pattern shows up more clearly under pressure. The full report breaks down how it holds together, and where it starts to strain."
 
+    // Placeholder distribution data — TODO: wire up real type frequency data from Airtable
+    const DIST_VISIBLE = [
+      { name: 'Pragmatic Bridge-Builder', pct: 22, isUser: false },
+      { name: 'Civic Minimalist', pct: 18, isUser: false },
+      { name: patternLabel || 'Your Type', pct: 6, isUser: true },
+    ]
+    const DIST_BLURRED = [
+      { name: 'Progressive Institutionalist', pct: 12 },
+      { name: 'Principled Dissenter', pct: 9 },
+      { name: 'Constructive Realist', pct: 8 },
+    ]
+    const MAX_PCT = 22
+
     return (
-      <div className="survey-page">
-        <div className="container-sm">
-          <div className="alignment-results">
-            <div className="section-label" style={{ textAlign: 'center', marginBottom: 8 }}>Your Analysis</div>
-            <h2 style={{ textAlign: 'center', marginBottom: 8 }}>Your Political Alignment</h2>
-            <p style={{ textAlign: 'center', marginBottom: 32, color: 'var(--text)' }}>
-              Based on your answers to 10 values questions.
-            </p>
+      <div className="pa-results-page">
+        <div className="pa-results-wrap">
 
-            {/* Output 0 — Recognition Card */}
-            {(patternLabel || recognitionSummary) && (
-              <div className="recognition-card">
-                {patternLabel && (
-                  <div className="recognition-card-label">{patternLabel}</div>
-                )}
-                {recognitionSummary && (
-                  <p className="recognition-card-summary">{renderInline(recognitionSummary, 'rec')}</p>
-                )}
-              </div>
-            )}
-            <div className="recognition-divider-wrap">
-              <hr className="recognition-divider-line" />
-              <div className="recognition-divider">Full analysis below ↓</div>
+          {/* 1. EYEBROW + HEADLINE */}
+          <div className="pa-results-header">
+            <p className="pa-results-eyebrow">Your Analysis</p>
+            <h1 className="pa-results-h1">Your Political Alignment</h1>
+            <p className="pa-results-sub">Based on your answers to 10 values questions.</p>
+          </div>
+
+          {/* 2. RARITY STRIP — TODO: wire up real rarity/rank/region from Airtable aggregates */}
+          <div className="pa-rarity-strip">
+            <div className="pa-rarity-stat">
+              <div className="pa-rarity-val">6%</div>
+              <div className="pa-rarity-label">Of Respondents</div>
             </div>
-
-            {/* Output 1 — Ideological Label */}
-            <div className="analysis-section">
-              <div className="analysis-section-header">
-                <span className="analysis-section-num">1</span>
-                Ideological Label
-              </div>
-              <div className="analysis-paragraphs">
-                {renderMarkdown(label)}
-              </div>
+            <div className="pa-rarity-divider" />
+            <div className="pa-rarity-stat">
+              <div className="pa-rarity-val">2nd</div>
+              <div className="pa-rarity-label">Rarest Type</div>
             </div>
-
-            {/* Output 2 — Where This Shows Up */}
-            {behaviorSignal && (
-              <div className="analysis-section">
-                <div className="analysis-section-header">
-                  <span className="analysis-section-num">2</span>
-                  Where This Shows Up
-                </div>
-                <div className="analysis-paragraphs">
-                  {renderMarkdown(behaviorSignal)}
-                </div>
-              </div>
-            )}
-
-            {/* Share Card */}
-            {patternLabel && (
-              <div className="share-card-wrap">
-                <div className="share-card" ref={shareCardRef}>
-                  <div className="share-card-eyebrow">My Civic Alignment</div>
-                  <div className="share-card-pattern">{patternLabel}</div>
-                  <div className="share-card-tension">{firstSentence(recognitionSummary)}</div>
-                  <div className="share-card-url">civiccongruence.org</div>
-                </div>
-                <div className="share-card-actions">
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleShare(patternLabel, recognitionSummary)}
-                  >
-                    {shareCopied ? 'Copied!' : 'Share your pattern'}
-                  </button>
-                  <button
-                    className="btn btn-secondary"
-                    onClick={() => handleSaveImage(patternLabel)}
-                  >
-                    Save as image
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Full Report Checkout */}
-            <div className="report-checkout">
-              <p className="report-checkout-transition">{renderInline(transitionLine, 'transition')}</p>
-              <div className="report-checkout-deeper">
-                <p className="report-checkout-deeper-label">Inside, you'll see:</p>
-                <ul>
-                  <li>Why this pattern shows up in your responses</li>
-                  <li>Where your thinking is consistent vs under pressure</li>
-                  <li>What kinds of systems align with your approach</li>
-                  <li>Where blind spots may emerge</li>
-                </ul>
-              </div>
-              <p className="report-checkout-curiosity">{CURIOSITY_LINES[curiosityIdx]}</p>
-              <div className="report-checkout-form">
-                <div className="field-group">
-                  <label className="field-label" htmlFor="report-email">
-                    Where should we send your report?
-                  </label>
-                  <input
-                    id="report-email"
-                    className="field-input"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={reportEmail}
-                    onChange={(e) => setReportEmail(e.target.value)}
-                  />
-                </div>
-                {checkoutError && (
-                  <div className="error-banner" style={{ marginTop: 8 }}>{checkoutError}</div>
-                )}
-                <button
-                  className="btn btn-primary btn-lg"
-                  onClick={handleCheckout}
-                  disabled={checkoutLoading || !reportEmail}
-                  style={{ marginTop: 12 }}
-                >
-                  {checkoutLoading ? 'Redirecting\u2026' : 'See your full report \u2014 $7'}
-                </button>
-                <p className="report-checkout-sent">A structured breakdown of how your thinking holds under pressure, where it works, and where it breaks. Delivered instantly.</p>
-              </div>
-            </div>
-
-            <div className="results-actions">
-              <button className="btn btn-secondary" onClick={() => onNavigate('civic-survey')}>
-                See how your community compares &#8594;
-              </button>
-              <button className="btn btn-ghost" onClick={reset}>Take it again</button>
+            <div className="pa-rarity-divider" />
+            <div className="pa-rarity-stat">
+              <div className="pa-rarity-val">Your Region</div>
+              <div className="pa-rarity-label">Most Common In</div>
             </div>
           </div>
+
+          {/* 3. RECOGNITION QUOTE */}
+          {(tensionLine || recognitionSummary) && (
+            <div className="pa-quote-card">
+              <p className="pa-quote-card-text">{tensionLine || firstSentence(recognitionSummary)}</p>
+              <p className="pa-quote-card-attr">Pattern Recognition &mdash; What This Looks Like in Practice</p>
+            </div>
+          )}
+
+          {/* 4. SHARE CARD + BUTTONS */}
+          {patternLabel && (
+            <div className="pa-share-section">
+              <p className="pa-share-label">Share Your Result</p>
+              <div className="pa-share-card" ref={shareCardRef}>
+                <div className="pa-share-circle pa-share-circle--lg" />
+                <div className="pa-share-circle pa-share-circle--md" />
+                <div className="pa-share-circle pa-share-circle--sm" />
+                <div className="pa-share-card-inner">
+                  <div className="pa-share-pattern">{patternLabel}</div>
+                  <div className="pa-share-meta-row">
+                    <span className="pa-share-badge">My Alignment</span>
+                    <span className="pa-share-type-name">{patternLabel}</span>
+                  </div>
+                  <div className="pa-share-footer">
+                    <div className="pa-share-track-wrap">
+                      <div className="pa-share-track">
+                        <div className="pa-share-track-fill" style={{ width: '6%' }} />
+                      </div>
+                    </div>
+                    <span className="pa-share-rarity-text">Top 6% rarest</span>
+                    <span className="pa-share-url">CIVICCONGRUENCE.ORG</span>
+                  </div>
+                </div>
+              </div>
+              <div className="pa-share-btns">
+                <button className="pa-share-btn pa-share-btn--dark" onClick={() => handleSaveImage(patternLabel)}>
+                  Share image
+                </button>
+                <button className="pa-share-btn pa-share-btn--surface" onClick={() => handleShare(patternLabel, recognitionSummary)}>
+                  {shareCopied ? 'Copied!' : 'Copy link'}
+                </button>
+                <button
+                  className="pa-share-btn pa-share-btn--surface"
+                  onClick={() => {
+                    const shareText = encodeURIComponent((tensionLine || patternLabel) + ' — find yours at')
+                    const shareUrl = encodeURIComponent('https://civiccongruence.org/#/political-alignment')
+                    window.open('https://twitter.com/intent/tweet?text=' + shareText + '&url=' + shareUrl, '_blank')
+                  }}
+                >
+                  Post to X
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* 5. DISTRIBUTION CHART */}
+          <div className="pa-dist-card">
+            <div className="pa-dist-header">
+              <span className="pa-dist-title">How your type compares</span>
+              <span className="pa-dist-link">Full breakdown &rarr;</span>
+            </div>
+            <div className="pa-dist-rows">
+              {DIST_VISIBLE.map((t) => (
+                <div className="pa-dist-row" key={t.name}>
+                  <span className={`pa-dist-label${t.isUser ? ' pa-dist-label--user' : ''}`}>{t.name}</span>
+                  <div className="pa-dist-track">
+                    <div
+                      className="pa-dist-fill"
+                      style={{
+                        width: `${(t.pct / MAX_PCT) * 82}%`,
+                        background: t.isUser ? 'var(--gold)' : 'var(--border)',
+                      }}
+                    />
+                  </div>
+                  <span className={`pa-dist-pct${t.isUser ? ' pa-dist-pct--user' : ''}`}>{t.pct}%</span>
+                </div>
+              ))}
+            </div>
+            <div className="pa-dist-blurred">
+              {DIST_BLURRED.map((t) => (
+                <div className="pa-dist-row" key={t.name}>
+                  <span className="pa-dist-label">{t.name}</span>
+                  <div className="pa-dist-track">
+                    <div className="pa-dist-fill" style={{ width: `${(t.pct / MAX_PCT) * 82}%`, background: 'var(--border)' }} />
+                  </div>
+                  <span className="pa-dist-pct">{t.pct}%</span>
+                </div>
+              ))}
+            </div>
+            <p className="pa-dist-upsell">
+              Full breakdown of all 12 types &mdash; <span className="pa-dist-upsell-link">included in the full report</span>
+            </p>
+          </div>
+
+          {/* 6. INSIGHT CARDS */}
+          <div className="pa-insight-grid">
+            <div className="pa-insight-card">
+              <div className="pa-insight-label">Ideological Pattern</div>
+              <div className="pa-insight-body">{label ? renderMarkdown(label) : '—'}</div>
+            </div>
+            <div className="pa-insight-card">
+              <div className="pa-insight-label">Where This Shows Up</div>
+              <div className="pa-insight-body">{behaviorSignal ? renderMarkdown(behaviorSignal) : '—'}</div>
+            </div>
+            <div className="pa-insight-card">
+              <div className="pa-insight-label">Common In</div>
+              <div className="pa-insight-body">{recognitionSummary ? renderMarkdown(recognitionSummary) : '—'}</div>
+            </div>
+            <div className="pa-insight-card">
+              <div className="pa-insight-label">The Central Tension</div>
+              <div className="pa-insight-body">{tensionLine || '—'}</div>
+            </div>
+          </div>
+
+          {/* 7. UPSELL BLOCK — checkout logic unchanged */}
+          <div className="pa-upsell-block">
+            <div className="pa-upsell-left">
+              <p className="pa-upsell-eyebrow">Full Report</p>
+              <h3 className="pa-upsell-h3">Where this pattern holds &mdash; and where it breaks</h3>
+              <p className="pa-upsell-body">{transitionLine}</p>
+            </div>
+            <div className="pa-upsell-right">
+              <div className="pa-upsell-price">$7</div>
+              <p className="pa-upsell-delivery">Delivered instantly</p>
+              <input
+                id="report-email"
+                className="pa-upsell-input"
+                type="email"
+                placeholder="your@email.com"
+                value={reportEmail}
+                onChange={(e) => setReportEmail(e.target.value)}
+              />
+              {checkoutError && (
+                <div className="error-banner" style={{ marginTop: 8 }}>{checkoutError}</div>
+              )}
+              <button
+                className="pa-upsell-btn"
+                onClick={handleCheckout}
+                disabled={checkoutLoading || !reportEmail}
+              >
+                {checkoutLoading ? 'Redirecting…' : 'Get full report — $7'}
+              </button>
+            </div>
+          </div>
+
+          {/* 8. BOTTOM BUTTONS */}
+          <div className="pa-bottom-btns">
+            <button className="pa-bottom-btn" onClick={() => onNavigate('civic-survey')}>
+              See how your community compares &#8594;
+            </button>
+            <button className="pa-bottom-btn" onClick={reset}>Take it again</button>
+          </div>
+
         </div>
       </div>
     )
