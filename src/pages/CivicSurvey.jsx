@@ -151,8 +151,7 @@ const TOPICS_BY_ID = Object.fromEntries(ALL_TOPICS.map((t) => [t.id, t]))
 const CLOSING_FIELD = 'Biggest Impact'
 
 function getScoreColor(score) {
-  if (score <= 2) return 'score-low'
-  if (score <= 3) return 'score-mid'
+  if (score <= 1) return 'score-low'
   return 'score-high'
 }
 
@@ -161,12 +160,7 @@ function buildSnapshot(topics, answers) {
   const sorted = [...scores].sort((a, b) => a.score - b.score)
   const highest = sorted[sorted.length - 1]
   const lowest = sorted[0]
-  const spread = highest.score - lowest.score
-  const pattern = spread > 1.5
-    ? 'Pattern: Uneven experience across systems'
-    : spread >= 0.5
-    ? 'Pattern: Mixed experience across systems'
-    : 'Pattern: Consistent experience across systems'
+  const pattern = `${highest.label} feels stronger than trust in ${lowest.label.toLowerCase()}`
   return { highest, lowest, pattern }
 }
 
@@ -429,39 +423,39 @@ Rules:
               <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: 0 }}>{pattern}</p>
             </div>
 
-            {reflection && (
-              <div className="cs-result-share-card">
-                <div className="cs-result-share-circle cs-result-share-circle--1" />
-                <div className="cs-result-share-circle cs-result-share-circle--2" />
-                <div style={{ position: 'relative' }}>
-                  <p className="cs-result-share-eyebrow">MY CIVIC SIGNAL</p>
-                  <p className="cs-result-share-quote">
-                    {(() => {
-                      const sentences = reflection.match(/[^.!?]+[.!?]+/g) || [reflection]
-                      const keywords = ['you want', "you're not", 'you feel', 'what comes through']
-                      const resonant = sentences.find((s) => keywords.some((k) => s.toLowerCase().includes(k)))
-                      if (resonant) return resonant.trim()
-                      const paras = reflection.split(/\n\n+/)
-                      if (paras.length > 1) {
-                        const s2 = paras[1].match(/[^.!?]+[.!?]+/g)
-                        return s2?.[0]?.trim() || paras[1].trim()
-                      }
-                      return sentences[0]?.trim() || reflection
-                    })()}
-                  </p>
-                  <div className="cs-result-share-footer">
-                    <span className="cs-result-share-url">CIVICCONGRUENCE.ORG</span>
-                    <span style={{ flex: 1 }} />
-                    <button
-                      className="cs-result-share-btn"
-                      onClick={() => navigator.share?.({ title: 'My Civic Signal', url: window.location.href })}
-                    >
-                      Share your signal
-                    </button>
-                  </div>
+            <div className="cs-result-share-card">
+              <div className="cs-result-share-circle cs-result-share-circle--1" />
+              <div className="cs-result-share-circle cs-result-share-circle--2" />
+              <div style={{ position: 'relative' }}>
+                <p className="cs-result-share-eyebrow">MY CIVIC SIGNAL</p>
+                <p className="cs-result-share-headline">
+                  {(() => {
+                    const adj = highest.score >= 4 ? 'stronger' : highest.score === 3 ? 'moderate' : 'present'
+                    return `${highest.label} feels ${adj} — but ${lowest.label.toLowerCase()} still feels uncertain.`
+                  })()}
+                </p>
+                <p className="cs-result-share-scores">
+                  {topicQueue.map((t) => `${t.label} ${answers[t.scale.fieldName] || 0}/5`).join(' · ')}
+                </p>
+                <div className="cs-result-share-footer">
+                  <span className="cs-result-share-url">Add your signal → civiccongruence.org</span>
                 </div>
               </div>
-            )}
+            </div>
+            <div className="cs-result-share-btns">
+              <button
+                className="cs-result-share-action cs-result-share-action--dark"
+                onClick={() => navigator.share?.({ title: 'My Civic Signal', url: window.location.href })}
+              >
+                Share your signal
+              </button>
+              <button
+                className="cs-result-share-action cs-result-share-action--light"
+                onClick={() => navigator.clipboard?.writeText(window.location.href)}
+              >
+                Copy link
+              </button>
+            </div>
 
             {error && <div className="error-banner">{error}</div>}
 
