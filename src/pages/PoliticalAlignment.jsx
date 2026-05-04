@@ -403,7 +403,8 @@ export default function PoliticalAlignment({ onNavigate }) {
           <div className="container">
             <div className="pa-section-header">
               <p className="pa-section-eyebrow">Political Alignment</p>
-              <h2 className="pa-section-h2">How it works</h2>
+              <h2 className="pa-section-h2">Not left or right.<br /><em>Specific.</em></h2>
+              <p className="pa-section-intro">Most political surveys put you on a spectrum. Civic Congruence maps the actual texture of your thinking — where your values are consistent, where they&rsquo;re in tension, and what that reveals about how you see the role of government.</p>
             </div>
             <div className="pa-steps-grid">
               <div className="home-signal-card">
@@ -428,6 +429,9 @@ export default function PoliticalAlignment({ onNavigate }) {
         {/* SAMPLE RESULT */}
         <section className="pa-sample-section">
           <div className="container">
+            <div className="pa-section-header pa-section-header--sample">
+              <h2 className="pa-section-h2">What your result<br /><em className="pa-section-h2-gold">looks like</em></h2>
+            </div>
             <div className="pa-sample-card">
               <div className="home-hero-circle home-hero-circle--large" />
               <div className="home-hero-circle home-hero-circle--medium" />
