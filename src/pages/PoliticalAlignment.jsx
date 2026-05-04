@@ -405,6 +405,12 @@ export default function PoliticalAlignment({ onNavigate }) {
               <p className="pa-section-eyebrow">Political Alignment</p>
               <h2 className="pa-section-h2">Not left or right.<br /><em>Specific.</em></h2>
               <p className="pa-section-intro">Most political surveys put you on a spectrum. Civic Congruence maps the actual texture of your thinking — where your values are consistent, where they&rsquo;re in tension, and what that reveals about how you see the role of government.</p>
+              <div className="pa-hero-cta">
+                <button className="btn pa-cta-btn" onClick={() => setPhase('questions')}>
+                  Start the 4-minute diagnostic
+                </button>
+                <p className="pa-cta-note">Free &middot; Private &middot; No registration</p>
+              </div>
             </div>
             <div className="pa-steps-grid">
               <div className="home-signal-card">
@@ -511,30 +517,30 @@ export default function PoliticalAlignment({ onNavigate }) {
           </div>
         </section>
 
-        {/* VALUES DIAGNOSTIC ENTRY — unchanged */}
+        {/* MID CTA — after pull quote */}
+        <section className="pa-mid-cta-section">
+          <div className="container-sm" style={{ textAlign: 'center' }}>
+            <button className="btn pa-cta-btn" onClick={() => setPhase('questions')}>
+              Start the 4-minute diagnostic
+            </button>
+          </div>
+        </section>
+
+        {/* CLOSING CTA */}
         <section className="pa-entry-section">
           <div className="container-sm">
-            <div className="survey-header">
-              <div className="section-label">Political Alignment</div>
-              <h2>Values Diagnostic</h2>
-              <div className="diagnostic-instruction">
-                <p>{OPENING_INSTRUCTION_LINES.join(' ')}</p>
-              </div>
-            </div>
-            <div style={{ textAlign: 'center', marginTop: 16 }}>
-              <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 12, marginTop: 0 }}>
-                Most options will feel partially true. Choose the answer you would accept in reality,<br />not the one that sounds best.
-              </p>
+            <div className="pa-closing-card">
+              <p className="pa-closing-eyebrow">Beyond opinion. Into signal.</p>
+              <h2 className="pa-closing-h2">Find out where you <em>actually</em> stand</h2>
+              <p className="pa-closing-sub">Ten questions. A result precise enough to share.</p>
               <button
-                className="btn btn-primary btn-lg"
-                style={{ width: '100%', maxWidth: 360 }}
+                className="btn pa-cta-btn"
+                style={{ width: '100%', maxWidth: 400 }}
                 onClick={() => setPhase('questions')}
               >
                 Start the 4-minute diagnostic
               </button>
-              <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginTop: 12, marginBottom: 0 }}>
-                Private. Your responses aren&rsquo;t shared.
-              </p>
+              <p className="pa-closing-note">Free &middot; Private &middot; Results in under 4 minutes</p>
             </div>
           </div>
         </section>
