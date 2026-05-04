@@ -363,7 +363,32 @@ Rules:
           <div className="results-screen">
             <div className="section-label" style={{ textAlign: 'center', marginBottom: 8, fontSize: 11, letterSpacing: '0.14em', color: 'var(--gold-text)' }}>YOUR RESULT</div>
             <h2>Your Civic Alignment</h2>
-            <p className="results-intro">Based on your answers across {topicQueue.length} civic areas.</p>
+            <p style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontStyle: 'italic', color: 'var(--gold-text)', marginTop: 6, marginBottom: 0 }}>{pattern}</p>
+
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '20px 0 32px' }}>
+              {topicQueue.map((t) => {
+                const pillScore = answers[t.scale.fieldName]
+                const isHighest = t.label === highest.label
+                const isLowest = t.label === lowest.label
+                return (
+                  <div
+                    key={t.id}
+                    style={{
+                      background: 'var(--surface-2)',
+                      border: `1px solid ${isHighest ? 'var(--gold)' : 'var(--border-soft)'}`,
+                      borderRadius: 20,
+                      padding: '8px 16px',
+                      fontSize: 13,
+                      color: 'var(--text)',
+                    }}
+                  >
+                    {t.label} {pillScore}/5{isLowest ? ' · Lowest' : ''}
+                  </div>
+                )
+              })}
+            </div>
+
+            <hr className="cs-result-divider" />
 
             {reflectionLoading && (
               <div style={{ marginBottom: 28, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '20px 24px', textAlign: 'center' }}>
@@ -410,18 +435,7 @@ Rules:
               })}
             </div>
 
-            <h4 className="results-group-header">Your alignment snapshot</h4>
-            <div className="results-summary results-summary--primary">
-              <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-h)', margin: '0 0 4px' }}>
-                Strongest signal: {highest.label} ({highest.score}/5)
-              </p>
-              <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: '0 0 10px' }}>
-                Lowest signal: {lowest.label} ({lowest.score}/5)
-              </p>
-              <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: 0 }}>{pattern}</p>
-            </div>
-
-            <hr className="cs-result-divider" />
+            <hr className="cs-result-divider" style={{ margin: '32px 0' }} />
 
             {error && <div className="error-banner">{error}</div>}
 
