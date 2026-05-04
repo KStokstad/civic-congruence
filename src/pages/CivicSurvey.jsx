@@ -441,19 +441,18 @@ Rules:
               <div style={{ position: 'absolute', top: -30, right: -30, width: 160, height: 160, borderRadius: '50%', border: '1.5px solid rgba(200,169,110,0.12)' }} />
               <div style={{ position: 'absolute', bottom: -40, left: 10, width: 120, height: 120, borderRadius: '50%', border: '1.5px solid rgba(200,169,110,0.08)' }} />
               <div style={{ position: 'relative' }}>
-                <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--gold)', marginBottom: 10 }}>
-                  CONTRIBUTE YOUR SIGNAL
-                </p>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 22, color: 'var(--inverted-text)', marginBottom: 10, fontWeight: 400 }}>
-                  Your experience becomes part of the community dataset.
-                </h3>
-
                 {submitted ? (
-                  <p style={{ fontSize: 14, color: 'rgba(184,168,136,0.9)', textAlign: 'center', lineHeight: 1.6, margin: '16px 0 0' }}>
+                  <p style={{ fontSize: 14, color: 'rgba(184,168,136,0.9)', textAlign: 'center', lineHeight: 1.6, margin: 0 }}>
                     Thank you. Your anonymous responses have been added to the Civic Congruence dataset.
                   </p>
                 ) : (
                   <>
+                    <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--gold)', marginBottom: 10 }}>
+                      CONTRIBUTE YOUR SIGNAL
+                    </p>
+                    <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 22, color: 'var(--inverted-text)', marginBottom: 10, fontWeight: 400 }}>
+                      Your experience becomes part of the community dataset.
+                    </h3>
                     <p style={{ fontSize: 14, color: 'rgba(184,168,136,0.8)', lineHeight: 1.6, marginBottom: 6 }}>
                       Your result has been generated from your responses. Your responses have not been added to the community dataset yet.
                     </p>
@@ -495,12 +494,7 @@ Rules:
                   <div className="cs-result-share-circle cs-result-share-circle--2" />
                   <div style={{ position: 'relative' }}>
                     <p className="cs-result-share-eyebrow">SHARE YOUR RESULT</p>
-                    <p className="cs-result-share-headline">
-                      {(() => {
-                        const adj = highest.score >= 4 ? 'stronger' : highest.score === 3 ? 'moderate' : 'present'
-                        return `${highest.label} feels ${adj} — but ${lowest.label.toLowerCase()} still feels uncertain.`
-                      })()}
-                    </p>
+                    <p className="cs-result-share-headline">{pattern}</p>
                     <p style={{ fontSize: 13, color: '#8a7e6e', margin: '0 0 8px' }}>See what your experience points to:</p>
                     <div className="cs-result-share-footer">
                       <span className="cs-result-share-url">civiccongruence.org</span>
