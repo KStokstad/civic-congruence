@@ -398,20 +398,28 @@ export default function PoliticalAlignment({ onNavigate }) {
     return (
       <div className="pa-landing">
 
+        {/* HERO */}
+        <div className="cs-hero">
+          <div className="cs-hero-circle cs-hero-circle--1" />
+          <div className="cs-hero-circle cs-hero-circle--2" />
+          <div className="cs-hero-circle cs-hero-circle--3" />
+          <div className="cs-hero-content">
+            <p className="cs-eyebrow">POLITICAL ALIGNMENT</p>
+            <h1 className="cs-hero-h1">Not left or right.<br /><em>Specific.</em></h1>
+            <p className="cs-hero-sub">Most political surveys put you on a spectrum. Civic Congruence maps the actual texture of your thinking — where your values are consistent, where they&rsquo;re in tension, and what that reveals about how you see the role of government.</p>
+            <button
+              className="cs-hero-cta"
+              onClick={() => setPhase('questions')}
+            >
+              Start the 4-minute diagnostic
+            </button>
+            <p className="cs-hero-note">Free &middot; Private &middot; No registration</p>
+          </div>
+        </div>
+
         {/* HOW IT WORKS */}
         <section className="pa-how-section">
           <div className="container">
-            <div className="pa-section-header">
-              <p className="pa-section-eyebrow">Political Alignment</p>
-              <h2 className="pa-section-h2">Not left or right.<br /><em>Specific.</em></h2>
-              <p className="pa-section-intro">Most political surveys put you on a spectrum. Civic Congruence maps the actual texture of your thinking — where your values are consistent, where they&rsquo;re in tension, and what that reveals about how you see the role of government.</p>
-              <div className="pa-hero-cta">
-                <button className="btn pa-cta-btn" onClick={() => setPhase('questions')}>
-                  Start the 4-minute diagnostic
-                </button>
-                <p className="pa-cta-note">Free &middot; Private &middot; No registration</p>
-              </div>
-            </div>
             <div className="pa-steps-grid">
               <div className="home-signal-card">
                 <div className="home-signal-card-heading">1</div>
