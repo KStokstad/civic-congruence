@@ -364,7 +364,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-sans);
   font-size: 15px;
   font-weight: 500;
-  background: #c8a96e;
+  background: #d4aa6e;
   color: #1a1814;
   border: none;
   cursor: pointer;
@@ -372,7 +372,7 @@ h1, h2, h3, h4 {
   white-space: nowrap;
 }
 
-.btn-home-primary:hover { background: #a8843e; color: #ffffff; }
+.btn-home-primary:hover { background: #b8923a; color: #ffffff; }
 .btn-home-primary:active { transform: scale(0.98); }
 
 .btn-home-ghost {
@@ -446,7 +446,7 @@ h1, h2, h3, h4 {
 }
 
 @media (prefers-color-scheme: dark) {
-  .home-signal-em { color: #c8a96e; }
+  .home-signal-em { color: #d4aa6e; }
 }
 
 .home-signal-sub {
@@ -511,7 +511,7 @@ h1, h2, h3, h4 {
 
 .home-pilot-card {
   background: var(--surface);
-  border: 1px solid #c8a96e;
+  border: 1px solid #d4aa6e;
   border-radius: 20px;
   padding: 48px 56px;
   display: grid;
@@ -542,7 +542,7 @@ h1, h2, h3, h4 {
 }
 
 @media (prefers-color-scheme: dark) {
-  .home-pilot-eyebrow { color: #c8a96e; }
+  .home-pilot-eyebrow { color: #d4aa6e; }
 }
 
 .home-pilot-h2 {

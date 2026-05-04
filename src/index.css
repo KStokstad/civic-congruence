@@ -15,9 +15,9 @@
   --text-muted: #7a6e5e;
 
   /* Gold */
-  --gold: #c8a96e;
+  --gold: #d4aa6e;
   --gold-text: #966e2a;
-  --gold-hover: #a8843e;
+  --gold-hover: #b8923a;
 
   /* Inverted section */
   --inverted-bg: #1e1c17;
@@ -32,7 +32,7 @@
   --accent: #966e2a;
   --accent-hover: #7a5820;
   --accent-light: rgba(200,169,110,0.12);
-  --accent-mid: #c8a96e;
+  --accent-mid: #d4aa6e;
 
   /* Status */
   --success: #2D6A4F;
