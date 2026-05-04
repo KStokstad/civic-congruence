@@ -147,8 +147,8 @@ FREE OUTPUT
 OUTPUT 0 — RECOGNITION SUMMARY
 PATTERN LABEL: A 4-6 word phrase that names the core orientation. Precise, non-generic, not ideological. A behavioral description, not a political label.
 RECOGNITION SUMMARY: Exactly 2 sentences under 75 words total. The first sentence names the core pattern. The second sentence names the central tension. Use pattern language only: "your responses suggest," "a pattern emerges of." Do not use "you believe" or "you are." Do not repeat language that will appear in OUTPUT 1. Create curiosity, not closure.
-TENSION: One sentence only. 10-16 words maximum. Active voice. Describes a decision pattern, not an identity. No "your responses suggest," "you are," or political party labels. Should be directly shareable on social media as a self-description of how someone thinks under pressure.
-Example: "Favors decisive action when institutions feel too compromised to repair."
+TENSION: One sentence only. Maximum 12 words. Active voice. Express the central tension in plain, direct language. Use the pattern: "[verb phrase], but [contrasting verb phrase]." Avoid abstract nouns. Make it sound like something a person would actually say, not a clinical description. No "your responses suggest," "you are," or political party labels.
+Example: "Wants systemic change, but distrusts the institutions that would deliver it."
 Format exactly as:
 PATTERN: [label]
 SUMMARY: [2 sentences]
@@ -643,7 +643,7 @@ export default function PoliticalAlignment({ onNavigate }) {
                     })()}
                   </div>
                   <div className="pa-share-meta-row">
-                    <span className="pa-share-badge">Pattern</span>
+                    <span className="pa-share-badge">My Pattern</span>
                     <span className="pa-share-type-name">{patternLabel}</span>
                   </div>
                   <div className="pa-share-footer">
@@ -712,7 +712,7 @@ export default function PoliticalAlignment({ onNavigate }) {
                 </div>
               ))}
               <div className="pa-dist-overlay">
-                Full breakdown included in the full report
+                Full breakdown of all types included in the full report
               </div>
             </div>
           </div>
@@ -754,7 +754,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-upsell-left">
               <p className="pa-upsell-eyebrow">Full Report</p>
               <h3 className="pa-upsell-h3">Where this pattern holds &mdash; and where it breaks</h3>
-              <p className="pa-upsell-body">{transitionLine}</p>
+              <p className="pa-upsell-body">Your full report breaks down why this pattern shows up, where it works, where it strains, and what to watch under pressure.</p>
             </div>
             <div className="pa-upsell-right">
               <div className="pa-upsell-price">$7</div>

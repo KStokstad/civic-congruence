@@ -3751,7 +3751,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-sans);
   font-size: 13px;
   line-height: 1.6;
-  color: var(--text);
+  color: var(--text-h);
   position: relative;
   max-height: 80px;
   overflow: hidden;
@@ -3770,7 +3770,7 @@ h1, h2, h3, h4 {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 32px;
+  height: 28px;
   background: linear-gradient(transparent, var(--surface));
   pointer-events: none;
 }
