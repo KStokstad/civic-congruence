@@ -627,6 +627,28 @@ Rules:
   const scaleAnswered = answers[topic.scale.fieldName] !== undefined
 
   return (
+    <>
+      {topicIdx === 0 && (
+        <>
+          <div className="cs-hero">
+            <div className="cs-hero-circle cs-hero-circle--1" />
+            <div className="cs-hero-circle cs-hero-circle--2" />
+            <div className="cs-hero-circle cs-hero-circle--3" />
+            <div className="cs-hero-content">
+              <p className="cs-eyebrow">CIVIC SURVEY</p>
+              <h1 className="cs-hero-h1">What is your community actually experiencing?</h1>
+              <p className="cs-hero-sub">Most surveys ask for your opinion. This one asks for your experience. The difference is what makes the data useful.</p>
+            </div>
+          </div>
+          <div className="cs-signal">
+            <div className="cs-signal-inner">
+              <h2 className="cs-signal-h2">Your experience becomes shared <em>signal</em></h2>
+              <p className="cs-signal-body">When you submit your responses, they join a community dataset that reveals patterns across governance, economy, safety, health, and education. You stay anonymous. The signal becomes visible.</p>
+            </div>
+          </div>
+          <hr className="cs-divider" />
+        </>
+      )}
     <div className="survey-page">
       <div className="container-sm">
         {topicIdx === 0 && (
@@ -730,5 +752,6 @@ Rules:
         </div>
       </div>
     </div>
+    </>
   )
 }
