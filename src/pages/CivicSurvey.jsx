@@ -369,7 +369,7 @@ Rules:
       <div className="survey-page">
         <div className="container-sm">
           <div className="results-screen">
-            <div className="section-label" style={{ textAlign: 'center', marginBottom: 8 }}>Your Profile</div>
+            <div className="section-label" style={{ textAlign: 'center', marginBottom: 8, fontSize: 11, letterSpacing: '0.14em', color: 'var(--gold-text)' }}>YOUR RESULT</div>
             <h2>Your Civic Alignment</h2>
             <p className="results-intro">Based on your answers across {topicQueue.length} civic areas.</p>
 
@@ -383,9 +383,6 @@ Rules:
 
             {reflection && (
               <div style={{ marginBottom: 28 }}>
-                <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', margin: '0 0 8px' }}>
-                  Based on your responses
-                </p>
                 <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '20px 24px' }}>
                   <p style={{ fontSize: 17, color: 'var(--text)', lineHeight: 1.7, margin: 0, fontWeight: 400, whiteSpace: 'pre-wrap' }}>
                     {reflection}
@@ -431,6 +428,29 @@ Rules:
               </p>
               <p style={{ fontSize: 16, fontWeight: 400, color: 'var(--text)', margin: 0 }}>{pattern}</p>
             </div>
+
+            {reflection && (
+              <div className="cs-result-share-card">
+                <div className="cs-result-share-circle cs-result-share-circle--1" />
+                <div className="cs-result-share-circle cs-result-share-circle--2" />
+                <div style={{ position: 'relative' }}>
+                  <p className="cs-result-share-eyebrow">MY CIVIC SIGNAL</p>
+                  <p className="cs-result-share-quote">
+                    {(() => { const i = reflection.indexOf('.'); return i > -1 ? reflection.slice(0, i + 1) : reflection })()}
+                  </p>
+                  <div className="cs-result-share-footer">
+                    <span className="cs-result-share-url">CIVICCONGRUENCE.ORG</span>
+                    <span style={{ flex: 1 }} />
+                    <button
+                      className="cs-result-share-btn"
+                      onClick={() => navigator.share?.({ title: 'My Civic Signal', url: window.location.href })}
+                    >
+                      Share your signal
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {error && <div className="error-banner">{error}</div>}
 
