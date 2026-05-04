@@ -386,7 +386,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   background: transparent;
   color: rgba(237, 230, 218, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   cursor: pointer;
   transition: all 0.15s ease;
   white-space: nowrap;
@@ -1381,12 +1381,12 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #FFFBEB;
-  border: 1px solid #FCD34D;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 10px 16px;
   font-size: 14px;
-  color: #92400E;
+  color: var(--text-muted);
   margin-bottom: 28px;
 }
 
@@ -2193,12 +2193,16 @@ h1, h2, h3, h4 {
 }
 
 .about-hero-sub {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
-  color: rgba(240, 234, 224, 0.6);
+  color: var(--inverted-text);
   max-width: 600px;
   line-height: 1.7;
   margin: 0;
+}
+
+.about-hero .section-label {
+  color: var(--gold-text);
 }
 
 .about-transition-line {

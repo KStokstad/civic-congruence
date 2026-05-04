@@ -120,7 +120,7 @@ function SampleDashboard({ onReset }) {
   return (
     <div className="dashboard-data">
       <div className="data-notice">
-        <span>⚠ This is sample data. Live data appears once verified responses are available.</span>
+        <span><span style={{ color: 'var(--gold-text)' }}>⚠</span> This is sample data. Live data appears once verified responses are available.</span>
         <span style={{ fontSize: 13, color: 'var(--text-muted)', marginLeft: 12 }}>Preview how the system works</span>
         <button
           className="btn btn-ghost"
@@ -210,7 +210,7 @@ function LiveDashboard({ records, onReset }) {
 
   return (
     <div className="dashboard-data">
-      <div className="data-notice" style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--ink)' }}>
+      <div className="data-notice" style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: 'var(--text)' }}>
         <div>
           <div style={{ color: 'var(--gold-text)' }}>✓ Showing live verified data</div>
           <div style={{ fontSize: 12, opacity: 0.75, marginTop: 2 }}>Updated in real time</div>
