@@ -407,12 +407,12 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
             <div className="pa-steps-grid">
               <div className="home-signal-card">
-                <div className="home-signal-card-heading">1 →</div>
+                <div className="home-signal-card-heading">1</div>
                 <p className="home-signal-card-bold">Answer 10 values questions.</p>
                 <p className="home-signal-card-body">Real tradeoffs, no right answers. Choose what you would actually do under pressure.</p>
               </div>
               <div className="home-signal-card">
-                <div className="home-signal-card-heading">2 →</div>
+                <div className="home-signal-card-heading">2</div>
                 <p className="home-signal-card-bold">Get your alignment type.</p>
                 <p className="home-signal-card-body">One of 12 behavioral patterns, named for how you decide — not for what party you vote for.</p>
               </div>
@@ -434,7 +434,11 @@ export default function PoliticalAlignment({ onNavigate }) {
               <div className="home-hero-circle home-hero-circle--small" />
               <div className="pa-sample-inner">
                 <p className="pa-sample-eyebrow">Political Alignment Result</p>
-                <h3 className="pa-sample-title">Protective Disruption Under Expert Control</h3>
+                <h3 className="pa-sample-title">
+                  <span className="pa-sample-title-main">Protective Disruption</span>
+                  <br />
+                  <span className="pa-sample-title-sub">Under Expert Control</span>
+                </h3>
                 <p className="pa-sample-sub">
                   Strong interventionist instincts, skeptical of the institutions that would do the intervening.
                 </p>
@@ -461,7 +465,8 @@ export default function PoliticalAlignment({ onNavigate }) {
         <section className="pa-types-section">
           <div className="container">
             <div className="pa-section-header">
-              <p className="pa-section-eyebrow">From the 12 alignment types</p>
+              <p className="pa-section-eyebrow">The 12 Alignment Types</p>
+              <h2 className="pa-section-h2">Every result is <em>distinct</em></h2>
             </div>
             <div className="pa-types-grid">
               <div className="pa-type-card">

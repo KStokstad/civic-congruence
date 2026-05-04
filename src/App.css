@@ -2707,13 +2707,23 @@ h1, h2, h3, h4 {
 
 .pa-sample-title {
   font-family: var(--font-display);
-  font-style: italic;
+  font-style: normal;
   font-size: clamp(26px, 3.5vw, 40px);
   font-weight: 400;
-  color: var(--gold);
+  color: var(--inverted-text);
   margin: 0 0 16px;
-  line-height: 1.2;
+  line-height: 1.25;
   max-width: 640px;
+}
+
+.pa-sample-title-main {
+  color: var(--inverted-text);
+  font-style: normal;
+}
+
+.pa-sample-title-sub {
+  color: var(--gold);
+  font-style: italic;
 }
 
 .pa-sample-sub {
