@@ -578,14 +578,16 @@ export default function PoliticalAlignment({ onNavigate }) {
 
     return (
       <div className="pa-results-page">
-        <div className="pa-results-wrap">
-
-          {/* 1. EYEBROW + HEADLINE */}
-          <div className="pa-results-header">
-            <p className="pa-results-eyebrow">Your Analysis</p>
-            <h1 className="pa-results-h1">Your Political Alignment</h1>
-            <p className="pa-results-sub">Based on your answers to 10 values questions.</p>
+        <div className="slim-hero">
+          <div className="slim-hero-circle slim-hero-circle--1" />
+          <div className="slim-hero-circle slim-hero-circle--2" />
+          <div className="slim-hero-content">
+            <p className="slim-hero-eyebrow">YOUR ANALYSIS</p>
+            <h1 className="slim-hero-h1">Your Political Alignment</h1>
+            <p className="slim-hero-sub">Based on your answers to 10 values questions.</p>
           </div>
+        </div>
+        <div className="pa-results-wrap">
 
           {/* 2. RARITY STRIP */}
           {/* TODO: Wire real region data from result */}

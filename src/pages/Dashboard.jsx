@@ -300,14 +300,17 @@ export default function Dashboard({ onNavigate }) {
   }
 
   return (
-    <div className="dashboard-page">
-      <div className="container">
-        <div className="dashboard-header">
-          <div>
-            <div className="section-label">Public Data</div>
-            <h2>Civic Alignment Dashboard</h2>
-          </div>
+    <>
+      <div className="slim-hero">
+        <div className="slim-hero-circle slim-hero-circle--1" />
+        <div className="slim-hero-circle slim-hero-circle--2" />
+        <div className="slim-hero-content">
+          <p className="slim-hero-eyebrow">PUBLIC DATA</p>
+          <h1 className="slim-hero-h1">Civic Alignment Dashboard</h1>
         </div>
+      </div>
+      <div className="dashboard-page">
+        <div className="container">
 
         {mode === 'empty' && (
           <div className="empty-state">
@@ -363,7 +366,8 @@ export default function Dashboard({ onNavigate }) {
         {mode === 'live' && (
           <LiveDashboard records={records} onReset={() => setMode('empty')} />
         )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }

@@ -737,6 +737,66 @@ h1, h2, h3, h4 {
   margin: 0 auto;
 }
 
+/* ── Slim hero (shared: Network Pulse, Dashboard, PA result) ── */
+.slim-hero {
+  background: var(--inverted-bg);
+  padding: 48px 40px 52px;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+
+.slim-hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.slim-hero-circle--1 {
+  top: -80px;
+  right: -80px;
+  width: 280px;
+  height: 280px;
+  border: 1.5px solid rgba(200, 169, 110, 0.12);
+}
+.slim-hero-circle--2 {
+  bottom: -60px;
+  left: -40px;
+  width: 200px;
+  height: 200px;
+  border: 1.5px solid rgba(200, 169, 110, 0.08);
+}
+
+.slim-hero-content {
+  position: relative;
+  max-width: 680px;
+}
+
+.slim-hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.slim-hero-h1 {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--inverted-text);
+  margin-bottom: 0;
+}
+
+.slim-hero-sub {
+  font-size: 14px;
+  color: rgba(184, 168, 136, 0.7);
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
 .survey-page {
   padding: 56px 0 80px;
 }
@@ -2589,6 +2649,11 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 720px) {
+  .slim-hero { padding: 32px 24px 36px; }
+  .slim-hero-h1 { font-size: 28px; }
+  .slim-hero-circle--1 { width: 200px; height: 200px; }
+  .slim-hero-circle--2 { width: 160px; height: 160px; }
+
   .nav-hamburger { display: flex; }
   .nav-links {
     display: none;

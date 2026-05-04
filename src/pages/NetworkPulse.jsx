@@ -403,12 +403,17 @@ export default function NetworkPulse() {
   }
 
   return (
-    <div className="survey-page">
-      <div className="container-sm">
-        <div className="survey-header">
-          <div className="section-label">Network Pulse</div>
-          <h2>Weekly Pulse Check-In</h2>
+    <>
+      <div className="slim-hero">
+        <div className="slim-hero-circle slim-hero-circle--1" />
+        <div className="slim-hero-circle slim-hero-circle--2" />
+        <div className="slim-hero-content">
+          <p className="slim-hero-eyebrow">NETWORK PULSE</p>
+          <h1 className="slim-hero-h1">Weekly Pulse Check-In</h1>
         </div>
+      </div>
+      <div className="survey-page">
+        <div className="container-sm">
 
         {view === 'gate' && (
           <AccessGate onUnlock={handleUnlock} onApply={() => setView('apply')} />
@@ -419,7 +424,8 @@ export default function NetworkPulse() {
         {view === 'pulse' && (
           <PulseForm networkName={networkName} onReset={() => setView('gate')} />
         )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
