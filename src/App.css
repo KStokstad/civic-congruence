@@ -597,6 +597,7 @@ h1, h2, h3, h4 {
 .cs-hero {
   background: var(--inverted-bg);
   padding: 80px 40px 88px;
+  padding-top: 80px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -662,6 +663,34 @@ h1, h2, h3, h4 {
   max-width: 460px;
   margin: 0 auto;
   line-height: 1.65;
+}
+
+.cs-hero-cta {
+  background: var(--gold);
+  color: #1a1814;
+  border: none;
+  border-radius: 9px;
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  margin-top: 36px;
+  display: inline-block;
+  transition: background 0.15s;
+}
+.cs-hero-cta:hover {
+  background: #a8843e;
+  color: #ffffff;
+}
+.cs-hero-cta:active {
+  transform: scale(0.98);
+}
+
+.cs-hero-note {
+  font-size: 12px;
+  color: rgba(160, 144, 112, 0.6);
+  margin-top: 14px;
 }
 
 .cs-signal {

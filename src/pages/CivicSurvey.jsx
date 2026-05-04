@@ -638,6 +638,13 @@ Rules:
               <p className="cs-eyebrow">CIVIC SURVEY</p>
               <h1 className="cs-hero-h1">What is your community actually experiencing?</h1>
               <p className="cs-hero-sub">Most surveys ask for your opinion. This one asks for your experience. The difference is what makes the data useful.</p>
+              <button
+                className="cs-hero-cta"
+                onClick={() => document.getElementById('cs-survey-anchor')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Share your experience
+              </button>
+              <p className="cs-hero-note">Free &middot; Anonymous &middot; Takes about 3 minutes</p>
             </div>
           </div>
           <div className="cs-signal">
@@ -646,10 +653,9 @@ Rules:
               <p className="cs-signal-body">When you submit your responses, they join a community dataset that reveals patterns across governance, economy, safety, health, and education. You stay anonymous. The signal becomes visible.</p>
             </div>
           </div>
-          <hr className="cs-divider" />
         </>
       )}
-    <div className="survey-page">
+    <div className="survey-page" id="cs-survey-anchor">
       <div className="container-sm">
         {topicIdx === 0 && (
           <div className="survey-header">
