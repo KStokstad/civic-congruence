@@ -436,7 +436,18 @@ Rules:
                 <div style={{ position: 'relative' }}>
                   <p className="cs-result-share-eyebrow">MY CIVIC SIGNAL</p>
                   <p className="cs-result-share-quote">
-                    {(() => { const i = reflection.indexOf('.'); return i > -1 ? reflection.slice(0, i + 1) : reflection })()}
+                    {(() => {
+                      const sentences = reflection.match(/[^.!?]+[.!?]+/g) || [reflection]
+                      const keywords = ['you want', "you're not", 'you feel', 'what comes through']
+                      const resonant = sentences.find((s) => keywords.some((k) => s.toLowerCase().includes(k)))
+                      if (resonant) return resonant.trim()
+                      const paras = reflection.split(/\n\n+/)
+                      if (paras.length > 1) {
+                        const s2 = paras[1].match(/[^.!?]+[.!?]+/g)
+                        return s2?.[0]?.trim() || paras[1].trim()
+                      }
+                      return sentences[0]?.trim() || reflection
+                    })()}
                   </p>
                   <div className="cs-result-share-footer">
                     <span className="cs-result-share-url">CIVICCONGRUENCE.ORG</span>
