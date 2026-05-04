@@ -396,31 +396,140 @@ export default function PoliticalAlignment({ onNavigate }) {
   // ── Intro ───────────────────────────────────────
   if (phase === 'intro') {
     return (
-      <div className="survey-page">
-        <div className="container-sm">
-          <div className="survey-header">
-            <div className="section-label">Political Alignment</div>
-            <h2>Values Diagnostic</h2>
-            <div className="diagnostic-instruction">
-              <p>{OPENING_INSTRUCTION_LINES.join(' ')}</p>
+      <div className="pa-landing">
+
+        {/* HOW IT WORKS */}
+        <section className="pa-how-section">
+          <div className="container">
+            <div className="pa-section-header">
+              <p className="pa-section-eyebrow">Political Alignment</p>
+              <h2 className="pa-section-h2">How it works</h2>
+            </div>
+            <div className="pa-steps-grid">
+              <div className="home-signal-card">
+                <div className="home-signal-card-heading">1 →</div>
+                <p className="home-signal-card-bold">Answer 10 values questions.</p>
+                <p className="home-signal-card-body">Real tradeoffs, no right answers. Choose what you would actually do under pressure.</p>
+              </div>
+              <div className="home-signal-card">
+                <div className="home-signal-card-heading">2 →</div>
+                <p className="home-signal-card-bold">Get your alignment type.</p>
+                <p className="home-signal-card-body">One of 12 behavioral patterns, named for how you decide — not for what party you vote for.</p>
+              </div>
+              <div className="home-signal-card">
+                <div className="home-signal-card-heading">3</div>
+                <p className="home-signal-card-bold">See where you fit.</p>
+                <p className="home-signal-card-body">Compare your type to the broader Civic Congruence respondent pool.</p>
+              </div>
             </div>
           </div>
-          <div style={{ textAlign: 'center', marginTop: 16 }}>
-            <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 12, marginTop: 0 }}>
-              Most options will feel partially true. Choose the answer you would accept in reality,<br />not the one that sounds best.
-            </p>
-            <button
-              className="btn btn-primary btn-lg"
-              style={{ width: '100%', maxWidth: 360 }}
-              onClick={() => setPhase('questions')}
-            >
-              Start the 4-minute diagnostic
-            </button>
-            <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginTop: 12, marginBottom: 0 }}>
-              Private. Your responses aren&rsquo;t shared.
-            </p>
+        </section>
+
+        {/* SAMPLE RESULT */}
+        <section className="pa-sample-section">
+          <div className="container">
+            <div className="pa-sample-card">
+              <div className="home-hero-circle home-hero-circle--large" />
+              <div className="home-hero-circle home-hero-circle--medium" />
+              <div className="home-hero-circle home-hero-circle--small" />
+              <div className="pa-sample-inner">
+                <p className="pa-sample-eyebrow">Political Alignment Result</p>
+                <h3 className="pa-sample-title">Protective Disruption Under Expert Control</h3>
+                <p className="pa-sample-sub">
+                  Strong interventionist instincts, skeptical of the institutions that would do the intervening.
+                </p>
+                <div className="pa-sample-stats">
+                  <div className="pa-stat">
+                    <div className="pa-stat-val">6%</div>
+                    <div className="pa-stat-label">of respondents</div>
+                  </div>
+                  <div className="pa-stat">
+                    <div className="pa-stat-val">2nd</div>
+                    <div className="pa-stat-label">rarest type</div>
+                  </div>
+                  <div className="pa-stat">
+                    <div className="pa-stat-val">Iowa</div>
+                    <div className="pa-stat-label">top location</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+
+        {/* THE 12 TYPES */}
+        <section className="pa-types-section">
+          <div className="container">
+            <div className="pa-section-header">
+              <p className="pa-section-eyebrow">From the 12 alignment types</p>
+            </div>
+            <div className="pa-types-grid">
+              <div className="pa-type-card">
+                <div className="pa-type-name">Civic Minimalist</div>
+                <p className="pa-type-desc">Skeptical of institutional solutions. Favors local accountability over coordinated intervention.</p>
+                <div className="pa-type-rarity">18% of respondents</div>
+              </div>
+              <div className="pa-type-card">
+                <div className="pa-type-name">Progressive Institutionalist</div>
+                <p className="pa-type-desc">Strong belief in systemic change through democratic structures, even when those structures move slowly.</p>
+                <div className="pa-type-rarity">12% of respondents</div>
+              </div>
+              <div className="pa-type-card">
+                <div className="pa-type-name">Pragmatic Bridge-Builder</div>
+                <p className="pa-type-desc">Values outcomes over ideology. Shifts position based on evidence, frustrating both sides.</p>
+                <div className="pa-type-rarity">22% of respondents</div>
+              </div>
+              <div className="pa-type-card">
+                <div className="pa-type-name">Principled Dissenter</div>
+                <p className="pa-type-desc">Consistent values applied to an inconsistent system. Skeptical of party loyalty in both directions.</p>
+                <div className="pa-type-rarity">9% of respondents</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* PULL QUOTE */}
+        <section className="pa-quote-section">
+          <div className="container">
+            <blockquote className="pa-quote">
+              <p className="pa-quote-text">
+                &ldquo;You&rsquo;ve probably sat in a policy meeting thinking: this could be solved in two weeks if someone with actual authority just made a decision.&rdquo;
+              </p>
+              <cite className="pa-quote-attribution">
+                From a Protective Disruption result &mdash; Civic Congruence
+              </cite>
+            </blockquote>
+          </div>
+        </section>
+
+        {/* VALUES DIAGNOSTIC ENTRY — unchanged */}
+        <section className="pa-entry-section">
+          <div className="container-sm">
+            <div className="survey-header">
+              <div className="section-label">Political Alignment</div>
+              <h2>Values Diagnostic</h2>
+              <div className="diagnostic-instruction">
+                <p>{OPENING_INSTRUCTION_LINES.join(' ')}</p>
+              </div>
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 16 }}>
+              <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 12, marginTop: 0 }}>
+                Most options will feel partially true. Choose the answer you would accept in reality,<br />not the one that sounds best.
+              </p>
+              <button
+                className="btn btn-primary btn-lg"
+                style={{ width: '100%', maxWidth: 360 }}
+                onClick={() => setPhase('questions')}
+              >
+                Start the 4-minute diagnostic
+              </button>
+              <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginTop: 12, marginBottom: 0 }}>
+                Private. Your responses aren&rsquo;t shared.
+              </p>
+            </div>
+          </div>
+        </section>
+
       </div>
     )
   }
