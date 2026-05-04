@@ -517,15 +517,6 @@ export default function PoliticalAlignment({ onNavigate }) {
           </div>
         </section>
 
-        {/* MID CTA — after pull quote */}
-        <section className="pa-mid-cta-section">
-          <div className="container-sm" style={{ textAlign: 'center' }}>
-            <button className="btn pa-cta-btn" onClick={() => setPhase('questions')}>
-              Start the 4-minute diagnostic
-            </button>
-          </div>
-        </section>
-
         {/* CLOSING CTA */}
         <section className="pa-entry-section">
           <div className="container-sm">
