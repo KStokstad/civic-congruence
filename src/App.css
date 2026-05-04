@@ -440,6 +440,24 @@ h1, h2, h3, h4 {
   line-height: 1.2;
 }
 
+.home-signal-verb-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.home-signal-verb-sizer {
+  visibility: hidden;
+  user-select: none;
+}
+
+.home-signal-verb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
 .home-signal-em {
   font-style: italic;
   color: #966e2a;

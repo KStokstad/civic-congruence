@@ -1,4 +1,22 @@
+import { useState, useEffect } from 'react'
+
+const VERBS = ['informs', 'supports', 'enables']
+
 export default function Home({ onNavigate }) {
+  const [verbIndex, setVerbIndex] = useState(0)
+  const [verbVisible, setVerbVisible] = useState(true)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVerbVisible(false)
+      setTimeout(() => {
+        setVerbIndex(i => (i + 1) % VERBS.length)
+        setVerbVisible(true)
+      }, 300)
+    }, 2500)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <>
       {/* Hero — inverted section */}
@@ -42,7 +60,17 @@ export default function Home({ onNavigate }) {
         <div className="container">
           <div className="home-signal-header">
             <h2 className="home-signal-h2">
-              Signal <em className="home-signal-em">informs</em> better decisions
+              Signal{' '}
+              <span className="home-signal-verb-wrap">
+                <span className="home-signal-verb-sizer" aria-hidden="true">supports</span>
+                <em
+                  className="home-signal-em home-signal-verb"
+                  style={{ opacity: verbVisible ? 1 : 0 }}
+                >
+                  {VERBS[verbIndex]}
+                </em>
+              </span>
+              {' '}better decisions
             </h2>
             <p className="home-signal-sub">
               We turn community input into usable signal. This is how.
