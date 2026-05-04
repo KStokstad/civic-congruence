@@ -431,7 +431,7 @@ Rules:
                 Thank you for sharing your experience. Submit your responses to add them to the community dataset. Your input helps surface what communities are actually experiencing.<br />Your responses will remain anonymous.
               </p>
               <button className="btn btn-primary btn-lg cs-result-submit-btn" onClick={handleSubmit} disabled={submitting}>
-                {submitting ? 'Saving…' : 'Add my responses to the dataset'}
+                {submitting ? 'Saving…' : 'Submit my responses to the dataset'}
               </button>
             </div>
 
@@ -446,11 +446,9 @@ Rules:
                     return `${highest.label} feels ${adj} — but ${lowest.label.toLowerCase()} still feels uncertain.`
                   })()}
                 </p>
-                <p className="cs-result-share-scores">
-                  {topicQueue.map((t) => `${t.label} ${answers[t.scale.fieldName] || 0}/5`).join(' · ')}
-                </p>
+                <p style={{ fontSize: 13, color: '#8a7e6e', margin: '0 0 8px' }}>See what your experience points to:</p>
                 <div className="cs-result-share-footer">
-                  <span className="cs-result-share-url">Add your signal → civiccongruence.org</span>
+                  <span className="cs-result-share-url">civiccongruence.org</span>
                 </div>
               </div>
             </div>
