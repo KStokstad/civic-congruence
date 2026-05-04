@@ -637,7 +637,9 @@ export default function PoliticalAlignment({ onNavigate }) {
                   <div className="pa-share-pattern">
                     {(() => {
                       const t = tensionLine || patternLabel || ''
-                      return t.length > 65 ? t.slice(0, t.lastIndexOf(' ', 65)) + '.' : t
+                      const breakMatch = t.match(/^[^,—]+[,—]/)
+                      if (breakMatch && breakMatch[0].length <= 80) return breakMatch[0].trim()
+                      return t.length > 80 ? t.slice(0, t.lastIndexOf(' ', 80)) + ' —' : t
                     })()}
                   </div>
                   <div className="pa-share-meta-row">
@@ -733,7 +735,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
             <div className="pa-insight-card">
               <div className="pa-insight-label">Common In</div>
-              <div className="pa-insight-body" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+              <div className="pa-insight-body pa-insight-body--clamp">
                 {firstSentence(recognitionSummary) || '—'}
                 <div className="pa-insight-fade" />
               </div>

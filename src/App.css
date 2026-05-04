@@ -3757,6 +3757,14 @@ h1, h2, h3, h4 {
   overflow: hidden;
 }
 
+.pa-insight-body--clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: none;
+}
+
 .pa-insight-fade {
   position: absolute;
   bottom: 0;
@@ -3810,9 +3818,13 @@ h1, h2, h3, h4 {
 .pa-upsell-left .pa-upsell-body {
   font-family: var(--font-sans);
   font-size: 13px;
-  color: rgba(160, 144, 112, 0.8);
+  color: rgba(160, 144, 112, 0.8) !important;
   line-height: 1.6;
   margin: 0;
+}
+.pa-upsell-body *,
+.pa-upsell-left .pa-upsell-body * {
+  color: rgba(160, 144, 112, 0.8) !important;
 }
 
 .pa-upsell-right {
