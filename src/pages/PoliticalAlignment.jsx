@@ -590,11 +590,22 @@ export default function PoliticalAlignment({ onNavigate }) {
       ? `${patternLabel} shows up more clearly under pressure. The full report breaks down how this pattern holds together, and where it starts to strain.`
       : "Your pattern shows up more clearly under pressure. The full report breaks down how it holds together, and where it starts to strain."
 
+    // Placeholder rarity — TODO: replace with real type frequency from Airtable
+    const rarityPct = 6
+    // ≤10%: rarity is a hook — show badge
+    // 11–25%: not compelling — hide badge
+    // ≥26%: shift to specificity — show "1 of 12 patterns"
+    const rarityBadgeText = rarityPct <= 10
+      ? `Top ${rarityPct}% rarest`
+      : rarityPct <= 25
+      ? null
+      : '1 of 12 patterns'
+
     // Placeholder distribution data — TODO: wire up real type frequency data from Airtable
     const DIST_VISIBLE = [
       { name: 'Pragmatic Bridge-Builder', pct: 22, isUser: false },
       { name: 'Civic Minimalist', pct: 18, isUser: false },
-      { name: patternLabel || 'Your Type', pct: 6, isUser: true },
+      { name: patternLabel || 'Your Type', pct: rarityPct, isUser: true },
     ]
     const DIST_BLURRED = [
       { name: 'Progressive Institutionalist', pct: 12 },
@@ -619,8 +630,8 @@ export default function PoliticalAlignment({ onNavigate }) {
           {/* 2. RARITY STRIP */}
           <div className="pa-rarity-strip">
             <div className="pa-rarity-stat">
-              <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>6%</div>
-              <div className="pa-rarity-label">Shared by 6% of respondents</div>
+              <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>{rarityPct}%</div>
+              <div className="pa-rarity-label">Shared by {rarityPct}% of respondents</div>
             </div>
             <div className="pa-rarity-divider" />
             <div className="pa-rarity-stat">
@@ -648,14 +659,14 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-insight-card pa-insight-card--hero">
               <div className="pa-insight-hero-name">{patternLabel || '—'}</div>
               <div className="pa-insight-hero-desc">{firstSentence(label) || '—'}</div>
-              <div className="pa-insight-stat">6% of respondents</div>
+              <div className="pa-insight-stat">{rarityBadgeText || `Shared by ${rarityPct}% of respondents`}</div>
             </div>
 
             {/* Card 2 — Where This Shows Up */}
             <div className="pa-insight-card">
               <div className="pa-insight-label">WHERE THIS SHOWS UP</div>
               <div className="pa-insight-body">{firstSentence(behaviorSignal) || '—'}</div>
-              <div className="pa-insight-stat">Seen in 6% of all results</div>
+              <div className="pa-insight-stat">Seen in {rarityPct}% of all results</div>
             </div>
 
             {/* Card 3 — Common In */}
@@ -669,7 +680,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-insight-card">
               <div className="pa-insight-label">THE CENTRAL TENSION</div>
               <div className="pa-insight-body">{tensionLine || '—'}</div>
-              <div className="pa-insight-stat">Shared by 6% of respondents</div>
+              <div className="pa-insight-stat">Shared by {rarityPct}% of respondents</div>
             </div>
           </div>
 
@@ -694,9 +705,11 @@ export default function PoliticalAlignment({ onNavigate }) {
                     <div className="pa-share-quote">
                       {tensionLine || '—'}
                     </div>
-                    <div className="pa-share-rarity-badge">
-                      Top 6% rarest
-                    </div>
+                    {rarityBadgeText && (
+                      <div className="pa-share-rarity-badge">
+                        {rarityBadgeText}
+                      </div>
+                    )}
                   </div>
                   <div className="pa-share-card-bottom">
                     <div className="pa-share-cta-pill">
