@@ -628,7 +628,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
           </div>
 
-          {/* 3. RECOGNITION QUOTE */}
+          {/* 4. RECOGNITION QUOTE */}
           {(tensionLine || recognitionSummary) && (
             <div className="pa-quote-card">
               <p className="pa-quote-card-text">{tensionLine || firstSentence(behaviorSignal) || firstSentence(recognitionSummary)}</p>
@@ -636,7 +636,38 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
           )}
 
-          {/* 4. SHARE CARD + BUTTONS */}
+          {/* 5. INSIGHT CARDS */}
+          <div className="pa-insight-grid">
+            {/* Card 1 — Hero: Ideological Pattern */}
+            <div className="pa-insight-card pa-insight-card--hero">
+              <div className="pa-insight-hero-name">{patternLabel || '—'}</div>
+              <div className="pa-insight-hero-desc">{firstSentence(label) || '—'}</div>
+              <div className="pa-insight-stat">6% of respondents</div>
+            </div>
+
+            {/* Card 2 — Where This Shows Up */}
+            <div className="pa-insight-card">
+              <div className="pa-insight-label">WHERE THIS SHOWS UP</div>
+              <div className="pa-insight-body">{firstSentence(behaviorSignal) || '—'}</div>
+              <div className="pa-insight-stat">Seen in 6% of all results</div>
+            </div>
+
+            {/* Card 3 — Common In */}
+            <div className="pa-insight-card">
+              <div className="pa-insight-label">COMMON IN</div>
+              <div className="pa-insight-body">{firstSentence(recognitionSummary) || '—'}</div>
+              <div className="pa-insight-stat">Most common in your area</div>
+            </div>
+
+            {/* Card 4 — The Central Tension */}
+            <div className="pa-insight-card">
+              <div className="pa-insight-label">THE CENTRAL TENSION</div>
+              <div className="pa-insight-body">{tensionLine || '—'}</div>
+              <div className="pa-insight-stat">Shared by 6% of respondents</div>
+            </div>
+          </div>
+
+          {/* 6. SHARE CARD + BUTTONS */}
           {patternLabel && (
             <div className="pa-share-section">
               <p className="pa-share-label">Share Your Result</p>
@@ -672,7 +703,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
           )}
 
-          {/* 5. DISTRIBUTION CHART */}
+          {/* 7. DISTRIBUTION CHART */}
           <div className="pa-dist-card">
             <div className="pa-dist-header">
               <span className="pa-dist-title">How your type compares</span>
@@ -711,38 +742,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
           </div>
 
-          {/* 6. INSIGHT CARDS */}
-          <div className="pa-insight-grid">
-            {/* Card 1 — Hero: Ideological Pattern */}
-            <div className="pa-insight-card pa-insight-card--hero">
-              <div className="pa-insight-hero-name">{patternLabel || '—'}</div>
-              <div className="pa-insight-hero-desc">{firstSentence(label) || '—'}</div>
-              <div className="pa-insight-stat">6% of respondents</div>
-            </div>
-
-            {/* Card 2 — Where This Shows Up */}
-            <div className="pa-insight-card">
-              <div className="pa-insight-label">WHERE THIS SHOWS UP</div>
-              <div className="pa-insight-body">{firstSentence(behaviorSignal) || '—'}</div>
-              <div className="pa-insight-stat">Seen in 6% of all results</div>
-            </div>
-
-            {/* Card 3 — Common In */}
-            <div className="pa-insight-card">
-              <div className="pa-insight-label">COMMON IN</div>
-              <div className="pa-insight-body">{firstSentence(recognitionSummary) || '—'}</div>
-              <div className="pa-insight-stat">Most common in your area</div>
-            </div>
-
-            {/* Card 4 — The Central Tension */}
-            <div className="pa-insight-card">
-              <div className="pa-insight-label">THE CENTRAL TENSION</div>
-              <div className="pa-insight-body">{tensionLine || '—'}</div>
-              <div className="pa-insight-stat">Shared by 6% of respondents</div>
-            </div>
-          </div>
-
-          {/* 7. UPSELL BLOCK — checkout logic unchanged */}
+          {/* 8. UPSELL BLOCK — checkout logic unchanged */}
           <div className="pa-upsell-block">
             <div className="pa-upsell-left">
               <p className="pa-upsell-eyebrow">Full Report</p>
