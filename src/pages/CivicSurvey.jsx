@@ -257,7 +257,8 @@ Rules:
   async function handleShareImage() {
     if (!csShareCardRef.current) return
     const { default: html2canvas } = await import('html2canvas')
-    const canvas = await html2canvas(csShareCardRef.current, { scale: 2, useCORS: true })
+    const w = csShareCardRef.current.offsetWidth
+    const canvas = await html2canvas(csShareCardRef.current, { scale: 2, width: w, height: w, backgroundColor: null, useCORS: true })
     canvas.toBlob(async (blob) => {
       if (!blob) return
       const file = new File([blob], 'civic-congruence-result.png', { type: 'image/png' })
@@ -519,15 +520,19 @@ Rules:
                 <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', marginBottom: 16, textAlign: 'center' }}>
                   This shares your civic signal publicly. It does not submit additional data.
                 </p>
-                <div className="cs-result-share-card" ref={csShareCardRef} style={{ width: '100%' }}>
+                <div className="cs-result-share-card" ref={csShareCardRef}>
                   <div className="cs-result-share-circle cs-result-share-circle--1" />
                   <div className="cs-result-share-circle cs-result-share-circle--2" />
-                  <div style={{ position: 'relative' }}>
-                    <p className="cs-result-share-eyebrow">SHARE YOUR RESULT</p>
-                    <p className="cs-result-share-headline">{pattern}</p>
-                    <p style={{ fontSize: 13, color: '#8a7e6e', margin: '0 0 4px' }}>Map your civic alignment at</p>
-                    <div className="cs-result-share-footer">
-                      <span className="cs-result-share-url" style={{ fontWeight: 500 }}>civiccongruence.org</span>
+                  <div className="cs-result-share-inner">
+                    <div className="cs-result-share-top">
+                      <p className="cs-result-share-eyebrow">MY CIVIC SIGNAL</p>
+                      <p className="cs-result-share-headline">{pattern}</p>
+                      <p className="cs-result-share-desc">A community experience signal — not opinion, not polling. What people are actually living.</p>
+                    </div>
+                    <div className="cs-result-share-bottom">
+                      <div className="cs-result-share-divider" />
+                      <p className="cs-result-share-cta">Add your signal at</p>
+                      <p className="cs-result-share-url">civiccongruence.org</p>
                     </div>
                   </div>
                 </div>

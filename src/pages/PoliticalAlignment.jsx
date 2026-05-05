@@ -358,7 +358,8 @@ export default function PoliticalAlignment({ onNavigate }) {
   async function handleSaveImage() {
     if (!shareCardRef.current) return
     const { default: html2canvas } = await import('html2canvas')
-    const canvas = await html2canvas(shareCardRef.current, { scale: 2, useCORS: true })
+    const w = shareCardRef.current.offsetWidth
+    const canvas = await html2canvas(shareCardRef.current, { scale: 2, width: w, height: w, backgroundColor: null, useCORS: true })
     canvas.toBlob(async (blob) => {
       if (!blob) return
       const file = new File([blob], 'civic-congruence-result.png', { type: 'image/png' })
@@ -632,26 +633,16 @@ export default function PoliticalAlignment({ onNavigate }) {
                 <div className="pa-share-circle pa-share-circle--md" />
                 <div className="pa-share-circle pa-share-circle--sm" />
                 <div className="pa-share-card-inner">
-                  <div className="pa-share-pattern">
-                    {(() => {
-                      const t = tensionLine || patternLabel || ''
-                      const breakMatch = t.match(/^[^,—]+[,—]/)
-                      if (breakMatch && breakMatch[0].length <= 80) return breakMatch[0].trim()
-                      return t.length > 80 ? t.slice(0, t.lastIndexOf(' ', 80)) + ' —' : t
-                    })()}
+                  <div className="pa-share-card-top">
+                    <div className="pa-share-eyebrow">MY PATTERN</div>
+                    <div className="pa-share-pattern">{tensionLine || patternLabel || '—'}</div>
                   </div>
-                  <div className="pa-share-meta-row">
-                    <span className="pa-share-badge">My Pattern</span>
-                    <span className="pa-share-type-name">{patternLabel}</span>
-                  </div>
-                  <div className="pa-share-footer">
-                    <div className="pa-share-track-wrap">
-                      <div className="pa-share-track">
-                        <div className="pa-share-track-fill" style={{ width: '6%' }} />
-                      </div>
+                  <div className="pa-share-card-bottom">
+                    <div className="pa-share-type-name">{patternLabel}</div>
+                    <div className="pa-share-footer">
+                      <span className="pa-share-rarity-text">Top 6% rarest</span>
+                      <span className="pa-share-url">civiccongruence.org</span>
                     </div>
-                    <span className="pa-share-rarity-text">Top 6% rarest</span>
-                    <span className="pa-share-url">CIVICCONGRUENCE.ORG</span>
                   </div>
                 </div>
               </div>
