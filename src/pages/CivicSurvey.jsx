@@ -434,6 +434,13 @@ Write a brief, grounded reflection that makes them feel accurately heard. Refere
   if (surveyPhase === 'results') {
     const { highest, lowest, pattern } = buildSnapshot(topicQueue, answers)
     const shareSummary = buildShareSummary(highest, lowest)
+
+    // TODO: replace with real dashboard data — % of respondents sharing same lowest-scoring area
+    const communityResonancePct = null
+    const resonanceBadgeText = communityResonancePct != null
+      ? `${communityResonancePct}% of respondents share this signal`
+      : 'A civic signal from your community'
+
     return (
       <div className="survey-page">
         <div className="container-sm">
@@ -464,6 +471,10 @@ Write a brief, grounded reflection that makes them feel accurately heard. Refere
                   </div>
                 )
               })}
+            </div>
+
+            <div style={{ margin: '8px 0 16px' }}>
+              <span className="cs-resonance-badge">{resonanceBadgeText}</span>
             </div>
 
             {csPatternSupport && (
@@ -597,6 +608,7 @@ Write a brief, grounded reflection that makes them feel accurately heard. Refere
                       <p className="cs-result-share-desc">
                         {shareSummary}
                       </p>
+                      <span className="cs-resonance-badge">{resonanceBadgeText}</span>
                     </div>
                     <div className="cs-result-share-bottom">
                       <div className="cs-result-share-cta-pill">
