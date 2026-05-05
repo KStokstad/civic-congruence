@@ -3535,12 +3535,12 @@ h1, h2, h3, h4 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .pa-share-card-top {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .pa-share-card-bottom {
@@ -3552,16 +3552,18 @@ h1, h2, h3, h4 {
   font-family: var(--font-sans);
   font-size: 13px;
   color: rgba(200, 169, 110, 0.7);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .pa-share-pattern {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 400;
   line-height: 1.2;
   color: var(--inverted-text);
   font-style: italic;
+  margin-bottom: auto;
+  padding-bottom: 24px;
 }
 
 .pa-share-type-name {

@@ -364,15 +364,21 @@ export default function PoliticalAlignment({ onNavigate }) {
       if (!blob) return
       const file = new File([blob], 'civic-congruence-result.png', { type: 'image/png' })
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        try { await navigator.share({ files: [file] }); return } catch (_) {}
+        try {
+          await navigator.share({ files: [file] })
+          return
+        } catch (_) {}
       }
-      const link = document.createElement('a')
-      link.href = URL.createObjectURL(blob)
-      link.download = 'civic-congruence-result.png'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      setTimeout(() => URL.revokeObjectURL(link.href), 100)
+      const reader = new FileReader()
+      reader.onload = function(e) {
+        const link = document.createElement('a')
+        link.href = e.target.result
+        link.download = 'civic-congruence-result.png'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      }
+      reader.readAsDataURL(blob)
     })
   }
 
