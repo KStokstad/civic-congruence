@@ -540,14 +540,29 @@ Rules:
                   <div className="cs-result-share-circle cs-result-share-circle--2" />
                   <div className="cs-result-share-inner">
                     <div className="cs-result-share-top">
-                      <p className="cs-result-share-eyebrow">MY CIVIC SIGNAL</p>
-                      <p className="cs-result-share-headline">{pattern}</p>
-                      <p className="cs-result-share-desc">A community experience signal — not opinion, not polling. What people are actually living.</p>
+                      <p className="cs-result-share-eyebrow">
+                        My Civic Signal
+                      </p>
+                      <p className="cs-result-share-subhead">
+                        Civic Congruence · Civic Survey
+                      </p>
+                    </div>
+                    <div className="cs-result-share-middle">
+                      <p className="cs-result-share-headline">
+                        {pattern}
+                      </p>
+                      <p className="cs-result-share-desc">
+                        A community experience signal — not opinion,
+                        not polling. What people are actually living.
+                      </p>
                     </div>
                     <div className="cs-result-share-bottom">
-                      <div className="cs-result-share-divider" />
-                      <p className="cs-result-share-cta">Add your signal at</p>
-                      <p className="cs-result-share-url">civiccongruence.org</p>
+                      <div className="cs-result-share-cta-pill">
+                        Add your signal →
+                      </div>
+                      <p className="cs-result-share-url">
+                        civiccongruence.org
+                      </p>
                     </div>
                   </div>
                 </div>

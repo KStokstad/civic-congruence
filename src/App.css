@@ -1301,10 +1301,9 @@ h1, h2, h3, h4 {
 }
 
 .cs-result-share-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 16px;
-  padding: 28px;
+  background: #1a1814;
+  border-radius: 14px;
+  padding: 26px 28px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -1312,7 +1311,7 @@ h1, h2, h3, h4 {
   max-width: 540px;
   display: flex;
   flex-direction: column;
-  color: var(--text-h);
+  color: #EDE6DA;
 }
 
 .cs-result-share-circle {
@@ -1321,18 +1320,14 @@ h1, h2, h3, h4 {
   pointer-events: none;
 }
 .cs-result-share-circle--1 {
-  top: -20px;
-  right: -20px;
-  width: 140px;
-  height: 140px;
-  border: 1.5px solid rgba(200, 169, 110, 0.15);
+  width: 280px; height: 280px;
+  top: -90px; right: -90px;
+  border: 1.5px solid rgba(200, 169, 110, 0.12);
 }
 .cs-result-share-circle--2 {
-  bottom: -30px;
-  left: 10px;
-  width: 100px;
-  height: 100px;
-  border: 1.5px solid rgba(200, 169, 110, 0.10);
+  width: 200px; height: 200px;
+  bottom: -70px; left: -50px;
+  border: 1.5px solid rgba(200, 169, 110, 0.09);
 }
 
 .cs-result-share-inner {
@@ -1347,60 +1342,85 @@ h1, h2, h3, h4 {
 .cs-result-share-top {
   display: flex;
   flex-direction: column;
-}
-
-.cs-result-share-bottom {
-  display: flex;
-  flex-direction: column;
+  gap: 4px;
 }
 
 .cs-result-share-eyebrow {
   font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 12px;
+  font-size: 12px;
   font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c8a96e;
+  margin: 0;
+}
+
+.cs-result-share-subhead {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(220, 205, 175, 0.8);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.cs-result-share-middle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  justify-content: center;
+  padding: 12px 0;
 }
 
 .cs-result-share-headline {
   font-family: var(--font-display);
-  font-size: 22px;
-  font-style: italic;
-  color: var(--text-h);
-  line-height: 1.25;
-  margin-bottom: 10px;
+  font-size: 26px;
+  line-height: 1.15;
+  color: #EDE6DA;
+  margin: 0;
+  font-style: normal;
 }
 
 .cs-result-share-desc {
   font-family: var(--font-sans);
   font-size: 13px;
-  color: var(--text-muted);
   line-height: 1.5;
+  color: rgba(220, 205, 175, 0.8);
   margin: 0;
 }
 
-.cs-result-share-divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin-bottom: 10px;
+.cs-result-share-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 12px;
 }
 
-.cs-result-share-cta {
+.cs-result-share-cta-pill {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  padding: 7px 16px;
+  background: #c8a96e;
+  border-radius: 20px;
   font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--text-muted);
-  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1a1814;
+  letter-spacing: 0.04em;
 }
 
 .cs-result-share-url {
   font-family: var(--font-sans);
-  font-size: 15px;
-  color: var(--text-h);
-  font-weight: 500;
-  letter-spacing: normal;
+  font-size: 10px;
+  color: rgba(220, 205, 175, 0.6);
+  letter-spacing: 0.03em;
+  margin: 0;
 }
+
+.cs-result-share-divider { display: none; }
+.cs-result-share-cta { display: none; }
 
 .cs-result-divider {
   border: none;
