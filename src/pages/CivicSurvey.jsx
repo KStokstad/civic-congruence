@@ -164,6 +164,26 @@ function buildSnapshot(topics, answers) {
   return { highest, lowest, pattern }
 }
 
+function buildShareSummary(highest, lowest) {
+  const highMap = {
+    Economy: 'Economic confidence',
+    Safety: 'Safety confidence',
+    Health: 'Health confidence',
+    Education: 'Education confidence',
+    Governance: 'Governance confidence',
+  }
+  const lowMap = {
+    Economy: 'Economic gap',
+    Safety: 'Safety gap',
+    Health: 'Health access gap',
+    Education: 'Education gap',
+    Governance: 'Public trust gap',
+  }
+  const hi = highMap[highest.label] || `${highest.label} confidence`
+  const lo = lowMap[lowest.label] || `${lowest.label} gap`
+  return `${hi}. ${lo}.`
+}
+
 export default function CivicSurvey({ onNavigate }) {
   const [surveyPhase, setSurveyPhase] = useState('loading')
   const [topicQueue, setTopicQueue] = useState([])
@@ -177,6 +197,8 @@ export default function CivicSurvey({ onNavigate }) {
   const [error, setError] = useState(null)
   const [reflection, setReflection] = useState(null)
   const [reflectionLoading, setReflectionLoading] = useState(false)
+  const [csPatternLabel, setCsPatternLabel] = useState(null)
+  const [csPatternSupport, setCsPatternSupport] = useState(null)
   const [copiedLink, setCopiedLink] = useState(false)
   const csShareCardRef = useRef(null)
 
@@ -210,22 +232,26 @@ export default function CivicSurvey({ onNavigate }) {
       return `${t.label}: ${score}/5. Main concern: ${concern}. What's missing: ${missing}. Notes: ${notes}`
     }).join('\n')
 
-    const prompt = `A community member just completed a civic experience survey. Based on their responses, write a brief, grounded reflection that makes them feel accurately heard. Reference their specific written comments directly if they provided any. Connect their scale scores to their lived experience. Do not be analytical or use policy language. Sound human, specific, and observational — like someone who read what they wrote and understood it.
+    const prompt = `A community member just completed a civic experience survey. Based on their responses, generate three outputs using the exact labels below.
 
 Their responses:
 ${topicLines}
 
-Rules:
+PATTERN_LABEL: Write a plain civic identity pattern in 8 words or fewer. Do not compare scores to each other directly. Translate the score pattern into a human civic identity — something the person would recognize in themselves. Format: "[Sees/Feels] [positive], but [gap]." No numbers. No area names unless essential. Use this lookup as a guide: Economy high + Education/Governance low → "Sees opportunity, but not accountability." Health high + Economy low → "Holding health together while costs strain." Safety low + Governance low → "Feels exposed and unheard." Education low + Economy low → "Worried the basics are slipping." Governance low + mixed → "Wants answers, not vague promises." All low → "Sees the gaps. Not asking for much."
+
+PATTERN_SUPPORT: One plain conversational sentence, maximum 20 words, expanding on the pattern label. Example: "You see signs of local economic strength, but education and governance feel harder to trust."
+
+REFLECTION:
+Write a brief, grounded reflection that makes them feel accurately heard. Reference their specific written comments directly if they provided any. Connect their scale scores to their lived experience. Do not be analytical or use policy language. Sound human, specific, and observational — like someone who read what they wrote and understood it.
 - If they provided written notes, reference the specific content directly
 - If no notes were provided, work from scale scores, selected concerns, and what's missing text
 - Do not use the words 'survey', 'data', 'responses', or 'analysis'
-- Do not start with 'Your responses suggest'
-- Do not start with 'Based on your responses' or any similar opener. Do not include any header or title line. Begin directly with the observation.
+- Do not start with 'Your responses suggest' or 'Based on your responses'. Begin directly with the observation.
 - Sound like a thoughtful person reading what they wrote, not an AI summarizing data
-- Use observational language, not confident interpretation. Use softer alternatives: "One thing that stands out" not "What stands out most", "It suggests" not "You clearly", "It sounds like" not "You are", "This may reflect" not "This reflects"
-- Write in 2-3 short paragraphs separated by a blank line between each. Do not write one continuous block of text
-- Never state something as certain fact about the person — always frame as observation from their input
-- Use reflective language, not interpretive language. Instead of 'This suggests...' or 'That says something...' use 'It sounds like...' or 'You're pointing to...' or 'What you shared highlights...' The tone should feel like someone listening carefully, not someone analyzing data.`
+- Use observational language: "It sounds like" not "You are", "This may reflect" not "This reflects"
+- Write in 2-3 short paragraphs separated by a blank line. Do not write one continuous block of text
+- Never state something as certain fact — always frame as observation from their input
+- Use reflective language: 'It sounds like...' or 'You're pointing to...' not 'This suggests...'`
 
     fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -237,14 +263,21 @@ Rules:
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 300,
+        max_tokens: 500,
         messages: [{ role: 'user', content: prompt }],
       }),
     })
       .then((r) => r.json())
       .then((data) => {
         const text = data?.content?.[0]?.text
-        if (text) setReflection(text.trim())
+        if (!text) return
+        const labelMatch = text.match(/^PATTERN_LABEL:\s*(.+)/m)
+        const supportMatch = text.match(/^PATTERN_SUPPORT:\s*(.+)/m)
+        const reflectionMatch = text.match(/^REFLECTION:\s*([\s\S]+)$/m)
+        if (labelMatch) setCsPatternLabel(labelMatch[1].trim())
+        if (supportMatch) setCsPatternSupport(supportMatch[1].trim())
+        const reflectionText = reflectionMatch ? reflectionMatch[1].trim() : text.trim()
+        setReflection(reflectionText)
       })
       .catch(() => {})
       .finally(() => setReflectionLoading(false))
@@ -303,6 +336,8 @@ Rules:
     setError(null)
     setReflection(null)
     setReflectionLoading(false)
+    setCsPatternLabel(null)
+    setCsPatternSupport(null)
     setTopicQueue([])
     setExtensionTopics([])
     setSurveyPhase('loading')
@@ -398,15 +433,17 @@ Rules:
   // ── Results ──────────────────────────────────────
   if (surveyPhase === 'results') {
     const { highest, lowest, pattern } = buildSnapshot(topicQueue, answers)
+    const shareSummary = buildShareSummary(highest, lowest)
     return (
       <div className="survey-page">
         <div className="container-sm">
           <div className="results-screen">
             <div className="section-label" style={{ textAlign: 'center', marginBottom: 8, fontSize: 11, letterSpacing: '0.14em', color: 'var(--gold-text)' }}>YOUR RESULT</div>
-            <h2>Your Civic Alignment</h2>
-            <p style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontStyle: 'italic', color: 'var(--gold-text)', marginTop: 6, marginBottom: 0 }}>{pattern}</p>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '26px', color: 'var(--text-h)', marginBottom: 0, fontWeight: 400 }}>
+              {csPatternLabel || 'Your Civic Alignment'}
+            </h2>
 
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '20px 0 32px' }}>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '16px 0 8px' }}>
               {topicQueue.map((t) => {
                 const pillScore = answers[t.scale.fieldName]
                 const isHighest = t.label === highest.label
@@ -428,6 +465,12 @@ Rules:
                 )
               })}
             </div>
+
+            {csPatternSupport && (
+              <p style={{ fontSize: 15, color: 'var(--text)', lineHeight: 1.6, margin: '0 0 24px' }}>
+                {csPatternSupport}
+              </p>
+            )}
 
             <hr className="cs-result-divider" />
 
@@ -549,16 +592,15 @@ Rules:
                     </div>
                     <div className="cs-result-share-middle">
                       <p className="cs-result-share-headline">
-                        {pattern}
+                        {csPatternLabel || pattern}
                       </p>
                       <p className="cs-result-share-desc">
-                        A community experience signal — not opinion,
-                        not polling. What people are actually living.
+                        {shareSummary}
                       </p>
                     </div>
                     <div className="cs-result-share-bottom">
                       <div className="cs-result-share-cta-pill">
-                        Add your signal →
+                        Find your civic signal →
                       </div>
                       <p className="cs-result-share-url">
                         civiccongruence.org
@@ -571,7 +613,7 @@ Rules:
                     className="cs-result-share-action cs-result-share-action--dark"
                     onClick={handleShareImage}
                   >
-                    Share image
+                    Share your signal
                   </button>
                   <button
                     className="cs-result-share-action cs-result-share-action--light"
@@ -581,7 +623,7 @@ Rules:
                   </button>
                 </div>
                 <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8, fontStyle: 'italic' }}>
-                  Every signal shared adds to the pattern.
+                  Every signal shared helps show what people are actually experiencing.
                 </p>
               </div>
             )}
