@@ -319,7 +319,7 @@ export default function PoliticalAlignment({ onNavigate }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: reportEmail,
+          email: reportEmail || '',
           sessionId,
           alignmentData: answers,
           airtableRecordId: recordId,
@@ -756,21 +756,13 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-upsell-right">
               <div className="pa-upsell-price">$7</div>
               <p className="pa-upsell-delivery">Full report delivered instantly</p>
-              <input
-                id="report-email"
-                className="pa-upsell-input"
-                type="email"
-                placeholder="your@email.com"
-                value={reportEmail}
-                onChange={(e) => setReportEmail(e.target.value)}
-              />
               {checkoutError && (
                 <div className="error-banner" style={{ marginTop: 8 }}>{checkoutError}</div>
               )}
               <button
                 className="pa-upsell-btn"
                 onClick={handleCheckout}
-                disabled={checkoutLoading || !reportEmail}
+                disabled={checkoutLoading}
               >
                 {checkoutLoading ? 'Redirecting…' : 'Get full report — $7'}
               </button>
