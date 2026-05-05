@@ -362,13 +362,19 @@ export default function PoliticalAlignment({ onNavigate }) {
     const canvas = await html2canvas(shareCardRef.current, { scale: 2, width: w, height: w, backgroundColor: null, useCORS: true })
     canvas.toBlob(async (blob) => {
       if (!blob) return
-      const file = new File([blob], 'civic-congruence-result.png', { type: 'image/png' })
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        try {
-          await navigator.share({ files: [file] })
-          return
-        } catch (_) {}
+
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
+      if (isMobile && navigator.canShare) {
+        const file = new File([blob], 'civic-congruence-result.png', { type: 'image/png' })
+        if (navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({ files: [file] })
+            return
+          } catch (_) {}
+        }
       }
+
       const reader = new FileReader()
       reader.onload = function(e) {
         const link = document.createElement('a')

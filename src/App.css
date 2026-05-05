@@ -3535,12 +3535,12 @@ h1, h2, h3, h4 {
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .pa-share-card-top {
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 
 .pa-share-card-bottom {
@@ -3562,8 +3562,9 @@ h1, h2, h3, h4 {
   line-height: 1.2;
   color: var(--inverted-text);
   font-style: italic;
-  margin-bottom: auto;
-  padding-bottom: 24px;
+  margin-top: 16px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .pa-share-type-name {
