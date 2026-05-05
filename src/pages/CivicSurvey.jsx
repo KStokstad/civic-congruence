@@ -848,7 +848,10 @@ Write a brief, grounded reflection that makes them feel accurately heard. Refere
           <div className="cs-signal">
             <div className="cs-signal-inner">
               <h2 className="cs-signal-h2">Your experience becomes shared <em>signal</em></h2>
-              <p className="cs-signal-body">When you submit your responses, they join a community dataset that reveals patterns across governance, economy, safety, health, and education. You stay anonymous. The signal becomes visible.</p>
+              <p className="cs-signal-body">When you answer, Civic Congruence uses your responses to show patterns across governance, economy, safety, health, and education. Your private result is generated first. Nothing is added to the community dataset unless you choose to submit it.</p>
+              <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginTop: 12, marginBottom: 0 }}>
+                Choose what is closest to your experience. Imperfect answers are expected.
+              </p>
             </div>
           </div>
         </>
@@ -856,15 +859,7 @@ Write a brief, grounded reflection that makes them feel accurately heard. Refere
     <div className="survey-page" id="cs-survey-anchor">
       <div className="container-sm">
         {topicIdx === 0 && (
-          <p style={{ fontSize: 14, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 16 }}>
-            Most answers will feel imperfect. Choose what&rsquo;s closest to your experience.
-          </p>
-        )}
-
-        {topicIdx === 0 && (
-          <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', maxWidth: 480, margin: '0 auto', padding: '12px 0', fontStyle: 'italic' }}>
-            Your answers are used to generate your private result. They are not added to the community dataset unless you choose to submit them.
-          </p>
+          <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '0 0 28px' }} />
         )}
 
         <div className="topic-step" key={`${topic.id}-0`}>
