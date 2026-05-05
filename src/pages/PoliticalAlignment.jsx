@@ -665,25 +665,6 @@ export default function PoliticalAlignment({ onNavigate }) {
                 <button className="pa-share-btn pa-share-btn--surface" onClick={handleCopyLink}>
                   {shareCopied ? 'Copied!' : 'Copy link'}
                 </button>
-                <button
-                  className="pa-share-btn pa-share-btn--surface"
-                  onClick={() => {
-                    const tweetText = tensionLine || patternLabel
-                    const tweetUrl = 'https://civiccongruence.org'
-                    const text = encodeURIComponent(
-                      tweetText +
-                      ' — find your political alignment at'
-                    )
-                    const url = encodeURIComponent(tweetUrl)
-                    window.open(
-                      'https://twitter.com/intent/tweet?text=' +
-                      text + '&url=' + url,
-                      '_blank'
-                    )
-                  }}
-                >
-                  Post to X
-                </button>
               </div>
               <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8, fontStyle: 'italic' }}>
                 Every signal shared adds to the pattern.
