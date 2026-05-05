@@ -449,6 +449,50 @@ Rules:
               </div>
             )}
 
+            {submitted && (
+              <div style={{ marginBottom: 28 }}>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4, textAlign: 'center' }}>
+                  OPTIONAL: SHARE YOUR RESULT
+                </p>
+                <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', marginBottom: 16, textAlign: 'center' }}>
+                  This shares your civic signal publicly. It does not submit additional data.
+                </p>
+                <div className="cs-result-share-card" ref={csShareCardRef}>
+                  <div className="cs-result-share-circle cs-result-share-circle--1" />
+                  <div className="cs-result-share-circle cs-result-share-circle--2" />
+                  <div className="cs-result-share-inner">
+                    <div className="cs-result-share-top">
+                      <p className="cs-result-share-eyebrow">MY CIVIC SIGNAL</p>
+                      <p className="cs-result-share-headline">{pattern}</p>
+                      <p className="cs-result-share-desc">A community experience signal — not opinion, not polling. What people are actually living.</p>
+                    </div>
+                    <div className="cs-result-share-bottom">
+                      <div className="cs-result-share-divider" />
+                      <p className="cs-result-share-cta">Add your signal at</p>
+                      <p className="cs-result-share-url">civiccongruence.org</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="cs-result-share-btns" style={{ width: '100%' }}>
+                  <button
+                    className="cs-result-share-action cs-result-share-action--dark"
+                    onClick={handleShareImage}
+                  >
+                    Share image
+                  </button>
+                  <button
+                    className="cs-result-share-action cs-result-share-action--light"
+                    onClick={handleCopyLink}
+                  >
+                    {copiedLink ? 'Copied!' : 'Copy link'}
+                  </button>
+                </div>
+                <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8, fontStyle: 'italic' }}>
+                  Every signal shared adds to the pattern.
+                </p>
+              </div>
+            )}
+
             <div className="results-grid">
               {topicQueue.map((t) => {
                 const score = answers[t.scale.fieldName]
@@ -527,46 +571,6 @@ Rules:
               </div>
             </div>
 
-            {submitted && (
-              <div style={{ marginTop: 24 }}>
-                <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4, textAlign: 'center' }}>
-                  OPTIONAL: SHARE YOUR RESULT
-                </p>
-                <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', marginBottom: 16, textAlign: 'center' }}>
-                  This shares your civic signal publicly. It does not submit additional data.
-                </p>
-                <div className="cs-result-share-card" ref={csShareCardRef}>
-                  <div className="cs-result-share-circle cs-result-share-circle--1" />
-                  <div className="cs-result-share-circle cs-result-share-circle--2" />
-                  <div className="cs-result-share-inner">
-                    <div className="cs-result-share-top">
-                      <p className="cs-result-share-eyebrow">MY CIVIC SIGNAL</p>
-                      <p className="cs-result-share-headline">{pattern}</p>
-                      <p className="cs-result-share-desc">A community experience signal — not opinion, not polling. What people are actually living.</p>
-                    </div>
-                    <div className="cs-result-share-bottom">
-                      <div className="cs-result-share-divider" />
-                      <p className="cs-result-share-cta">Add your signal at</p>
-                      <p className="cs-result-share-url">civiccongruence.org</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="cs-result-share-btns" style={{ width: '100%' }}>
-                  <button
-                    className="cs-result-share-action cs-result-share-action--dark"
-                    onClick={handleShareImage}
-                  >
-                    Share image
-                  </button>
-                  <button
-                    className="cs-result-share-action cs-result-share-action--light"
-                    onClick={handleCopyLink}
-                  >
-                    {copiedLink ? 'Copied!' : 'Copy link'}
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>

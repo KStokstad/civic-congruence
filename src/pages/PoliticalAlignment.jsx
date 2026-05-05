@@ -685,6 +685,9 @@ export default function PoliticalAlignment({ onNavigate }) {
                   Post to X
                 </button>
               </div>
+              <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8, fontStyle: 'italic' }}>
+                Every signal shared adds to the pattern.
+              </p>
             </div>
           )}
 
