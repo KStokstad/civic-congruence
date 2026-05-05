@@ -3390,7 +3390,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-size: 32px;
   font-weight: 400;
-  color: rgba(240, 234, 224, 0.95) !important;
+  color: rgba(240, 234, 224, 0.95);
   line-height: 1.1;
 }
 
@@ -3737,6 +3737,10 @@ h1, h2, h3, h4 {
   border-radius: 14px;
   padding: 18px 20px;
   border: 1px solid var(--border-soft);
+  height: 140px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .pa-insight-label {
@@ -3747,6 +3751,7 @@ h1, h2, h3, h4 {
   color: var(--text-muted);
   font-weight: 500;
   margin-bottom: 8px;
+  flex-shrink: 0;
 }
 
 .pa-insight-body {
@@ -3754,32 +3759,15 @@ h1, h2, h3, h4 {
   font-size: 13px;
   line-height: 1.6;
   color: var(--text-h);
-  position: relative;
-  max-height: 70px;
   overflow: hidden;
-}
-
-.pa-insight-body::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 28px;
-  background: linear-gradient(transparent, var(--surface));
-  pointer-events: none;
+  flex: 1;
 }
 
 .pa-insight-body--clamp {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  max-height: none;
-}
-
-.pa-insight-body--clamp::after {
-  display: none;
 }
 
 .pa-insight-body p {
@@ -3825,13 +3813,13 @@ h1, h2, h3, h4 {
 .pa-upsell-left .pa-upsell-body {
   font-family: var(--font-sans);
   font-size: 13px;
-  color: rgba(160, 144, 112, 0.8) !important;
+  color: rgba(160, 144, 112, 0.8);
   line-height: 1.6;
   margin: 0;
 }
 .pa-upsell-body *,
 .pa-upsell-left .pa-upsell-body * {
-  color: rgba(160, 144, 112, 0.8) !important;
+  color: rgba(160, 144, 112, 0.8);
 }
 
 .pa-upsell-right {
