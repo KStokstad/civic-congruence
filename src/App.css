@@ -3737,11 +3737,30 @@ h1, h2, h3, h4 {
   border-radius: 14px;
   padding: 18px 20px;
   border: 1px solid var(--border-soft);
-  height: 180px;
-  overflow: hidden;
+  height: auto;
+  overflow: visible;
   display: flex;
   flex-direction: column;
-  position: relative;
+  gap: 6px;
+}
+
+.pa-insight-card--hero {
+  border-color: var(--gold);
+}
+
+.pa-insight-hero-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-h);
+  margin-bottom: 2px;
+}
+
+.pa-insight-hero-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 4px;
 }
 
 .pa-insight-label {
@@ -3751,8 +3770,6 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
   color: var(--text-muted);
   font-weight: 500;
-  margin-bottom: 8px;
-  flex-shrink: 0;
 }
 
 .pa-insight-body {
@@ -3760,36 +3777,13 @@ h1, h2, h3, h4 {
   font-size: 13px;
   line-height: 1.6;
   color: var(--text-h);
-  overflow: hidden;
   flex: 1;
-  position: relative;
 }
 
-.pa-insight-body::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40px;
-  background: linear-gradient(
-    transparent,
-    var(--surface)
-  );
-  pointer-events: none;
-}
-
-.pa-insight-body--clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.pa-insight-body p {
-  margin: 0;
+.pa-insight-stat {
   font-size: 13px;
-  line-height: 1.6;
+  color: var(--gold-text);
+  margin-top: auto;
 }
 
 /* 7. Upsell block */
