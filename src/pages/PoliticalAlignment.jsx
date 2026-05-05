@@ -482,8 +482,8 @@ export default function PoliticalAlignment({ onNavigate }) {
                     <div className="pa-stat-label">rarest type</div>
                   </div>
                   <div className="pa-stat">
-                    <div className="pa-stat-val">Iowa</div>
-                    <div className="pa-stat-label">top location</div>
+                    <div className="pa-stat-val">1 of 12</div>
+                    <div className="pa-stat-label">pattern types</div>
                   </div>
                 </div>
               </div>
@@ -610,8 +610,6 @@ export default function PoliticalAlignment({ onNavigate }) {
         <div className="pa-results-wrap">
 
           {/* 2. RARITY STRIP */}
-          {/* TODO: Wire real region data from result */}
-          {/* object here before production launch    */}
           <div className="pa-rarity-strip">
             <div className="pa-rarity-stat">
               <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>6%</div>
@@ -624,8 +622,8 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
             <div className="pa-rarity-divider" />
             <div className="pa-rarity-stat">
-              <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>Your Area</div>
-              <div className="pa-rarity-label">Most Common In</div>
+              <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>1 of 12</div>
+              <div className="pa-rarity-label">Pattern Types</div>
             </div>
           </div>
 
