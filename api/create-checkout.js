@@ -51,8 +51,8 @@ export default async function handler(req, res) {
       hasSiteUrl: !!process.env.VITE_SITE_URL,
     })
 
-    if (!email || !sessionId) {
-      return res.status(400).json({ error: 'email and sessionId are required' })
+    if (!sessionId) {
+      return res.status(400).json({ error: 'sessionId is required' })
     }
 
     // Save Session ID to Airtable — non-blocking
@@ -71,8 +71,8 @@ export default async function handler(req, res) {
       payment_method_types: ['card'],
       line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
       mode: 'payment',
-      customer_email: email,
-      success_url: `${process.env.VITE_SITE_URL}/report?session_id={CHECKOUT_SESSION_ID}&email=${encodeURIComponent(email)}`,
+      ...(email ? { customer_email: email } : {}),
+      success_url: `${process.env.VITE_SITE_URL}/report?session_id={CHECKOUT_SESSION_ID}&email=${encodeURIComponent(email || '')}`,
       cancel_url: `${process.env.VITE_SITE_URL}/political-alignment`,
       metadata: {
         email,
