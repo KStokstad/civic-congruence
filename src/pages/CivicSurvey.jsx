@@ -184,6 +184,46 @@ function buildShareSummary(highest, lowest) {
   return `${hi}. ${lo}.`
 }
 
+function stripMarkdown(text) {
+  if (!text) return ''
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/^#+\s/gm, '')
+    .replace(/`/g, '')
+    .trim()
+}
+
+function parseCivicResult(raw) {
+  try {
+    const cleaned = raw.replace(/```json/g, '').replace(/```/g, '').trim()
+    return JSON.parse(cleaned)
+  } catch (_) {}
+
+  const extract = (label, text) => {
+    const regex = new RegExp(
+      label + '[:\\*\\s]+([\\s\\S]*?)(?=PATTERN_LABEL|PATTERN_SUPPORT|REFLECTION|$)',
+      'i'
+    )
+    const match = text.match(regex)
+    return match ? match[1].trim() : ''
+  }
+
+  const patternLabel = extract('PATTERN_LABEL', raw)
+  const patternSupport = extract('PATTERN_SUPPORT', raw)
+  const reflection = extract('REFLECTION', raw)
+
+  if (patternLabel || reflection) {
+    return { patternLabel, patternSupport, reflection }
+  }
+
+  return {
+    patternLabel: 'Your civic signal',
+    patternSupport: 'Based on your responses.',
+    reflection: raw.replace(/\*\*[^*]+\*\*:?/g, '').trim(),
+  }
+}
+
 export default function CivicSurvey({ onNavigate }) {
   const [surveyPhase, setSurveyPhase] = useState('loading')
   const [topicQueue, setTopicQueue] = useState([])
@@ -251,7 +291,10 @@ Write a brief, grounded reflection that makes them feel accurately heard. Refere
 - Use observational language: "It sounds like" not "You are", "This may reflect" not "This reflects"
 - Write in 2-3 short paragraphs separated by a blank line. Do not write one continuous block of text
 - Never state something as certain fact — always frame as observation from their input
-- Use reflective language: 'It sounds like...' or 'You're pointing to...' not 'This suggests...'`
+- Use reflective language: 'It sounds like...' or 'You're pointing to...' not 'This suggests...'
+
+Return your response as valid JSON only. No markdown. No labels. No backticks. No text outside the JSON object. Use exactly this shape:
+{"patternLabel":"Short plain-language civic pattern. Max 8 words.","patternSupport":"One sentence expanding the pattern in conversational language. Max 20 words.","reflection":"Full interpretation paragraph addressing the person directly. Use you/your. Plain language."}`
 
     fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -263,7 +306,7 @@ Write a brief, grounded reflection that makes them feel accurately heard. Refere
       },
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 500,
+        max_tokens: 600,
         messages: [{ role: 'user', content: prompt }],
       }),
     })
@@ -271,13 +314,10 @@ Write a brief, grounded reflection that makes them feel accurately heard. Refere
       .then((data) => {
         const text = data?.content?.[0]?.text
         if (!text) return
-        const labelMatch = text.match(/^PATTERN_LABEL:\s*(.+)/m)
-        const supportMatch = text.match(/^PATTERN_SUPPORT:\s*(.+)/m)
-        const reflectionMatch = text.match(/^REFLECTION:\s*([\s\S]+)$/m)
-        if (labelMatch) setCsPatternLabel(labelMatch[1].trim())
-        if (supportMatch) setCsPatternSupport(supportMatch[1].trim())
-        const reflectionText = reflectionMatch ? reflectionMatch[1].trim() : text.trim()
-        setReflection(reflectionText)
+        const { patternLabel, patternSupport, reflection } = parseCivicResult(text)
+        if (patternLabel) setCsPatternLabel(stripMarkdown(patternLabel))
+        if (patternSupport) setCsPatternSupport(stripMarkdown(patternSupport))
+        if (reflection) setReflection(stripMarkdown(reflection))
       })
       .catch(() => {})
       .finally(() => setReflectionLoading(false))
