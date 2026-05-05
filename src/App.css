@@ -3487,9 +3487,9 @@ h1, h2, h3, h4 {
 }
 
 .pa-share-card {
-  background: var(--inverted-bg);
-  border-radius: 20px;
-  padding: 28px;
+  background: #1a1814;
+  border-radius: 14px;
+  padding: 26px 28px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -3504,29 +3504,18 @@ h1, h2, h3, h4 {
   border-radius: 50%;
   pointer-events: none;
 }
-
 .pa-share-circle--lg {
-  top: -50px;
-  right: -50px;
-  width: 200px;
-  height: 200px;
-  border: 40px solid rgba(200, 169, 110, 0.15);
+  width: 280px; height: 280px;
+  top: -90px; right: -90px;
+  border: 1.5px solid rgba(200, 169, 110, 0.12);
 }
-
 .pa-share-circle--md {
-  bottom: -70px;
-  left: 10px;
-  width: 160px;
-  height: 160px;
-  border: 28px solid rgba(200, 169, 110, 0.08);
+  width: 200px; height: 200px;
+  bottom: -70px; left: -50px;
+  border: 1.5px solid rgba(200, 169, 110, 0.09);
 }
-
 .pa-share-circle--sm {
-  top: 30px;
-  left: 8%;
-  width: 100px;
-  height: 100px;
-  border: 16px solid rgba(200, 169, 110, 0.05);
+  display: none;
 }
 
 .pa-share-card-inner {
@@ -3541,61 +3530,96 @@ h1, h2, h3, h4 {
 .pa-share-card-top {
   display: flex;
   flex-direction: column;
+  gap: 4px;
+}
+
+.pa-share-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c8a96e;
+}
+
+.pa-share-subhead {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(220, 205, 175, 0.8);
+  letter-spacing: 0.02em;
+}
+
+.pa-share-card-middle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.pa-share-type-label {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.1;
+  color: #EDE6DA;
+}
+
+.pa-share-quote {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(220, 205, 175, 0.85);
+  border-left: 2px solid #c8a96e;
+  padding-left: 10px;
+}
+
+.pa-share-rarity-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 4px 12px;
+  border: 1.5px solid #c8a96e;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: #c8a96e;
+  letter-spacing: 0.04em;
 }
 
 .pa-share-card-bottom {
   display: flex;
   flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 12px;
 }
 
-.pa-share-eyebrow {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  color: rgba(200, 169, 110, 0.7);
-  margin-bottom: 16px;
-}
-
-.pa-share-pattern {
-  font-family: var(--font-display);
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 1.2;
-  color: var(--inverted-text);
-  font-style: italic;
-  margin-top: 16px;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.pa-share-type-name {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  color: rgba(200, 188, 168, 0.85);
-  margin-bottom: 10px;
-}
-
-.pa-share-footer {
-  display: flex;
+.pa-share-cta-pill {
+  display: inline-flex;
+  align-self: flex-start;
   align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 10px;
-}
-
-.pa-share-rarity-text {
+  padding: 7px 16px;
+  background: #c8a96e;
+  border-radius: 20px;
   font-family: var(--font-sans);
-  font-size: 14px;
-  color: #c8a96e;
+  font-size: 12px;
   font-weight: 500;
-  white-space: nowrap;
+  color: #1a1814;
+  letter-spacing: 0.04em;
 }
 
 .pa-share-url {
   font-family: var(--font-sans);
-  font-size: 13px;
-  color: rgba(200, 188, 168, 0.85);
-  white-space: nowrap;
+  font-size: 10px;
+  color: rgba(220, 205, 175, 0.6);
+  letter-spacing: 0.03em;
 }
+
+.pa-share-type-name { display: none; }
+.pa-share-pattern { display: none; }
+.pa-share-footer { display: none; }
+.pa-share-rarity-text { display: none; }
 
 .pa-share-btns {
   display: flex;
