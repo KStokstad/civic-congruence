@@ -355,21 +355,6 @@ export default function PoliticalAlignment({ onNavigate }) {
     return match ? match[0].trim() : text.split('\n')[0].trim()
   }
 
-  async function handleShare(patternLabel, recognitionSummary) {
-    const tension = firstSentence(recognitionSummary)
-    const shareText = tension ? `${patternLabel}. ${tension}` : patternLabel
-    const shareUrl = 'https://civiccongruence.org/#/political-alignment'
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: 'My Civic Alignment', text: shareText, url: shareUrl })
-        return
-      } catch (_) { /* fall through to clipboard */ }
-    }
-    await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`)
-    setShareCopied(true)
-    setTimeout(() => setShareCopied(false), 2500)
-  }
-
   async function handleSaveImage() {
     if (!shareCardRef.current) return
     const { default: html2canvas } = await import('html2canvas')
@@ -381,9 +366,12 @@ export default function PoliticalAlignment({ onNavigate }) {
         try { await navigator.share({ files: [file] }); return } catch (_) {}
       }
       const link = document.createElement('a')
-      link.download = 'civic-congruence-result.png'
       link.href = URL.createObjectURL(blob)
+      link.download = 'civic-congruence-result.png'
+      document.body.appendChild(link)
       link.click()
+      document.body.removeChild(link)
+      setTimeout(() => URL.revokeObjectURL(link.href), 100)
     })
   }
 
@@ -677,9 +665,18 @@ export default function PoliticalAlignment({ onNavigate }) {
                 <button
                   className="pa-share-btn pa-share-btn--surface"
                   onClick={() => {
-                    const text = encodeURIComponent((tensionLine || patternLabel) + ' — find yours at')
-                    const url = encodeURIComponent('https://civiccongruence.org/#/political-alignment')
-                    window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank')
+                    const tweetText = tensionLine || patternLabel
+                    const tweetUrl = 'https://civiccongruence.org'
+                    const text = encodeURIComponent(
+                      tweetText +
+                      ' — find your political alignment at'
+                    )
+                    const url = encodeURIComponent(tweetUrl)
+                    window.open(
+                      'https://twitter.com/intent/tweet?text=' +
+                      text + '&url=' + url,
+                      '_blank'
+                    )
                   }}
                 >
                   Post to X
