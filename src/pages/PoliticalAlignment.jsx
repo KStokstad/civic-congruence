@@ -145,10 +145,10 @@ Generate a structured analysis with two tiers: FREE OUTPUT only. Do not generate
 FREE OUTPUT
 
 OUTPUT 0 — RECOGNITION SUMMARY
-PATTERN LABEL: A short identity label, 2-3 words. e.g. "Institutional Skeptic". Precise, non-generic, not ideological. A behavioral description, not a political label.
+PATTERN LABEL: A short identity label, 2-3 words maximum. e.g. "Institutional Skeptic". Precise, non-generic, not ideological. A behavioral description, not a political label. Do not append qualifiers or descriptors after the label — e.g. write "Pragmatic Skeptic" not "Pragmatic Skeptic with Structural Patience." Any further description belongs in PATTERN SUBLABEL, not here.
 PATTERN SUBLABEL: A plain-language explanation of the label, 4-6 words, in everyday terms. e.g. "Reform-minded, but wary of power". Must be immediately understandable to a non-political person.
 RECOGNITION SUMMARY: Exactly 2 sentences under 75 words total. The first sentence names the core pattern. The second sentence names the central tension. Use pattern language only: "your responses suggest," "a pattern emerges of." Do not use "you believe" or "you are." Do not repeat language that will appear in OUTPUT 1. Create curiosity, not closure.
-TENSION: Write the central tension as a plain conversational sentence a non-political person would immediately understand. Avoid abstract nouns like "systemic", "institutional", "rupture", "paradigm". Use everyday language. Pattern: "Wants [X], but doesn't trust [Y] to deliver it." Example: "Wants change, but doesn't trust the people offering it." Maximum 12 words.
+TENSION: Write the central tension as a direct-address sentence starting with "You want." Use plain conversational language a non-political person would immediately understand. Avoid abstract nouns like "systemic", "institutional", "rupture", "paradigm". Do not use the phrase "distrusts the paths offered." Pattern: "You want [X], but don't trust [Y]." Example: "You want results, but don't trust the usual paths." Maximum 10 words.
 Format exactly as:
 PATTERN: [2-3 word label]
 SUBLABEL: [4-6 word plain explanation]
@@ -163,9 +163,12 @@ Rules: Do not expand beyond one paragraph. Do not add additional sections. Do no
 OUTPUT 2 — WHERE THIS SHOWS UP
 Write exactly 2-3 sentences describing one concrete behavioral pattern — how this orientation tends to manifest in real decisions or reactions.
 Rules:
+- Start with "You" — write as direct address to the person, not third-person pattern description
+- Do not start with "This can show up as" or "A pattern worth noting is"
 - Name one specific behavior, not a general trait
 - Show a real-world implication or tension
-- Use pattern language: "this can show up as," "a pattern worth noting is," "your responses suggest this tends to manifest as"
+- Example: "You may step back from political conversations not because you lack views, but because the terms of the debate feel flawed, performative, or unproductive."
+- Plain language. No taxonomy.
 - Do not introduce new frameworks or expand into analysis
 - Do not repeat what was said in OUTPUT 0 or OUTPUT 1
 - This should make the reader think: "Oh, that's actually true about how I respond"
@@ -617,17 +620,17 @@ export default function PoliticalAlignment({ onNavigate }) {
           <div className="pa-rarity-strip">
             <div className="pa-rarity-stat">
               <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>6%</div>
-              <div className="pa-rarity-label">Of Respondents</div>
+              <div className="pa-rarity-label">Shared by 6% of respondents</div>
             </div>
             <div className="pa-rarity-divider" />
             <div className="pa-rarity-stat">
               <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>2nd</div>
-              <div className="pa-rarity-label">Rarest Type</div>
+              <div className="pa-rarity-label">Rarest Pattern</div>
             </div>
             <div className="pa-rarity-divider" />
             <div className="pa-rarity-stat">
               <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>1 of 12</div>
-              <div className="pa-rarity-label">Pattern Types</div>
+              <div className="pa-rarity-label">Patterns</div>
             </div>
           </div>
 
@@ -685,14 +688,11 @@ export default function PoliticalAlignment({ onNavigate }) {
                     </div>
                   </div>
                   <div className="pa-share-card-middle">
-                    <div className="pa-share-quote">
-                      {tensionLine || '—'}
-                    </div>
                     <div className="pa-share-type-label">
                       {patternLabel || '—'}
                     </div>
-                    <div className="pa-share-type-sublabel">
-                      {patternSublabel || '—'}
+                    <div className="pa-share-quote">
+                      {tensionLine || '—'}
                     </div>
                     <div className="pa-share-rarity-badge">
                       Top 6% rarest
@@ -710,14 +710,14 @@ export default function PoliticalAlignment({ onNavigate }) {
               </div>
               <div className="pa-share-btns">
                 <button className="pa-share-btn pa-share-btn--dark" onClick={handleSaveImage}>
-                  Share image
+                  Share your pattern
                 </button>
                 <button className="pa-share-btn pa-share-btn--surface" onClick={handleCopyLink}>
                   {shareCopied ? 'Copied!' : 'Copy link'}
                 </button>
               </div>
               <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8, fontStyle: 'italic' }}>
-                Every signal shared adds to the pattern.
+                Every shared pattern helps reveal where public trust is strained.
               </p>
             </div>
           )}
