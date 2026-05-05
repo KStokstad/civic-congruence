@@ -3883,14 +3883,23 @@ h1, h2, h3, h4 {
 .pa-upsell-input {
   width: 100%;
   padding: 10px 14px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
   border-radius: 9px;
   font-size: 14px;
   font-family: var(--font-sans);
-  background: var(--surface);
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--inverted-text);
   margin-bottom: 10px;
   box-sizing: border-box;
+}
+
+.pa-upsell-input::placeholder {
+  color: rgba(240, 234, 224, 0.35);
+}
+
+.pa-upsell-input:focus {
+  outline: none;
+  border-color: rgba(200, 169, 110, 0.6);
 }
 
 .pa-upsell-btn {
