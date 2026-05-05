@@ -858,10 +858,6 @@ Write a brief, grounded reflection that makes them feel accurately heard. Refere
       )}
     <div className="survey-page" id="cs-survey-anchor">
       <div className="container-sm">
-        {topicIdx === 0 && (
-          <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '0 0 28px' }} />
-        )}
-
         <div className="topic-step" key={`${topic.id}-0`}>
           <div className="survey-progress">
             <div className="progress-track">
