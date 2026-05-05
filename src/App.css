@@ -3585,6 +3585,13 @@ h1, h2, h3, h4 {
   color: #EDE6DA;
 }
 
+.pa-share-type-sublabel {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: rgba(220,205,175,0.75);
+  margin-top: 2px;
+}
+
 .pa-share-quote {
   font-family: var(--font-sans);
   font-size: 13px;

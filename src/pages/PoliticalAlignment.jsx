@@ -145,12 +145,13 @@ Generate a structured analysis with two tiers: FREE OUTPUT only. Do not generate
 FREE OUTPUT
 
 OUTPUT 0 — RECOGNITION SUMMARY
-PATTERN LABEL: A 4-6 word phrase that names the core orientation. Precise, non-generic, not ideological. A behavioral description, not a political label.
+PATTERN LABEL: A short identity label, 2-3 words. e.g. "Institutional Skeptic". Precise, non-generic, not ideological. A behavioral description, not a political label.
+PATTERN SUBLABEL: A plain-language explanation of the label, 4-6 words, in everyday terms. e.g. "Reform-minded, but wary of power". Must be immediately understandable to a non-political person.
 RECOGNITION SUMMARY: Exactly 2 sentences under 75 words total. The first sentence names the core pattern. The second sentence names the central tension. Use pattern language only: "your responses suggest," "a pattern emerges of." Do not use "you believe" or "you are." Do not repeat language that will appear in OUTPUT 1. Create curiosity, not closure.
-TENSION: One sentence only. Maximum 10 words. Active voice. Use exactly this pattern: "[verb phrase], but [contrasting verb phrase]." Both sides must be concrete verbs. No abstract nouns. No "your responses suggest," "you are," or party labels.
-Example: "Demands change, but only through trusted structures."
+TENSION: Write the central tension as a plain conversational sentence a non-political person would immediately understand. Avoid abstract nouns like "systemic", "institutional", "rupture", "paradigm". Use everyday language. Pattern: "Wants [X], but doesn't trust [Y] to deliver it." Example: "Wants change, but doesn't trust the people offering it." Maximum 12 words.
 Format exactly as:
-PATTERN: [label]
+PATTERN: [2-3 word label]
+SUBLABEL: [4-6 word plain explanation]
 SUMMARY: [2 sentences]
 TENSION: [one sentence]
 
@@ -211,15 +212,17 @@ Do not use markdown formatting in your response. Do not use ## headers, ** bold 
 }
 
 function parseAnalysis(text) {
-  const patternMatch = text.match(/^\*{0,2}PATTERN(?:\s+LABEL)?:\*{0,2}\s*(.+)/m)
-  const summaryMatch = text.match(/^\*{0,2}(?:RECOGNITION\s+)?SUMMARY:\*{0,2}\s*([\s\S]+?)(?=\n\n|#{1,3}\s*OUTPUT\s+[12]|OUTPUT\s+[12]|TENSION:|$)/m)
-  const tensionMatch = text.match(/^\*{0,2}TENSION:\*{0,2}\s*(.+)/m)
-  const tensionLine = tensionMatch ? tensionMatch[1].trim() : null
+  const patternMatch  = text.match(/^\*{0,2}PATTERN(?:\s+LABEL)?:\*{0,2}\s*(.+)/m)
+  const sublabelMatch = text.match(/^\*{0,2}SUBLABEL:\*{0,2}\s*(.+)/m)
+  const summaryMatch  = text.match(/^\*{0,2}(?:RECOGNITION\s+)?SUMMARY:\*{0,2}\s*([\s\S]+?)(?=\n\n|#{1,3}\s*OUTPUT\s+[12]|OUTPUT\s+[12]|TENSION:|$)/m)
+  const tensionMatch  = text.match(/^\*{0,2}TENSION:\*{0,2}\s*(.+)/m)
+  const tensionLine   = tensionMatch ? tensionMatch[1].trim() : null
   console.log('[PA tension]', tensionLine)
   const o1 = text.match(/#{0,3}\s*OUTPUT\s+1[^\n]*\n([\s\S]+?)(?=#{0,3}\s*OUTPUT\s+2|$)/i)
   const o2 = text.match(/#{0,3}\s*OUTPUT\s+2[^\n]*\n([\s\S]+?)(?=#{0,3}\s*OUTPUT\s+3|$)/i)
   return {
-    patternLabel:       patternMatch ? patternMatch[1].trim() : null,
+    patternLabel:    patternMatch  ? patternMatch[1].trim()  : null,
+    patternSublabel: sublabelMatch ? sublabelMatch[1].trim() : null,
     recognitionSummary: summaryMatch ? summaryMatch[1].trim() : null,
     tensionLine,
     label:          o1 ? o1[1].trim() : text,
@@ -578,7 +581,7 @@ export default function PoliticalAlignment({ onNavigate }) {
 
   // ── Results ─────────────────────────────────────
   if (phase === 'results') {
-    const { patternLabel, recognitionSummary, tensionLine, label, behaviorSignal } = parseAnalysis(analysis)
+    const { patternLabel, patternSublabel, recognitionSummary, tensionLine, label, behaviorSignal } = parseAnalysis(analysis)
     console.log('[PA parsed]', { patternLabel, recognitionSummary, tensionLine, label, behaviorSignal })
     const transitionLine = patternLabel
       ? `${patternLabel} shows up more clearly under pressure. The full report breaks down how this pattern holds together, and where it starts to strain.`
@@ -680,16 +683,16 @@ export default function PoliticalAlignment({ onNavigate }) {
                     <div className="pa-share-eyebrow">
                       My Civic Pattern
                     </div>
-                    <div className="pa-share-subhead">
-                      Civic Congruence · Pattern Survey
-                    </div>
                   </div>
                   <div className="pa-share-card-middle">
+                    <div className="pa-share-quote">
+                      {tensionLine || '—'}
+                    </div>
                     <div className="pa-share-type-label">
                       {patternLabel || '—'}
                     </div>
-                    <div className="pa-share-quote">
-                      {tensionLine || '—'}
+                    <div className="pa-share-type-sublabel">
+                      {patternSublabel || '—'}
                     </div>
                     <div className="pa-share-rarity-badge">
                       Top 6% rarest
