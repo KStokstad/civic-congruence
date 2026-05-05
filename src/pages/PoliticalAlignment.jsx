@@ -712,11 +712,8 @@ export default function PoliticalAlignment({ onNavigate }) {
                     )}
                   </div>
                   <div className="pa-share-card-bottom">
-                    <div className="pa-share-cta-pill">
-                      Find your pattern →
-                    </div>
-                    <div className="pa-share-url">
-                      civiccongruence.org
+                    <div style={{ fontFamily: 'var(--font-sans)', fontSize: 13, fontWeight: 500, color: '#c8a96e' }}>
+                      Find yours at civiccongruence.org
                     </div>
                   </div>
                 </div>

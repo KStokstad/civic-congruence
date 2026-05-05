@@ -651,12 +651,9 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
                       <span className="cs-resonance-badge">{resonanceBadgeText}</span>
                     </div>
                     <div className="cs-result-share-bottom">
-                      <div className="cs-result-share-cta-pill">
-                        Find your civic signal →
+                      <div style={{ fontFamily: 'var(--font-sans)', fontSize: 13, fontWeight: 500, color: '#c8a96e' }}>
+                        Find yours at civiccongruence.org
                       </div>
-                      <p className="cs-result-share-url">
-                        civiccongruence.org
-                      </p>
                     </div>
                   </div>
                 </div>
