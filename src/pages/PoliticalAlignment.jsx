@@ -465,10 +465,10 @@ export default function PoliticalAlignment({ onNavigate }) {
                 <h3 className="pa-sample-title">
                   <span className="pa-sample-title-main">Protective Disruption</span>
                   <br />
-                  <span className="pa-sample-title-sub">Under Expert Control</span>
+                  <span className="pa-sample-title-sub">Institutional Skepticism</span>
                 </h3>
                 <p className="pa-sample-sub">
-                  Strong interventionist instincts, skeptical of the institutions that would do the intervening.
+                  Wants bold action, but questions who can be trusted to deliver it.
                 </p>
                 <div className="pa-sample-stats">
                   <div className="pa-stat">
