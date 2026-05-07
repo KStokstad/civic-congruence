@@ -513,10 +513,6 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
               })}
             </div>
 
-            <div style={{ margin: '8px 0 16px' }}>
-              <span className="cs-resonance-badge">{resonanceBadgeText}</span>
-            </div>
-
             {csPatternSupport && (
               <p style={{ fontSize: 15, color: 'var(--text)', lineHeight: 1.6, margin: '0 0 24px' }}>
                 {csPatternSupport}
