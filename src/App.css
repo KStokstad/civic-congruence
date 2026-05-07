@@ -3574,14 +3574,11 @@ h1, h2, h3, h4 {
 .pa-share-card {
   background: #1a1814;
   border-radius: 14px;
-  padding: 28px;
   position: relative;
   overflow: hidden;
   width: 100%;
   aspect-ratio: 1 / 1;
   max-width: 540px;
-  display: flex;
-  flex-direction: column;
 }
 
 .pa-share-circle {
@@ -3604,15 +3601,16 @@ h1, h2, h3, h4 {
 }
 
 .pa-share-card-inner {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .pa-share-card-top {
+  position: absolute;
+  top: 8%;
+  left: 8%;
+  right: 8%;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -3634,18 +3632,20 @@ h1, h2, h3, h4 {
 }
 
 .pa-share-card-middle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 8%;
+  right: 8%;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  flex: 1;
-  justify-content: center;
-  padding: 14px 0 6px;
 }
 
 .pa-share-pattern {
   font-family: var(--font-display);
-  font-size: 24px;
-  line-height: 1.18;
+  font-size: 40px;
+  line-height: 1.1;
   color: #EDE6DA;
   font-style: normal;
   margin: 0;
@@ -3680,11 +3680,10 @@ h1, h2, h3, h4 {
 }
 
 .pa-share-card-bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 10px;
+  position: absolute;
+  bottom: 8%;
+  left: 8%;
+  right: 8%;
 }
 
 .pa-share-cta-pill {
