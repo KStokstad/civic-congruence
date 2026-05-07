@@ -499,17 +499,17 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-types-grid">
               <div className="pa-type-card">
                 <div className="pa-type-name">Civic Minimalist</div>
-                <p className="pa-type-desc">Skeptical of institutional solutions. Favors local accountability over coordinated intervention.</p>
+                <p className="pa-type-desc">Skeptical that large institutional structures solve local problems. Prefers direct accountability over coordinated systems.</p>
                 <div className="pa-type-rarity">18% of respondents</div>
               </div>
               <div className="pa-type-card">
-                <div className="pa-type-name">Progressive Institutionalist</div>
-                <p className="pa-type-desc">Strong belief in systemic change through democratic structures, even when those structures move slowly.</p>
+                <div className="pa-type-name">Structural Reformer</div>
+                <p className="pa-type-desc">Believes lasting change runs through democratic institutions, even when they move slowly.</p>
                 <div className="pa-type-rarity">12% of respondents</div>
               </div>
               <div className="pa-type-card">
                 <div className="pa-type-name">Pragmatic Bridge-Builder</div>
-                <p className="pa-type-desc">Values outcomes over ideology. Shifts position based on evidence, frustrating both sides.</p>
+                <p className="pa-type-desc">Values outcomes over doctrine. Adjusts position based on evidence and context rather than fixed alignment.</p>
                 <div className="pa-type-rarity">22% of respondents</div>
               </div>
               <div className="pa-type-card">
@@ -599,7 +599,7 @@ export default function PoliticalAlignment({ onNavigate }) {
       { name: patternLabel || 'Your Type', pct: rarityPct, isUser: true },
     ]
     const DIST_BLURRED = [
-      { name: 'Progressive Institutionalist', pct: 12 },
+      { name: 'Structural Reformer', pct: 12 },
       { name: 'Principled Dissenter', pct: 9 },
       { name: 'Constructive Realist', pct: 8 },
     ]
