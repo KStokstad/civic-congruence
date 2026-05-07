@@ -625,6 +625,9 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
                     <div className="cs-result-share-middle">
                       <p className="cs-result-share-headline">{csPatternLabel || pattern}</p>
                       <p className="cs-result-share-desc">{csPatternSupport || shareSummary}</p>
+                      <p className="cs-result-share-scores">
+                        {topicQueue.map((t) => `${t.label} ${answers[t.scale.fieldName] || '—'}/5`).join(' · ')}
+                      </p>
                     </div>
                     <div className="cs-result-share-bottom">
                       <div className="cs-result-share-cta-pill">Find your civic signal → civiccongruence.org</div>
