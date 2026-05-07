@@ -1431,6 +1431,23 @@ h1, h2, h3, h4 {
   color: #c8a96e;
 }
 
+.cs-result-save-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--inverted-bg);
+  color: var(--inverted-text);
+  border: 1px solid rgba(200,169,110,0.25);
+  border-radius: 9px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.cs-result-save-btn:hover {
+  border-color: rgba(200,169,110,0.55);
+}
+
 .cs-result-share-divider { display: none; }
 .cs-result-share-cta { display: none; }
 

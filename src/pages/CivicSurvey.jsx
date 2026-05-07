@@ -326,6 +326,24 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
     setAnswers((prev) => ({ ...prev, [fieldName]: value }))
   }
 
+  async function handleSaveResult() {
+    if (!csShareCardRef.current) return
+    const { default: html2canvas } = await import('html2canvas')
+    const w = csShareCardRef.current.offsetWidth
+    const canvas = await html2canvas(csShareCardRef.current, { scale: 2, width: w, height: w, backgroundColor: null, useCORS: true })
+    canvas.toBlob((blob) => {
+      if (!blob) return
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'civic-congruence-result.png'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    })
+  }
+
   async function handleShareImage() {
     if (!csShareCardRef.current) return
     const { default: html2canvas } = await import('html2canvas')
@@ -607,7 +625,14 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
             </div>
 
             {submitted && (
+              <>
               <div style={{ marginTop: 24 }}>
+                <button className="cs-result-save-btn" onClick={handleSaveResult}>
+                  Save my free result
+                </button>
+              </div>
+
+              <div style={{ marginTop: 28 }}>
                 <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4, textAlign: 'center' }}>
                   OPTIONAL: SHARE YOUR RESULT
                 </p>
@@ -646,6 +671,7 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
                   Every signal shared helps show what people are actually experiencing.
                 </p>
               </div>
+              </>
             )}
 
           </div>
