@@ -870,7 +870,7 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
           <div className="cs-signal">
             <div className="cs-signal-inner">
               <h2 className="cs-signal-h2">Your experience becomes shared <em>signal</em></h2>
-              <p className="cs-signal-body">When you answer, Civic Congruence uses your responses to show patterns across governance, economy, safety, health, and education. Your private result is generated first. Nothing is added to the community dataset unless you choose to submit it.</p>
+              <p className="cs-signal-body">When you answer, Civic Congruence uses your responses to show patterns across governance, economy, safety, health, and education. Your private result is generated first. Nothing is added to the community dataset unless you choose to submit&nbsp;it.</p>
               <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginTop: 12, marginBottom: 0 }}>
                 Choose what is closest to your experience. Imperfect answers are expected.
               </p>
