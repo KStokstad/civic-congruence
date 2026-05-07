@@ -344,16 +344,14 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
         }
       }
 
-      const reader = new FileReader()
-      reader.onload = function(e) {
-        const link = document.createElement('a')
-        link.href = e.target.result
-        link.download = 'civic-congruence-result.png'
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-      }
-      reader.readAsDataURL(blob)
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'civic-congruence-result.png'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
     })
   }
 
