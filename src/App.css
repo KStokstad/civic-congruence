@@ -1303,14 +1303,11 @@ h1, h2, h3, h4 {
 .cs-result-share-card {
   background: #1a1814;
   border-radius: 14px;
-  padding: 28px;
   position: relative;
   overflow: hidden;
   width: 100%;
   aspect-ratio: 1 / 1;
   max-width: 540px;
-  display: flex;
-  flex-direction: column;
   color: #EDE6DA;
 }
 
@@ -1331,14 +1328,16 @@ h1, h2, h3, h4 {
 }
 
 .cs-result-share-inner {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 1;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
 }
 
 .cs-result-share-top {
+  position: absolute;
+  top: 8%;
+  left: 8%;
+  right: 8%;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -1362,10 +1361,13 @@ h1, h2, h3, h4 {
 }
 
 .cs-result-share-middle {
+  position: absolute;
+  top: 36%;
+  left: 8%;
+  right: 8%;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 18px 0 0;
 }
 
 .cs-result-share-headline {
@@ -1394,12 +1396,12 @@ h1, h2, h3, h4 {
 }
 
 .cs-result-share-bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  position: absolute;
+  bottom: 8%;
+  left: 8%;
+  right: 8%;
+  border-top: 1px solid rgba(255,255,255,0.08);
   padding-top: 10px;
-  margin-top: auto;
 }
 
 .cs-result-share-cta-pill {
