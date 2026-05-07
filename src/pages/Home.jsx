@@ -45,12 +45,6 @@ export default function Home({ onNavigate }) {
             >
               Share your experience
             </button>
-            <button
-              className="btn-home-ghost"
-              onClick={() => onNavigate('dashboard')}
-            >
-              View the signal
-            </button>
           </div>
         </div>
       </section>
