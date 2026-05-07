@@ -239,7 +239,6 @@ export default function CivicSurvey({ onNavigate }) {
   const [reflectionLoading, setReflectionLoading] = useState(false)
   const [csPatternLabel, setCsPatternLabel] = useState(null)
   const [csPatternSupport, setCsPatternSupport] = useState(null)
-  const [copiedLink, setCopiedLink] = useState(false)
   const csShareCardRef = useRef(null)
 
   function initSurvey(count) {
@@ -335,9 +334,7 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
     canvas.toBlob(async (blob) => {
       if (!blob) return
 
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-
-      if (isMobile && navigator.canShare) {
+      if (navigator.canShare) {
         const file = new File([blob], 'civic-congruence-result.png', { type: 'image/png' })
         if (navigator.canShare({ files: [file] })) {
           try {
@@ -358,12 +355,6 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
       }
       reader.readAsDataURL(blob)
     })
-  }
-
-  async function handleCopyLink() {
-    await navigator.clipboard.writeText(window.location.href)
-    setCopiedLink(true)
-    setTimeout(() => setCopiedLink(false), 2000)
   }
 
   function reset() {
@@ -647,13 +638,7 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
                     className="cs-result-share-action cs-result-share-action--dark"
                     onClick={handleShareImage}
                   >
-                    Share your signal
-                  </button>
-                  <button
-                    className="cs-result-share-action cs-result-share-action--light"
-                    onClick={handleCopyLink}
-                  >
-                    {copiedLink ? 'Copied!' : 'Copy link'}
+                    Share image
                   </button>
                 </div>
                 <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8, fontStyle: 'italic' }}>

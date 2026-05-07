@@ -250,7 +250,6 @@ export default function PoliticalAlignment({ onNavigate }) {
   const [checkoutLoading, setCheckoutLoading] = useState(false)
   const [checkoutError, setCheckoutError] = useState(null)
   const [curiosityIdx] = useState(() => Math.floor(Math.random() * CURIOSITY_LINES.length))
-  const [shareCopied, setShareCopied] = useState(false)
   const shareCardRef = useRef(null)
 
   const total = QUESTIONS.length
@@ -369,9 +368,7 @@ export default function PoliticalAlignment({ onNavigate }) {
     canvas.toBlob(async (blob) => {
       if (!blob) return
 
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-
-      if (isMobile && navigator.canShare) {
+      if (navigator.canShare) {
         const file = new File([blob], 'civic-congruence-result.png', { type: 'image/png' })
         if (navigator.canShare({ files: [file] })) {
           try {
@@ -392,12 +389,6 @@ export default function PoliticalAlignment({ onNavigate }) {
       }
       reader.readAsDataURL(blob)
     })
-  }
-
-  async function handleCopyLink() {
-    await navigator.clipboard.writeText(window.location.href)
-    setShareCopied(true)
-    setTimeout(() => setShareCopied(false), 2000)
   }
 
   function reset() {
@@ -711,10 +702,7 @@ export default function PoliticalAlignment({ onNavigate }) {
               </div>
               <div className="pa-share-btns">
                 <button className="pa-share-btn pa-share-btn--dark" onClick={handleSaveImage}>
-                  Share your pattern
-                </button>
-                <button className="pa-share-btn pa-share-btn--surface" onClick={handleCopyLink}>
-                  {shareCopied ? 'Copied!' : 'Copy link'}
+                  Share image
                 </button>
               </div>
               <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8, fontStyle: 'italic' }}>
