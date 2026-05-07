@@ -159,6 +159,7 @@ OUTPUT 1 — IDEOLOGICAL LABEL (SHORT)
 Write exactly one paragraph. Maximum 4 sentences. 80-120 words total.
 Purpose: Name the orientation. Explain what holds it together. Introduce the core tension.
 Rules: Do not expand beyond one paragraph. Do not add additional sections. Do not fully explain the system. Maintain curiosity. End with an implied or explicit open loop.
+Language rules: Do not use directional partisan language anywhere in this output. Specifically forbidden: "left-leaning", "right-leaning", "progressive", "conservative", "liberal" as orientation descriptors. Use pattern-based alternatives instead: "practical reform" not "left-leaning pragmatism", "reform-oriented policy goals" not "progressive policy goals", "institutional skepticism" not a partisan identity, "legacy institutions" not a party label, "mainstream framing" not an ideological tradition. The orientation must be describable without placing the person on a left-right spectrum.
 
 OUTPUT 2 — WHERE THIS SHOWS UP
 Write exactly 2-3 sentences describing one concrete behavioral pattern — how this orientation tends to manifest in real decisions or reactions.
@@ -174,7 +175,7 @@ Rules:
 - This should make the reader think: "Oh, that's actually true about how I respond"
 
 GENERAL RULES
-Use pattern language, not identity claims. Avoid ideological labels unless explicitly qualified. FREE OUTPUT must create curiosity, not closure. FREE OUTPUT must be significantly shorter than any full analysis. Do not generate any PAID OUTPUT sections in this response. Avoid em-dashes throughout. Use periods, commas, or restructure instead.
+Use pattern language, not identity claims. Avoid ideological labels unless explicitly qualified. Do not use left-right directional language ("left-leaning", "right-leaning", "progressive", "conservative", "liberal") as descriptors anywhere in the output. FREE OUTPUT must create curiosity, not closure. FREE OUTPUT must be significantly shorter than any full analysis. Do not generate any PAID OUTPUT sections in this response. Avoid em-dashes throughout. Use periods, commas, or restructure instead.
 
 Do not use markdown formatting in your response. Do not use ## headers, ** bold markers, or # symbols. Use plain text only. Format the response exactly as specified with plain PATTERN: and SUMMARY: labels.`
 
