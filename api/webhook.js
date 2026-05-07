@@ -57,12 +57,12 @@ REPORT STRUCTURE RULES — apply to every section:
 One-line system rule: Each section should feel like the next step in the same line of reasoning, not a new topic.
 
 Core Orientation
-A narrative portrait of this person's political orientation. Not a list — prose. Name the specific ideological home, explain what drives it, and describe how it sits in the current political landscape.
+A narrative portrait of this person's civic orientation. Not a list — prose. Describe the values at the center of this orientation and the tension it holds between competing goods. Do not assign the user to an ideological tradition or imply a political lineage. Describe how this orientation sits in the current landscape.
 
 Regardless of what profile emerges from the answers, always open this section with an observation the respondent would recognize as accurate and non-threatening before introducing any complexity or tension. Even profiles that lean toward disruption or anti-institutionalism should feel seen and understood in the first paragraph before the analysis deepens.
 
-Historical Context
-2-3 figures whose political orientation resembles this person's pattern. For each: name, era, one sentence of parallel, one sentence of divergence or test. Cut anything that explains rather than illuminates. 2 sentences maximum per figure.
+What This Pattern Responds To
+Describe the conditions, pressures, and circumstances this civic orientation is most sensitive to. Do not reference named historical figures, political movements, parties, or ideological traditions. Describe what activates this pattern — what it notices, what it responds to, what it treats as signal.
 
 System Context
 Which factions within current American political parties would welcome this person, which would tolerate them, and which would reject them — and why. Be specific about intra-party dynamics, not just party labels.
@@ -113,6 +113,8 @@ ADDITIONAL RULES — apply to every section without exception:
 9. NO NAMED FIGURES IN SYSTEM CONTEXT: Do not name specific political figures by name in the System Context or faction mapping sections. Describe factions and their characteristics without anchoring to individuals. Let the reader map themselves.
 
 10. PATTERN IS NOT IDENTITY: Avoid presenting the pattern as fixed or permanent. Frame observations as tendencies that may vary by context, not fixed traits. The pattern describes how responses cluster, not who the person fundamentally is.
+
+11. NO NAMED FIGURES, NO IDEOLOGICAL LINEAGE: Do not reference any named political figure, historical leader, or public personality anywhere in this report. Do not imply the user belongs to or descends from a political tradition. Describe patterns, tensions, and orientations — not pedigrees.
 
 After the Final Orientation section, add one more section with this exact header and structure:
 
