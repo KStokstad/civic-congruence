@@ -616,7 +616,20 @@ export default function PoliticalAlignment({ onNavigate }) {
         </div>
         <div className="pa-results-wrap">
 
-          {/* 2. RARITY STRIP */}
+          {/* 2. PATTERN RESULT */}
+          {patternLabel && (
+            <div className="pa-pattern-result">
+              <div className="pa-pattern-result-label">{patternLabel}</div>
+              {patternSublabel && (
+                <div className="pa-pattern-result-sublabel">{patternSublabel}</div>
+              )}
+              {tensionLine && (
+                <div className="pa-pattern-result-tension">{tensionLine}</div>
+              )}
+            </div>
+          )}
+
+          {/* 3. RARITY STRIP */}
           <div className="pa-rarity-strip">
             <div className="pa-rarity-stat">
               <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>{rarityPct}%</div>
@@ -633,14 +646,6 @@ export default function PoliticalAlignment({ onNavigate }) {
               <div className="pa-rarity-label">Patterns</div>
             </div>
           </div>
-
-          {/* 4. RECOGNITION QUOTE */}
-          {(tensionLine || recognitionSummary) && (
-            <div className="pa-quote-card">
-              <p className="pa-quote-card-text">{tensionLine || firstSentence(behaviorSignal) || firstSentence(recognitionSummary)}</p>
-              <p className="pa-quote-card-attr">Pattern Recognition &mdash; What This Looks Like in Practice</p>
-            </div>
-          )}
 
           {/* 5. INSIGHT CARDS */}
           <div className="pa-insight-grid">
@@ -709,6 +714,29 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
           )}
 
+          {/* 6. UPSELL BLOCK — checkout logic unchanged */}
+          <div className="pa-upsell-block">
+            <div className="pa-upsell-left">
+              <p className="pa-upsell-eyebrow">Full Report</p>
+              <h3 className="pa-upsell-h3">Where this pattern holds &mdash; and where it breaks</h3>
+              <p className="pa-upsell-body" style={{ color: 'rgba(160, 144, 112, 0.8)' }}>Your full report breaks down why this pattern shows up, where it works, where it strains, and what to watch under pressure.</p>
+            </div>
+            <div className="pa-upsell-right">
+              <div className="pa-upsell-price">$7</div>
+              <p className="pa-upsell-delivery">Full report delivered instantly</p>
+              {checkoutError && (
+                <div className="error-banner" style={{ marginTop: 8 }}>{checkoutError}</div>
+              )}
+              <button
+                className="pa-upsell-btn"
+                onClick={handleCheckout}
+                disabled={checkoutLoading}
+              >
+                {checkoutLoading ? 'Redirecting…' : 'Get full report — $7'}
+              </button>
+            </div>
+          </div>
+
           {/* 7. DISTRIBUTION CHART */}
           <div className="pa-dist-card">
             <div className="pa-dist-header">
@@ -745,29 +773,6 @@ export default function PoliticalAlignment({ onNavigate }) {
               <div className="pa-dist-overlay">
                 Full breakdown of all types included in the full report
               </div>
-            </div>
-          </div>
-
-          {/* 8. UPSELL BLOCK — checkout logic unchanged */}
-          <div className="pa-upsell-block">
-            <div className="pa-upsell-left">
-              <p className="pa-upsell-eyebrow">Full Report</p>
-              <h3 className="pa-upsell-h3">Where this pattern holds &mdash; and where it breaks</h3>
-              <p className="pa-upsell-body" style={{ color: 'rgba(160, 144, 112, 0.8)' }}>Your full report breaks down why this pattern shows up, where it works, where it strains, and what to watch under pressure.</p>
-            </div>
-            <div className="pa-upsell-right">
-              <div className="pa-upsell-price">$7</div>
-              <p className="pa-upsell-delivery">Full report delivered instantly</p>
-              {checkoutError && (
-                <div className="error-banner" style={{ marginTop: 8 }}>{checkoutError}</div>
-              )}
-              <button
-                className="pa-upsell-btn"
-                onClick={handleCheckout}
-                disabled={checkoutLoading}
-              >
-                {checkoutLoading ? 'Redirecting…' : 'Get full report — $7'}
-              </button>
             </div>
           </div>
 
