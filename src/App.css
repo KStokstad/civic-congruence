@@ -1303,7 +1303,7 @@ h1, h2, h3, h4 {
 .cs-result-share-card {
   background: #1a1814;
   border-radius: 14px;
-  padding: 26px 28px;
+  padding: 28px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -1321,13 +1321,13 @@ h1, h2, h3, h4 {
 }
 .cs-result-share-circle--1 {
   width: 280px; height: 280px;
-  top: -90px; right: -90px;
-  border: 1.5px solid rgba(200, 169, 110, 0.12);
+  top: -80px; right: -80px;
+  border: 1px solid rgba(200,169,110,0.10);
 }
 .cs-result-share-circle--2 {
   width: 200px; height: 200px;
-  bottom: -70px; left: -50px;
-  border: 1.5px solid rgba(200, 169, 110, 0.09);
+  bottom: -60px; left: -40px;
+  border: 1px solid rgba(200,169,110,0.07);
 }
 
 .cs-result-share-inner {
@@ -1342,7 +1342,7 @@ h1, h2, h3, h4 {
 .cs-result-share-top {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .cs-result-share-eyebrow {
@@ -1358,24 +1358,23 @@ h1, h2, h3, h4 {
 .cs-result-share-subhead {
   font-family: var(--font-sans);
   font-size: 12px;
-  color: rgba(220, 205, 175, 0.8);
-  letter-spacing: 0.02em;
+  color: rgba(220,205,175,0.7);
   margin: 0;
 }
 
 .cs-result-share-middle {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   flex: 1;
   justify-content: center;
-  padding: 12px 0;
+  padding: 14px 0 6px;
 }
 
 .cs-result-share-headline {
   font-family: var(--font-display);
-  font-size: 26px;
-  line-height: 1.15;
+  font-size: 28px;
+  line-height: 1.1;
   color: #EDE6DA;
   margin: 0;
   font-style: normal;
@@ -1383,39 +1382,36 @@ h1, h2, h3, h4 {
 
 .cs-result-share-desc {
   font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: 1.5;
-  color: rgba(220, 205, 175, 0.8);
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(220,205,175,0.8);
   margin: 0;
 }
 
 .cs-result-share-bottom {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 12px;
+  gap: 4px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 10px;
 }
 
 .cs-result-share-cta-pill {
-  display: inline-flex;
-  align-self: flex-start;
-  align-items: center;
-  padding: 7px 16px;
-  background: #c8a96e;
-  border-radius: 20px;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
-  color: #1a1814;
-  letter-spacing: 0.04em;
+  color: #c8a96e;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  align-self: flex-start;
 }
 
 .cs-result-share-url {
   font-family: var(--font-sans);
-  font-size: 10px;
-  color: rgba(220, 205, 175, 0.6);
-  letter-spacing: 0.03em;
+  font-size: 11px;
+  color: rgba(220,205,175,0.6);
   margin: 0;
 }
 
@@ -3519,7 +3515,7 @@ h1, h2, h3, h4 {
 .pa-share-card {
   background: #1a1814;
   border-radius: 14px;
-  padding: 26px 28px;
+  padding: 28px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -3536,13 +3532,13 @@ h1, h2, h3, h4 {
 }
 .pa-share-circle--lg {
   width: 280px; height: 280px;
-  top: -90px; right: -90px;
-  border: 1.5px solid rgba(200, 169, 110, 0.12);
+  top: -80px; right: -80px;
+  border: 1px solid rgba(200,169,110,0.10);
 }
 .pa-share-circle--md {
   width: 200px; height: 200px;
-  bottom: -70px; left: -50px;
-  border: 1.5px solid rgba(200, 169, 110, 0.09);
+  bottom: -60px; left: -40px;
+  border: 1px solid rgba(200,169,110,0.07);
 }
 .pa-share-circle--sm {
   display: none;
@@ -3560,7 +3556,7 @@ h1, h2, h3, h4 {
 .pa-share-card-top {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .pa-share-eyebrow {
@@ -3575,8 +3571,7 @@ h1, h2, h3, h4 {
 .pa-share-subhead {
   font-family: var(--font-sans);
   font-size: 12px;
-  color: rgba(220, 205, 175, 0.8);
-  letter-spacing: 0.02em;
+  color: rgba(220,205,175,0.7);
 }
 
 .pa-share-card-middle {
@@ -3585,40 +3580,41 @@ h1, h2, h3, h4 {
   gap: 10px;
   flex: 1;
   justify-content: center;
-  padding: 12px 0;
+  padding: 14px 0 6px;
+}
+
+.pa-share-pattern {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.18;
+  color: #EDE6DA;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
 }
 
 .pa-share-type-label {
-  font-family: var(--font-display);
-  font-size: 30px;
-  line-height: 1.1;
-  color: #EDE6DA;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(220,205,175,0.85);
 }
 
 .pa-share-type-sublabel {
   font-family: var(--font-sans);
   font-size: 13px;
-  color: rgba(220,205,175,0.75);
-  margin-top: 2px;
-}
-
-.pa-share-quote {
-  font-family: var(--font-sans);
-  font-size: 13px;
-  line-height: 1.5;
-  color: rgba(220, 205, 175, 0.85);
-  border-left: 2px solid #c8a96e;
-  padding-left: 10px;
+  color: rgba(220,205,175,0.7);
+  margin-top: 0;
 }
 
 .pa-share-rarity-badge {
   display: inline-flex;
   align-self: flex-start;
-  padding: 4px 12px;
-  border: 1.5px solid #c8a96e;
+  padding: 3px 10px;
+  border: 1px solid rgba(200,169,110,0.5);
   border-radius: 20px;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   color: #c8a96e;
   letter-spacing: 0.04em;
@@ -3627,34 +3623,31 @@ h1, h2, h3, h4 {
 .pa-share-card-bottom {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 12px;
+  gap: 4px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 10px;
 }
 
 .pa-share-cta-pill {
-  display: inline-flex;
-  align-self: flex-start;
-  align-items: center;
-  padding: 7px 16px;
-  background: #c8a96e;
-  border-radius: 20px;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
-  color: #1a1814;
-  letter-spacing: 0.04em;
+  color: #c8a96e;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  align-self: flex-start;
 }
 
 .pa-share-url {
   font-family: var(--font-sans);
-  font-size: 10px;
-  color: rgba(220, 205, 175, 0.6);
-  letter-spacing: 0.03em;
+  font-size: 11px;
+  color: rgba(220,205,175,0.6);
 }
 
 .pa-share-type-name { display: none; }
-.pa-share-pattern { display: none; }
+.pa-share-quote { display: none; }
 .pa-share-footer { display: none; }
 .pa-share-rarity-text { display: none; }
 

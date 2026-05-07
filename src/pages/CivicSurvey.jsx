@@ -634,26 +634,15 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
                   <div className="cs-result-share-circle cs-result-share-circle--2" />
                   <div className="cs-result-share-inner">
                     <div className="cs-result-share-top">
-                      <p className="cs-result-share-eyebrow">
-                        My Civic Signal
-                      </p>
-                      <p className="cs-result-share-subhead">
-                        Civic Congruence · Civic Survey
-                      </p>
+                      <p className="cs-result-share-eyebrow">My Civic Signal</p>
+                      <p className="cs-result-share-subhead">Civic Congruence · Civic Survey</p>
                     </div>
                     <div className="cs-result-share-middle">
-                      <p className="cs-result-share-headline">
-                        {csPatternLabel || pattern}
-                      </p>
-                      <p className="cs-result-share-desc">
-                        {shareSummary}
-                      </p>
-                      <span className="cs-resonance-badge">{resonanceBadgeText}</span>
+                      <p className="cs-result-share-headline">{csPatternLabel || pattern}</p>
+                      <p className="cs-result-share-desc">{csPatternSupport || shareSummary}</p>
                     </div>
                     <div className="cs-result-share-bottom">
-                      <div style={{ fontFamily: 'var(--font-sans)', fontSize: 13, fontWeight: 500, color: '#c8a96e' }}>
-                        Find yours at civiccongruence.org
-                      </div>
+                      <div className="cs-result-share-cta-pill">Find your civic signal → civiccongruence.org</div>
                     </div>
                   </div>
                 </div>

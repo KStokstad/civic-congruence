@@ -694,27 +694,18 @@ export default function PoliticalAlignment({ onNavigate }) {
                 <div className="pa-share-circle pa-share-circle--sm" />
                 <div className="pa-share-card-inner">
                   <div className="pa-share-card-top">
-                    <div className="pa-share-eyebrow">
-                      My Civic Pattern
-                    </div>
+                    <div className="pa-share-eyebrow">My Civic Pattern</div>
+                    <div className="pa-share-subhead">Civic Congruence · Political Alignment</div>
                   </div>
                   <div className="pa-share-card-middle">
-                    <div className="pa-share-type-label">
-                      {patternLabel || '—'}
-                    </div>
-                    <div className="pa-share-quote">
-                      {tensionLine || '—'}
-                    </div>
+                    <div className="pa-share-pattern">{tensionLine || '—'}</div>
+                    <div className="pa-share-type-label">{patternLabel || '—'}</div>
                     {rarityBadgeText && (
-                      <div className="pa-share-rarity-badge">
-                        {rarityBadgeText}
-                      </div>
+                      <div className="pa-share-rarity-badge">{rarityBadgeText}</div>
                     )}
                   </div>
                   <div className="pa-share-card-bottom">
-                    <div style={{ fontFamily: 'var(--font-sans)', fontSize: 13, fontWeight: 500, color: '#c8a96e' }}>
-                      Find yours at civiccongruence.org
-                    </div>
+                    <div className="pa-share-cta-pill">Find your civic pattern → civiccongruence.org</div>
                   </div>
                 </div>
               </div>
