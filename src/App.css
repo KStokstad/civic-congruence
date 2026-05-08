@@ -127,6 +127,7 @@ h1, h2, h3, h4 {
   justify-content: center;
   gap: 8px;
   padding: 10px 22px;
+  min-height: 44px;
   font-size: 15px;
   font-weight: 500;
   border-radius: var(--radius-sm);
@@ -162,6 +163,7 @@ h1, h2, h3, h4 {
 .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  pointer-events: none;
   transform: none !important;
   box-shadow: none !important;
 }
@@ -1435,6 +1437,7 @@ h1, h2, h3, h4 {
 .cs-result-save-btn {
   width: 100%;
   padding: 13px;
+  min-height: 44px;
   background: var(--inverted-bg);
   color: var(--inverted-text);
   border: 1px solid rgba(200,169,110,0.25);
@@ -1487,6 +1490,7 @@ h1, h2, h3, h4 {
 .cs-result-share-action {
   flex: 1;
   padding: 13px 8px;
+  min-height: 44px;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 500;
@@ -3741,6 +3745,7 @@ h1, h2, h3, h4 {
 .pa-share-btn {
   flex: 1;
   padding: 13px 8px;
+  min-height: 44px;
   border-radius: 10px;
   font-family: var(--font-sans);
   font-size: 14px;
@@ -4073,6 +4078,7 @@ h1, h2, h3, h4 {
 .pa-bottom-btn {
   flex: 1;
   padding: 14px;
+  min-height: 44px;
   background: var(--surface);
   border: 1.5px solid var(--border);
   border-radius: 11px;

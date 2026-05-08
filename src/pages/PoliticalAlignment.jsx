@@ -603,11 +603,8 @@ export default function PoliticalAlignment({ onNavigate }) {
     // ≤10%: rarity is a hook — show badge
     // 11–25%: not compelling — hide badge
     // ≥26%: shift to specificity — show "1 of 12 patterns"
-    const rarityBadgeText = rarityPct <= 10
-      ? `Top ${rarityPct}% rarest`
-      : rarityPct <= 25
-      ? null
-      : '1 of 12 patterns'
+    // Suppress badge until real data is wired — no fake precision in production
+    const rarityBadgeText = null
 
     // Placeholder distribution data — TODO: wire up real type frequency data from Airtable
     const DIST_VISIBLE = [
@@ -648,18 +645,8 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
           )}
 
-          {/* 3. RARITY STRIP */}
+          {/* 3. PATTERN COUNT — structural only */}
           <div className="pa-rarity-strip">
-            <div className="pa-rarity-stat">
-              <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>{rarityPct}%</div>
-              <div className="pa-rarity-label">Shared by {rarityPct}% of respondents</div>
-            </div>
-            <div className="pa-rarity-divider" />
-            <div className="pa-rarity-stat">
-              <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>2nd</div>
-              <div className="pa-rarity-label">Rarest Pattern</div>
-            </div>
-            <div className="pa-rarity-divider" />
             <div className="pa-rarity-stat">
               <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>1 of 12</div>
               <div className="pa-rarity-label">Patterns</div>
@@ -672,14 +659,14 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-insight-card pa-insight-card--hero">
               <div className="pa-insight-hero-name">{patternLabel || '—'}</div>
               <div className="pa-insight-hero-desc">{firstSentence(label) || '—'}</div>
-              <div className="pa-insight-stat">{rarityBadgeText || `Shared by ${rarityPct}% of respondents`}</div>
+              <div className="pa-insight-stat">1 of 12 pattern types</div>
             </div>
 
             {/* Card 2 — Where This Shows Up */}
             <div className="pa-insight-card">
               <div className="pa-insight-label">WHERE THIS SHOWS UP</div>
               <div className="pa-insight-body">{firstSentence(behaviorSignal) || '—'}</div>
-              <div className="pa-insight-stat">Seen in {rarityPct}% of all results</div>
+              <div className="pa-insight-stat">1 of 12 pattern types</div>
             </div>
 
             {/* Card 3 — Common In */}
@@ -693,7 +680,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-insight-card">
               <div className="pa-insight-label">THE CENTRAL TENSION</div>
               <div className="pa-insight-body">{tensionLine || '—'}</div>
-              <div className="pa-insight-stat">Shared by {rarityPct}% of respondents</div>
+              <div className="pa-insight-stat">1 of 12 pattern types</div>
             </div>
           </div>
 
@@ -741,7 +728,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-upsell-left">
               <p className="pa-upsell-eyebrow">Full Report</p>
               <h3 className="pa-upsell-h3">Where this pattern holds &mdash; and where it breaks</h3>
-              <p className="pa-upsell-body" style={{ color: 'rgba(160, 144, 112, 0.8)' }}>Your full report breaks down why this pattern shows up, where it works, where it strains, and what to watch under pressure.</p>
+              <p className="pa-upsell-body" style={{ color: 'var(--inverted-text-secondary)' }}>Your full report breaks down why this pattern shows up, where it works, where it strains, and what to watch under pressure.</p>
             </div>
             <div className="pa-upsell-right">
               <div className="pa-upsell-price">$7</div>
@@ -759,44 +746,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
           </div>
 
-          {/* 7. DISTRIBUTION CHART */}
-          <div className="pa-dist-card">
-            <div className="pa-dist-header">
-              <span className="pa-dist-title">How your type compares</span>
-              <span className="pa-dist-link">Full breakdown &rarr;</span>
-            </div>
-            <div className="pa-dist-rows">
-              {DIST_VISIBLE.map((t) => (
-                <div className="pa-dist-row" key={t.name}>
-                  <span className={`pa-dist-label${t.isUser ? ' pa-dist-label--user' : ''}`}>{t.name}</span>
-                  <div className="pa-dist-track">
-                    <div
-                      className="pa-dist-fill"
-                      style={{
-                        width: `${(t.pct / MAX_PCT) * 82}%`,
-                        background: t.isUser ? 'var(--gold)' : 'var(--border)',
-                      }}
-                    />
-                  </div>
-                  <span className={`pa-dist-pct${t.isUser ? ' pa-dist-pct--user' : ''}`}>{t.pct}%</span>
-                </div>
-              ))}
-            </div>
-            <div className="pa-dist-gated">
-              {DIST_BLURRED.map((t) => (
-                <div className="pa-dist-row pa-dist-row--muted" key={t.name}>
-                  <span className="pa-dist-label">{t.name}</span>
-                  <div className="pa-dist-track">
-                    <div className="pa-dist-fill" style={{ width: `${(t.pct / MAX_PCT) * 82}%`, background: 'var(--border)' }} />
-                  </div>
-                  <span className="pa-dist-pct">{t.pct}%</span>
-                </div>
-              ))}
-              <div className="pa-dist-overlay">
-                Full breakdown of all types included in the full report
-              </div>
-            </div>
-          </div>
+          {/* Distribution chart removed — placeholder data suppressed until real Airtable data is wired */}
 
           {/* 8. BOTTOM BUTTONS */}
           <div className="pa-bottom-btns">

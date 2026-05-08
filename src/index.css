@@ -22,6 +22,8 @@
   /* Inverted section */
   --inverted-bg: #1e1c17;
   --inverted-text: #F0EAE0;
+  --inverted-text-secondary: rgba(220, 205, 175, 0.80);
+  --inverted-text-tertiary: rgba(200, 185, 155, 0.70);
 
   /* Borders */
   --border: #beb6a4;

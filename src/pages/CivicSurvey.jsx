@@ -596,10 +596,10 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
                     <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 22, color: 'var(--inverted-text)', marginBottom: 10, fontWeight: 400 }}>
                       Your experience becomes part of the community dataset.
                     </h3>
-                    <p style={{ fontSize: 14, color: 'rgba(184,168,136,0.8)', lineHeight: 1.6, marginBottom: 6 }}>
+                    <p style={{ fontSize: 14, color: 'var(--inverted-text-secondary)', lineHeight: 1.6, marginBottom: 6 }}>
                       Your result is ready. Your responses have not yet been added to the community dataset.
                     </p>
-                    <p style={{ fontSize: 13, color: 'rgba(160,144,112,0.6)', marginBottom: 24 }}>
+                    <p style={{ fontSize: 13, color: 'var(--inverted-text-tertiary)', marginBottom: 24 }}>
                       Responses remain anonymous.
                     </p>
                     {error && <div className="error-banner">{error}</div>}
@@ -636,7 +636,7 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
                 <p style={{ fontFamily: 'var(--font-sans)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 4, textAlign: 'center' }}>
                   OPTIONAL: SHARE YOUR RESULT
                 </p>
-                <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', marginBottom: 16, textAlign: 'center' }}>
+                <p style={{ fontSize: 13, color: 'var(--text-muted)', fontStyle: 'italic', marginBottom: 16, textAlign: 'center' }}>
                   This shares your civic signal publicly. It does not submit additional data.
                 </p>
                 <div className="cs-result-share-card" ref={csShareCardRef}>
@@ -909,7 +909,7 @@ Return your response as valid JSON only. No markdown. No labels. No backticks. N
           <div className="question-block">
             <div className="question-text">{topic.scale.text}</div>
             <div className="scale-wrapper">
-              <p style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic', textAlign: 'center', margin: '0 0 8px' }}>
+              <p style={{ fontSize: 13, color: 'var(--text-muted)', fontStyle: 'italic', textAlign: 'center', margin: '0 0 8px' }}>
                 If you&rsquo;re unsure, go with your first instinct.
               </p>
               {!topic.scale.labels && (
