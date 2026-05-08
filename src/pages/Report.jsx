@@ -177,7 +177,7 @@ export default function Report({ onNavigate }) {
               <div className="at-a-glance">
                 <div className="at-a-glance-label">At a Glance</div>
                 <ul className="at-a-glance-list">
-                  <li><span className="at-a-glance-key">Orientation</span>{orientation}</li>
+                  <li><span className="at-a-glance-key">Orientation</span><span className="at-a-glance-value--primary">{orientation}</span></li>
                   <li><span className="at-a-glance-key">Strength</span>{strength}</li>
                   <li><span className="at-a-glance-key">Tension</span>{tension}</li>
                   <li><span className="at-a-glance-key">Best environments</span>{bestEnv}</li>
