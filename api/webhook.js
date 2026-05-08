@@ -194,11 +194,15 @@ function markdownToHtml(text) {
     const line = raw.trimEnd()
     const h1 = line.match(/^#\s+(.+)/)
     const h2 = line.match(/^##\s+(.+)/)
+    const h3 = line.match(/^###\s+(.+)/)
     const li = line.match(/^[*-]\s+(.+)/)
 
     if (h1) {
       flushList(); flushPara()
       out.push(`<h1 style="${s}font-size:28px;margin:32px 0 8px;color:#111;">${inline(h1[1])}</h1>`)
+    } else if (h3) {
+      flushList(); flushPara()
+      out.push(`<h3 style="${s}font-size:17px;font-weight:600;margin:24px 0 6px;color:#111;">${inline(h3[1])}</h3>`)
     } else if (h2) {
       flushList(); flushPara()
       out.push(`<h2 style="${s}font-size:20px;font-weight:500;margin:36px 0 8px;color:#111;">${inline(h2[1])}</h2>`)

@@ -55,16 +55,13 @@ function parseAtAGlance(text) {
 }
 
 const SECTION_SUB_LINES = {
-  'Core Orientation':        'How your answers fit together',
-  'How You Evaluate Systems':'What your responses reveal about how you make decisions',
-  'Where Tension Shows Up':  'Where your thinking gets complicated',
-  'What This Pattern Responds To': 'The conditions and pressures this orientation is most sensitive to',
-  'System Context':          'Where this orientation sits in today\u2019s landscape',
-  'System Alignment':        'How well current categories reflect your position',
-  'Where This Works':        'Situations where this approach is effective',
-  'Where It Breaks Down':    'Where this approach runs into limits',
-  'What to Watch':           'Patterns worth being aware of',
-  'Final Orientation':       'How to hold all of this',
+  'Core Orientation':             'How your answers fit together',
+  'What This Pattern Responds To':'The conditions and pressures this orientation is most sensitive to',
+  'System Context':               'Where this orientation sits in today\u2019s landscape',
+  'Where You Sit':                'How represented this pattern feels in current politics',
+  'Where This Works':             'Situations where this approach is effective',
+  'Where It Breaks Down':         'Where this approach runs into limits',
+  'How To Use This Pattern':      'How to apply this orientation with more clarity',
 }
 
 const POLL_INTERVAL = 3000
