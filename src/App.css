@@ -2302,8 +2302,8 @@ h1, h2, h3, h4 {
 }
 
 .report-content p {
-  line-height: 1.65;
-  margin-bottom: 14px;
+  line-height: 1.78;
+  margin-bottom: 18px;
 }
 
 .analysis-paragraphs p:last-child,
@@ -2329,8 +2329,8 @@ h1, h2, h3, h4 {
   font-weight: 500;
   font-family: var(--font-display);
   text-transform: none;
-  margin-top: 36px;
-  margin-bottom: 10px;
+  margin-top: 52px;
+  margin-bottom: 12px;
 }
 
 .analysis-paragraphs h3 {
@@ -2922,20 +2922,22 @@ h1, h2, h3, h4 {
 
 .at-a-glance {
   max-width: 680px;
-  background: rgba(27, 75, 138, 0.04);
-  border: 1px solid rgba(27, 75, 138, 0.12);
-  border-radius: var(--radius);
-  padding: 18px 22px;
+  background: rgba(27, 75, 138, 0.05);
+  border: 1px solid rgba(27, 75, 138, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
   margin-bottom: 40px;
 }
 
 .at-a-glance-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(27, 75, 138, 0.1);
 }
 
 .at-a-glance-list {
@@ -2944,15 +2946,15 @@ h1, h2, h3, h4 {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .at-a-glance-list li {
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.55;
   color: var(--text);
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .at-a-glance-key {
@@ -2962,8 +2964,8 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
   color: var(--text-muted);
   white-space: nowrap;
-  padding-top: 2px;
-  min-width: 110px;
+  padding-top: 3px;
+  min-width: 120px;
 }
 
 .report-content {

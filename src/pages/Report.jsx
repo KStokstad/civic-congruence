@@ -198,8 +198,8 @@ export default function Report({ onNavigate }) {
             <button className="btn btn-secondary" onClick={() => window.print()}>
               Print / Save as PDF
             </button>
-            <button className="btn btn-secondary" onClick={() => onNavigate('civic-survey')}>
-              Take the Civic Survey
+            <button className="btn btn-secondary" onClick={() => onNavigate('political-alignment')}>
+              Take the diagnostic again
             </button>
           </div>
 
