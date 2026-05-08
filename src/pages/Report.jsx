@@ -138,8 +138,8 @@ export default function Report({ onNavigate }) {
         <div className="container-sm">
           <div className="generating-state">
             <div className="generating-spinner" />
-            <h3>Generating your report&hellip;</h3>
-            <p>This takes about 30 seconds. Don't close this tab.</p>
+            <h3>Your report is being generated.</h3>
+            <p>This usually takes about a minute.</p>
           </div>
         </div>
       </div>
