@@ -702,7 +702,7 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-share-section">
               <p className="pa-share-label">Save or share your result</p>
               <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 16 }}>
-                Download your free result or share it as an image. The Deep Dive expands this analysis.
+                Download the share image or post it directly. The Deep Dive expands the full analysis.
               </p>
               <div className="pa-share-card" ref={shareCardRef}>
                 <div className="pa-share-circle pa-share-circle--lg" />
@@ -727,7 +727,7 @@ export default function PoliticalAlignment({ onNavigate }) {
               </div>
               <div className="pa-share-btns">
                 <button className="pa-share-btn pa-share-btn--dark" onClick={handleSavePA}>
-                  Save free result
+                  Download share image
                 </button>
                 <button className="pa-share-btn pa-share-btn--surface" onClick={handleSaveImage}>
                   Share image
