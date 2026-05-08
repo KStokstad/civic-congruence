@@ -129,6 +129,16 @@ const QUESTIONS = [
   },
 ]
 
+function deriveDimensions(answers) {
+  const pick = (q, table) => table[answers[q]] ?? null
+  return [
+    { label: 'Change preference',     value: pick('Q5', { A: 'High', B: 'Low', C: 'Medium', D: 'Low' }) },
+    { label: 'Institutional trust',   value: pick('Q4', { A: 'Low', B: 'High', C: 'Medium', D: 'Low' }) },
+    { label: 'Tradition / continuity', value: pick('Q3', { A: 'High', B: 'Low', C: 'Medium', D: 'Low' }) },
+    { label: 'Compromise willingness', value: pick('Q9', { A: 'Low', B: 'Medium', C: 'High', D1: 'Medium', D2: 'Low' }) },
+  ].filter(d => d.value !== null)
+}
+
 async function callAnthropic(answers) {
   const answersText = QUESTIONS.map((q) => {
     const selected = q.options.find((o) => o.id === answers[q.fieldName])
@@ -645,13 +655,24 @@ export default function PoliticalAlignment({ onNavigate }) {
             </div>
           )}
 
-          {/* 3. PATTERN COUNT — structural only */}
-          <div className="pa-rarity-strip">
-            <div className="pa-rarity-stat">
-              <div className="pa-rarity-val" style={{ color: 'rgba(240, 234, 224, 0.95)' }}>1 of 12</div>
-              <div className="pa-rarity-label">Patterns</div>
-            </div>
-          </div>
+          {/* 3. WHAT SHAPED THIS RESULT */}
+          {(() => {
+            const dims = deriveDimensions(answers)
+            if (!dims.length) return null
+            return (
+              <div className="pa-dimensions">
+                <p className="pa-dimensions-label">What shaped this result</p>
+                <ul className="pa-dimensions-list">
+                  {dims.map(d => (
+                    <li key={d.label} className="pa-dimensions-row">
+                      <span className="pa-dimensions-key">{d.label}</span>
+                      <span className="pa-dimensions-val">{d.value}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          })()}
 
           {/* 5. INSIGHT CARDS */}
           <div className="pa-insight-grid">
@@ -659,14 +680,12 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-insight-card pa-insight-card--hero">
               <div className="pa-insight-hero-name">{patternLabel || '—'}</div>
               <div className="pa-insight-hero-desc">{firstSentence(label) || '—'}</div>
-              <div className="pa-insight-stat">1 of 12 pattern types</div>
             </div>
 
             {/* Card 2 — Where This Shows Up */}
             <div className="pa-insight-card">
               <div className="pa-insight-label">WHERE THIS SHOWS UP</div>
               <div className="pa-insight-body">{firstSentence(behaviorSignal) || '—'}</div>
-              <div className="pa-insight-stat">1 of 12 pattern types</div>
             </div>
 
             {/* Card 3 — Common In */}
@@ -680,7 +699,6 @@ export default function PoliticalAlignment({ onNavigate }) {
             <div className="pa-insight-card">
               <div className="pa-insight-label">THE CENTRAL TENSION</div>
               <div className="pa-insight-body">{tensionLine || '—'}</div>
-              <div className="pa-insight-stat">1 of 12 pattern types</div>
             </div>
           </div>
 
