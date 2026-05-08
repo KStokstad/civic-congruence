@@ -159,7 +159,7 @@ OUTPUT 1 — IDEOLOGICAL LABEL (SHORT)
 Write exactly one paragraph. Maximum 4 sentences. 80-120 words total.
 Purpose: Name the orientation. Explain what holds it together. Introduce the core tension.
 Rules: Do not expand beyond one paragraph. Do not add additional sections. Do not fully explain the system. Maintain curiosity. End with an implied or explicit open loop.
-Language rules: Do not use directional partisan language anywhere in this output. Specifically forbidden: "left-leaning", "right-leaning", "progressive", "conservative", "liberal" as orientation descriptors. Use pattern-based alternatives instead: "practical reform" not "left-leaning pragmatism", "reform-oriented policy goals" not "progressive policy goals", "institutional skepticism" not a partisan identity, "legacy institutions" not a party label, "mainstream framing" not an ideological tradition. The orientation must be describable without placing the person on a left-right spectrum.
+Language rules: Do not use directional partisan language anywhere in this output. Specifically forbidden: "left-leaning", "right-leaning", "progressive", "conservative", "liberal" as orientation descriptors, and "partisan frameworks" as a descriptor or noun phrase. Use pattern-based alternatives instead: "practical reform" not "left-leaning pragmatism", "reform-oriented policy goals" not "progressive policy goals", "institutional skepticism" not a partisan identity, "legacy institutions" not a party label, "mainstream framing" or "standard political framing" not an ideological tradition, "familiar political categories" not "partisan frameworks". The orientation must be describable without placing the person on a left-right spectrum.
 
 OUTPUT 2 — WHERE THIS SHOWS UP
 Write exactly 2-3 sentences describing one concrete behavioral pattern — how this orientation tends to manifest in real decisions or reactions.
@@ -175,7 +175,7 @@ Rules:
 - This should make the reader think: "Oh, that's actually true about how I respond"
 
 GENERAL RULES
-Use pattern language, not identity claims. Avoid ideological labels unless explicitly qualified. Do not use left-right directional language ("left-leaning", "right-leaning", "progressive", "conservative", "liberal") as descriptors anywhere in the output. FREE OUTPUT must create curiosity, not closure. FREE OUTPUT must be significantly shorter than any full analysis. Do not generate any PAID OUTPUT sections in this response. Avoid em-dashes throughout. Use periods, commas, or restructure instead.
+Use pattern language, not identity claims. Avoid ideological labels unless explicitly qualified. Do not use left-right directional language ("left-leaning", "right-leaning", "progressive", "conservative", "liberal") as descriptors anywhere in the output. Do not use "partisan frameworks" — prefer "standard political framing", "familiar political categories", or "legacy institutions" depending on context. FREE OUTPUT must create curiosity, not closure. FREE OUTPUT must be significantly shorter than any full analysis. Do not generate any PAID OUTPUT sections in this response. Avoid em-dashes throughout. Use periods, commas, or restructure instead.
 
 Do not use markdown formatting in your response. Do not use ## headers, ** bold markers, or # symbols. Use plain text only. Format the response exactly as specified with plain PATTERN: and SUMMARY: labels.`
 
@@ -359,6 +359,24 @@ export default function PoliticalAlignment({ onNavigate }) {
     if (!text) return ''
     const match = text.match(/^[^.!?]+[.!?]/)
     return match ? match[0].trim() : text.split('\n')[0].trim()
+  }
+
+  async function handleSavePA() {
+    if (!shareCardRef.current) return
+    const { default: html2canvas } = await import('html2canvas')
+    const w = shareCardRef.current.offsetWidth
+    const canvas = await html2canvas(shareCardRef.current, { scale: 2, width: w, height: w, backgroundColor: null, useCORS: true })
+    canvas.toBlob((blob) => {
+      if (!blob) return
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = 'civic-congruence-result.png'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    })
   }
 
   async function handleSaveImage() {
@@ -682,7 +700,10 @@ export default function PoliticalAlignment({ onNavigate }) {
           {/* 6. SHARE CARD + BUTTONS */}
           {patternLabel && (
             <div className="pa-share-section">
-              <p className="pa-share-label">Share Your Result</p>
+              <p className="pa-share-label">Save or share your result</p>
+              <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginBottom: 16 }}>
+                Download your free result or share it as an image. The Deep Dive expands this analysis.
+              </p>
               <div className="pa-share-card" ref={shareCardRef}>
                 <div className="pa-share-circle pa-share-circle--lg" />
                 <div className="pa-share-circle pa-share-circle--md" />
@@ -705,13 +726,13 @@ export default function PoliticalAlignment({ onNavigate }) {
                 </div>
               </div>
               <div className="pa-share-btns">
-                <button className="pa-share-btn pa-share-btn--dark" onClick={handleSaveImage}>
+                <button className="pa-share-btn pa-share-btn--dark" onClick={handleSavePA}>
+                  Save free result
+                </button>
+                <button className="pa-share-btn pa-share-btn--surface" onClick={handleSaveImage}>
                   Share image
                 </button>
               </div>
-              <p style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8, fontStyle: 'italic' }}>
-                Every shared pattern helps reveal where public trust is strained.
-              </p>
             </div>
           )}
 
